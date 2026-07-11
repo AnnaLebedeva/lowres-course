@@ -9,10 +9,10 @@ if [ -n "${GITHUB_PAT_TOKEN:-}" ] && [ -x ".codex-tmp/git-askpass.sh" ]; then
 fi
 
 if git diff --quiet && git diff --cached --quiet; then
-  echo "No changes to sync."
-  exit 0
+  echo "No file changes to commit."
+else
+  git add .
+  git commit -m "$message"
 fi
 
-git add .
-git commit -m "$message"
 git push
