@@ -83,7 +83,7 @@ LLM/API-ключи не нужны: на первом занятии важне�
         code(COMMON_SETUP + """
 from typing import Any, Dict, List, TypedDict
 from urllib.parse import quote
-from PIL import Image
+from PIL import Image, UnidentifiedImageError
 from IPython.display import display
 import matplotlib.pyplot as plt
 import pytesseract
@@ -106,6 +106,7 @@ UDM_WIKI_API = 'https://udm.wikipedia.org/w/api.php'
 COMMONS_CATEGORY = 'Category:Udmurt Dunne'
 LANGUAGE = 'удмуртский'
 FALLBACK_FILE_TITLE = 'File:Удномер.jpg'
+RASTER_MIME_TYPES = {'image/jpeg', 'image/png', 'image/tiff', 'image/webp'}
 
 def api_get(url, params, timeout=30):
     r = requests.get(url, params=params, timeout=timeout, headers={'User-Agent': 'lowres-course-colab/1.0'})
@@ -145,6 +146,9 @@ def commons_imageinfo(title):
         'artist': meta.get('Artist', {}).get('value'),
         'description': meta.get('ImageDescription', {}).get('value'),
     }
+
+def is_raster_image(info):
+    return bool(info.get('url')) and info.get('mime') in RASTER_MIME_TYPES
 
 def fetch_udm_wiki_pages(limit=5):
     random_pages = api_get(UDM_WIKI_API, {
@@ -218,7 +222,7 @@ def choose_downloadable_image(state):
     for item in state['commons_files']:
         info = commons_imageinfo(item['title'])
         inspected.append(info)
-        if info.get('url') and (info.get('mime') or '').startswith('image/') and selected is None:
+        if is_raster_image(info) and selected is None:
             selected = info
     if selected is None:
         selected = commons_imageinfo(FALLBACK_FILE_TITLE)
@@ -226,26 +230,62 @@ def choose_downloadable_image(state):
     save_artifact('lesson01_commons_sources.csv', pd.DataFrame(inspected))
     return state
 
+def download_openable_image(info, candidate_index=0):
+    response = requests.get(
+        info['url'],
+        timeout=60,
+        headers={'User-Agent': 'lowres-course-colab/1.0 (teaching notebook)'},
+    )
+    response.raise_for_status()
+    content_type = response.headers.get('Content-Type', '').split(';')[0].strip().lower()
+    if content_type and content_type not in RASTER_MIME_TYPES and content_type != 'application/octet-stream':
+        raise ValueError(f'expected raster image, got Content-Type={content_type}')
+
+    raw = response.content
+    try:
+        img = Image.open(io.BytesIO(raw)).convert('RGB')
+    except UnidentifiedImageError as exc:
+        raise ValueError('downloaded bytes are not an openable raster image') from exc
+
+    if max(img.size) > 2200:
+        img.thumbnail((2200, 2200))
+
+    image_path = DATA_DIR / f'lesson01_ocr_source_{candidate_index}.jpg'
+    img.save(image_path, format='JPEG', quality=92)
+    return image_path
+
 def run_ocr_baseline(state):
-    selected = state['selected_file']
-    image_url = selected['url']
-    suffix = Path(image_url.split('?')[0]).suffix or '.jpg'
-    image_path = DATA_DIR / ('lesson01_ocr_source' + suffix)
-    ocr_path = DATA_DIR / 'lesson01_ocr_raw.txt'
+    selected_title = state['selected_file'].get('title')
+    candidates = [state['selected_file']]
+    for item in state['commons_files']:
+        if item.get('title') != selected_title:
+            candidates.append(commons_imageinfo(item['title']))
 
-    if image_path.exists() and ocr_path.exists():
-        text = ocr_path.read_text(encoding='utf-8')
-    else:
-        raw = requests.get(image_url, timeout=60, headers={'User-Agent': 'lowres-course-colab/1.0'}).content
-        image_path.write_bytes(raw)
-        img = Image.open(image_path).convert('RGB')
-        if max(img.size) > 2200:
-            img.thumbnail((2200, 2200))
-            image_path = DATA_DIR / 'lesson01_ocr_source_resized.jpg'
-            img.save(image_path)
-        text = pytesseract.image_to_string(Image.open(image_path), lang='rus')
-        save_artifact('lesson01_ocr_raw.txt', text)
+    errors = []
+    image_path = None
+    selected = None
+    for i, candidate in enumerate(candidates):
+        if not is_raster_image(candidate):
+            errors.append({'title': candidate.get('title'), 'error': f"unsupported mime: {candidate.get('mime')}"})
+            continue
+        try:
+            image_path = download_openable_image(candidate, i)
+            selected = candidate
+            break
+        except Exception as exc:
+            errors.append({'title': candidate.get('title'), 'error': str(exc)})
 
+    if selected is None or image_path is None:
+        save_artifact('lesson01_download_errors.csv', pd.DataFrame(errors))
+        raise RuntimeError('Не удалось скачать ни одного открываемого raster-изображения из Commons candidates.')
+
+    if errors:
+        save_artifact('lesson01_download_errors.csv', pd.DataFrame(errors))
+
+    text = pytesseract.image_to_string(Image.open(image_path), lang='rus')
+    save_artifact('lesson01_ocr_raw.txt', text)
+
+    state['selected_file'] = selected
     state['image_path'] = str(image_path)
     state['ocr_text'] = text
     return state
