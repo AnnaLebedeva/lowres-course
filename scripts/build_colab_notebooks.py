@@ -529,8 +529,292 @@ display(pd.DataFrame([state['ocr_diagnostics'], state['wiki_stats']], index=['oc
     ]
 
 
+def lesson01_dataset_scout_cells():
+    languages_code = repr([
+        {"language_ru": "татарский", "language_en": "Tatar", "family": "Тюркская", "branch": "кыпчакская", "iso639_3": "tat", "opus_code": "tt", "wiki_code": "tt"},
+        {"language_ru": "башкирский", "language_en": "Bashkir", "family": "Тюркская", "branch": "кыпчакская", "iso639_3": "bak", "opus_code": "ba", "wiki_code": "ba"},
+        {"language_ru": "чувашский", "language_en": "Chuvash", "family": "Тюркская", "branch": "огурская", "iso639_3": "chv", "opus_code": "chv", "wiki_code": "cv"},
+        {"language_ru": "якутский / саха", "language_en": "Sakha / Yakut", "family": "Тюркская", "branch": "сибирская", "iso639_3": "sah", "opus_code": "sah", "wiki_code": "sah"},
+        {"language_ru": "тувинский", "language_en": "Tuvan", "family": "Тюркская", "branch": "сибирская", "iso639_3": "tyv", "opus_code": "tyv", "wiki_code": "tyv"},
+        {"language_ru": "хакасский", "language_en": "Khakas", "family": "Тюркская", "branch": "сибирская", "iso639_3": "kjh", "opus_code": "kjh", "wiki_code": None},
+        {"language_ru": "алтайский", "language_en": "Altai", "family": "Тюркская", "branch": "сибирская", "iso639_3": "alt", "opus_code": "alt", "wiki_code": "alt"},
+        {"language_ru": "кумыкский", "language_en": "Kumyk", "family": "Тюркская", "branch": "кыпчакская", "iso639_3": "kum", "opus_code": "kum", "wiki_code": None},
+        {"language_ru": "карачаево-балкарский", "language_en": "Karachay-Balkar", "family": "Тюркская", "branch": "кыпчакская", "iso639_3": "krc", "opus_code": "krc", "wiki_code": "krc"},
+        {"language_ru": "ногайский", "language_en": "Nogai", "family": "Тюркская", "branch": "кыпчакская", "iso639_3": "nog", "opus_code": "nog", "wiki_code": None},
+        {"language_ru": "крымскотатарский", "language_en": "Crimean Tatar", "family": "Тюркская", "branch": "кыпчакско-огузская", "iso639_3": "crh", "opus_code": "crh", "wiki_code": "crh"},
+        {"language_ru": "удмуртский", "language_en": "Udmurt", "family": "Уральская", "branch": "пермская", "iso639_3": "udm", "opus_code": "udm", "wiki_code": "udm"},
+        {"language_ru": "коми-зырянский", "language_en": "Komi-Zyrian", "family": "Уральская", "branch": "пермская", "iso639_3": "kpv", "opus_code": "kpv", "wiki_code": "kv"},
+        {"language_ru": "коми-пермяцкий", "language_en": "Komi-Permyak", "family": "Уральская", "branch": "пермская", "iso639_3": "koi", "opus_code": "koi", "wiki_code": "koi"},
+        {"language_ru": "эрзянский", "language_en": "Erzya", "family": "Уральская", "branch": "мордовская", "iso639_3": "myv", "opus_code": "myv", "wiki_code": "myv"},
+        {"language_ru": "мокшанский", "language_en": "Moksha", "family": "Уральская", "branch": "мордовская", "iso639_3": "mdf", "opus_code": "mdf", "wiki_code": "mdf"},
+        {"language_ru": "марийский луговой", "language_en": "Meadow Mari", "family": "Уральская", "branch": "марийская", "iso639_3": "mhr", "opus_code": "mhr", "wiki_code": "mhr"},
+        {"language_ru": "марийский горный", "language_en": "Hill Mari", "family": "Уральская", "branch": "марийская", "iso639_3": "mrj", "opus_code": "mrj", "wiki_code": "mrj"},
+        {"language_ru": "карельский", "language_en": "Karelian", "family": "Уральская", "branch": "прибалтийско-финская", "iso639_3": "krl", "opus_code": "krl", "wiki_code": "krl"},
+        {"language_ru": "вепсский", "language_en": "Veps", "family": "Уральская", "branch": "прибалтийско-финская", "iso639_3": "vep", "opus_code": "vep", "wiki_code": "vep"},
+        {"language_ru": "хантыйский", "language_en": "Khanty", "family": "Уральская", "branch": "угорская", "iso639_3": "kca", "opus_code": None, "wiki_code": None},
+        {"language_ru": "мансийский", "language_en": "Mansi", "family": "Уральская", "branch": "угорская", "iso639_3": "mns", "opus_code": "mns", "wiki_code": None},
+        {"language_ru": "ненецкий", "language_en": "Nenets", "family": "Уральская", "branch": "самодийская", "iso639_3": "yrk", "opus_code": "yrk", "wiki_code": None},
+        {"language_ru": "чеченский", "language_en": "Chechen", "family": "Северокавказская", "branch": "нахская", "iso639_3": "che", "opus_code": "ce", "wiki_code": "ce"},
+        {"language_ru": "ингушский", "language_en": "Ingush", "family": "Северокавказская", "branch": "нахская", "iso639_3": "inh", "opus_code": "inh", "wiki_code": "inh"},
+        {"language_ru": "аварский", "language_en": "Avar", "family": "Северокавказская", "branch": "нахско-дагестанская", "iso639_3": "ava", "opus_code": "av", "wiki_code": "av"},
+        {"language_ru": "даргинский", "language_en": "Dargwa", "family": "Северокавказская", "branch": "нахско-дагестанская", "iso639_3": "dar", "opus_code": "dar", "wiki_code": None},
+        {"language_ru": "лезгинский", "language_en": "Lezgian", "family": "Северокавказская", "branch": "нахско-дагестанская", "iso639_3": "lez", "opus_code": "lez", "wiki_code": "lez"},
+        {"language_ru": "лакский", "language_en": "Lak", "family": "Северокавказская", "branch": "нахско-дагестанская", "iso639_3": "lbe", "opus_code": "lbe", "wiki_code": "lbe"},
+        {"language_ru": "рутульский", "language_en": "Rutul", "family": "Северокавказская", "branch": "нахско-дагестанская", "iso639_3": "rut", "opus_code": "rut", "wiki_code": None},
+        {"language_ru": "адыгейский", "language_en": "Adyghe", "family": "Северокавказская", "branch": "абхазо-адыгская", "iso639_3": "ady", "opus_code": "ady", "wiki_code": "ady"},
+        {"language_ru": "кабардино-черкесский", "language_en": "Kabardian", "family": "Северокавказская", "branch": "абхазо-адыгская", "iso639_3": "kbd", "opus_code": "kbd", "wiki_code": "kbd"},
+        {"language_ru": "абазинский", "language_en": "Abaza", "family": "Северокавказская", "branch": "абхазо-адыгская", "iso639_3": "abq", "opus_code": None, "wiki_code": None},
+        {"language_ru": "бурятский", "language_en": "Buryat", "family": "Монгольская", "branch": "монгольская", "iso639_3": "bxr", "opus_code": "bxr", "wiki_code": "bxr"},
+        {"language_ru": "калмыцкий", "language_en": "Kalmyk", "family": "Монгольская", "branch": "ойратская", "iso639_3": "xal", "opus_code": "xal", "wiki_code": "xal"},
+        {"language_ru": "эвенкийский", "language_en": "Evenki", "family": "Тунгусо-маньчжурская", "branch": "тунгусская", "iso639_3": "evn", "opus_code": "evn", "wiki_code": None},
+        {"language_ru": "нанайский", "language_en": "Nanai", "family": "Тунгусо-маньчжурская", "branch": "тунгусская", "iso639_3": "gld", "opus_code": "gld", "wiki_code": None},
+        {"language_ru": "нивхский", "language_en": "Nivkh", "family": "изолят / палеоазиатская группа", "branch": "нивхская", "iso639_3": "niv", "opus_code": None, "wiki_code": None},
+        {"language_ru": "чукотский", "language_en": "Chukchi", "family": "чукотско-камчатская", "branch": "чукотская", "iso639_3": "ckt", "opus_code": None, "wiki_code": None},
+        {"language_ru": "корякский", "language_en": "Koryak", "family": "чукотско-камчатская", "branch": "чукотская", "iso639_3": "kpy", "opus_code": None, "wiki_code": None},
+        {"language_ru": "алеутский", "language_en": "Aleut", "family": "эскимосско-алеутская", "branch": "алеутская", "iso639_3": "ale", "opus_code": "ale", "wiki_code": None},
+        {"language_ru": "эскимосский / юпик", "language_en": "Yupik", "family": "эскимосско-алеутская", "branch": "эскимосская", "iso639_3": "ess", "opus_code": None, "wiki_code": None},
+    ])
+    return [
+        md("""
+# Занятие 1. Агент первичной разведки языковых данных
+
+**Цель практики:** не OCR и не ASR, а стартовая карта проекта: какие языки берем в поле зрения и какие открытые данные уже можно найти.
+
+Агент в этой тетрадке собирает первоначальную информацию:
+
+1. берет редактируемый seed list основных живых языков народов России без диалектального уровня;
+2. проверяет OPUS API на параллельные данные с русским;
+3. проверяет OPUS на моноязычные строки/сегменты;
+4. проверяет наличие языковой Википедии и ее размер;
+5. собирает таблицу, которую можно открыть в Google Sheets и дальше править руками.
+
+Готовый снапшот этой таблицы уже создан в Google Sheets: https://docs.google.com/spreadsheets/d/1XIW9BCxs4ENsQUhiK1HYGzpA1aLiYcwOOOfnmZNtcB8
+"""),
+        code("""
+!pip -q install langgraph pandas requests openpyxl
+"""),
+        code(COMMON_SETUP + """
+from typing import Any, Dict, List, TypedDict
+from datetime import datetime, timezone
+from langgraph.graph import StateGraph, END
+"""),
+        md("""
+## 1. Seed list языков
+
+Это не “истина навсегда”, а стартовая рабочая рамка для курса. Ее надо обсуждать и уточнять: какие языки добавить, где объединять варианты, где наоборот нельзя смешивать разные языковые сообщества.
+"""),
+        code(f"""
+LANGUAGES = {languages_code}
+
+seed_df = pd.DataFrame(LANGUAGES)
+display(seed_df.groupby(['family', 'branch']).size().reset_index(name='languages'))
+display(seed_df.head(12))
+"""),
+        md("## 2. Инструменты агента: OPUS API и Wikipedia API"),
+        code("""
+OPUS_API = 'https://opus.nlpl.eu/opusapi'
+
+def api_get(url, params, attempts=3):
+    last_error = None
+    for attempt in range(attempts):
+        try:
+            r = requests.get(url, params=params, timeout=30, headers={'User-Agent': 'lowres-course-dataset-scout/1.0'})
+            if r.status_code == 429 and attempt < attempts - 1:
+                wait = int(r.headers.get('Retry-After', 2 + attempt * 2))
+                print('rate limit, wait', wait, 'sec')
+                time.sleep(wait)
+                continue
+            r.raise_for_status()
+            return r.json()
+        except Exception as exc:
+            last_error = exc
+            if attempt < attempts - 1:
+                time.sleep(1 + attempt * 2)
+    raise last_error
+
+def as_int(value):
+    if value in ('', None):
+        return 0
+    return int(value)
+
+def query_opus_for_language(opus_code):
+    if not opus_code:
+        return {
+            'opus_checked': False,
+            'opus_ru_parallel_pairs': 0,
+            'opus_ru_parallel_documents': 0,
+            'opus_ru_parallel_corpora': '',
+            'opus_mono_pairs_or_segments': 0,
+            'opus_mono_documents': 0,
+            'opus_mono_corpora': '',
+        }
+    data = api_get(OPUS_API, {
+        'source': 'ru',
+        'target': opus_code,
+        'preprocessing': 'xml',
+        'version': 'latest',
+    })
+    corpora = data.get('corpora', [])
+    parallel = [c for c in corpora if {c.get('source'), c.get('target')} == {'ru', opus_code}]
+    mono = [c for c in corpora if c.get('source') == opus_code and not c.get('target')]
+    return {
+        'opus_checked': True,
+        'opus_ru_parallel_pairs': sum(as_int(c.get('alignment_pairs')) for c in parallel),
+        'opus_ru_parallel_documents': sum(as_int(c.get('documents')) for c in parallel),
+        'opus_ru_parallel_corpora': '; '.join(f"{c.get('corpus')} ({c.get('alignment_pairs') or 0})" for c in parallel),
+        'opus_mono_pairs_or_segments': sum(as_int(c.get('alignment_pairs')) for c in mono),
+        'opus_mono_documents': sum(as_int(c.get('documents')) for c in mono),
+        'opus_mono_corpora': '; '.join(f"{c.get('corpus')} ({c.get('alignment_pairs') or 0})" for c in mono),
+    }
+
+def query_wikipedia_for_language(wiki_code):
+    if not wiki_code:
+        return {'wiki_checked': False, 'wiki_articles': '', 'wiki_pages': '', 'wiki_source_url': ''}
+    try:
+        data = api_get(f'https://{wiki_code}.wikipedia.org/w/api.php', {
+            'action': 'query',
+            'meta': 'siteinfo',
+            'siprop': 'statistics',
+            'format': 'json',
+        })
+        stats = data.get('query', {}).get('statistics', {})
+        return {
+            'wiki_checked': True,
+            'wiki_articles': stats.get('articles', ''),
+            'wiki_pages': stats.get('pages', ''),
+            'wiki_source_url': f'https://{wiki_code}.wikipedia.org/',
+        }
+    except Exception as exc:
+        return {
+            'wiki_checked': False,
+            'wiki_articles': '',
+            'wiki_pages': '',
+            'wiki_source_url': f'https://{wiki_code}.wikipedia.org/',
+            'wiki_error': str(exc),
+        }
+"""),
+        md("## 3. Plain Python агент: state, tools, observations, report"),
+        code("""
+def scout_language(row):
+    observation = dict(row)
+    observation.update(query_opus_for_language(row.get('opus_code')))
+    observation.update(query_wikipedia_for_language(row.get('wiki_code')))
+    observation['parallel_with_russian_source'] = 'https://opus.nlpl.eu/opusapi'
+    observation['monolingual_source'] = 'OPUS monolingual rows; Wikipedia statistics where available'
+    observation['checked_at_utc'] = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+    return observation
+
+def run_dataset_scout(languages):
+    state = {
+        'goal': 'собрать первичную карту языков и открытых датасетов',
+        'sources': ['OPUS API', 'Wikipedia siteinfo API'],
+        'languages_total': len(languages),
+        'observations': [],
+        'errors': [],
+    }
+    for i, lang in enumerate(languages, 1):
+        print(f"[{i}/{len(languages)}] {lang['language_ru']}")
+        try:
+            state['observations'].append(scout_language(lang))
+        except Exception as exc:
+            state['errors'].append({'language_ru': lang['language_ru'], 'error': str(exc)})
+    inventory = pd.DataFrame(state['observations'])
+    inventory = inventory.sort_values(['family', 'branch', 'language_ru']).reset_index(drop=True)
+    state['inventory'] = inventory
+    state['summary'] = {
+        'languages_total': len(languages),
+        'languages_checked': len(inventory),
+        'with_opus_ru_parallel': int((inventory['opus_ru_parallel_pairs'] > 0).sum()),
+        'with_wikipedia': int((inventory['wiki_checked'] == True).sum()),
+        'errors': len(state['errors']),
+    }
+    return state
+
+plain_state = run_dataset_scout(LANGUAGES)
+plain_state['summary']
+"""),
+        code("""
+inventory = plain_state['inventory']
+display(inventory.head(20))
+display(inventory.groupby('family')[['opus_ru_parallel_pairs', 'opus_mono_pairs_or_segments']].sum().sort_values('opus_ru_parallel_pairs', ascending=False))
+
+save_artifact('lesson01_language_dataset_inventory.csv', inventory)
+save_artifact('lesson01_dataset_scout_summary.json', json.dumps(plain_state['summary'], ensure_ascii=False, indent=2))
+"""),
+        md("## 4. Та же логика в LangGraph"),
+        code("""
+class DatasetScoutState(TypedDict, total=False):
+    languages: List[Dict[str, Any]]
+    observations: List[Dict[str, Any]]
+    errors: List[Dict[str, Any]]
+    inventory: Any
+    summary: Dict[str, Any]
+
+def init_state_node(state: DatasetScoutState):
+    return {'observations': [], 'errors': []}
+
+def collect_node(state: DatasetScoutState):
+    observations = []
+    errors = []
+    for lang in state['languages']:
+        try:
+            observations.append(scout_language(lang))
+        except Exception as exc:
+            errors.append({'language_ru': lang['language_ru'], 'error': str(exc)})
+    return {'observations': observations, 'errors': errors}
+
+def table_node(state: DatasetScoutState):
+    inventory = pd.DataFrame(state['observations']).sort_values(['family', 'branch', 'language_ru']).reset_index(drop=True)
+    return {'inventory': inventory}
+
+def summary_node(state: DatasetScoutState):
+    inventory = state['inventory']
+    return {'summary': {
+        'languages_total': len(state['languages']),
+        'languages_checked': len(inventory),
+        'with_opus_ru_parallel': int((inventory['opus_ru_parallel_pairs'] > 0).sum()),
+        'with_wikipedia': int((inventory['wiki_checked'] == True).sum()),
+        'errors': len(state.get('errors', [])),
+    }}
+
+workflow = StateGraph(DatasetScoutState)
+workflow.add_node('init', init_state_node)
+workflow.add_node('collect', collect_node)
+workflow.add_node('table', table_node)
+workflow.add_node('summary', summary_node)
+workflow.set_entry_point('init')
+workflow.add_edge('init', 'collect')
+workflow.add_edge('collect', 'table')
+workflow.add_edge('table', 'summary')
+workflow.add_edge('summary', END)
+agent = workflow.compile()
+
+graph_state = agent.invoke({'languages': LANGUAGES})
+graph_state['summary']
+"""),
+        md("""
+## 5. Google Sheets
+
+На занятии можно открыть готовый Google Sheet и править его как общий рабочий артефакт:
+
+https://docs.google.com/spreadsheets/d/1XIW9BCxs4ENsQUhiK1HYGzpA1aLiYcwOOOfnmZNtcB8
+
+В Colab эта тетрадка сохраняет CSV в `/content/lowres_lab/lesson01_language_dataset_inventory.csv`. Его можно загрузить в Google Sheets или использовать как основу для обновления общей таблицы.
+"""),
+        md("""
+## Вопросы для отчета
+
+1. Какие языковые семьи в таблице оказываются лучше всего покрыты параллельными данными с русским?
+2. Где есть Википедия, но почти нет параллельных данных?
+3. Где OPUS показывает нули: это значит “данных нет” или “мы не нашли правильный код/источник”?
+4. Какие источники надо добавить следующими: национальные корпуса, сайты СМИ, библиотеки, архивы, Hugging Face, GitHub?
+5. Какие решения агента требуют человеческой проверки: список языков, объединение вариантов, лицензии, качество данных?
+"""),
+    ]
+
+
 NOTEBOOKS = {
-    "01_agents_for_language_preservation.ipynb": lesson01_real_agent_cells(),
+    "01_agents_for_language_preservation.ipynb": lesson01_dataset_scout_cells(),
     "02_web_scraping_sources.ipynb": [
         md("""
 # Занятие 2. Веб-сбор, источники и правовая рамка
@@ -719,12 +1003,42 @@ show_df(diag)
 save_artifact('lesson03_ocr_diagnostics.csv', diag)
 """),
         md("""
+## 6. OCR как маленький агентский workflow
+
+Этот блок переносит агентскую идею из вводного занятия туда, где ей место: в OCR-задачу. Здесь `state` хранит источник, версии OCR, диагностику и решение о следующем человеческом шаге.
+"""),
+        code("""
+def decide_next_ocr_step(diag_df):
+    best = diag_df.sort_values(['tokens_2plus', 'weird_char_share'], ascending=[False, True]).iloc[0]
+    if best['tokens_2plus'] < 20:
+        return 'Нужен другой скан или ручная разметка маленького ground truth: baseline почти не читает текст.'
+    if best['weird_char_share'] > 0.1:
+        return 'Нужна дополнительная предобработка и проверка символов.'
+    return 'Можно отобрать 30-50 строк для ручной оценки ошибок OCR.'
+
+ocr_agent_state = {
+    'task': 'оценить OCR baseline для открытого удмуртского скана',
+    'source_file': FILE_TITLE,
+    'source_url': image_url,
+    'versions': {
+        'raw': raw_text,
+        'preprocessed': prep_text,
+    },
+    'diagnostics': diag.to_dict('records'),
+    'next_human_step': decide_next_ocr_step(diag),
+}
+
+print(json.dumps(ocr_agent_state, ensure_ascii=False, indent=2)[:3000])
+save_artifact('lesson03_ocr_agent_state.json', json.dumps(ocr_agent_state, ensure_ascii=False, indent=2))
+"""),
+        md("""
 ## Вопросы для отчёта
 
 1. Можно ли читать результат глазами? Какие слова/буквы распознаются хуже всего?
 2. Улучшил ли препроцессинг результат?
 3. Почему русская OCR-модель может ошибаться на удмуртском?
-4. Какие 30-50 строк стоит вручную разметить как ground truth для следующего шага?
+4. Какое поле `state` оказалось самым важным для решения о следующем шаге?
+5. Какие 30-50 строк стоит вручную разметить как ground truth для следующего шага?
 """),
     ],
     "04_asr_udmurt_whisper_tiny.ipynb": [
@@ -1256,7 +1570,7 @@ These notebooks are classroom practices for the course sessions. They are design
 
 | Notebook | Practice | Open in Colab |
 |---|---|---|
-| `01_agents_for_language_preservation.ipynb` | real LangGraph mini-agent for source scouting, OCR baseline, and low-resource language diagnostics | [Colab](https://colab.research.google.com/github/AnnaLebedeva/lowres-course/blob/main/colab_notebooks/01_agents_for_language_preservation.ipynb) |
+| `01_agents_for_language_preservation.ipynb` | agentic dataset scouting for languages of Russia using OPUS and Wikipedia APIs | [Colab](https://colab.research.google.com/github/AnnaLebedeva/lowres-course/blob/main/colab_notebooks/01_agents_for_language_preservation.ipynb) |
 | `02_web_scraping_sources.ipynb` | source table, API collection, basic noise checks | [Colab](https://colab.research.google.com/github/AnnaLebedeva/lowres-course/blob/main/colab_notebooks/02_web_scraping_sources.ipynb) |
 | `03_ocr_udmurt_commons.ipynb` | OCR baseline on an Udmurt Wikimedia Commons scan | [Colab](https://colab.research.google.com/github/AnnaLebedeva/lowres-course/blob/main/colab_notebooks/03_ocr_udmurt_commons.ipynb) |
 | `04_asr_udmurt_whisper_tiny.ipynb` | ASR baseline on open Udmurt audio | [Colab](https://colab.research.google.com/github/AnnaLebedeva/lowres-course/blob/main/colab_notebooks/04_asr_udmurt_whisper_tiny.ipynb) |
