@@ -34,7 +34,7 @@ def nb(cells):
 
 
 COMMON_SETUP = """
-import os, re, json, textwrap, math, statistics, random, io
+import os, re, json, textwrap, math, statistics, random, io, time
 from pathlib import Path
 import pandas as pd
 import numpy as np
@@ -98,6 +98,8 @@ from langgraph.graph import StateGraph, END
 - Удмуртская Википедия: небольшой корпус страниц для сравнения с OCR-выводом.
 
 Это не учебная таблица: агент будет обращаться к API и сохранять полученные данные.
+
+Если Wikimedia временно отвечает `429 Too Many Requests`, подождите минуту и перезапустите ячейку. В тетрадке запросы сгруппированы, но публичные API все равно иногда ограничивают Colab-адреса.
 """),
         code("""
 COMMONS_API = 'https://commons.wikimedia.org/w/api.php'
@@ -108,10 +110,28 @@ LANGUAGE = 'удмуртский'
 FALLBACK_FILE_TITLE = 'File:Удномер.jpg'
 RASTER_MIME_TYPES = {'image/jpeg', 'image/png', 'image/tiff', 'image/webp'}
 
-def api_get(url, params, timeout=30):
-    r = requests.get(url, params=params, timeout=timeout, headers={'User-Agent': 'lowres-course-colab/1.0'})
-    r.raise_for_status()
-    return r.json()
+def api_get(url, params, timeout=30, attempts=3):
+    last_error = None
+    for attempt in range(attempts):
+        r = requests.get(
+            url,
+            params=params,
+            timeout=timeout,
+            headers={'User-Agent': 'lowres-course-colab/1.0 (contact: teaching-notebook)'},
+        )
+        if r.status_code == 429 and attempt < attempts - 1:
+            wait = int(r.headers.get('Retry-After', 2 + attempt * 2))
+            print(f'Wikimedia API rate limit: ждем {wait} сек. и пробуем еще раз')
+            time.sleep(wait)
+            continue
+        try:
+            r.raise_for_status()
+            return r.json()
+        except requests.HTTPError as exc:
+            last_error = exc
+            if attempt < attempts - 1:
+                time.sleep(2 + attempt * 2)
+    raise last_error
 
 def commons_category_files(category, limit=20):
     data = api_get(COMMONS_API, {
@@ -146,6 +166,33 @@ def commons_imageinfo(title):
         'artist': meta.get('Artist', {}).get('value'),
         'description': meta.get('ImageDescription', {}).get('value'),
     }
+
+def commons_imageinfo_batch(titles):
+    if not titles:
+        return []
+    data = api_get(COMMONS_API, {
+        'action': 'query',
+        'titles': '|'.join(titles),
+        'prop': 'imageinfo',
+        'iiprop': 'url|mime|size|extmetadata',
+        'format': 'json',
+    })
+    by_title = {}
+    for page in data.get('query', {}).get('pages', {}).values():
+        title = page.get('title')
+        info = page.get('imageinfo', [{}])[0]
+        meta = info.get('extmetadata', {})
+        by_title[title] = {
+            'title': title,
+            'url': info.get('url'),
+            'mime': info.get('mime'),
+            'width': info.get('width'),
+            'height': info.get('height'),
+            'license': meta.get('LicenseShortName', {}).get('value'),
+            'artist': meta.get('Artist', {}).get('value'),
+            'description': meta.get('ImageDescription', {}).get('value'),
+        }
+    return [by_title[t] for t in titles if t in by_title]
 
 def is_raster_image(info):
     return bool(info.get('url')) and info.get('mime') in RASTER_MIME_TYPES
@@ -217,16 +264,18 @@ def scout_sources(state):
     return state
 
 def choose_downloadable_image(state):
-    inspected = []
+    titles = [item['title'] for item in state['commons_files']]
+    inspected = commons_imageinfo_batch(titles)
     selected = None
-    for item in state['commons_files']:
-        info = commons_imageinfo(item['title'])
-        inspected.append(info)
+    for info in inspected:
         if is_raster_image(info) and selected is None:
             selected = info
     if selected is None:
-        selected = commons_imageinfo(FALLBACK_FILE_TITLE)
+        fallback = commons_imageinfo(FALLBACK_FILE_TITLE)
+        inspected.append(fallback)
+        selected = fallback
     state['selected_file'] = selected
+    state['inspected_files'] = inspected
     save_artifact('lesson01_commons_sources.csv', pd.DataFrame(inspected))
     return state
 
@@ -257,9 +306,9 @@ def download_openable_image(info, candidate_index=0):
 def run_ocr_baseline(state):
     selected_title = state['selected_file'].get('title')
     candidates = [state['selected_file']]
-    for item in state['commons_files']:
-        if item.get('title') != selected_title:
-            candidates.append(commons_imageinfo(item['title']))
+    for candidate in state.get('inspected_files', []):
+        if candidate.get('title') != selected_title:
+            candidates.append(candidate)
 
     errors = []
     image_path = None
@@ -376,6 +425,7 @@ class LabAgentState(TypedDict, total=False):
     language: str
     commons_category: str
     commons_files: List[Dict[str, Any]]
+    inspected_files: List[Dict[str, Any]]
     selected_file: Dict[str, Any]
     image_path: str
     ocr_text: str
@@ -392,7 +442,7 @@ def source_scout_node(state: LabAgentState):
 
 def metadata_node(state: LabAgentState):
     next_state = choose_downloadable_image(dict(state))
-    return {'selected_file': next_state['selected_file']}
+    return {'selected_file': next_state['selected_file'], 'inspected_files': next_state['inspected_files']}
 
 def ocr_node(state: LabAgentState):
     next_state = run_ocr_baseline(dict(state))
