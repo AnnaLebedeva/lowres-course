@@ -71,7 +71,9 @@ def lesson01_real_agent_cells():
 4. взять небольшой контрольный корпус из Удмуртской Википедии;
 5. собрать отчет: что найдено, насколько читаемый OCR, что нужно проверить человеку.
 
-Используем `LangGraph`, потому что он хорошо показывает агентское состояние (`state`) и переходы между шагами. LLM/API-ключи не нужны.
+Сначала соберем агента без фреймворка: обычные функции, словарь `state`, явные вызовы инструментов и решения. Потом завернем те же шаги в `LangGraph`, чтобы увидеть, зачем вообще нужен фреймворк для агентских workflow.
+
+LLM/API-ключи не нужны: на первом занятии важнее понять архитектуру агента, чем подключать внешнюю модель.
 """),
         code("""
 !apt-get -qq update
@@ -189,7 +191,146 @@ def text_diagnostics(text):
         'sample': text[:700],
     }
 """),
-        md("## 2. LangGraph: состояние и узлы агента"),
+        md("""
+## 2. Агент без фреймворка: что под капотом
+
+Минимальный агент состоит из четырех вещей:
+
+- `state`: явная модель текущего контекста задачи;
+- tools: функции, которые ходят во внешний мир или обрабатывают данные;
+- observations: результаты вызова tools;
+- policy: простые правила, которые решают, что делать дальше.
+
+Ниже это обычный Python. Никакого LangGraph пока нет.
+"""),
+        code("""
+def scout_sources(state):
+    files = commons_category_files(state['commons_category'])
+    if not files:
+        files = [{'title': FALLBACK_FILE_TITLE, 'pageid': None}]
+    state['commons_files'] = files
+    save_artifact('lesson01_commons_candidates.csv', pd.DataFrame(files))
+    return state
+
+def choose_downloadable_image(state):
+    inspected = []
+    selected = None
+    for item in state['commons_files']:
+        info = commons_imageinfo(item['title'])
+        inspected.append(info)
+        if info.get('url') and (info.get('mime') or '').startswith('image/') and selected is None:
+            selected = info
+    if selected is None:
+        selected = commons_imageinfo(FALLBACK_FILE_TITLE)
+    state['selected_file'] = selected
+    save_artifact('lesson01_commons_sources.csv', pd.DataFrame(inspected))
+    return state
+
+def run_ocr_baseline(state):
+    selected = state['selected_file']
+    image_url = selected['url']
+    suffix = Path(image_url.split('?')[0]).suffix or '.jpg'
+    image_path = DATA_DIR / ('lesson01_ocr_source' + suffix)
+    ocr_path = DATA_DIR / 'lesson01_ocr_raw.txt'
+
+    if image_path.exists() and ocr_path.exists():
+        text = ocr_path.read_text(encoding='utf-8')
+    else:
+        raw = requests.get(image_url, timeout=60, headers={'User-Agent': 'lowres-course-colab/1.0'}).content
+        image_path.write_bytes(raw)
+        img = Image.open(image_path).convert('RGB')
+        if max(img.size) > 2200:
+            img.thumbnail((2200, 2200))
+            image_path = DATA_DIR / 'lesson01_ocr_source_resized.jpg'
+            img.save(image_path)
+        text = pytesseract.image_to_string(Image.open(image_path), lang='rus')
+        save_artifact('lesson01_ocr_raw.txt', text)
+
+    state['image_path'] = str(image_path)
+    state['ocr_text'] = text
+    return state
+
+def decide_human_tasks(state):
+    diag = text_diagnostics(state.get('ocr_text', ''))
+    tasks = []
+    if diag['chars'] < 100:
+        tasks.append('OCR почти ничего не извлек: выбрать другой скан или улучшить предобработку.')
+    if diag['cyrillic_share'] < 0.7:
+        tasks.append('В тексте много некириллического шума: проверить язык OCR и качество изображения.')
+    if diag['short_token_share'] > 0.45:
+        tasks.append('Много коротких фрагментов: нужна ручная проверка строк и сегментации.')
+    if not tasks:
+        tasks.append('Выбрать 20-30 строк и вручную оценить ошибки OCR.')
+    state['ocr_diagnostics'] = diag
+    state['human_tasks'] = tasks
+    return state
+
+def add_wiki_probe(state):
+    pages = fetch_udm_wiki_pages(limit=5)
+    save_artifact('lesson01_udm_wiki_probe.csv', pd.DataFrame(pages))
+    all_text = ' '.join(p['extract_preview'] for p in pages)
+    state['wiki_pages'] = pages
+    state['wiki_stats'] = text_diagnostics(all_text)
+    return state
+
+def build_agent_report(state):
+    report = {
+        'language': state['language'],
+        'agent_type': state.get('agent_type', 'plain Python tool-using agent'),
+        'real_sources': {
+            'commons_category': state['commons_category'],
+            'selected_file_title': state['selected_file'].get('title'),
+            'selected_file_url': state['selected_file'].get('url'),
+            'license': state['selected_file'].get('license'),
+            'wiki_pages': [p['url'] for p in state['wiki_pages']],
+        },
+        'ocr_diagnostics': state['ocr_diagnostics'],
+        'wiki_probe_stats': state['wiki_stats'],
+        'next_human_tasks': state['human_tasks'],
+        'state_fields_used': sorted(state.keys()),
+    }
+    state['report'] = report
+    save_artifact('lesson01_real_agent_report.json', json.dumps(report, ensure_ascii=False, indent=2))
+    return state
+
+def run_plain_agent(language, commons_category):
+    state = {
+        'language': language,
+        'commons_category': commons_category,
+        'goal': 'оценить, можно ли начать OCR-разведку по открытым удмуртским материалам',
+        'plan': [
+            'найти файлы',
+            'выбрать изображение',
+            'запустить OCR',
+            'оценить текст',
+            'сравнить с wiki-корпусом',
+            'собрать отчет',
+        ],
+    }
+    for step in [
+        scout_sources,
+        choose_downloadable_image,
+        run_ocr_baseline,
+        decide_human_tasks,
+        add_wiki_probe,
+        build_agent_report,
+    ]:
+        state = step(state)
+        print('done:', step.__name__, '| state keys:', sorted(state.keys()))
+    return state
+
+plain_state = run_plain_agent(LANGUAGE, COMMONS_CATEGORY)
+print(json.dumps(plain_state['report'], ensure_ascii=False, indent=2))
+"""),
+        md("""
+## 3. Та же логика в LangGraph
+
+Теперь берем те же функции и раскладываем их в граф. Смысл LangGraph не в том, что он “умнее”, а в том, что он делает архитектуру явной:
+
+- у каждого узла есть входной и выходной `state`;
+- переходы между шагами видны отдельно от кода инструментов;
+- позже можно добавлять условия, повторы, LLM-узлы, human review и сохранение состояния между запусками.
+"""),
         code("""
 class LabAgentState(TypedDict, total=False):
     language: str
@@ -203,96 +344,31 @@ class LabAgentState(TypedDict, total=False):
     wiki_stats: Dict[str, Any]
     report: Dict[str, Any]
     human_tasks: List[str]
+    agent_type: str
 
 def source_scout_node(state: LabAgentState):
-    files = commons_category_files(state['commons_category'])
-    if not files:
-        files = [{'title': FALLBACK_FILE_TITLE, 'pageid': None}]
-    df = pd.DataFrame(files)
-    save_artifact('lesson01_commons_candidates.csv', df)
-    return {'commons_files': files}
+    next_state = scout_sources(dict(state))
+    return {'commons_files': next_state['commons_files']}
 
 def metadata_node(state: LabAgentState):
-    inspected = []
-    selected = None
-    for item in state['commons_files']:
-        info = commons_imageinfo(item['title'])
-        inspected.append(info)
-        if info.get('url') and (info.get('mime') or '').startswith('image/') and selected is None:
-            selected = info
-    if selected is None:
-        selected = commons_imageinfo(FALLBACK_FILE_TITLE)
-    save_artifact('lesson01_commons_sources.csv', pd.DataFrame(inspected))
-    return {'selected_file': selected}
+    next_state = choose_downloadable_image(dict(state))
+    return {'selected_file': next_state['selected_file']}
 
 def ocr_node(state: LabAgentState):
-    selected = state['selected_file']
-    image_url = selected['url']
-    suffix = Path(image_url.split('?')[0]).suffix or '.jpg'
-    image_path = DATA_DIR / ('lesson01_ocr_source' + suffix)
-    raw = requests.get(image_url, timeout=60, headers={'User-Agent': 'lowres-course-colab/1.0'}).content
-    image_path.write_bytes(raw)
-
-    img = Image.open(image_path).convert('RGB')
-    if max(img.size) > 2200:
-        img.thumbnail((2200, 2200))
-        resized_path = DATA_DIR / 'lesson01_ocr_source_resized.jpg'
-        img.save(resized_path)
-        image_path = resized_path
-
-    text = pytesseract.image_to_string(Image.open(image_path), lang='rus')
-    save_artifact('lesson01_ocr_raw.txt', text)
-    return {'image_path': str(image_path), 'ocr_text': text}
+    next_state = run_ocr_baseline(dict(state))
+    return {'image_path': next_state['image_path'], 'ocr_text': next_state['ocr_text']}
 
 def ocr_diagnostics_node(state: LabAgentState):
-    diag = text_diagnostics(state.get('ocr_text', ''))
-    tasks = []
-    if diag['chars'] < 100:
-        tasks.append('OCR почти ничего не извлек: выбрать другой скан или улучшить предобработку.')
-    if diag['cyrillic_share'] < 0.7:
-        tasks.append('В тексте много некириллического шума: проверить язык OCR и качество изображения.')
-    if diag['short_token_share'] > 0.45:
-        tasks.append('Много коротких фрагментов: нужна ручная проверка строк и сегментации.')
-    if not tasks:
-        tasks.append('Выбрать 20-30 строк и вручную оценить ошибки OCR.')
-    return {'ocr_diagnostics': diag, 'human_tasks': tasks}
+    next_state = decide_human_tasks(dict(state))
+    return {'ocr_diagnostics': next_state['ocr_diagnostics'], 'human_tasks': next_state['human_tasks']}
 
 def wiki_probe_node(state: LabAgentState):
-    pages = fetch_udm_wiki_pages(limit=5)
-    save_artifact('lesson01_udm_wiki_probe.csv', pd.DataFrame(pages))
-    all_text = ' '.join(p['extract_preview'] for p in pages)
-    stats = text_diagnostics(all_text)
-    return {'wiki_pages': pages, 'wiki_stats': stats}
+    next_state = add_wiki_probe(dict(state))
+    return {'wiki_pages': next_state['wiki_pages'], 'wiki_stats': next_state['wiki_stats']}
 
 def report_node(state: LabAgentState):
-    report = {
-        'language': state['language'],
-        'agent_type': 'tool-using workflow agent on LangGraph',
-        'real_sources': {
-            'commons_category': state['commons_category'],
-            'selected_file_title': state['selected_file'].get('title'),
-            'selected_file_url': state['selected_file'].get('url'),
-            'license': state['selected_file'].get('license'),
-            'wiki_pages': [p['url'] for p in state['wiki_pages']],
-        },
-        'ocr_diagnostics': state['ocr_diagnostics'],
-        'wiki_probe_stats': state['wiki_stats'],
-        'next_human_tasks': state['human_tasks'],
-        'state_fields_used': [
-            'language',
-            'commons_category',
-            'commons_files',
-            'selected_file',
-            'image_path',
-            'ocr_text',
-            'ocr_diagnostics',
-            'wiki_pages',
-            'wiki_stats',
-            'human_tasks',
-        ],
-    }
-    save_artifact('lesson01_real_agent_report.json', json.dumps(report, ensure_ascii=False, indent=2))
-    return {'report': report}
+    next_state = build_agent_report(dict(state))
+    return {'report': next_state['report']}
 
 workflow = StateGraph(LabAgentState)
 workflow.add_node('source_scout', source_scout_node)
@@ -312,16 +388,17 @@ workflow.add_edge('report', END)
 
 agent = workflow.compile()
 """),
-        md("## 3. Запускаем агента"),
+        md("## 4. Запускаем LangGraph-версию"),
         code("""
 state = agent.invoke({
     'language': LANGUAGE,
     'commons_category': COMMONS_CATEGORY,
+    'agent_type': 'LangGraph tool-using workflow agent',
 })
 
 print(json.dumps(state['report'], ensure_ascii=False, indent=2))
 """),
-        md("## 4. Смотрим реальные артефакты"),
+        md("## 5. Смотрим реальные артефакты"),
         code("""
 print('Выбранный файл:', state['selected_file']['title'])
 print('Лицензия:', state['selected_file'].get('license'))
@@ -339,25 +416,25 @@ display(pd.DataFrame(state['wiki_pages'])[['title', 'chars', 'tokens', 'cyrillic
 display(pd.DataFrame([state['ocr_diagnostics'], state['wiki_stats']], index=['ocr', 'wiki_probe']))
 """),
         md("""
-## 5. Что здесь агентского
+## 6. Что здесь агентского
 
-В этой тетрадке важны не “виды агентов”, а конкретная схема работы:
+В этой вводной тетрадке важны не “виды агентов”, а архитектура на конкретной задаче:
 
 - `state` хранит текущую картину задачи: цель, найденные источники, выбранный файл, OCR-текст, диагностику, контрольный корпус и задачи для человека.
 - каждый узел делает один проверяемый шаг;
 - следующий шаг выбирается на основании уже собранного состояния;
 - человек остается в контуре там, где нельзя автоматически решать про права, качество и публикацию.
 
-Такой агент можно переделать под другие задачи: поиск корпуса, первичную разметку, проверку словаря, подготовку data card, маршрутизацию материалов к эксперту.
+В следующих тетрадках мы уже не будем каждый раз подробно разбирать архитектуру. Будем использовать этот принцип как рабочий шаблон: источник, tool, state, диагностика, human boundary, отчет.
 """),
         md("""
 ## Вопросы для отчета
 
 1. Какой реальный материал нашел агент и можно ли понять его лицензию?
-2. Получился ли OCR-текст вменяемым? Покажите 3-5 характерных ошибок.
-3. Какие поля `state` реально повлияли на следующие шаги?
-4. Что в этой задаче нельзя отдавать агенту полностью автоматически?
-5. Как бы вы изменили этот workflow для своего языка или корпуса?
+2. Какие части plain Python-агента соответствуют `state`, tools, observations и policy?
+3. Что стало понятнее или надежнее после переноса той же логики в LangGraph?
+4. Получился ли OCR-текст вменяемым? Покажите 3-5 характерных ошибок.
+5. Что в этой задаче нельзя отдавать агенту полностью автоматически?
 """),
     ]
 
