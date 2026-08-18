@@ -1,0 +1,224 @@
+{"kind":"deck","id":"pr/8o5tjp","name":"Deck"}
+{"kind":"layout","layoutId":"7eb285e8-24ab-4438-9e9c-8ef11b772e5f","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"ef4c7ca8-4c6c-4629-a0b9-603c148b45f6","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/ld8qos","slide":1,"title":"Курс по ML для малоресурсных языков","textShapes":6}
+{"kind":"shape","id":"sh/x07a9sjm","slide":1,"bbox":[0,0,22,720]}
+{"kind":"textbox","id":"sh/adwbexkv","slide":1,"text":"Курс по ML для малоресурсных языков","textPreview":"Курс по ML для малоресурсных языков","textChars":35,"textLines":1,"bbox":[76,72,720,30]}
+{"kind":"textbox","id":"sh/ve5s721g","slide":1,"text":"Занятие 2. Веб-скрейпинг, сбор данных и правовая рамка","textPreview":"Занятие 2. Веб-скрейпинг, сбор данных и правовая рамка","textChars":54,"textLines":1,"bbox":[76,170,990,170]}
+{"kind":"textbox","id":"sh/k3ytk7ix","slide":1,"text":"Занятие учит находить и собирать текстовые данные без разрушения качества и без нарушения прав. Главный результат - первый воспроизводимый пайплайн сбора корпуса и таблица источников.","textPreview":"Занятие учит находить и собирать текстовые данные без разрушения качества и без нарушения прав. Главный результат - первый воспроизводимы...","textChars":183,"textLines":1,"bbox":[80,392,900,92]}
+{"kind":"textbox","id":"sh/547adcji","slide":1,"text":"Лекция, семинар, домашнее задание и заметки докладчика","textPreview":"Лекция, семинар, домашнее задание и заметки докладчика","textChars":54,"textLines":1,"bbox":[80,560,820,32]}
+{"kind":"textbox","id":"sh/i1gbixk7","slide":1,"text":"Занятие 2","textPreview":"Занятие 2","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/j2psb21s","slide":1,"text":"1/13","textPreview":"1/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/ld8qos","slide":1,"text":"[Sources]\n- Local markdown source: course_sessions/02_veb_skreyping_sbor_i_prava_na_dannye.md"}
+{"kind":"slide","id":"sl/k1o06v","slide":2,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/nydsb2d8","slide":2,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/ozm9k7ut","slide":2,"text":"Откуда берутся данные для малоресурсных языков","textPreview":"Откуда берутся данные для малоресурсных языков","textChars":46,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/pkvadcve","slide":2,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/al4bmhcz","slide":2,"text":"Сайты местных СМИ, администраций, школ, музеев","textPreview":"Сайты местных СМИ, администраций, школ, музеев","textChars":46,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/bmdsfmdk","slide":2,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/cnmtoru5","slide":2,"text":"PDF, учебники, словари, архивы","textPreview":"PDF, учебники, словари, архивы","textChars":30,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/xovahwva","slide":2,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/6p0radwv","slide":2,"text":"Социальные сети и мессенджеры: только с явным согласием и осторожностью","textPreview":"Социальные сети и мессенджеры: только с явным согласием и осторожностью","textChars":71,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/rqts3id0","slide":2,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/3qdgzmxw","slide":2,"text":"Полевые данные: речь, списки слов, тексты, переводы","textPreview":"Полевые данные: речь, списки слов, тексты, переводы","textChars":51,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/ipkzqhgb","slide":2,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/5svy1wf2","slide":2,"text":"Занятие 2","textPreview":"Занятие 2","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/4rmhsryh","slide":2,"text":"2/13","textPreview":"2/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/k1o06v","slide":2,"text":"Для многих языков открытый веб-корпус мал или почти отсутствует. Поэтому сбор данных часто комбинирует веб, архивы, OCR и полевую работу. Нужно сразу отделять легальные открытые источники от материалов, которые нельзя публиковать.\n\n[Sources]\n- Local markdown source: course_sessions/02_veb_skreyping_sbor_i_prava_na_dannye.md"}
+{"kind":"slide","id":"sl/9avntd","slide":3,"title":"ЛЕКЦИЯ","textShapes":11}
+{"kind":"textbox","id":"sh/crih87ix","slide":3,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/rq9gf2hc","slide":3,"text":"Скрейпинг как исследовательский пайплайн","textPreview":"Скрейпинг как исследовательский пайплайн","textChars":40,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/qp0z6x0r","slide":3,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/porydsz6","slide":3,"text":"Инвентаризация источников","textPreview":"Инвентаризация источников","textChars":25,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/43ih4nil","slide":3,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/32pgbih0","slide":3,"text":"Проверка правил доступа","textPreview":"Проверка правил доступа","textChars":23,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/21gz2x0f","slide":3,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/h07y9sza","slide":3,"text":"Загрузка","textPreview":"Загрузка","textChars":8,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/gzyh0nip","slide":3,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/q5ob6d4b","slide":3,"text":"Извлечение текста","textPreview":"Извлечение текста","textChars":17,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/r6xcfylw","slide":3,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/s76t832h","slide":3,"text":"Дедупликация","textPreview":"Дедупликация","textChars":12,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/d8zuh832","slide":3,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/ihob2t4f","slide":3,"text":"Языковая фильтрация","textPreview":"Языковая фильтрация","textChars":19,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/3ixcbyl0","slide":3,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/4j6t43ml","slide":3,"text":"Документация","textPreview":"Документация","textChars":12,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/5kfud83q","slide":3,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/ud4byt43","slide":3,"text":"Занятие 2","textPreview":"Занятие 2","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/vedc7elo","slide":3,"text":"3/13","textPreview":"3/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/9avntd","slide":3,"text":"Скрейпинг - не просто \"скачать сайт\". Воспроизводимость важнее объема. Через месяц команда должна понимать, откуда взялась каждая строка и можно ли ее использовать.\n\n[Sources]\n- Local markdown source: course_sessions/02_veb_skreyping_sbor_i_prava_na_dannye.md"}
+{"kind":"slide","id":"sl/9gahkw","slide":4,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/36hwr65k","slide":4,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/47qdkbm5","slide":4,"text":"Правила доступа и этика","textPreview":"Правила доступа и этика","textChars":23,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/p8zetgnq","slide":4,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/q98vm14b","slide":4,"text":"Проверяем лицензии, Terms of Use, robots.txt","textPreview":"Проверяем лицензии, Terms of Use, robots.txt","textChars":44,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/rahwv65w","slide":4,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/cbqdobmh","slide":4,"text":"Не собираем личные данные без необходимости","textPreview":"Не собираем личные данные без необходимости","textChars":43,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/dcjexgn2","slide":4,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/6dovah47","slide":4,"text":"Не публикуем чувствительные материалы","textPreview":"Не публикуем чувствительные материалы","textChars":37,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/7excjm5c","slide":4,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/ru5gvmx8","slide":4,"text":"Храним источник, дату, лицензию, ограничения","textPreview":"Храним источник, дату, лицензию, ограничения","textChars":44,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/6tcz2hgn","slide":4,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/twnyxwfe","slide":4,"text":"Занятие 2","textPreview":"Занятие 2","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/sveh4ryt","slide":4,"text":"4/13","textPreview":"4/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/9gahkw","slide":4,"text":"Даже если технически можно скачать данные, это не значит, что их можно публиковать или использовать для обучения модели. Для летней школы нужно заранее подготовить шаблоны согласий и правила хранения.\n\n[Sources]\n- Local markdown source: course_sessions/02_veb_skreyping_sbor_i_prava_na_dannye.md"}
+{"kind":"slide","id":"sl/yqfwn2","slide":5,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/x472hgnq","slide":5,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/a1gjm14z","slide":5,"text":"Современные инструменты сбора","textPreview":"Современные инструменты сбора","textChars":29,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/b2pkf65k","slide":5,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/oze1krm9","slide":5,"text":"trafilatura, newspaper, readability для извлечения текста","textPreview":"trafilatura, newspaper, readability для извлечения текста","textChars":57,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/p0n2dwne","slide":5,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/2dwji143","slide":5,"text":"BeautifulSoup, requests, Playwright для сложных страниц","textPreview":"BeautifulSoup, requests, Playwright для сложных страниц","textChars":55,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/ny5kb65o","slide":5,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/0be1grmx","slide":5,"text":"Агент для обхода источников и составления отчета","textPreview":"Агент для обхода источников и составления отчета","textChars":48,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/1cn29wni","slide":5,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/tkfmd43y","slide":5,"text":"Таблица источников как контроль качества","textPreview":"Таблица источников как контроль качества","textChars":40,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/8j65kz2d","slide":5,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/7ix4buls","slide":5,"text":"Занятие 2","textPreview":"Занятие 2","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/6honipk7","slide":5,"text":"5/13","textPreview":"5/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/yqfwn2","slide":5,"text":"Студенты с базовым Python могут работать через готовые библиотеки и агента. Но они должны проверять результат: извлекся ли основной текст, не попали ли меню, реклама, комментарии, дубли.\n\n[Sources]\n- Local markdown source: course_sessions/02_veb_skreyping_sbor_i_prava_na_dannye.md"}
+{"kind":"slide","id":"sl/9kmkmd","slide":6,"title":"ЛЕКЦИЯ","textShapes":11}
+{"kind":"textbox","id":"sh/x8n6hkju","slide":6,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/a5cn6pkj","slide":6,"text":"Что сохранять вместе с текстом","textPreview":"Что сохранять вместе с текстом","textChars":30,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/v6l4fu14","slide":6,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/kbe5cz2l","slide":6,"text":"URL","textPreview":"URL","textChars":3,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/5wn6l4j6","slide":6,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/i9wnapkf","slide":6,"text":"Дата загрузки","textPreview":"Дата загрузки","textChars":13,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/ja5oju10","slide":6,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/sze5gj2h","slide":6,"text":"Заголовок","textPreview":"Заголовок","textChars":9,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/t076p4j2","slide":6,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/x4zqlwbe","slide":6,"text":"Язык по источнику и язык по классификатору","textPreview":"Язык по источнику и язык по классификатору","textChars":42,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/w3qpcrat","slide":6,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/vih8jmt8","slide":6,"text":"Лицензия или статус прав","textPreview":"Лицензия или статус прав","textChars":24,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/aho7ahsn","slide":6,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/58zqpwba","slide":6,"text":"Хеш текста","textPreview":"Хеш текста","textChars":10,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/k7q9grap","slide":6,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/j6h8nmt4","slide":6,"text":"Версия пайплайна","textPreview":"Версия пайплайна","textChars":16,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/i587ehsz","slide":6,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/lcfqdsb6","slide":6,"text":"Занятие 2","textPreview":"Занятие 2","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/0b6p47al","slide":6,"text":"6/13","textPreview":"6/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/9kmkmd","slide":6,"text":"Метаданные позволяют потом чистить корпус, исключать спорные источники и воспроизводить датасет. Это особенно важно для малоресурсных языков, где каждый текст может сильно влиять на модель.\n\n[Sources]\n- Local markdown source: course_sessions/02_veb_skreyping_sbor_i_prava_na_dannye.md"}
+{"kind":"slide","id":"sl/7jziea","slide":7,"title":"ЛЕКЦИЯ","textShapes":10}
+{"kind":"textbox","id":"sh/8zu98zi5","slide":7,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/nyl8zuhk","slide":7,"text":"Риски веб-корпусов","textPreview":"Риски веб-корпусов","textChars":18,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/mxc76p0z","slide":7,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/xo3q54zm","slide":7,"text":"Код-свитчинг","textPreview":"Код-свитчинг","textChars":12,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/wnu9cjih","slide":7,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/vml83ehw","slide":7,"text":"Машинные переводы","textPreview":"Машинные переводы","textChars":17,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/a1cra90b","slide":7,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/dsjqtkzi","slide":7,"text":"Повторяющиеся новости","textPreview":"Повторяющиеся новости","textChars":21,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/crap0fix","slide":7,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/e9czu9gr","slide":7,"text":"Тексты не на целевом языке","textPreview":"Тексты не на целевом языке","textChars":26,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/fal03ehc","slide":7,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/gbuhwjyx","slide":7,"text":"Нестабильная орфография","textPreview":"Нестабильная орфография","textChars":23,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/1c3i5oz2","slide":7,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/2dcjytgn","slide":7,"text":"Непрозрачные права","textPreview":"Непрозрачные права","textChars":18,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/3el07yh8","slide":7,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/ofu103yt","slide":7,"text":"Занятие 2","textPreview":"Занятие 2","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/pg3i98ze","slide":7,"text":"7/13","textPreview":"7/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/7jziea","slide":7,"text":"Большой корпус низкого качества может вредить больше, чем маленький корпус хорошего качества. Нужно учить студентов считать не только объем, но и долю шума.\n\n[Sources]\n- Local markdown source: course_sessions/02_veb_skreyping_sbor_i_prava_na_dannye.md"}
+{"kind":"slide","id":"sl/inpp6z","slide":8,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/rq5wbitk","slide":8,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/crexk3a5","slide":8,"text":"Агентный сбор данных","textPreview":"Агентный сбор данных","textChars":20,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/dsned8bq","slide":8,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/21cvets3","slide":8,"text":"Агент ищет источники","textPreview":"Агент ищет источники","textChars":20,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/32lw7yto","slide":8,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/43udg3a9","slide":8,"text":"Агент предлагает код загрузки","textPreview":"Агент предлагает код загрузки","textChars":29,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/p43e98be","slide":8,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/mxwfqxs7","slide":8,"text":"Агент строит отчет о качестве","textPreview":"Агент строит отчет о качестве","textChars":29,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/nypwj2ts","slide":8,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/f690zil8","slide":8,"text":"Человек проверяет права, выборку и ошибки","textPreview":"Человек проверяет права, выборку и ошибки","textChars":41,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/u5gzqdk3","slide":8,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/h8ri1s3e","slide":8,"text":"Занятие 2","textPreview":"Занятие 2","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/g7ihsn2t","slide":8,"text":"8/13","textPreview":"8/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/inpp6z","slide":8,"text":"Агент полезен для рутинных шагов: составить список сайтов, написать скрипт, проверить формат. Но нельзя делегировать ему финальное решение о праве использования и качестве языкового материала.\n\n[Sources]\n- Local markdown source: course_sessions/02_veb_skreyping_sbor_i_prava_na_dannye.md"}
+{"kind":"slide","id":"sl/57zwu9","slide":9,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/50ved0ri","slide":9,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/ixkv2lsr","slide":9,"text":"Артефакт занятия","textPreview":"Артефакт занятия","textChars":16,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/3ydwbq9c","slide":9,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/gv2d0val","slide":9,"text":"sources.csv","textPreview":"sources.csv","textChars":11,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/hwbe9gr6","slide":9,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/utkvylsv","slide":9,"text":"scrape_config.yaml","textPreview":"scrape_config.yaml","textChars":18,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/vutw7q90","slide":9,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/0r6xcfa5","slide":9,"text":"raw_texts.jsonl","textPreview":"raw_texts.jsonl","textChars":15,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/1sfelkra","slide":9,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/p8nipcve","slide":9,"text":"scraping_report.md","textPreview":"scraping_report.md","textChars":18,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/o7e1w7et","slide":9,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/3650n2d8","slide":9,"text":"Занятие 2","textPreview":"Занятие 2","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/25wjuxwn","slide":9,"text":"9/13","textPreview":"9/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/57zwu9","slide":9,"text":"Даже если команда собрала 20 текстов, это уже полезно, если они чисто описаны и воспроизводимы. Цель занятия - создать основу корпуса.\n\n[Sources]\n- Local markdown source: course_sessions/02_veb_skreyping_sbor_i_prava_na_dannye.md"}
+{"kind":"slide","id":"sl/umhypv","slide":10,"title":"СЕМИНАР","textShapes":12}
+{"kind":"textbox","id":"sh/3apgnelk","slide":10,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/obyxgjm5","slide":10,"text":"Практика 1. Таблица источников, 20 минут","textPreview":"Практика 1. Таблица источников, 20 минут","textChars":40,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/pw7ypo3q","slide":10,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/axgfit4v","slide":10,"text":"Каждая команда создает sources.csv:","textPreview":"Каждая команда создает sources.csv:","textChars":35,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/bypgrylg","slide":10,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/czyxkjm1","slide":10,"text":"source_id","textPreview":"source_id","textChars":9,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/x0ryto3m","slide":10,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/y10fmt47","slide":10,"text":"url_or_reference","textPreview":"url_or_reference","textChars":16,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/z29gvyls","slide":10,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/rmtw7m58","slide":10,"text":"type","textPreview":"type","textChars":4,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/qlkve14n","slide":10,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/d8be9wne","slide":10,"text":"language","textPreview":"language","textChars":8,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/sn2dgrmt","slide":10,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/3i9c3m5c","slide":10,"text":"license","textPreview":"license","textChars":7,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/ih0vahor","slide":10,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/5kre5wn2","slide":10,"text":"access_notes","textPreview":"access_notes","textChars":12,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/4jidcrmx","slide":10,"bbox":[80,534,12,12]}
+{"kind":"textbox","id":"sh/nedwf65g","slide":10,"text":"risk_level","textPreview":"risk_level","textChars":10,"textLines":1,"bbox":[110,526,1010,40]}
+{"kind":"shape","id":"sh/2d4vml4v","slide":10,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/y9oze5o3","slide":10,"text":"Занятие 2","textPreview":"Занятие 2","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/jaxgnapo","slide":10,"text":"10/13","textPreview":"10/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/umhypv","slide":10,"text":"[Sources]\n- Local markdown source: course_sessions/02_veb_skreyping_sbor_i_prava_na_dannye.md"}
+{"kind":"slide","id":"sl/a34bmg","slide":11,"title":"СЕМИНАР","textShapes":6}
+{"kind":"textbox","id":"sh/0bypsv21","slide":11,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/zqp8zq1g","slide":11,"text":"Практика 2. Сбор 5-10 документов, 30 минут","textPreview":"Практика 2. Сбор 5-10 документов, 30 минут","textChars":42,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/epg7qlkv","slide":11,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/9grqp0ji","slide":11,"text":"Команды используют готовый скрипт, агентный код или ручную загрузку. Минимальное требование - сохранить текст...","textPreview":"Команды используют готовый скрипт, агентный код или ручную загрузку. Минимальное требование - сохранить текст...","textChars":112,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/ofi9wv2x","slide":11,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/ne98nq1c","slide":11,"text":"{\"id\": \"...\", \"source\": \"...\", \"text\": \"...\", \"metadata\": {...}}","textPreview":"{\"id\": \"...\", \"source\": \"...\", \"text\": \"...\", \"metadata\": {...}}","textChars":64,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/md0ru5kr","slide":11,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/xkbqtkje","slide":11,"text":"Занятие 2","textPreview":"Занятие 2","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/wji90f29","slide":11,"text":"11/13","textPreview":"11/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/a34bmg","slide":11,"text":"[Sources]\n- Local markdown source: course_sessions/02_veb_skreyping_sbor_i_prava_na_dannye.md"}
+{"kind":"slide","id":"sl/p63n18","slide":12,"title":"СЕМИНАР","textShapes":10}
+{"kind":"textbox","id":"sh/cje5o7yd","slide":12,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/bi54v2hs","slide":12,"text":"Практика 3. Проверка шума, 25 минут","textPreview":"Практика 3. Проверка шума, 25 минут","textChars":35,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/qhwnmxg7","slide":12,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/l87m1czu","slide":12,"text":"Команды вручную размечают 20 фрагментов:","textPreview":"Команды вручную размечают 20 фрагментов:","textChars":40,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/07y5s7y9","slide":12,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/z6p4zmho","slide":12,"text":"целевой язык: да / нет / смешанный","textPreview":"целевой язык: да / нет / смешанный","textChars":34,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/ylgnqhgj","slide":12,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/9crm5wz6","slide":12,"text":"мусор HTML: да / нет","textPreview":"мусор HTML: да / нет","textChars":20,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/8by5wryl","slide":12,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/ixcny50j","slide":12,"text":"дубликат: да / нет","textPreview":"дубликат: да / нет","textChars":18,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/3y5o7a14","slide":12,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/4ze50fip","slide":12,"text":"права понятны: да / нет","textPreview":"права понятны: да / нет","textChars":23,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/50n690za","slide":12,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/q1wn250v","slide":12,"text":"годится для корпуса: да / нет","textPreview":"годится для корпуса: да / нет","textChars":29,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/r25obahg","slide":12,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/s3e54fil","slide":12,"text":"Занятие 2","textPreview":"Занятие 2","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/d4n6dkz6","slide":12,"text":"12/13","textPreview":"12/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/p63n18","slide":12,"text":"[Sources]\n- Local markdown source: course_sessions/02_veb_skreyping_sbor_i_prava_na_dannye.md"}
+{"kind":"slide","id":"sl/mlvu2j","slide":13,"title":"СЕМИНАР","textShapes":12}
+{"kind":"textbox","id":"sh/ipobehwz","slide":13,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/5sfupwfq","slide":13,"text":"Практика 4. Отчет агента, 15 минут","textPreview":"Практика 4. Отчет агента, 15 минут","textChars":34,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/kr6tgre5","slide":13,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/vmdsjmx8","slide":13,"text":"Промпт:","textPreview":"Промпт:","textChars":7,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/al4bahw3","slide":13,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/xofalcfe","slide":13,"text":"Проанализируй этот небольшой корпус для малоресурсного языка.","textPreview":"Проанализируй этот небольшой корпус для малоресурсного языка.","textChars":61,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/wnmtc7et","slide":13,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/fihcf6ds","slide":13,"text":"Найди признаки мусора, дублей, код-свитчинга и юридических рисков.","textPreview":"Найди признаки мусора, дублей, код-свитчинга и юридических рисков.","textChars":66,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/uh8bm1w7","slide":13,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/k72xsfyl","slide":13,"text":"Сформируй отчет: что можно использовать сейчас, что требует проверки,","textPreview":"Сформируй отчет: что можно использовать сейчас, что требует проверки,","textChars":69,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/58ve1kf6","slide":13,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/i5kfq5gf","slide":13,"text":"что нужно исключить. Не делай вид, что уверен в языке, если данных мало.","textPreview":"что нужно исключить. Не делай вид, что уверен в языке, если данных мало.","textChars":72,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/j6twzah0","slide":13,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/w32xofyp","slide":13,"text":"## Домашнее задание","textPreview":"## Домашнее задание","textChars":19,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/x4bexkza","slide":13,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/ahkfm5gj","slide":13,"text":"Расширить список источников до 10-20.","textPreview":"Расширить список источников до 10-20.","textChars":37,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/vitwvah4","slide":13,"bbox":[80,534,12,12]}
+{"kind":"textbox","id":"sh/8fixkvyd","slide":13,"text":"Собрать минимум 30 документов или объяснить, почему это невозможно.","textPreview":"Собрать минимум 30 документов или объяснить, почему это невозможно.","textChars":67,"textLines":1,"bbox":[110,526,1010,40]}
+{"kind":"shape","id":"sh/9gret0zy","slide":13,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/pcjuxwrm","slide":13,"text":"Занятие 2","textPreview":"Занятие 2","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/obadorqh","slide":13,"text":"13/13","textPreview":"13/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/mlvu2j","slide":13,"text":"[Sources]\n- Local markdown source: course_sessions/02_veb_skreyping_sbor_i_prava_na_dannye.md"}

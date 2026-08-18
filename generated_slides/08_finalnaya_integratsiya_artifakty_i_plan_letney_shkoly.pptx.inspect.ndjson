@@ -1,0 +1,248 @@
+{"kind":"deck","id":"pr/gc3yd9","name":"Deck"}
+{"kind":"layout","layoutId":"bb82aec2-f745-4915-8035-18e98c21939a","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"a1e6f74e-2561-49cb-98ad-68d8cf588570","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/8opifn","slide":1,"title":"Курс по ML для малоресурсных языков","textShapes":6}
+{"kind":"shape","id":"sh/0vi5c7at","slide":1,"bbox":[0,0,22,720]}
+{"kind":"textbox","id":"sh/zu9432t8","slide":1,"text":"Курс по ML для малоресурсных языков","textPreview":"Курс по ML для малоресурсных языков","textChars":35,"textLines":1,"bbox":[76,72,720,30]}
+{"kind":"textbox","id":"sh/etgnaxs3","slide":1,"text":"Занятие 8. Финальная интеграция, артефакты и план летней школы","textPreview":"Занятие 8. Финальная интеграция, артефакты и план летней школы","textChars":62,"textLines":1,"bbox":[76,170,990,170]}
+{"kind":"textbox","id":"sh/9kr69cbq","slide":1,"text":"Последнее занятие собирает результаты в понятные артефакты: датасеты, модели, пайплайны, отчеты и план летней школы. Главный результат - не презентация ради презентации, а проверяемый пакет работы.","textPreview":"Последнее занятие собирает результаты в понятные артефакты: датасеты, модели, пайплайны, отчеты и план летней школы. Главный результат - ...","textChars":197,"textLines":1,"bbox":[80,392,900,92]}
+{"kind":"textbox","id":"sh/8ji5g7a5","slide":1,"text":"Лекция, семинар, домашнее задание и заметки докладчика","textPreview":"Лекция, семинар, домашнее задание и заметки докладчика","textChars":54,"textLines":1,"bbox":[80,560,820,32]}
+{"kind":"textbox","id":"sh/ni9472tk","slide":1,"text":"Занятие 8","textPreview":"Занятие 8","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/mh0nexsz","slide":1,"text":"1/13","textPreview":"1/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/8opifn","slide":1,"text":"[Sources]\n- Local markdown source: course_sessions/08_finalnaya_integratsiya_artifakty_i_plan_letney_shkoly.md"}
+{"kind":"slide","id":"sl/8jsz6o","slide":2,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/y1czax03","slide":2,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/l43ylcju","slide":2,"text":"Что считается результатом курса","textPreview":"Что считается результатом курса","textChars":31,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/k3uhc7i9","slide":2,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/by1gf21s","slide":2,"text":"Датасет с data card","textPreview":"Датасет с data card","textChars":19,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/axsz6x07","slide":2,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/x03yhsjy","slide":2,"text":"Модель с model card","textPreview":"Модель с model card","textChars":19,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/wzah87id","slide":2,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/na1gbi1g","slide":2,"text":"Пайплайн с инструкцией запуска","textPreview":"Пайплайн с инструкцией запуска","textChars":30,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/m9sz2d0b","slide":2,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/w3ex4fy1","slide":2,"text":"Демо для сообщества или преподавателей","textPreview":"Демо для сообщества или преподавателей","textChars":38,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/h4nexkzm","slide":2,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/u1wf250b","slide":2,"text":"План полевого сбора для летней школы","textPreview":"План полевого сбора для летней школы","textChars":36,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/v25wvahg","slide":2,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/8fux0fi5","slide":2,"text":"Занятие 8","textPreview":"Занятие 8","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/9g3et0zq","slide":2,"text":"2/13","textPreview":"2/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/8jsz6o","slide":2,"text":"Результаты могут быть разными по технической сложности. Важнее, чтобы они были честно описаны, воспроизводимы и пригодны для следующего этапа.\n\n[Sources]\n- Local markdown source: course_sessions/08_finalnaya_integratsiya_artifakty_i_plan_letney_shkoly.md"}
+{"kind":"slide","id":"sl/q1r136","slide":3,"title":"ЛЕКЦИЯ","textShapes":10}
+{"kind":"textbox","id":"sh/cf65g325","slide":3,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/bexonyl0","slide":3,"text":"Минимальный финальный пакет","textPreview":"Минимальный финальный пакет","textChars":27,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/qdonetkf","slide":3,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/l4z6t832","slide":3,"text":"README.md","textPreview":"README.md","textChars":9,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/03q5kn2h","slide":3,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/z2xorilw","slide":3,"text":"DATA_CARD.md","textPreview":"DATA_CARD.md","textChars":12,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/yhonidkb","slide":3,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/h8v6ho3i","slide":3,"text":"MODEL_CARD.md, если есть модель","textPreview":"MODEL_CARD.md, если есть модель","textChars":31,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/g7m58j2d","slide":3,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/i9gryd83","slide":3,"text":"pipeline.md или notebook","textPreview":"pipeline.md или notebook","textChars":24,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/jap87i9o","slide":3,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/4by90nq9","slide":3,"text":"eval_report.md","textPreview":"eval_report.md","textChars":14,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/5c7q98ru","slide":3,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/6x0r2d8f","slide":3,"text":"summer_school_plan.md","textPreview":"summer_school_plan.md","textChars":21,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/ry98bi90","slide":3,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/szi94nql","slide":3,"text":"Занятие 8","textPreview":"Занятие 8","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/d0rqdsrq","slide":3,"text":"3/13","textPreview":"3/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/q1r136","slide":3,"text":"Если команда не успела обучить модель, это не провал. Качественный датасет и сильный план сбора могут быть ценнее слабой модели без документации.\n\n[Sources]\n- Local markdown source: course_sessions/08_finalnaya_integratsiya_artifakty_i_plan_letney_shkoly.md"}
+{"kind":"slide","id":"sl/oidq0d","slide":4,"title":"ЛЕКЦИЯ","textShapes":11}
+{"kind":"textbox","id":"sh/f61c3u5s","slide":4,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/07udwzmx","slide":4,"text":"Model card","textPreview":"Model card","textChars":10,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/183u543i","slide":4,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/29cvy943","slide":4,"text":"Назначение модели","textPreview":"Назначение модели","textChars":17,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/nalc7elo","slide":4,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/obud0zm9","slide":4,"text":"Данные обучения","textPreview":"Данные обучения","textChars":15,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/pc3u943u","slide":4,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/id8bm54z","slide":4,"text":"Метрики","textPreview":"Метрики","textChars":7,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/3ehcva5k","slide":4,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/f690b2xo","slide":4,"text":"Ограничения","textPreview":"Ограничения","textChars":11,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/e50j2xw3","slide":4,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/18ridcfe","slide":4,"text":"Известные ошибки","textPreview":"Известные ошибки","textChars":16,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/g7i147et","slide":4,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/r2p07ixc","slide":4,"text":"Нерекомендованное использование","textPreview":"Нерекомендованное использование","textChars":31,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/61gjydwr","slide":4,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/t47i9sfi","slide":4,"text":"Контакт и версия","textPreview":"Контакт и версия","textChars":16,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/s3y10nex","slide":4,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/jyp03ixg","slide":4,"text":"Занятие 8","textPreview":"Занятие 8","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/ixgzudwv","slide":4,"text":"4/13","textPreview":"4/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/oidq0d","slide":4,"text":"Для ASR, OCR, перевода и спелчекера model card должен прямо указывать, на каких данных модель проверялась и где она не должна применяться.\n\n[Sources]\n- Local markdown source: course_sessions/08_finalnaya_integratsiya_artifakty_i_plan_letney_shkoly.md"}
+{"kind":"slide","id":"sl/vb1zzq","slide":5,"title":"ЛЕКЦИЯ","textShapes":10}
+{"kind":"textbox","id":"sh/w72pkru5","slide":5,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/v6tobmdk","slide":5,"text":"Evaluation report","textPreview":"Evaluation report","textChars":17,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/u5k7ihcz","slide":5,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/5wv6hwvm","slide":5,"text":"Что измеряли","textPreview":"Что измеряли","textChars":12,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/4vmporu1","slide":5,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/judofmdg","slide":5,"text":"На каком тесте","textPreview":"На каком тесте","textChars":14,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/it47mhcv","slide":5,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/t0v6lgvi","slide":5,"text":"Какие метрики","textPreview":"Какие метрики","textChars":13,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/szmpsbud","slide":5,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/ato7ih0v","slide":5,"text":"Примеры ошибок","textPreview":"Примеры ошибок","textChars":14,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/bux8b2hg","slide":5,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/cv6pk7i1","slide":5,"text":"Что нужно улучшить","textPreview":"Что нужно улучшить","textChars":18,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/xwfqdczm","slide":5,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/yxo7mh07","slide":5,"text":"Что нельзя утверждать по этим данным","textPreview":"Что нельзя утверждать по этим данным","textChars":36,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/zyx8fmhc","slide":5,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/kzqporix","slide":5,"text":"Занятие 8","textPreview":"Занятие 8","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/l0zqhwzi","slide":5,"text":"5/13","textPreview":"5/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/vb1zzq","slide":5,"text":"Сильный отчет не скрывает слабости. Для малоресурсных языков честный анализ ошибок часто важнее красивой общей метрики.\n\n[Sources]\n- Local markdown source: course_sessions/08_finalnaya_integratsiya_artifakty_i_plan_letney_shkoly.md"}
+{"kind":"slide","id":"sl/sz4rrg","slide":6,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/290zilgz","slide":6,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/pcritgzq","slide":6,"text":"Интеграция пайплайнов","textPreview":"Интеграция пайплайнов","textChars":21,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/4bihkvy5","slide":6,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/ret0vqhw","slide":6,"text":"Web corpus -> cleaning -> spellchecker","textPreview":"Web corpus -> cleaning -> spellchecker","textChars":38,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/qd0zmlgb","slide":6,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/dgbih0zm","slide":6,"text":"OCR -> correction -> text corpus","textPreview":"OCR -> correction -> text corpus","textChars":32,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/cf2hovy1","slide":6,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/7ipgj6hc","slide":6,"text":"ASR -> transcript -> text corpus","textPreview":"ASR -> transcript -> text corpus","textChars":32,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/6hgza1gr","slide":6,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/g3els7ul","slide":6,"text":"Parallel alignment -> MT baseline","textPreview":"Parallel alignment -> MT baseline","textChars":33,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/ho7mlcb6","slide":6,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/u1w3qxcf","slide":6,"text":"Все артефакты связаны метаданными","textPreview":"Все артефакты связаны метаданными","textChars":33,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/v254j2t0","slide":6,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/4rylw7ux","slide":6,"text":"Занятие 8","textPreview":"Занятие 8","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/5s7mpcb2","slide":6,"text":"6/13","textPreview":"6/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/sz4rrg","slide":6,"text":"Курс должен показать, что отдельные компоненты не изолированы. OCR и ASR дают тексты, тексты помогают спелчекеру, параллельные данные помогают переводу, все вместе готовит летнюю школу.\n\n[Sources]\n- Local markdown source: course_sessions/08_finalnaya_integratsiya_artifakty_i_plan_letney_shkoly.md"}
+{"kind":"slide","id":"sl/b4ndlq","slide":7,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/7y5knih4","slide":7,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/8ze1gnip","slide":7,"text":"Агентная проверка финального пакета","textPreview":"Агентная проверка финального пакета","textChars":35,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/t0n2psza","slide":7,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/ytcjad0n","slide":7,"text":"Проверить структуру файлов","textPreview":"Проверить структуру файлов","textChars":26,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/ju50jih8","slide":7,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/kve1c3it","slide":7,"text":"Найти недостающие метаданные","textPreview":"Найти недостающие метаданные","textChars":28,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/lwnil8ze","slide":7,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/ipgjmxgr","slide":7,"text":"Сравнить README с реальным содержимым","textPreview":"Сравнить README с реальным содержимым","textChars":37,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/3qpkv2hc","slide":7,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/7y547a9s","slide":7,"text":"Сформировать список рисков","textPreview":"Сформировать список рисков","textChars":26,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/6xc3y58n","slide":7,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/t0nm90ry","slide":7,"text":"Подготовить чек-лист публикации","textPreview":"Подготовить чек-лист публикации","textChars":31,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/szel0vqd","slide":7,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/f254ba94","slide":7,"text":"Занятие 8","textPreview":"Занятие 8","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/e1wn258j","slide":7,"text":"7/13","textPreview":"7/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/b4ndlq","slide":7,"text":"Агент хорошо работает как reviewer. Он может найти несоответствия: README обещает модель, но файла нет; data card не содержит лицензии; evaluation report не указывает test set.\n\n[Sources]\n- Local markdown source: course_sessions/08_finalnaya_integratsiya_artifakty_i_plan_letney_shkoly.md"}
+{"kind":"slide","id":"sl/7cqjpy","slide":8,"title":"ЛЕКЦИЯ","textShapes":11}
+{"kind":"textbox","id":"sh/w7e94z2h","slide":8,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/v658bulw","slide":8,"text":"План летней школы","textPreview":"План летней школы","textChars":17,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/ulwr2pkb","slide":8,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/5c7ah4jy","slide":8,"text":"Регион и языки","textPreview":"Регион и языки","textChars":14,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/4be98z2d","slide":8,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/3a5sful8","slide":8,"text":"Партнеры и контакты","textPreview":"Партнеры и контакты","textChars":19,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/i9wr6pkn","slide":8,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/dg7al4ja","slide":8,"text":"Какие данные собираем","textPreview":"Какие данные собираем","textChars":21,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/sfy9cj2p","slide":8,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/u5wbqhcr","slide":8,"text":"Оборудование и роли","textPreview":"Оборудование и роли","textChars":19,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/v65czmdc","slide":8,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/w7edsrux","slide":8,"text":"Этический протокол","textPreview":"Этический протокол","textChars":18,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/h87u1cvi","slide":8,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/i9gvuhc3","slide":8,"text":"Расписание полевой лаборатории","textPreview":"Расписание полевой лаборатории","textChars":30,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/japc3mdo","slide":8,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/4bydwrut","slide":8,"text":"Ожидаемые артефакты","textPreview":"Ожидаемые артефакты","textChars":19,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/5c7u5wve","slide":8,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/ydcbixcj","slide":8,"text":"Занятие 8","textPreview":"Занятие 8","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/zelcr2d4","slide":8,"text":"8/13","textPreview":"8/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/7cqjpy","slide":8,"text":"Летняя школа должна строиться на выводах курса. Нужно понять, какие гипотезы подтвердились, где данных не хватает, какие команды готовы вести станции: ASR, OCR, перевод, спелчекер, корпус.\n\n[Sources]\n- Local markdown source: course_sessions/08_finalnaya_integratsiya_artifakty_i_plan_letney_shkoly.md"}
+{"kind":"slide","id":"sl/41rqj9","slide":9,"title":"ЛЕКЦИЯ","textShapes":11}
+{"kind":"textbox","id":"sh/rq90ruto","slide":9,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/sri10za9","slide":9,"text":"Финальная защита","textPreview":"Финальная защита","textChars":16,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/tcrit4be","slide":9,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/il0jupsr","slide":9,"text":"Проблема","textPreview":"Проблема","textChars":8,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/jm90nutc","slide":9,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/4ni1wzax","slide":9,"text":"Данные","textPreview":"Данные","textChars":6,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/5orip4bi","slide":9,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/uhgzq5sv","slide":9,"text":"Метод","textPreview":"Метод","textChars":5,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/vip0jatg","slide":9,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/3yl8nmdc","slide":9,"text":"Результат","textPreview":"Результат","textChars":9,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/2xcruhcr","slide":9,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/p03qpwvi","slide":9,"text":"Ошибки и ограничения","textPreview":"Ошибки и ограничения","textChars":20,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/4zu9wrux","slide":9,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/r2l8r6d8","slide":9,"text":"Что дальше","textPreview":"Что дальше","textChars":10,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/q1cry1c3","slide":9,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/d4nqtgve","slide":9,"text":"Что нужно от летней школы","textPreview":"Что нужно от летней школы","textChars":25,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/c3u90but","slide":9,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/7618f2d4","slide":9,"text":"Занятие 8","textPreview":"Занятие 8","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/65s7mxcj","slide":9,"text":"9/13","textPreview":"9/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/41rqj9","slide":9,"text":"Финальная защита должна быть короткой и предметной. Не надо продавать результат как завершенное решение, если это прототип. Важно показать, что команда понимает качество и следующий шаг.\n\n[Sources]\n- Local markdown source: course_sessions/08_finalnaya_integratsiya_artifakty_i_plan_letney_shkoly.md"}
+{"kind":"slide","id":"sl/jkp0aa","slide":10,"title":"СЕМИНАР","textShapes":12}
+{"kind":"textbox","id":"sh/loralwvu","slide":10,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/y1gbqhc3","slide":10,"text":"Практика 1. Финальная сборка, 25 минут","textPreview":"Практика 1. Финальная сборка, 25 минут","textChars":38,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/zm9sjmdo","slide":10,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/czyto7ux","slide":10,"text":"Команды приводят проект к структуре:","textPreview":"Команды приводят проект к структуре:","textChars":36,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/x07ahcvi","slide":10,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/axgbmhc7","slide":10,"text":"project/","textPreview":"project/","textChars":8,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/bypsf2ds","slide":10,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/ovy9k7u1","slide":10,"text":"README.md","textPreview":"README.md","textChars":9,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/pw7adcvm","slide":10,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/tgf25kjm","slide":10,"text":"data/","textPreview":"data/","textChars":5,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/8fm1cfi1","slide":10,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/7edk3a1g","slide":10,"text":"reports/","textPreview":"reports/","textChars":8,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/6d4ja50v","slide":10,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/lcv210ja","slide":10,"text":"notebooks/","textPreview":"notebooks/","textChars":10,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/kbm18fip","slide":10,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/jadkza14","slide":10,"text":"models/","textPreview":"models/","textChars":7,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/y94j650z","slide":10,"bbox":[80,534,12,12]}
+{"kind":"textbox","id":"sh/xov2x0je","slide":10,"text":"DATA_CARD.md","textPreview":"DATA_CARD.md","textChars":12,"textLines":1,"bbox":[110,526,1010,40]}
+{"kind":"shape","id":"sh/wn214vit","slide":10,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/or61kvqp","slide":10,"text":"Занятие 8","textPreview":"Занятие 8","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/psf2d0ra","slide":10,"text":"10/13","textPreview":"10/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/jkp0aa","slide":10,"text":"[Sources]\n- Local markdown source: course_sessions/08_finalnaya_integratsiya_artifakty_i_plan_letney_shkoly.md"}
+{"kind":"slide","id":"sl/tmhq11","slide":11,"title":"СЕМИНАР","textShapes":9}
+{"kind":"textbox","id":"sh/onmp4ry9","slide":11,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/nmd8bmx4","slide":11,"text":"Практика 2. Агентный review, 20 минут","textPreview":"Практика 2. Агентный review, 20 минут","textChars":37,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/2lk72hgj","slide":11,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/xsvqhwf6","slide":11,"text":"Промпт:","textPreview":"Промпт:","textChars":7,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/crm98bel","slide":11,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/bqd8f6x0","slide":11,"text":"Проверь финальный пакет проекта по малоресурсному языку.","textPreview":"Проверь финальный пакет проекта по малоресурсному языку.","textChars":56,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/ap4761wf","slide":11,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/dwbq5cfm","slide":11,"text":"Найди несоответствия между README, данными, отчетами и заявленными результатами.","textPreview":"Найди несоответствия между README, данными, отчетами и заявленными результатами.","textChars":80,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/sv2pw7yh","slide":11,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/m54b6xc3","slide":11,"text":"Составь список блокеров перед публикацией, список желательных улучшений","textPreview":"Составь список блокеров перед публикацией, список желательных улучшений","textChars":71,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/76dczido","slide":11,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/87mt8nu9","slide":11,"text":"и список задач для летней школы.","textPreview":"и список задач для летней школы.","textChars":32,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/98vu1sve","slide":11,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/u94baxcz","slide":11,"text":"Занятие 8","textPreview":"Занятие 8","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/vaxc32dk","slide":11,"text":"11/13","textPreview":"11/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/tmhq11","slide":11,"text":"[Sources]\n- Local markdown source: course_sessions/08_finalnaya_integratsiya_artifakty_i_plan_letney_shkoly.md"}
+{"kind":"slide","id":"sl/bcwbbc","slide":12,"title":"СЕМИНАР","textShapes":11}
+{"kind":"textbox","id":"sh/1sfq9kf6","slide":12,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/epo7epgv","slide":12,"text":"Практика 3. Финальные презентации, 30 минут","textPreview":"Практика 3. Финальные презентации, 30 минут","textChars":43,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/fqxo7ux0","slide":12,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/ovqpkzyx","slide":12,"text":"Каждая команда показывает:","textPreview":"Каждая команда показывает:","textChars":26,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/pwzqd4fi","slide":12,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/2t87ipgr","slide":12,"text":"что было целью","textPreview":"что было целью","textChars":14,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/nuh8buxc","slide":12,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/4zmp8fyd","slide":12,"text":"какие данные собраны","textPreview":"какие данные собраны","textChars":20,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/50v610fy","slide":12,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/pcz6l03i","slide":12,"text":"какие модели или пайплайны сделаны","textPreview":"какие модели или пайплайны сделаны","textChars":34,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/obq5cv2d","slide":12,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/3ahojqls","slide":12,"text":"какие метрики получены","textPreview":"какие метрики получены","textChars":22,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/298nalk7","slide":12,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/x0j6p03u","slide":12,"text":"какие ошибки обнаружены","textPreview":"какие ошибки обнаружены","textChars":23,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/cza5gv29","slide":12,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/byhonqlo","slide":12,"text":"что нужно делать дальше","textPreview":"что нужно делать дальше","textChars":23,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/qd8ne5k3","slide":12,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/l4j6tk3q","slide":12,"text":"Занятие 8","textPreview":"Занятие 8","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/k3a5kf25","slide":12,"text":"12/13","textPreview":"12/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/bcwbbc","slide":12,"text":"[Sources]\n- Local markdown source: course_sessions/08_finalnaya_integratsiya_artifakty_i_plan_letney_shkoly.md"}
+{"kind":"slide","id":"sl/d8zur2","slide":13,"title":"СЕМИНАР","textShapes":12}
+{"kind":"textbox","id":"sh/50rihgrq","slide":13,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/ixgz61sz","slide":13,"text":"Практика 4. Общий план летней школы, 15 минут","textPreview":"Практика 4. Общий план летней школы, 15 минут","textChars":45,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/jyp0f69k","slide":13,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/s3ihcba1","slide":13,"text":"Группа собирает общий документ:","textPreview":"Группа собирает общий документ:","textChars":31,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/t4rilgrm","slide":13,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/610za1sv","slide":13,"text":"приоритетный регион","textPreview":"приоритетный регион","textChars":19,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/7290j69g","slide":13,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/g7i1gvad","slide":13,"text":"список языков","textPreview":"список языков","textChars":13,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/1sbip0ry","slide":13,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/dcbqtcry","slide":13,"text":"станции работы","textPreview":"станции работы","textChars":14,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/sb2907qd","slide":13,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/ra98r298","slide":13,"text":"минимальное оборудование","textPreview":"минимальное оборудование","textChars":24,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/q90ryh8n","slide":13,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/10baxwra","slide":13,"text":"партнеры","textPreview":"партнеры","textChars":8,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/0z294rqp","slide":13,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/fyt8vm94","slide":13,"text":"риски","textPreview":"риски","textChars":5,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/edkr2h8j","slide":13,"bbox":[80,534,12,12]}
+{"kind":"textbox","id":"sh/h4rqlsrq","slide":13,"text":"план доработки до следующего года","textPreview":"план доработки до следующего года","textChars":33,"textLines":1,"bbox":[110,526,1010,40]}
+{"kind":"shape","id":"sh/g3y9snql","slide":13,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/8n298ny1","slide":13,"text":"Занятие 8","textPreview":"Занятие 8","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/9obqhszm","slide":13,"text":"13/13","textPreview":"13/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/d8zur2","slide":13,"text":"[Sources]\n- Local markdown source: course_sessions/08_finalnaya_integratsiya_artifakty_i_plan_letney_shkoly.md"}

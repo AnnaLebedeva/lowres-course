@@ -1,0 +1,228 @@
+{"kind":"deck","id":"pr/sipym2","name":"Deck"}
+{"kind":"layout","layoutId":"20925892-c0e8-43f4-a878-f8237450baa3","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"8bd4ed9d-e68d-425c-af13-c92d9da37439","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/rt8hli","slide":1,"title":"Курс по ML для малоресурсных языков","textShapes":6}
+{"kind":"shape","id":"sh/tgrmls7u","slide":1,"bbox":[0,0,22,720]}
+{"kind":"textbox","id":"sh/mt03qx83","slide":1,"text":"Курс по ML для малоресурсных языков","textPreview":"Курс по ML для малоресурсных языков","textChars":35,"textLines":1,"bbox":[76,72,720,30]}
+{"kind":"textbox","id":"sh/7e94jipo","slide":1,"text":"Занятие 6. Параллельные тексты, LBCM-alignment и машинный перевод","textPreview":"Занятие 6. Параллельные тексты, LBCM-alignment и машинный перевод","textChars":65,"textLines":1,"bbox":[76,170,990,170]}
+{"kind":"textbox","id":"sh/gj2lw7q5","slide":1,"text":"Занятие связывает сбор текстов с машинным переводом. Главный результат - небольшой параллельный датасет, выровненный с помощью LBCM-подхода, и baseline для перевода.","textPreview":"Занятие связывает сбор текстов с машинным переводом. Главный результат - небольшой параллельный датасет, выровненный с помощью LBCM-подхо...","textChars":165,"textLines":1,"bbox":[80,392,900,92]}
+{"kind":"textbox","id":"sh/hkbmpc7q","slide":1,"text":"Лекция, семинар, домашнее задание и заметки докладчика","textPreview":"Лекция, семинар, домашнее задание и заметки докладчика","textChars":54,"textLines":1,"bbox":[80,560,820,32]}
+{"kind":"textbox","id":"sh/uhk3ux8z","slide":1,"text":"Занятие 6","textPreview":"Занятие 6","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/vit4n2pk","slide":1,"text":"1/13","textPreview":"1/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/rt8hli","slide":1,"text":"[Sources]\n- Local markdown source: course_sessions/06_parallel_texts_lbcm_alignment_i_perevod.md"}
+{"kind":"slide","id":"sl/djntr0","slide":2,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/s7atgja9","slide":2,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/r61cne9o","slide":2,"text":"Зачем нужны параллельные тексты","textPreview":"Зачем нужны параллельные тексты","textChars":31,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/q58be9s3","slide":2,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/54zul4ri","slide":2,"text":"Перевод","textPreview":"Перевод","textChars":7,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/43qtczax","slide":2,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/32hcje9c","slide":2,"text":"Словари и терминология","textPreview":"Словари и терминология","textChars":22,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/i18ba9sr","slide":2,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/p03uh8rm","slide":2,"text":"Оценка качества моделей","textPreview":"Оценка качества моделей","textChars":23,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/ozudo3a1","slide":2,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/ap8v6pon","slide":2,"text":"Обучающие материалы","textPreview":"Обучающие материалы","textChars":19,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/bqhwfu58","slide":2,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/crqd8z6d","slide":2,"text":"Связь с доминирующим языком региона","textPreview":"Связь с доминирующим языком региона","textChars":35,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/xszeh4ny","slide":2,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/2l8v2pob","slide":2,"text":"Занятие 6","textPreview":"Занятие 6","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/nmhwbu5w","slide":2,"text":"2/13","textPreview":"2/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/djntr0","slide":2,"text":"Параллельные данные часто являются самым узким местом для машинного перевода. Для малоресурсных языков даже несколько сотен проверенных пар предложений могут быть значимым ресурсом.\n\n[Sources]\n- Local markdown source: course_sessions/06_parallel_texts_lbcm_alignment_i_perevod.md"}
+{"kind":"slide","id":"sl/3ljdh7","slide":3,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/i90v25wr","slide":3,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/5credkfi","slide":3,"text":"Источники параллельных данных","textPreview":"Источники параллельных данных","textChars":29,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/4bid4fex","slide":3,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/v6pw7qx0","slide":3,"text":"Учебники и двуязычные материалы","textPreview":"Учебники и двуязычные материалы","textChars":31,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/u5gvy5wv","slide":3,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/h87e90f6","slide":3,"text":"Религиозные тексты","textPreview":"Религиозные тексты","textChars":18,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/w7yd0vel","slide":3,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/7ipc3qx4","slide":3,"text":"Сайты администраций и СМИ","textPreview":"Сайты администраций и СМИ","textChars":25,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/mhgvulgj","slide":3,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/wfetg7ih","slide":3,"text":"Словари и фразовые списки","textPreview":"Словари и фразовые списки","textChars":25,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/xgna9cj2","slide":3,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/adwbex0b","slide":3,"text":"Полевой перевод коротких текстов","textPreview":"Полевой перевод коротких текстов","textChars":32,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/be5s721w","slide":3,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/obetcnil","slide":3,"text":"Занятие 6","textPreview":"Занятие 6","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/9cna5sj6","slide":3,"text":"3/13","textPreview":"3/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/3ljdh7","slide":3,"text":"Нужно обсуждать доменную ограниченность. Религиозные тексты могут быть большими, но не отражают современную повседневную речь. Учебные материалы полезны, но часто содержат искусственные фразы.\n\n[Sources]\n- Local markdown source: course_sessions/06_parallel_texts_lbcm_alignment_i_perevod.md"}
+{"kind":"slide","id":"sl/med2zj","slide":4,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/u5gnetw3","slide":4,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/h87mpove","slide":4,"text":"Типы выравнивания","textPreview":"Типы выравнивания","textChars":17,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/w7y5g3et","slide":4,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/ja94rydk","slide":4,"text":"Document alignment","textPreview":"Document alignment","textChars":18,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/i90nitwz","slide":4,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/5wr6t8vq","slide":4,"text":"Paragraph alignment","textPreview":"Paragraph alignment","textChars":19,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/4bi5k3e5","slide":4,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/ze54fedg","slide":4,"text":"Sentence alignment","textPreview":"Sentence alignment","textChars":18,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/ydwn69wv","slide":4,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/8nud0zu1","slide":4,"text":"Phrase and word alignment","textPreview":"Phrase and word alignment","textChars":25,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/9o3u94vm","slide":4,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/m1cvypcv","slide":4,"text":"Comparable corpora mining","textPreview":"Comparable corpora mining","textChars":25,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/7mlc7udg","slide":4,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/wrud4zux","slide":4,"text":"Занятие 6","textPreview":"Занятие 6","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/hs3ed4vi","slide":4,"text":"4/13","textPreview":"4/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/med2zj","slide":4,"text":"Не всегда есть идеально параллельные тексты. Иногда есть две версии новости, пересказ, учебный перевод или тексты на похожую тему. Тогда задача становится mining, а не простым выравниванием.\n\n[Sources]\n- Local markdown source: course_sessions/06_parallel_texts_lbcm_alignment_i_perevod.md"}
+{"kind":"slide","id":"sl/nihnuc","slide":5,"title":"ЛЕКЦИЯ","textShapes":10}
+{"kind":"textbox","id":"sh/nu1o76h4","slide":5,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/8va50by9","slide":5,"text":"LBCM-пайплайн","textPreview":"LBCM-пайплайн","textChars":13,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/9g369gzu","slide":5,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/ahcn21gf","slide":5,"text":"Разбить документы на сегменты","textPreview":"Разбить документы на сегменты","textChars":29,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/vilob6h0","slide":5,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/wju54byl","slide":5,"text":"Получить multilingual embeddings","textPreview":"Получить multilingual embeddings","textChars":32,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/xk36dgz6","slide":5,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/ql8nqhgb","slide":5,"text":"Посчитать similarity","textPreview":"Посчитать similarity","textChars":20,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/bmh4zmhw","slide":5,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/36hkvid0","slide":5,"text":"Найти кандидатов","textPreview":"Найти кандидатов","textChars":16,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/i5832dwf","slide":5,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/58j2xsv6","slide":5,"text":"Отфильтровать по длине, языку, score","textPreview":"Отфильтровать по длине, языку, score","textChars":36,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/47ql4nel","slide":5,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/v2hkryd4","slide":5,"text":"Проверить вручную","textPreview":"Проверить вручную","textChars":17,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/uh83ytwj","slide":5,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/h4z2t8vu","slide":5,"text":"Занятие 6","textPreview":"Занятие 6","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/g3ql03e9","slide":5,"text":"5/13","textPreview":"5/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/nihnuc","slide":5,"text":"Главная идея: предложения с похожим смыслом должны быть близки в многоязычном embedding-пространстве. Но score не заменяет экспертизу, особенно для родственных языков, диалектов и коротких фраз.\n\n[Sources]\n- Local markdown source: course_sessions/06_parallel_texts_lbcm_alignment_i_perevod.md"}
+{"kind":"slide","id":"sl/n0hyf7","slide":6,"title":"ЛЕКЦИЯ","textShapes":10}
+{"kind":"textbox","id":"sh/0bi903qh","slide":6,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/za987ypw","slide":6,"text":"Риски alignment","textPreview":"Риски alignment","textChars":15,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/y9gryt8b","slide":6,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/9grqd87y","slide":6,"text":"Ложные пары","textPreview":"Ложные пары","textChars":11,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/8fi943qd","slide":6,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/7e98byps","slide":6,"text":"Слишком свободный перевод","textPreview":"Слишком свободный перевод","textChars":25,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/md0r2t8n","slide":6,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/h4bah87a","slide":6,"text":"Пропуски и перестановки","textPreview":"Пропуски и перестановки","textChars":23,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/wj298n6p","slide":6,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/6xwjex87","slide":6,"text":"Смешение языков","textPreview":"Смешение языков","textChars":15,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/7y50729s","slide":6,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/sze1g7qd","slide":6,"text":"Утечка тестовых данных","textPreview":"Утечка тестовых данных","textChars":22,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/t0ni9cry","slide":6,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/ulwjih8j","slide":6,"text":"Неподходящий домен","textPreview":"Неподходящий домен","textChars":18,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/fmp0bm9o","slide":6,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/gny1krq9","slide":6,"text":"Занятие 6","textPreview":"Занятие 6","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/ho7idcru","slide":6,"text":"6/13","textPreview":"6/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/n0hyf7","slide":6,"text":"Alignment может выглядеть убедительно, но быть неверным. Для финального датасета нужно хранить score, источник и статус ручной проверки.\n\n[Sources]\n- Local markdown source: course_sessions/06_parallel_texts_lbcm_alignment_i_perevod.md"}
+{"kind":"slide","id":"sl/q5s038","slide":7,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/cvix8fm1","slide":7,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/ba9gfalg","slide":7,"text":"Baseline машинного перевода","textPreview":"Baseline машинного перевода","textChars":27,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/q90f654v","slide":7,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/p8red03a","slide":7,"text":"Готовая multilingual MT-модель","textPreview":"Готовая multilingual MT-модель","textChars":30,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/47yx4vm5","slide":7,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/36pwbqlk","slide":7,"text":"Few-shot prompting как baseline","textPreview":"Few-shot prompting как baseline","textChars":31,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/25gf2l4z","slide":7,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/94byp43u","slide":7,"text":"Fine-tuning при достаточном объеме","textPreview":"Fine-tuning при достаточном объеме","textChars":34,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/832xgz29","slide":7,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/69sri58z","slide":7,"text":"Оценка: chrF, BLEU, COMET, ручная проверка","textPreview":"Оценка: chrF, BLEU, COMET, ручная проверка","textChars":42,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/7a1sra9k","slide":7,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/sba9kfq5","slide":7,"text":"Занятие 6","textPreview":"Занятие 6","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/tc3atkrq","slide":7,"text":"7/13","textPreview":"7/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/q5s038","slide":7,"text":"Для малоресурсных языков BLEU часто нестабилен. chrF может быть полезнее на малых данных. Ручная оценка обязательна, особенно если орфография вариативна.\n\n[Sources]\n- Local markdown source: course_sessions/06_parallel_texts_lbcm_alignment_i_perevod.md"}
+{"kind":"slide","id":"sl/pd27bd","slide":8,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/dg3218fu","slide":8,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/qdc36dg3","slide":8,"text":"LLM и перевод","textPreview":"LLM и перевод","textChars":13,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/relkzixo","slide":8,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/4bul43yd","slide":8,"text":"LLM может помогать с черновым переводом","textPreview":"LLM может помогать с черновым переводом","textChars":39,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/5c32x8fy","slide":8,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/i9s32tg7","slide":8,"text":"Нужна маркировка synthetic data","textPreview":"Нужна маркировка synthetic data","textChars":31,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/3a1kvyxs","slide":8,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/gnal0jy1","slide":8,"text":"Нельзя смешивать человеческий и синтетический перевод без метаданных","textPreview":"Нельзя смешивать человеческий и синтетический перевод без метаданных","textChars":68,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/hoj2tofm","slide":8,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/t0ruxob6","slide":8,"text":"Для обучения модели synthetic data может быть полезен, но рискован","textPreview":"Для обучения модели synthetic data может быть полезен, но рискован","textChars":66,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/szitoju1","slide":8,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/7y9cvytg","slide":8,"text":"Занятие 6","textPreview":"Занятие 6","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/6x0bmtcv","slide":8,"text":"8/13","textPreview":"8/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/pd27bd","slide":8,"text":"LLM может создавать fluent hallucinations. В малоресурсном языке она может подменять язык похожим или доминирующим. Все синтетические данные должны быть явно помечены.\n\n[Sources]\n- Local markdown source: course_sessions/06_parallel_texts_lbcm_alignment_i_perevod.md"}
+{"kind":"slide","id":"sl/h436s7","slide":9,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/nmpofyl4","slide":9,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/ony583mp","slide":9,"text":"Артефакт занятия","textPreview":"Артефакт занятия","textChars":16,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/9o76h83a","slide":9,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/exwn2t4n","slide":9,"text":"parallel_candidates.tsv","textPreview":"parallel_candidates.tsv","textChars":23,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/zy5obyls","slide":9,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/0ze543md","slide":9,"text":"parallel_verified.tsv","textPreview":"parallel_verified.tsv","textChars":21,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/1k76d83y","slide":9,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/qtwny94b","slide":9,"text":"alignment_report.md","textPreview":"alignment_report.md","textChars":19,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/ru547elw","slide":9,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/zq9kv6pg","slide":9,"text":"mt_baseline_report.md","textPreview":"mt_baseline_report.md","textChars":21,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/yp0j21ov","slide":9,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/lcr2xg7m","slide":9,"text":"Занятие 6","textPreview":"Занятие 6","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/kri14b61","slide":9,"text":"9/13","textPreview":"9/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/h436s7","slide":9,"text":"Цель занятия - не обязательно обучить сильный переводчик. Более надежный результат - качественный маленький параллельный набор и понимание, сколько данных нужно для следующего шага.\n\n[Sources]\n- Local markdown source: course_sessions/06_parallel_texts_lbcm_alignment_i_perevod.md"}
+{"kind":"slide","id":"sl/7v5abs","slide":10,"title":"СЕМИНАР","textShapes":12}
+{"kind":"textbox","id":"sh/itgf2xkv","slide":10,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/5w7yds36","slide":10,"text":"Практика 1. Подготовка сегментов, 20 минут","textPreview":"Практика 1. Подготовка сегментов, 20 минут","textChars":42,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/4vyx4n2l","slide":10,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/vq5g7il4","slide":10,"text":"Команды берут два документа или две коллекции текстов и создают:","textPreview":"Команды берут два документа или две коллекции текстов и создают:","textChars":64,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/apwfyd4j","slide":10,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/xsny9s3a","slide":10,"text":"source_segments.tsv","textPreview":"source_segments.tsv","textChars":19,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/wrex0nmp","slide":10,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/fm9gjml8","slide":10,"text":"target_segments.tsv","textPreview":"target_segments.tsv","textChars":19,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/el0fahkn","slide":10,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/0zih0zqd","slide":10,"text":"Поля:","textPreview":"Поля:","textChars":5,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/10rytkry","slide":10,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/ex0zyp87","slide":10,"text":"segment_id","textPreview":"segment_id","textChars":10,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/fy9gru9s","slide":10,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/svixwfq1","slide":10,"text":"doc_id","textPreview":"doc_id","textChars":6,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/dwrypkrm","slide":10,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/q9gfu58b","slide":10,"text":"text","textPreview":"text","textChars":4,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/rapgna9g","slide":10,"bbox":[80,534,12,12]}
+{"kind":"textbox","id":"sh/47yxsfq5","slide":10,"text":"language","textPreview":"language","textChars":8,"textLines":1,"bbox":[110,526,1010,40]}
+{"kind":"shape","id":"sh/587yl0rq","slide":10,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/lsfm9cf2","slide":10,"text":"Занятие 6","textPreview":"Занятие 6","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/kr6507eh","slide":10,"text":"10/13","textPreview":"10/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/7v5abs","slide":10,"text":"[Sources]\n- Local markdown source: course_sessions/06_parallel_texts_lbcm_alignment_i_perevod.md"}
+{"kind":"slide","id":"sl/th7u4q","slide":11,"title":"СЕМИНАР","textShapes":9}
+{"kind":"textbox","id":"sh/na5g7ulk","slide":11,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/8behgzm5","slide":11,"text":"Практика 2. LBCM-кандидаты, 30 минут","textPreview":"Практика 2. LBCM-кандидаты, 30 минут","textChars":36,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/9cny943q","slide":11,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/y5cfap43","slide":11,"text":"Команды используют готовые многоязычные эмбеддинги или агентно подготовленный скрипт:","textPreview":"Команды используют готовые многоязычные эмбеддинги или агентно подготовленный скрипт:","textChars":85,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/z6lg3alo","slide":11,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/07uhcfm9","slide":11,"text":"кодируют сегменты","textPreview":"кодируют сегменты","textChars":17,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/l83y5k3u","slide":11,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/i1gzm9k7","slide":11,"text":"считают cosine similarity","textPreview":"считают cosine similarity","textChars":25,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/j2pgfels","slide":11,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/julkfmls","slide":11,"text":"выбирают top-k кандидатов","textPreview":"выбирают top-k кандидатов","textChars":25,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/itcjmhk7","slide":11,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/5g32hw3i","slide":11,"text":"сохраняют parallel_candidates.tsv","textPreview":"сохраняют parallel_candidates.tsv","textChars":33,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/kvu1or2x","slide":11,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/7i5kj6lo","slide":11,"text":"Занятие 6","textPreview":"Занятие 6","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/6hcjq1k3","slide":11,"text":"11/13","textPreview":"11/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/th7u4q","slide":11,"text":"[Sources]\n- Local markdown source: course_sessions/06_parallel_texts_lbcm_alignment_i_perevod.md"}
+{"kind":"slide","id":"sl/7a13sw","slide":12,"title":"СЕМИНАР","textShapes":10}
+{"kind":"textbox","id":"sh/gb654fyh","slide":12,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/faxovahw","slide":12,"text":"Практика 3. Ручная валидация, 20 минут","textPreview":"Практика 3. Ручная валидация, 20 минут","textChars":38,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/u94n25gr","slide":12,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/p0f61kfe","slide":12,"text":"Команды размечают 30 кандидатов:","textPreview":"Команды размечают 30 кандидатов:","textChars":32,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/4z6p8zyt","slide":12,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/3yxozux8","slide":12,"text":"good translation","textPreview":"good translation","textChars":16,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/2do76pgn","slide":12,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/d4z654fa","slide":12,"text":"partial translation","textPreview":"partial translation","textChars":19,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/c3qpczyp","slide":12,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/u9cb6lgn","slide":12,"text":"same topic only","textPreview":"same topic only","textChars":15,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/vulcfqx8","slide":12,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/gvut8byt","slide":12,"text":"wrong","textPreview":"wrong","textChars":5,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/hw3uhgfe","slide":12,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/2xcbalgz","slide":12,"text":"unsure","textPreview":"unsure","textChars":6,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/3ylcjqxk","slide":12,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/4zutcvy5","slide":12,"text":"Занятие 6","textPreview":"Занятие 6","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/p0nul0fa","slide":12,"text":"12/13","textPreview":"12/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/7a13sw","slide":12,"text":"[Sources]\n- Local markdown source: course_sessions/06_parallel_texts_lbcm_alignment_i_perevod.md"}
+{"kind":"slide","id":"sl/0nz8p7","slide":13,"title":"СЕМИНАР","textShapes":12}
+{"kind":"textbox","id":"sh/lo7itgfe","slide":13,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/ylwji1gn","slide":13,"text":"Практика 4. MT baseline, 20 минут","textPreview":"Практика 4. MT baseline, 20 минут","textChars":33,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/zmp0r6x8","slide":13,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/8by1ovyp","slide":13,"text":"Команды запускают перевод одним доступным способом:","textPreview":"Команды запускают перевод одним доступным способом:","textChars":51,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/9c7ixgfa","slide":13,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/mpgjmlgj","slide":13,"text":"готовая MT-модель","textPreview":"готовая MT-модель","textChars":17,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/nap0vqx4","slide":13,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/4fehcryl","slide":13,"text":"LLM-prompt baseline","textPreview":"LLM-prompt baseline","textChars":19,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/pgnilwf6","slide":13,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/9onqlgri","slide":13,"text":"словарный baseline для отдельных терминов","textPreview":"словарный baseline для отдельных терминов","textChars":41,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/onepcbqx","slide":13,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/nm58j69c","slide":13,"text":"Промпт для агента:","textPreview":"Промпт для агента:","textChars":18,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/mlw7a18r","slide":13,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/xc7qpgre","slide":13,"text":"Проанализируй таблицу кандидатов параллельных предложений.","textPreview":"Проанализируй таблицу кандидатов параллельных предложений.","textChars":58,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/wbe9gbq9","slide":13,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/ba58n69o","slide":13,"text":"Предложи правила фильтрации по similarity, длине, языку и ручному статусу.","textPreview":"Предложи правила фильтрации по similarity, длине, языку и ручному статусу.","textChars":74,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/apwrel83","slide":13,"bbox":[80,534,12,12]}
+{"kind":"textbox","id":"sh/lg7qt0rq","slide":13,"text":"Составь отчет о том, какие пары можно использовать для обучения,","textPreview":"Составь отчет о том, какие пары можно использовать для обучения,","textChars":64,"textLines":1,"bbox":[110,526,1010,40]}
+{"kind":"shape","id":"sh/kfy9kvq5","slide":13,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/4j6tgzyh","slide":13,"text":"Занятие 6","textPreview":"Занятие 6","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/5kfap4f2","slide":13,"text":"13/13","textPreview":"13/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/0nz8p7","slide":13,"text":"[Sources]\n- Local markdown source: course_sessions/06_parallel_texts_lbcm_alignment_i_perevod.md"}

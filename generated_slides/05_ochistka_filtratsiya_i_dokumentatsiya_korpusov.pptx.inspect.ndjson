@@ -1,0 +1,218 @@
+{"kind":"deck","id":"pr/j6r2fn","name":"Deck"}
+{"kind":"layout","layoutId":"898d94b1-7885-4b4d-a175-4ec3dbbb01f7","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"7c2f26cc-88fc-40f2-8f9d-6ddd8e208be8","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/nqg5fm","slide":1,"title":"Курс по ML для малоресурсных языков","textShapes":6}
+{"kind":"shape","id":"sh/eh0r69kr","slide":1,"bbox":[0,0,22,720]}
+{"kind":"textbox","id":"sh/1kra1o32","slide":1,"text":"Курс по ML для малоресурсных языков","textPreview":"Курс по ML для малоресурсных языков","textChars":35,"textLines":1,"bbox":[76,72,720,30]}
+{"kind":"textbox","id":"sh/gjit8j2h","slide":1,"text":"Занятие 5. Очистка, фильтрация и документация корпусов","textPreview":"Занятие 5. Очистка, фильтрация и документация корпусов","textChars":54,"textLines":1,"bbox":[76,170,990,170]}
+{"kind":"textbox","id":"sh/re9svel0","slide":1,"text":"Занятие превращает сырые данные в корпус, который можно использовать для обучения и оценки моделей. Главный фокус - качество, воспроизводимость и документация.","textPreview":"Занятие превращает сырые данные в корпус, который можно использовать для обучения и оценки моделей. Главный фокус - качество, воспроизвод...","textChars":159,"textLines":1,"bbox":[80,392,900,92]}
+{"kind":"textbox","id":"sh/6dgr29kf","slide":1,"text":"Лекция, семинар, домашнее задание и заметки докладчика","textPreview":"Лекция, семинар, домашнее задание и заметки докладчика","textChars":54,"textLines":1,"bbox":[80,560,820,32]}
+{"kind":"textbox","id":"sh/tgrax436","slide":1,"text":"Занятие 5","textPreview":"Занятие 5","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/sfi94j2l","slide":1,"text":"1/13","textPreview":"1/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/nqg5fm","slide":1,"text":"[Sources]\n- Local markdown source: course_sessions/05_ochistka_filtratsiya_i_dokumentatsiya_korpusov.md"}
+{"kind":"slide","id":"sl/o2dq3x","slide":2,"title":"ЛЕКЦИЯ","textShapes":7}
+{"kind":"textbox","id":"sh/50vexozi","slide":2,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/ix4v2t0r","slide":2,"text":"Почему очистка важнее размера","textPreview":"Почему очистка важнее размера","textChars":29,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/jydwvyhc","slide":2,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/sn6d83i9","slide":2,"text":"Малый корпус чувствителен к каждому ошибочному примеру","textPreview":"Малый корпус чувствителен к каждому ошибочному примеру","textChars":54,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/tofe18ze","slide":2,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/614v6t03","slide":2,"text":"Шум ломает ASR, OCR, перевод и спелчекер","textPreview":"Шум ломает ASR, OCR, перевод и спелчекер","textChars":40,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/r2xwzyho","slide":2,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/8r2dwjip","slide":2,"text":"Документация делает корпус пригодным для повторного использования","textPreview":"Документация делает корпус пригодным для повторного использования","textChars":65,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/9sbep4za","slide":2,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/l4ne58fu","slide":2,"text":"Занятие 5","textPreview":"Занятие 5","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/kjexcny9","slide":2,"text":"2/13","textPreview":"2/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/o2dq3x","slide":2,"text":"В больших языках шум иногда компенсируется объемом. В малоресурсных языках так не работает: один источник с машинным переводом или неправильной орфографией может заметно исказить модель.\n\n[Sources]\n- Local markdown source: course_sessions/05_ochistka_filtratsiya_i_dokumentatsiya_korpusov.md"}
+{"kind":"slide","id":"sl/sfdjgq","slide":3,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/zyxcvat0","slide":3,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/kz6d4fal","slide":3,"text":"Уровни очистки","textPreview":"Уровни очистки","textChars":14,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/l0fuxkb6","slide":3,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/m1ov6psr","slide":3,"text":"Техническая: HTML, мусор, кодировки, пустые строки","textPreview":"Техническая: HTML, мусор, кодировки, пустые строки","textChars":50,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/72xczu9w","slide":3,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/836d8fah","slide":3,"text":"Текстовая: дубли, boilerplate, списки, меню","textPreview":"Текстовая: дубли, boilerplate, списки, меню","textChars":43,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/94zu1kr2","slide":3,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/u58vapsn","slide":3,"text":"Языковая: не тот язык, смешанные фрагменты","textPreview":"Языковая: не тот язык, смешанные фрагменты","textChars":42,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/v6hc3u98","slide":3,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/76lkvadw","slide":3,"text":"Лингвистическая: нормализация орфографии, токенизация, морфология","textPreview":"Лингвистическая: нормализация орфографии, токенизация, морфология","textChars":65,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/6lcj2pcb","slide":3,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/t832xkv2","slide":3,"text":"Этическая: персональные и чувствительные данные","textPreview":"Этическая: персональные и чувствительные данные","textChars":47,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/87u14fuh","slide":3,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/ji1krad0","slide":3,"text":"Занятие 5","textPreview":"Занятие 5","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/yhsjy5wf","slide":3,"text":"3/13","textPreview":"3/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/sfdjgq","slide":3,"text":"Не все уровни можно автоматизировать. Для орфографии и языка носитель или эксперт часто важнее модели. Автоматические фильтры должны быть проверяемыми.\n\n[Sources]\n- Local markdown source: course_sessions/05_ochistka_filtratsiya_i_dokumentatsiya_korpusov.md"}
+{"kind":"slide","id":"sl/uvot74","slide":4,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/7el4fyxg","slide":4,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/8fe583yl","slide":4,"text":"Дедупликация","textPreview":"Дедупликация","textChars":12,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/9gnmh8f6","slide":4,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/ypcn2tgj","slide":4,"text":"Exact duplicates: одинаковые строки и документы","textPreview":"Exact duplicates: одинаковые строки и документы","textChars":47,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/zql4byx4","slide":4,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/kru543yp","slide":4,"text":"Near duplicates: новости, перепечатки, шаблоны","textPreview":"Near duplicates: новости, перепечатки, шаблоны","textChars":46,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/ls3mdofa","slide":4,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/ilwnedg3","slide":4,"text":"Хеши, n-граммы, MinHash","textPreview":"Хеши, n-граммы, MinHash","textChars":23,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/jmponix8","slide":4,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/vupsb250","slide":4,"text":"Важно сохранять источник удаленного дубля","textPreview":"Важно сохранять источник удаленного дубля","textChars":41,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/utgr2x4f","slide":4,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/hw7adcnq","slide":4,"text":"Занятие 5","textPreview":"Занятие 5","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/wvy947m5","slide":4,"text":"4/13","textPreview":"4/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/uvot74","slide":4,"text":"Дубли завышают метрики и создают утечку между train/test. Если один и тот же текст попадает и в обучение, и в тест, модель выглядит лучше, чем есть на самом деле.\n\n[Sources]\n- Local markdown source: course_sessions/05_ochistka_filtratsiya_i_dokumentatsiya_korpusov.md"}
+{"kind":"slide","id":"sl/3mc358","slide":5,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/bmd8fe9c","slide":5,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/cnm98zax","slide":5,"text":"Языковая фильтрация","textPreview":"Языковая фильтрация","textChars":19,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/xovah4ri","slide":5,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/yp4ra9s3","slide":5,"text":"FastText language identification как baseline","textPreview":"FastText language identification как baseline","textChars":45,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/zqdsje9o","slide":5,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/kr69cja9","slide":5,"text":"Эмбеддинги и примеры якорных текстов","textPreview":"Эмбеддинги и примеры якорных текстов","textChars":36,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/lsfaloru","slide":5,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/mtoretsz","slide":5,"text":"Ручная проверка выборки","textPreview":"Ручная проверка выборки","textChars":23,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/7uxsny9k","slide":5,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/32tcz2hw","slide":5,"text":"Отдельный класс: code-switching","textPreview":"Отдельный класс: code-switching","textChars":31,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/2hkvqx0b","slide":5,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/p4bu1sz2","slide":5,"text":"Занятие 5","textPreview":"Занятие 5","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/432ds7ih","slide":5,"text":"5/13","textPreview":"5/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/3mc358","slide":5,"text":"Готовые определители языка часто плохо работают на малоресурсных языках или путают родственные языки. Поэтому нужно использовать ручные проверки и, если возможно, маленький набор эталонных фрагментов.\n\n[Sources]\n- Local markdown source: course_sessions/05_ochistka_filtratsiya_i_dokumentatsiya_korpusov.md"}
+{"kind":"slide","id":"sl/agzqxq","slide":6,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/87apknyt","slide":6,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/n618r2x8","slide":6,"text":"Нормализация","textPreview":"Нормализация","textChars":12,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/m5s7ixgn","slide":6,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/xw3qxcfa","slide":6,"text":"Unicode normalization","textPreview":"Unicode normalization","textChars":21,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/wvupo7yp","slide":6,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/vul8v2xk","slide":6,"text":"Орфографические варианты","textPreview":"Орфографические варианты","textChars":24,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/ats7mxgz","slide":6,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/503q1cfm","slide":6,"text":"Апострофы, дефисы, диакритика","textPreview":"Апострофы, дефисы, диакритика","textChars":29,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/kzu9sre1","slide":6,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/2l8bidov","slide":6,"text":"Не уничтожать информацию без причины","textPreview":"Не уничтожать информацию без причины","textChars":36,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/3mhcbipg","slide":6,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/4nqtkn61","slide":6,"text":"Занятие 5","textPreview":"Занятие 5","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/pozuds7m","slide":6,"text":"6/13","textPreview":"6/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/agzqxq","slide":6,"text":"Нормализация должна быть обратимой или хотя бы задокументированной. Иногда диакритика критична для языка. Иногда разные орфографии отражают социальные или исторические варианты.\n\n[Sources]\n- Local markdown source: course_sessions/05_ochistka_filtratsiya_i_dokumentatsiya_korpusov.md"}
+{"kind":"slide","id":"sl/d84s0x","slide":7,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/5sfi10jq","slide":7,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/ipoz6l0f","slide":7,"text":"Train/dev/test для малых данных","textPreview":"Train/dev/test для малых данных","textChars":31,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/jqx0zq10","slide":7,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/wn6h4vi9","slide":7,"text":"Разделяем по источникам, авторам, датам или жанрам","textPreview":"Разделяем по источникам, авторам, датам или жанрам","textChars":50,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/hofix0ju","slide":7,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/u14z2l03","slide":7,"text":"Не допускаем дублей между сплитами","textPreview":"Не допускаем дублей между сплитами","textChars":34,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/vmx0vq1o","slide":7,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/gjq10fid","slide":7,"text":"Test должен отражать реальную задачу","textPreview":"Test должен отражать реальную задачу","textChars":36,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/1kzi9kjy","slide":7,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/pcnidkre","slide":7,"text":"Для очень малых данных: cross-validation или expert test set","textPreview":"Для очень малых данных: cross-validation или expert test set","textChars":60,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/obeh4fqt","slide":7,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/3al0bu98","slide":7,"text":"Занятие 5","textPreview":"Занятие 5","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/29cz2p8n","slide":7,"text":"7/13","textPreview":"7/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/d84s0x","slide":7,"text":"Стандартное случайное разделение часто дает ложную оценку. Если корпус состоит из перепечаток, random split почти гарантирует утечку.\n\n[Sources]\n- Local markdown source: course_sessions/05_ochistka_filtratsiya_i_dokumentatsiya_korpusov.md"}
+{"kind":"slide","id":"sl/x2d4se","slide":8,"title":"ЛЕКЦИЯ","textShapes":12}
+{"kind":"textbox","id":"sh/43i50r2h","slide":8,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/329o7m1w","slide":8,"text":"Data card","textPreview":"Data card","textChars":9,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/21gnyhkb","slide":8,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/dsr6dwjy","slide":8,"text":"Назначение","textPreview":"Назначение","textChars":10,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/cri54r2d","slide":8,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/rq9obm18","slide":8,"text":"Источники","textPreview":"Источники","textChars":9,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/q50n21kn","slide":8,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/1wb6hgja","slide":8,"text":"Состав","textPreview":"Состав","textChars":6,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/0v258b2p","slide":8,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/a14nelwz","slide":8,"text":"Лицензии","textPreview":"Лицензии","textChars":8,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/v2d4nqxk","slide":8,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/w3m5gve5","slide":8,"text":"Процесс очистки","textPreview":"Процесс очистки","textChars":15,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/x4vmp0fa","slide":8,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/i54ni5wv","slide":8,"text":"Ограничения","textPreview":"Ограничения","textChars":11,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/j6d4raxg","slide":8,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/4rm5kve1","slide":8,"text":"Риски","textPreview":"Риски","textChars":5,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/5sfmt0fm","slide":8,"bbox":[80,534,12,12]}
+{"kind":"textbox","id":"sh/y9k3m1wr","slide":8,"text":"Рекомендованное и нерекомендованное использование","textPreview":"Рекомендованное и нерекомендованное использование","textChars":49,"textLines":1,"bbox":[110,526,1010,40]}
+{"kind":"shape","id":"sh/zat4f6xc","slide":8,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/325s7i9s","slide":8,"text":"Занятие 5","textPreview":"Занятие 5","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/21wryd87","slide":8,"text":"8/13","textPreview":"8/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/x2d4se","slide":8,"text":"Data card - не бюрократия. Это способ передать будущей летней школе и другим исследователям, что именно было сделано и где находятся слабые места.\n\n[Sources]\n- Local markdown source: course_sessions/05_ochistka_filtratsiya_i_dokumentatsiya_korpusov.md"}
+{"kind":"slide","id":"sl/sico37","slide":9,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/658v6947","slide":9,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/t8je1oni","slide":9,"text":"Контроль качества агентами","textPreview":"Контроль качества агентами","textChars":26,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/87ad8jmd","slide":9,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/j2hcve5g","slide":9,"text":"Агент генерирует проверки","textPreview":"Агент генерирует проверки","textChars":25,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/y18v294v","slide":9,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/l4zux4nm","slide":9,"text":"Агент ищет аномалии","textPreview":"Агент ищет аномалии","textChars":19,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/k3qd4zm1","slide":9,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/behcru5k","slide":9,"text":"Агент пишет отчет","textPreview":"Агент пишет отчет","textChars":17,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/adovyp4z","slide":9,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/svmlsn6t","slide":9,"text":"Человек утверждает правила и проверяет выборку","textPreview":"Человек утверждает правила и проверяет выборку","textChars":46,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/dwv21sne","slide":9,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/qt4jqxon","slide":9,"text":"Занятие 5","textPreview":"Занятие 5","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/rudkz258","slide":9,"text":"9/13","textPreview":"9/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/sico37","slide":9,"text":"Агент хорошо помогает формулировать чек-листы и писать тесты для корпуса. Но финальные решения о нормализации языка и исключении материалов должны оставаться у команды.\n\n[Sources]\n- Local markdown source: course_sessions/05_ochistka_filtratsiya_i_dokumentatsiya_korpusov.md"}
+{"kind":"slide","id":"sl/i7dpe3","slide":10,"title":"СЕМИНАР","textShapes":10}
+{"kind":"textbox","id":"sh/apc36d4b","slide":10,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/xs321sn2","slide":10,"text":"Практика 1. Профиль корпуса, 20 минут","textPreview":"Практика 1. Профиль корпуса, 20 минут","textChars":37,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/wrul8nmh","slide":10,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/nm1kvi50","slide":10,"text":"Команды считают:","textPreview":"Команды считают:","textChars":16,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/m1s32d4f","slide":10,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/9o32x8nq","slide":10,"text":"число документов","textPreview":"число документов","textChars":16,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/8nul43m5","slide":10,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/zy1kry5o","slide":10,"text":"число символов и слов","textPreview":"число символов и слов","textChars":21,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/yxs3yto3","slide":10,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/4fuhgvip","slide":10,"text":"распределение по источникам","textPreview":"распределение по источникам","textChars":27,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/503i90za","slide":10,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/idszel0z","slide":10,"text":"долю пустых или коротких документов","textPreview":"долю пустых или коротких документов","textChars":35,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/je107qh4","slide":10,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/wbahcbit","slide":10,"text":"топ повторяющихся строк","textPreview":"топ повторяющихся строк","textChars":23,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/hcjy5gze","slide":10,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/u9szal0n","slide":10,"text":"Занятие 5","textPreview":"Занятие 5","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/va1g36h8","slide":10,"text":"10/13","textPreview":"10/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/i7dpe3","slide":10,"text":"[Sources]\n- Local markdown source: course_sessions/05_ochistka_filtratsiya_i_dokumentatsiya_korpusov.md"}
+{"kind":"slide","id":"sl/exqvah","slide":11,"title":"СЕМИНАР","textShapes":10}
+{"kind":"textbox","id":"sh/zq9kzepk","slide":11,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/kri18jq5","slide":11,"text":"Практика 2. Очистка, 30 минут","textPreview":"Практика 2. Очистка, 30 минут","textChars":29,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/lsr21o7q","slide":11,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/mt0jat8b","slide":11,"text":"Команды создают cleaning_rules.md и применяют минимум 5 правил:","textPreview":"Команды создают cleaning_rules.md и применяют минимум 5 правил:","textChars":63,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/7utk3ypw","slide":11,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/8v21cjq1","slide":11,"text":"удалить HTML-мусор","textPreview":"удалить HTML-мусор","textChars":18,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/9wb25o7m","slide":11,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/uxkjet87","slide":11,"text":"нормализовать Unicode","textPreview":"нормализовать Unicode","textChars":21,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/vytk7yps","slide":11,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/zy5oby5k","slide":11,"text":"удалить пустые строки","textPreview":"удалить пустые строки","textChars":21,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/yxwnitoz","slide":11,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/l0n6d8nq","slide":11,"text":"удалить дубли","textPreview":"удалить дубли","textChars":13,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/kze5k365","slide":11,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/bulo7y5o","slide":11,"text":"пометить смешанные фрагменты","textPreview":"пометить смешанные фрагменты","textChars":28,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/atcneto3","slide":11,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/xwn69one","slide":11,"text":"Занятие 5","textPreview":"Занятие 5","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/cvu5g36t","slide":11,"text":"11/13","textPreview":"11/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/exqvah","slide":11,"text":"[Sources]\n- Local markdown source: course_sessions/05_ochistka_filtratsiya_i_dokumentatsiya_korpusov.md"}
+{"kind":"slide","id":"sl/7nghwy","slide":12,"title":"СЕМИНАР","textShapes":9}
+{"kind":"textbox","id":"sh/obipojqx","slide":12,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/na9ovy9c","slide":12,"text":"Практика 3. Ручная валидация, 20 минут","textPreview":"Практика 3. Ручная валидация, 20 минут","textChars":38,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/2907mt8r","slide":12,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/x0rq18re","slide":12,"text":"Каждая команда проверяет 30 случайных фрагментов и считает:","textPreview":"Каждая команда проверяет 30 случайных фрагментов и считает:","textChars":59,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/wzips3q9","slide":12,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/by9ozy9o","slide":12,"text":"долю пригодных","textPreview":"долю пригодных","textChars":14,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/ax07qt83","slide":12,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/d476p4ra","slide":12,"text":"долю нецелевого языка","textPreview":"долю нецелевого языка","textChars":21,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/s3ypgzqp","slide":12,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/u9ov6pk3","slide":12,"text":"долю технического мусора","textPreview":"долю технического мусора","textChars":24,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/vahwza18","slide":12,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/gbqd8f2t","slide":12,"text":"долю спорных случаев","textPreview":"долю спорных случаев","textChars":20,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/hcze1kje","slide":12,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/id8vapkz","slide":12,"text":"Занятие 5","textPreview":"Занятие 5","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/3ehw3u1k","slide":12,"text":"12/13","textPreview":"12/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/7nghwy","slide":12,"text":"[Sources]\n- Local markdown source: course_sessions/05_ochistka_filtratsiya_i_dokumentatsiya_korpusov.md"}
+{"kind":"slide","id":"sl/rywe56","slide":13,"title":"СЕМИНАР","textShapes":12}
+{"kind":"textbox","id":"sh/gnm5sfm9","slide":13,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/vmd4zal4","slide":13,"text":"Практика 4. Data card, 20 минут","textPreview":"Практика 4. Data card, 20 минут","textChars":31,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/ulknq54j","slide":13,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/5cv65k36","slide":13,"text":"Команды заполняют первый черновик DATA_CARD.md.","textPreview":"Команды заполняют первый черновик DATA_CARD.md.","textChars":47,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/4bm5wfml","slide":13,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/3ado3al0","slide":13,"text":"Промпт для агента:","textPreview":"Промпт для агента:","textChars":18,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/i94nu54f","slide":13,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/dgf69432","slide":13,"text":"На основе описания источников, правил очистки и ручной проверки создай черновик data card.","textPreview":"На основе описания источников, правил очистки и ручной проверки создай черновик data card.","textChars":90,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/sf650zmh","slide":13,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/mds7ut4r","slide":13,"text":"Отдельно выпиши ограничения датасета, риски для языкового сообщества и список того,","textPreview":"Отдельно выпиши ограничения датасета, риски для языкового сообщества и список того,","textChars":83,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/7e1o3ylc","slide":13,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/8fapw3mh","slide":13,"text":"что нужно проверить перед публикацией.","textPreview":"что нужно проверить перед публикацией.","textChars":38,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/9gj65832","slide":13,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/uhs7yd4n","slide":13,"text":"## Домашнее задание","textPreview":"## Домашнее задание","textChars":19,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/vi187yl8","slide":13,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/gjap032t","slide":13,"text":"Довести clean_texts.jsonl до воспроизводимого состояния.","textPreview":"Довести clean_texts.jsonl до воспроизводимого состояния.","textChars":56,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/hk3q983e","slide":13,"bbox":[80,534,12,12]}
+{"kind":"textbox","id":"sh/al87m94j","slide":13,"text":"Подготовить DATA_CARD.md.","textPreview":"Подготовить DATA_CARD.md.","textChars":25,"textLines":1,"bbox":[110,526,1010,40]}
+{"kind":"shape","id":"sh/bmhovel4","slide":13,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/fetc76xk","slide":13,"text":"Занятие 5","textPreview":"Занятие 5","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/edkvelgz","slide":13,"text":"13/13","textPreview":"13/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/rywe56","slide":13,"text":"[Sources]\n- Local markdown source: course_sessions/05_ochistka_filtratsiya_i_dokumentatsiya_korpusov.md"}

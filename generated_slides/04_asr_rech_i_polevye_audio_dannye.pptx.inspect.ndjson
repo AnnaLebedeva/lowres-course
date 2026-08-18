@@ -1,0 +1,210 @@
+{"kind":"deck","id":"pr/xgdp6g","name":"Deck"}
+{"kind":"layout","layoutId":"96a2ca85-fbdb-46c0-9c67-19225459fa94","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"f40a1afa-a554-4ac6-80c5-3da14c03e982","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/0umm7i","slide":1,"title":"Курс по ML для малоресурсных языков","textShapes":6}
+{"kind":"shape","id":"sh/tofy9kj2","slide":1,"bbox":[0,0,22,720]}
+{"kind":"textbox","id":"sh/6lofypkb","slide":1,"text":"Курс по ML для малоресурсных языков","textPreview":"Курс по ML для малоресурсных языков","textChars":35,"textLines":1,"bbox":[76,72,720,30]}
+{"kind":"textbox","id":"sh/7mxw7a1w","slide":1,"text":"Занятие 4. ASR, речь и полевые аудиоданные","textPreview":"Занятие 4. ASR, речь и полевые аудиоданные","textChars":42,"textLines":1,"bbox":[76,170,990,170]}
+{"kind":"textbox","id":"sh/kz6xwf2l","slide":1,"text":"Занятие посвящено автоматическому распознаванию речи и созданию минимального речевого датасета. Итог - протокол записи, первичная транскрипция и baseline-ASR или оценка готовой модели.","textPreview":"Занятие посвящено автоматическому распознаванию речи и созданию минимального речевого датасета. Итог - протокол записи, первичная транскр...","textChars":184,"textLines":1,"bbox":[80,392,900,92]}
+{"kind":"textbox","id":"sh/50fe5kj6","slide":1,"text":"Лекция, семинар, домашнее задание и заметки докладчика","textPreview":"Лекция, семинар, домашнее задание и заметки докладчика","textChars":54,"textLines":1,"bbox":[80,560,820,32]}
+{"kind":"textbox","id":"sh/ix4fu5kf","slide":1,"text":"Занятие 4","textPreview":"Занятие 4","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/jyxw3a10","slide":1,"text":"1/13","textPreview":"1/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/0umm7i","slide":1,"text":"[Sources]\n- Local markdown source: course_sessions/04_asr_rech_i_polevye_audio_dannye.md"}
+{"kind":"slide","id":"sl/9bfd36","slide":2,"title":"ЛЕКЦИЯ","textShapes":7}
+{"kind":"textbox","id":"sh/mpkf2lg7","slide":2,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/9sbex0zi","slide":2,"text":"Почему речь важна","textPreview":"Почему речь важна","textChars":17,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/8r2x4vyd","slide":2,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/vutgzqho","slide":2,"text":"Многие малоресурсные языки лучше представлены в устной форме, чем в письменной","textPreview":"Многие малоресурсные языки лучше представлены в устной форме, чем в письменной","textChars":78,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/utkf6lg3","slide":2,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/hgvy10zu","slide":2,"text":"ASR ускоряет транскрипцию и создание корпусов","textPreview":"ASR ускоряет транскрипцию и создание корпусов","textChars":45,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/wvmx8vy9","slide":2,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/by9wn6hk","slide":2,"text":"Речевые данные важны для документации, образования и доступности","textPreview":"Речевые данные важны для документации, образования и доступности","textChars":64,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/ax0fu1gz","slide":2,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/k7a5wfu1","slide":2,"text":"Занятие 4","textPreview":"Занятие 4","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/58j6pkbm","slide":2,"text":"2/13","textPreview":"2/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/9bfd36","slide":2,"text":"Для ряда языков письменные данные ограничены или нестабильны, а носители могут охотнее говорить, чем писать. Поэтому ASR - ключевой компонент лаборатории.\n\n[Sources]\n- Local markdown source: course_sessions/04_asr_rech_i_polevye_audio_dannye.md"}
+{"kind":"slide","id":"sl/hz70l4","slide":3,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/10rq9kvi","slide":3,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/exg7epwr","slide":3,"text":"Что нужно для ASR","textPreview":"Что нужно для ASR","textChars":17,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/zy987adc","slide":3,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/cvypcfe1","slide":3,"text":"Аудио","textPreview":"Аудио","textChars":5,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/dw7q5kv6","slide":3,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/qtg7a5wv","slide":3,"text":"Точная транскрипция","textPreview":"Точная транскрипция","textChars":19,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/rup83adg","slide":3,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/4ryp8vep","slide":3,"text":"Метаданные говорящего и записи","textPreview":"Метаданные говорящего и записи","textChars":30,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/ps7q10va","slide":3,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/5ozqdsjm","slide":3,"text":"Train/dev/test split","textPreview":"Train/dev/test split","textChars":20,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/knqpkn21","slide":3,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/jmhobi1g","slide":3,"text":"Метрика WER или CER","textPreview":"Метрика WER или CER","textChars":19,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/il87idkv","slide":3,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/xkz69sja","slide":3,"text":"Занятие 4","textPreview":"Занятие 4","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/wzqpgn2p","slide":3,"text":"3/13","textPreview":"3/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/hz70l4","slide":3,"text":"ASR не начинается с модели. Сначала нужен протокол записи и транскрипции. Даже маленький, но чистый набор может быть полезнее большого неразмеченного архива.\n\n[Sources]\n- Local markdown source: course_sessions/04_asr_rech_i_polevye_audio_dannye.md"}
+{"kind":"slide","id":"sl/4tndsz","slide":4,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/natojm90","slide":4,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/ob25sral","slide":4,"text":"Современные baseline-подходы","textPreview":"Современные baseline-подходы","textChars":28,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/9cb6lcr6","slide":4,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/el0nmxsj","slide":4,"text":"Готовые multilingual ASR-модели как старт","textPreview":"Готовые multilingual ASR-модели как старт","textChars":41,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/zm9of294","slide":4,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/0n25o7ap","slide":4,"text":"Донастройка на малом корпусе","textPreview":"Донастройка на малом корпусе","textChars":28,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/1ob6hcra","slide":4,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/yh47y18n","slide":4,"text":"Forced alignment для уже расшифрованных аудио","textPreview":"Forced alignment для уже расшифрованных аудио","textChars":45,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/jidor698","slide":4,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/3mps3q18","slide":4,"text":"LLM-постобработка только с контролем исходной транскрипции","textPreview":"LLM-постобработка только с контролем исходной транскрипции","textChars":58,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/2lwru50n","slide":4,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/po7a50jy","slide":4,"text":"Занятие 4","textPreview":"Занятие 4","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/4ny9wvid","slide":4,"text":"4/13","textPreview":"4/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/4tndsz","slide":4,"text":"Для курса достаточно сравнить готовую модель с ручной транскрипцией и понять типы ошибок. Если данных достаточно, можно сделать небольшую донастройку. Но главное - не выдавать постобработанный текст за точную транскрипцию.\n\n[Sources]\n- Local markdown source: course_sessions/04_asr_rech_i_polevye_audio_dannye.md"}
+{"kind":"slide","id":"sl/uxlmy2","slide":5,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/ds7ed4ra","slide":5,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/qpgv298j","slide":5,"text":"Полевой протокол записи","textPreview":"Полевой протокол записи","textChars":23,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/rqpwbe94","slide":5,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/4nyd0zqd","slide":5,"text":"Согласие говорящего","textPreview":"Согласие говорящего","textChars":19,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/5o7e94ry","slide":5,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/ilgvyp8n","slide":5,"text":"Устройство и формат записи","textPreview":"Устройство и формат записи","textChars":26,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/3mpw7u9s","slide":5,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/ojidc3qx","slide":5,"text":"Шум, расстояние, микрофон","textPreview":"Шум, расстояние, микрофон","textChars":25,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/pkbel8r2","slide":5,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/9cr6pkf2","slide":5,"text":"Сценарий: слова, предложения, свободная речь","textPreview":"Сценарий: слова, предложения, свободная речь","textChars":44,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/8bi5wfyh","slide":5,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/na9onaxw","slide":5,"text":"Метаданные: язык, диалект, жанр, дата, условия","textPreview":"Метаданные: язык, диалект, жанр, дата, условия","textChars":46,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/mp0nu5gb","slide":5,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/lormlkfq","slide":5,"text":"Занятие 4","textPreview":"Занятие 4","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/0ni5sfy5","slide":5,"text":"5/13","textPreview":"5/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/uxlmy2","slide":5,"text":"Летняя школа должна иметь простой, повторяемый протокол. Хороший аудиофайл без метаданных быстро теряет исследовательскую ценность.\n\n[Sources]\n- Local markdown source: course_sessions/04_asr_rech_i_polevye_audio_dannye.md"}
+{"kind":"slide","id":"sl/30qliv","slide":6,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/pwvi1kve","slide":6,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/2tkzq5w3","slide":6,"text":"Транскрипция","textPreview":"Транскрипция","textChars":12,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/3ut0zado","slide":6,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/gr2hovex","slide":6,"text":"Оригинальная речь","textPreview":"Оригинальная речь","textChars":17,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/1sbix0vi","slide":6,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/epkzm5wr","slide":6,"text":"Нормализованная орфография","textPreview":"Нормализованная орфография","textChars":26,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/fqt0vqdc","slide":6,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/0n610ze1","slide":6,"text":"Перевод или глосса","textPreview":"Перевод или глосса","textChars":18,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/lofi94vm","slide":6,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/lw7m50vi","slide":6,"text":"Временные метки","textPreview":"Временные метки","textChars":15,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/kvy5wved","slide":6,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/jap43qds","slide":6,"text":"Не смешивать уровни в одном поле","textPreview":"Не смешивать уровни в одном поле","textChars":32,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/y9gnalw7","slide":6,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/x8nm1gvm","slide":6,"text":"Занятие 4","textPreview":"Занятие 4","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/w7el8be1","slide":6,"text":"6/13","textPreview":"6/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/30qliv","slide":6,"text":"Для ASR важно различать, что именно предсказывает модель. Если модель учится на нормализованной орфографии, она не восстановит фонетические особенности. Если нужен корпус для лингвистики, может понадобиться более точная транскрипция.\n\n[Sources]\n- Local markdown source: course_sessions/04_asr_rech_i_polevye_audio_dannye.md"}
+{"kind":"slide","id":"sl/eauvmy","slide":7,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/ni1kjapk","slide":7,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/oja1sfq5","slide":7,"text":"Оценка ASR","textPreview":"Оценка ASR","textChars":10,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/pkj2lk7q","slide":7,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/als3up8b","slide":7,"text":"WER для слов","textPreview":"WER для слов","textChars":12,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/b61knupw","slide":7,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/c7ulwfqh","slide":7,"text":"CER для символов","textPreview":"CER для символов","textChars":16,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/x832pk72","slide":7,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/qp8jil87","slide":7,"text":"Отдельно считать имена, заимствования, диакритику","textPreview":"Отдельно считать имена, заимствования, диакритику","textChars":49,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/rqhkbqps","slide":7,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/rit036t4","slide":7,"text":"Анализ ошибок важнее одной цифры","textPreview":"Анализ ошибок важнее одной цифры","textChars":32,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/6hkju1cj","slide":7,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/tkvi5wbu","slide":7,"text":"Занятие 4","textPreview":"Занятие 4","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/sj21wrup","slide":7,"text":"7/13","textPreview":"7/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/eauvmy","slide":7,"text":"Для языков с нестабильным словоразделом CER может быть информативнее WER. Для образовательного применения могут быть критичны ошибки в диакритике или морфемах.\n\n[Sources]\n- Local markdown source: course_sessions/04_asr_rech_i_polevye_audio_dannye.md"}
+{"kind":"slide","id":"sl/5hwn2w","slide":8,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/fu98vmh0","slide":8,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/gviporyl","slide":8,"text":"Агент в ASR-пайплайне","textPreview":"Агент в ASR-пайплайне","textChars":21,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/hwrqxwz6","slide":8,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/65g7ihgj","slide":8,"text":"Создает таблицу метаданных","textPreview":"Создает таблицу метаданных","textChars":26,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/7qp8r2h4","slide":8,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/sripk7y9","slide":8,"text":"Нарезает аудио по сегментам","textPreview":"Нарезает аудио по сегментам","textChars":27,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/tsrqtczu","slide":8,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/qlkru1gn","slide":8,"text":"Сравнивает гипотезу и ground truth","textPreview":"Сравнивает гипотезу и ground truth","textChars":34,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/bmt836h8","slide":8,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/zmlg329s","slide":8,"text":"Группирует ошибки","textPreview":"Группирует ошибки","textChars":17,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/elczux87","slide":8,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/1o3y5sri","slide":8,"text":"Готовит model card","textPreview":"Готовит model card","textChars":18,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/0nuhwnqx","slide":8,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/nqlg729o","slide":8,"text":"Занятие 4","textPreview":"Занятие 4","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/mpczyx83","slide":8,"text":"8/13","textPreview":"8/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/5hwn2w","slide":8,"text":"Агент может ускорить техническую работу, но не должен автоматически \"исправлять\" язык без проверки. Особенно опасны случаи, когда LLM заменяет редкую форму на более ожидаемую.\n\n[Sources]\n- Local markdown source: course_sessions/04_asr_rech_i_polevye_audio_dannye.md"}
+{"kind":"slide","id":"sl/cew2aj","slide":9,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/sfy5gjeh","slide":9,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/rep47exw","slide":9,"text":"Артефакт ASR","textPreview":"Артефакт ASR","textChars":12,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/6dgne9wb","slide":9,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/1kr6dovy","slide":9,"text":"audio_metadata.csv","textPreview":"audio_metadata.csv","textChars":18,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/gji5kjed","slide":9,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/fi9obyds","slide":9,"text":"segments/","textPreview":"segments/","textChars":9,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/eh0nitw7","slide":9,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/p8b6h8va","slide":9,"text":"transcripts.tsv","textPreview":"transcripts.tsv","textChars":15,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/o7i5o3ep","slide":9,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/qtg3yl4j","slide":9,"text":"asr_predictions.tsv","textPreview":"asr_predictions.tsv","textChars":19,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/rup4rq5o","slide":9,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/svyl0vm9","slide":9,"text":"asr_error_analysis.md","textPreview":"asr_error_analysis.md","textChars":21,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/dw7mtgnu","slide":9,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/ehg3ml4f","slide":9,"text":"Занятие 4","textPreview":"Занятие 4","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/fip4vq50","slide":9,"text":"9/13","textPreview":"9/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/cew2aj","slide":9,"text":"Даже если модель не дообучена, полезный артефакт - это протокол записи, небольшой проверенный набор и честная оценка готового ASR.\n\n[Sources]\n- Local markdown source: course_sessions/04_asr_rech_i_polevye_audio_dannye.md"}
+{"kind":"slide","id":"sl/k0azi5","slide":10,"title":"СЕМИНАР","textShapes":12}
+{"kind":"textbox","id":"sh/0vylkb6p","slide":10,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/zup4r6pk","slide":10,"text":"Практика 1. Протокол записи, 20 минут","textPreview":"Практика 1. Протокол записи, 20 минут","textChars":37,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/etg3i1oz","slide":10,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/90rmxg7m","slide":10,"text":"Команды проектируют форму согласия и метаданные:","textPreview":"Команды проектируют форму согласия и метаданные:","textChars":48,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/8zilob61","slide":10,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/ny94vqpg","slide":10,"text":"speaker_id","textPreview":"speaker_id","textChars":10,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/mx03mlov","slide":10,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/xobm107i","slide":10,"text":"language","textPreview":"language","textChars":8,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/wnilsv6x","slide":10,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/mlgrixcn","slide":10,"text":"dialect_or_variety","textPreview":"dialect_or_variety","textChars":18,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/nmp8b2t8","slide":10,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/8ny9k7ut","slide":10,"text":"genre","textPreview":"genre","textChars":5,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/9o7adsby","slide":10,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/apgrmxcj","slide":10,"text":"device","textPreview":"device","textChars":6,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/vq9sf2t4","slide":10,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/wri9o7up","slide":10,"text":"environment","textPreview":"environment","textChars":11,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/xsrahcba","slide":10,"bbox":[80,534,12,12]}
+{"kind":"textbox","id":"sh/qtwradcf","slide":10,"text":"consent_status","textPreview":"consent_status","textChars":14,"textLines":1,"bbox":[110,526,1010,40]}
+{"kind":"shape","id":"sh/bu583it0","slide":10,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/vm1wva5g","slide":10,"text":"Занятие 4","textPreview":"Занятие 4","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/ul8fm5ov","slide":10,"text":"10/13","textPreview":"10/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/k0azi5","slide":10,"text":"[Sources]\n- Local markdown source: course_sessions/04_asr_rech_i_polevye_audio_dannye.md"}
+{"kind":"slide","id":"sl/ju5zso","slide":11,"title":"СЕМИНАР","textShapes":8}
+{"kind":"textbox","id":"sh/qx8r2tk7","slide":11,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/d0zado3i","slide":11,"text":"Практика 2. Мини-набор аудио, 20 минут","textPreview":"Практика 2. Мини-набор аудио, 20 минут","textChars":38,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/szq9432x","slide":11,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/3uh87elg","slide":11,"text":"Команды используют принесенное аудио или записывают тестовые фразы. Минимум:","textPreview":"Команды используют принесенное аудио или записывают тестовые фразы. Минимум:","textChars":76,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/it8ry9kv","slide":11,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/5wza9o3m","slide":11,"text":"3-5 коротких файлов","textPreview":"3-5 коротких файлов","textChars":19,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/4vq90j21","slide":11,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/v6x83elk","slide":11,"text":"1-2 минуты суммарно","textPreview":"1-2 минуты суммарно","textChars":19,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/u5oru9kz","slide":11,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/4v610ned","slide":11,"text":"понятные метаданные","textPreview":"понятные метаданные","textChars":19,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/5gf2tsvi","slide":11,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/itojyxw7","slide":11,"text":"Занятие 4","textPreview":"Занятие 4","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/3uxkrids","slide":11,"text":"11/13","textPreview":"11/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/ju5zso","slide":11,"text":"[Sources]\n- Local markdown source: course_sessions/04_asr_rech_i_polevye_audio_dannye.md"}
+{"kind":"slide","id":"sl/sh6b7e","slide":12,"title":"СЕМИНАР","textShapes":5}
+{"kind":"textbox","id":"sh/f2l03alg","slide":12,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/gnu1wfml","slide":12,"text":"Практика 3. ASR baseline, 25 минут","textPreview":"Практика 3. ASR baseline, 25 минут","textChars":34,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/ho3i5k36","slide":12,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/2pcjyp4r","slide":12,"text":"Команды получают автоматическую транскрипцию готовой моделью или через доступный сервис. Результат сохраняетс...","textPreview":"Команды получают автоматическую транскрипцию готовой моделью или через доступный сервис. Результат сохраняетс...","textChars":112,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/3ql07ulc","slide":12,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/4re10fmx","slide":12,"text":"Занятие 4","textPreview":"Занятие 4","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/psni9k3i","slide":12,"text":"12/13","textPreview":"12/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/sh6b7e","slide":12,"text":"[Sources]\n- Local markdown source: course_sessions/04_asr_rech_i_polevye_audio_dannye.md"}
+{"kind":"slide","id":"sl/f4kowb","slide":13,"title":"СЕМИНАР","textShapes":12}
+{"kind":"textbox","id":"sh/xknyhwji","slide":13,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/ahwz6hkr","slide":13,"text":"Практика 4. Анализ ошибок, 25 минут","textPreview":"Практика 4. Анализ ошибок, 25 минут","textChars":35,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/bi5gfm1c","slide":13,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/ofeh472l","slide":13,"text":"Команды сравнивают автоматический результат с ручной транскрипцией:","textPreview":"Команды сравнивают автоматический результат с ручной транскрипцией:","textChars":67,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/9gnydcj6","slide":13,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/mdcf2hkv","slide":13,"text":"пропуски","textPreview":"пропуски","textChars":8,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/ne5gb21g","slide":13,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/0bux072p","slide":13,"text":"замены","textPreview":"замены","textChars":6,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/1c3y9cja","slide":13,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/dk7u50ri","slide":13,"text":"заимствования","textPreview":"заимствования","textChars":13,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/cjytcvad","slide":13,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/ripc3q9s","slide":13,"text":"ошибки диакритики","textPreview":"ошибки диакритики","textChars":17,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/qhgba5s7","slide":13,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/pw7u10rm","slide":13,"text":"смешение с доминирующим языком","textPreview":"смешение с доминирующим языком","textChars":30,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/4vyt8va1","slide":13,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/3upszq9g","slide":13,"text":"Промпт для агента:","textPreview":"Промпт для агента:","textChars":18,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/2tgb6lsv","slide":13,"bbox":[80,534,12,12]}
+{"kind":"textbox","id":"sh/hsnaxgra","slide":13,"text":"Сравни ASR-гипотезу с эталонной транскрипцией.","textPreview":"Сравни ASR-гипотезу с эталонной транскрипцией.","textChars":46,"textLines":1,"bbox":[110,526,1010,40]}
+{"kind":"shape","id":"sh/gret4ba5","slide":13,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/sn2l0fmx","slide":13,"text":"Занятие 4","textPreview":"Занятие 4","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/t8b29kni","slide":13,"text":"13/13","textPreview":"13/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/f4kowb","slide":13,"text":"[Sources]\n- Local markdown source: course_sessions/04_asr_rech_i_polevye_audio_dannye.md"}

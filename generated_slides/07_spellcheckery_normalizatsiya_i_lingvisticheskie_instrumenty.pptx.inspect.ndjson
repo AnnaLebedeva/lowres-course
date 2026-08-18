@@ -1,0 +1,220 @@
+{"kind":"deck","id":"pr/r0yde5","name":"Deck"}
+{"kind":"layout","layoutId":"584e2e14-0da0-45e1-a437-2e282700276d","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"faf26218-ca28-4952-ad40-2bef8829bfc9","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/5qphe7","slide":1,"title":"Курс по ML для малоресурсных языков","textShapes":6}
+{"kind":"shape","id":"sh/cn2tkvap","slide":1,"bbox":[0,0,22,720]}
+{"kind":"textbox","id":"sh/rmtsbqt4","slide":1,"text":"Курс по ML для малоресурсных языков","textPreview":"Курс по ML для малоресурсных языков","textChars":35,"textLines":1,"bbox":[76,72,720,30]}
+{"kind":"textbox","id":"sh/qlkbilsz","slide":1,"text":"Занятие 7. Спелчекеры, нормализация и лингвистические инструменты","textPreview":"Занятие 7. Спелчекеры, нормализация и лингвистические инструменты","textChars":65,"textLines":1,"bbox":[76,170,990,170]}
+{"kind":"textbox","id":"sh/1svuh0bm","slide":1,"text":"Занятие добавляет компонент, который часто нужен сообществам напрямую: проверка орфографии, нормализация, словари и простые инструменты письма. Итог - прототип спелчекера или нормализатора.","textPreview":"Занятие добавляет компонент, который часто нужен сообществам напрямую: проверка орфографии, нормализация, словари и простые инструменты п...","textChars":189,"textLines":1,"bbox":[80,392,900,92]}
+{"kind":"textbox","id":"sh/0rmtova1","slide":1,"text":"Лекция, семинар, домашнее задание и заметки докладчика","textPreview":"Лекция, семинар, домашнее задание и заметки докладчика","textChars":54,"textLines":1,"bbox":[80,560,820,32]}
+{"kind":"textbox","id":"sh/zqdcfqtg","slide":1,"text":"Занятие 7","textPreview":"Занятие 7","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/epkbmlsv","slide":1,"text":"1/13","textPreview":"1/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/5qphe7","slide":1,"text":"[Sources]\n- Local markdown source: course_sessions/07_spellcheckery_normalizatsiya_i_lingvisticheskie_instrumenty.md"}
+{"kind":"slide","id":"sl/cjpffp","slide":2,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/tgnq1gfe","slide":2,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/6dc7q1wn","slide":2,"text":"Почему спелчекер важен","textPreview":"Почему спелчекер важен","textChars":22,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/re58z6x8","slide":2,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/kruporex","slide":2,"text":"Поддержка письма и образования","textPreview":"Поддержка письма и образования","textChars":30,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/5c3qxwf2","slide":2,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/ipc7m1wr","slide":2,"text":"Улучшение OCR и ASR-постобработки","textPreview":"Улучшение OCR и ASR-постобработки","textChars":33,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/jql8v6xc","slide":2,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/wnupkrel","slide":2,"text":"Нормализация корпуса","textPreview":"Нормализация корпуса","textChars":20,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/xo3qtwf6","slide":2,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/t0je5072","slide":2,"text":"Обнаружение ошибок в данных","textPreview":"Обнаружение ошибок в данных","textChars":27,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/szaxwvqh","slide":2,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/ryhw3qpw","slide":2,"text":"Занятие 7","textPreview":"Занятие 7","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/6x8fu58b","slide":2,"text":"2/13","textPreview":"2/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/cjpffp","slide":2,"text":"Спелчекер - не второстепенный инструмент. Для языкового сообщества он может быть понятнее и полезнее, чем абстрактная ML-модель.\n\n[Sources]\n- Local markdown source: course_sessions/07_spellcheckery_normalizatsiya_i_lingvisticheskie_instrumenty.md"}
+{"kind":"slide","id":"sl/e4v24g","slide":3,"title":"ЛЕКЦИЯ","textShapes":10}
+{"kind":"textbox","id":"sh/m1k7yt87","slide":3,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/94b6987i","slide":3,"text":"Типы орфографической вариативности","textPreview":"Типы орфографической вариативности","textChars":34,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/832p03qx","slide":3,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/zy9o3epg","slide":3,"text":"Ошибки набора","textPreview":"Ошибки набора","textChars":13,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/yx07ut8v","slide":3,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/l0b65o7m","slide":3,"text":"Варианты орфографии","textPreview":"Варианты орфографии","textChars":19,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/0zipwjq1","slide":3,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/jud8fipk","slide":3,"text":"Диалектные различия","textPreview":"Диалектные различия","textChars":19,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/it476d8f","slide":3,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/wzml0rm5","slide":3,"text":"Заимствования","textPreview":"Заимствования","textChars":13,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/x0v29wnq","slide":3,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/axk3y14z","slide":3,"text":"Нестабильная письменная норма","textPreview":"Нестабильная письменная норма","textChars":29,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/bydk765k","slide":3,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/ov2lwrmt","slide":3,"text":"Ошибки OCR и ASR","textPreview":"Ошибки OCR и ASR","textChars":16,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/pwb25wne","slide":3,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/2tk3uho3","slide":3,"text":"Занятие 7","textPreview":"Занятие 7","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/nutk3m5o","slide":3,"text":"3/13","textPreview":"3/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/e4v24g","slide":3,"text":"Нельзя автоматически считать все варианты ошибками. Для некоторых языков \"норма\" обсуждается или меняется. Инструмент должен быть настраиваемым и документированным.\n\n[Sources]\n- Local markdown source: course_sessions/07_spellcheckery_normalizatsiya_i_lingvisticheskie_instrumenty.md"}
+{"kind":"slide","id":"sl/dct50g","slide":4,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/bqhwry98","slide":4,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/crqdk3at","slide":4,"text":"Подходы к спелчекеру","textPreview":"Подходы к спелчекеру","textChars":20,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/xsjet8re","slide":4,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/2l8ve9sr","slide":4,"text":"Словарный: Hunspell-стиль","textPreview":"Словарный: Hunspell-стиль","textChars":25,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/nmhwne9c","slide":4,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/onqdgjax","slide":4,"text":"Правила и морфология","textPreview":"Правила и морфология","textChars":20,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/pozepori","slide":4,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/mhsvqdsv","slide":4,"text":"Edit distance и кандидаты исправлений","textPreview":"Edit distance и кандидаты исправлений","textChars":37,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/7i1wzi9g","slide":4,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/ny5wrap8","slide":4,"text":"Нейросетевой seq2seq","textPreview":"Нейросетевой seq2seq","textChars":20,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/mxwfi58n","slide":4,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/90netk7e","slide":4,"text":"LLM как ассистент проверки, не как источник нормы","textPreview":"LLM как ассистент проверки, не как источник нормы","textChars":49,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/ozexkfqt","slide":4,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/v25wvup4","slide":4,"text":"Занятие 7","textPreview":"Занятие 7","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/a1wfmp8j","slide":4,"text":"4/13","textPreview":"4/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/dct50g","slide":4,"text":"Для курса реалистичен словарный или гибридный baseline: словарь + edit distance + правила. Нейросетевой подход требует больше данных и аккуратной оценки.\n\n[Sources]\n- Local markdown source: course_sessions/07_spellcheckery_normalizatsiya_i_lingvisticheskie_instrumenty.md"}
+{"kind":"slide","id":"sl/70v3mg","slide":5,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/yx8zuloj","slide":5,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/l0jy50nu","slide":5,"text":"Что нужно для словарного baseline","textPreview":"Что нужно для словарного baseline","textChars":33,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/kzqhwv69","slide":5,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/721g7a50","slide":5,"text":"Список словоформ","textPreview":"Список словоформ","textChars":16,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/m1szy5of","slide":5,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/tojy90n6","slide":5,"text":"Частотность","textPreview":"Частотность","textChars":11,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/83ah0v6l","slide":5,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/vq10ba5w","slide":5,"text":"Разметка допустимых вариантов","textPreview":"Разметка допустимых вариантов","textChars":29,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/upsz25ob","slide":5,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/0r6t4r61","slide":5,"text":"Правила аффиксов, если есть","textPreview":"Правила аффиксов, если есть","textChars":27,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/1sfudwnm","slide":5,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/epob2hob","slide":5,"text":"Набор тестовых предложений","textPreview":"Набор тестовых предложений","textChars":26,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/fqxcbm5w","slide":5,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/ovqt8b6d","slide":5,"text":"Занятие 7","textPreview":"Занятие 7","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/9wzuhgny","slide":5,"text":"5/13","textPreview":"5/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/70v3mg","slide":5,"text":"Даже частотный список из очищенного корпуса уже помогает. Но его нужно вручную проверить: веб-корпус может содержать ошибки, имена, русские или английские вставки.\n\n[Sources]\n- Local markdown source: course_sessions/07_spellcheckery_normalizatsiya_i_lingvisticheskie_instrumenty.md"}
+{"kind":"slide","id":"sl/l345ub","slide":6,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/9g3id0vi","slide":6,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/mdcj25w7","slide":6,"text":"Нормализация vs исправление","textPreview":"Нормализация vs исправление","textChars":27,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/nel0bads","slide":6,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/w3e18fe9","slide":6,"text":"Исправление: ошибка -> правильная форма","textPreview":"Исправление: ошибка -> правильная форма","textChars":39,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/x4n2hkvu","slide":6,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/a1wj65w3","slide":6,"text":"Нормализация: вариант -> выбранный стандарт","textPreview":"Нормализация: вариант -> выбранный стандарт","textChars":43,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/v250fado","slide":6,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/k7e1cze5","slide":6,"text":"Транслитерация: письменность A -> письменность B","textPreview":"Транслитерация: письменность A -> письменность B","textChars":48,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/5872lkvq","slide":6,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/xkja5ofy","slide":6,"text":"Все преобразования должны быть явно размечены","textPreview":"Все преобразования должны быть явно размечены","textChars":45,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/wzatcjyd","slide":6,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/by1s3exs","slide":6,"text":"Занятие 7","textPreview":"Занятие 7","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/ax8ba9g7","slide":6,"text":"6/13","textPreview":"6/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/l345ub","slide":6,"text":"Это важное различие. Нормализация может быть политически и культурно чувствительной. В курсе лучше говорить о вариантах и выбранной рабочей норме, а не о \"правильном\" языке без контекста.\n\n[Sources]\n- Local markdown source: course_sessions/07_spellcheckery_normalizatsiya_i_lingvisticheskie_instrumenty.md"}
+{"kind":"slide","id":"sl/i5p8nq","slide":7,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/na10b2x0","slide":7,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/obuh47el","slide":7,"text":"Оценка спелчекера","textPreview":"Оценка спелчекера","textChars":17,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/pc3idcf6","slide":7,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/adcz6hwr","slide":7,"text":"Precision: сколько предложенных исправлений верны","textPreview":"Precision: сколько предложенных исправлений верны","textChars":49,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/bel0fmxc","slide":7,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/cfuh8rex","slide":7,"text":"Recall: сколько ошибок найдено","textPreview":"Recall: сколько ошибок найдено","textChars":30,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/x03ihwfi","slide":7,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/y1cja1wn","slide":7,"text":"False positives особенно опасны","textPreview":"False positives особенно опасны","textChars":31,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/z2l0jmx8","slide":7,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/vqdgry5k","slide":7,"text":"Отдельно оценивать редкие и диалектные формы","textPreview":"Отдельно оценивать редкие и диалектные формы","textChars":44,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/upkzytoz","slide":7,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/hsvyt8na","slide":7,"text":"Занятие 7","textPreview":"Занятие 7","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/wrmh0365","slide":7,"text":"7/13","textPreview":"7/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/i5p8nq","slide":7,"text":"Плохой спелчекер может навредить, если помечает правильные формы как ошибки. Для малоресурсных языков лучше осторожный инструмент с высоким precision.\n\n[Sources]\n- Local markdown source: course_sessions/07_spellcheckery_normalizatsiya_i_lingvisticheskie_instrumenty.md"}
+{"kind":"slide","id":"sl/zvcm2n","slide":8,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/e5srat4b","slide":8,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/18ja583m","slide":8,"text":"Интеграция с другими треками","textPreview":"Интеграция с другими треками","textChars":28,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/g7a9c3m1","slide":8,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/r2hszelk","slide":8,"text":"OCR: исправление частых распознавательных ошибок","textPreview":"OCR: исправление частых распознавательных ошибок","textChars":48,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/618r6t4z","slide":8,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/t4ja1o3q","slide":8,"text":"ASR: нормализация транскриптов","textPreview":"ASR: нормализация транскриптов","textChars":30,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/s3a98jm5","slide":8,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/jeh8vel8","slide":8,"text":"MT: терминология и словари","textPreview":"MT: терминология и словари","textChars":26,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/id8r2943","slide":8,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/0vq5cnmt","slide":8,"text":"Корпус: контроль качества","textPreview":"Корпус: контроль качества","textChars":25,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/1wzm5sne","slide":8,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/et8nad4n","slide":8,"text":"Занятие 7","textPreview":"Занятие 7","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/fuh4ji58","slide":8,"text":"8/13","textPreview":"8/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/zvcm2n","slide":8,"text":"Спелчекер должен использовать результаты всех предыдущих занятий: очищенный корпус, OCR-ошибки, ASR-ошибки, параллельные тексты и словари.\n\n[Sources]\n- Local markdown source: course_sessions/07_spellcheckery_normalizatsiya_i_lingvisticheskie_instrumenty.md"}
+{"kind":"slide","id":"sl/j9jun3","slide":9,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/zmxgry9g","slide":9,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/0n6h03al","slide":9,"text":"Артефакт занятия","textPreview":"Артефакт занятия","textChars":16,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/lofytor6","slide":9,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/qx4zu9sj","slide":9,"text":"wordlist.tsv","textPreview":"wordlist.tsv","textChars":12,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/bydgne94","slide":9,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/czmhwjap","slide":9,"text":"accepted_variants.tsv","textPreview":"accepted_variants.tsv","textChars":21,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/dkvypora","slide":9,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/2tkfq9sn","slide":9,"text":"spellchecker_rules.md","textPreview":"spellchecker_rules.md","textChars":21,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/3udgjet8","slide":9,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/vu98fqpw","slide":9,"text":"spellchecker_demo.py или notebook","textPreview":"spellchecker_demo.py или notebook","textChars":33,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/at076lob","slide":9,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/xwrqhg72","slide":9,"text":"spellchecker_eval.md","textPreview":"spellchecker_eval.md","textChars":20,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/wvip8v6h","slide":9,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/jit8jqp8","slide":9,"text":"Занятие 7","textPreview":"Занятие 7","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/ihk7alon","slide":9,"text":"9/13","textPreview":"9/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/j9jun3","slide":9,"text":"Даже простой прототип, который показывает неизвестные слова и предлагает кандидатов, уже полезен. Главное - не скрывать ограничения.\n\n[Sources]\n- Local markdown source: course_sessions/07_spellcheckery_normalizatsiya_i_lingvisticheskie_instrumenty.md"}
+{"kind":"slide","id":"sl/0dqayn","slide":10,"title":"СЕМИНАР","textShapes":10}
+{"kind":"textbox","id":"sh/xsry54bq","slide":10,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/ap0za9sf","slide":10,"text":"Практика 1. Частотный словарь, 20 минут","textPreview":"Практика 1. Частотный словарь, 20 минут","textChars":39,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/bq9g3etk","slide":10,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/kvihgjah","slide":10,"text":"Команды строят wordlist.tsv:","textPreview":"Команды строят wordlist.tsv:","textChars":28,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/lwry9ob2","slide":10,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/yt0ze9sb","slide":10,"text":"word","textPreview":"word","textChars":4,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/ju9g7etw","slide":10,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/0zyx4fux","slide":10,"text":"count","textPreview":"count","textChars":5,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/107yxkbi","slide":10,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/d076dw3m","slide":10,"text":"source_count","textPreview":"source_count","textChars":12,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/czy5kr21","slide":10,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/bep4bmlg","slide":10,"text":"status: accepted / unsure / reject","textPreview":"status: accepted / unsure / reject","textChars":34,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/qdgnihkb","slide":10,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/l4r6hw3y","slide":10,"text":"notes","textPreview":"notes","textChars":5,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/03i5or2d","slide":10,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/z2pof6ls","slide":10,"text":"Занятие 7","textPreview":"Занятие 7","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/y1gnm1k7","slide":10,"text":"10/13","textPreview":"10/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/0dqayn","slide":10,"text":"[Sources]\n- Local markdown source: course_sessions/07_spellcheckery_normalizatsiya_i_lingvisticheskie_instrumenty.md"}
+{"kind":"slide","id":"sl/cw617t","slide":11,"title":"СЕМИНАР","textShapes":10}
+{"kind":"textbox","id":"sh/ixcr6x43","slide":11,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/503a1c3e","slide":11,"text":"Практика 2. Ошибки и варианты, 20 минут","textPreview":"Практика 2. Ошибки и варианты, 20 минут","textChars":39,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/4zu987m9","slide":11,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/vu18v2lc","slide":11,"text":"Команды собирают 30 примеров:","textPreview":"Команды собирают 30 примеров:","textChars":29,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/utsr2x4r","slide":11,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/hw3qxs3i","slide":11,"text":"OCR-ошибка","textPreview":"OCR-ошибка","textChars":10,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/wva94nmx","slide":11,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/fq5s7mlw","slide":11,"text":"ASR-ошибка","textPreview":"ASR-ошибка","textChars":10,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/epwreh4b","slide":11,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/gju1cnmx","slide":11,"text":"опечатка","textPreview":"опечатка","textChars":8,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/hk3i5sni","slide":11,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/uhcjad4r","slide":11,"text":"орфографический вариант","textPreview":"орфографический вариант","textChars":23,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/vil03i5c","slide":11,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/8fu18nm1","slide":11,"text":"заимствование","textPreview":"заимствование","textChars":13,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/tg3i18n6","slide":11,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/6dcj6dov","slide":11,"text":"Занятие 7","textPreview":"Занятие 7","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/7el0zi5g","slide":11,"text":"11/13","textPreview":"11/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/cw617t","slide":11,"text":"[Sources]\n- Local markdown source: course_sessions/07_spellcheckery_normalizatsiya_i_lingvisticheskie_instrumenty.md"}
+{"kind":"slide","id":"sl/470hm0","slide":12,"title":"СЕМИНАР","textShapes":9}
+{"kind":"textbox","id":"sh/6hwzaxcv","slide":12,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/tkny5sv6","slide":12,"text":"Практика 3. Baseline-спелчекер, 30 минут","textPreview":"Практика 3. Baseline-спелчекер, 30 минут","textChars":40,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/8jehcnul","slide":12,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/julgzid4","slide":12,"text":"Минимальная логика:","textPreview":"Минимальная логика:","textChars":19,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/ytcz6dcj","slide":12,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/lwny1sva","slide":12,"text":"если слова нет в словаре, отметить","textPreview":"если слова нет в словаре, отметить","textChars":34,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/kveh8nup","slide":12,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/3qp0bmdo","slide":12,"text":"предложить кандидатов по edit distance","textPreview":"предложить кандидатов по edit distance","textChars":38,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/ipgzihc3","slide":12,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/wveh47e5","slide":12,"text":"не исправлять автоматически без подтверждения","textPreview":"не исправлять автоматически без подтверждения","textChars":45,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/xwnidsvq","slide":12,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/atcz2xwz","slide":12,"text":"сохранять лог решений","textPreview":"сохранять лог решений","textChars":21,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/vul0b2dk","slide":12,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/8ruh0net","slide":12,"text":"Занятие 7","textPreview":"Занятие 7","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/9s3y9sve","slide":12,"text":"12/13","textPreview":"12/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/470hm0","slide":12,"text":"[Sources]\n- Local markdown source: course_sessions/07_spellcheckery_normalizatsiya_i_lingvisticheskie_instrumenty.md"}
+{"kind":"slide","id":"sl/y8pnhc","slide":13,"title":"СЕМИНАР","textShapes":12}
+{"kind":"textbox","id":"sh/4z21o36x","slide":13,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/jyt0fipc","slide":13,"text":"Практика 4. Оценка, 20 минут","textPreview":"Практика 4. Оценка, 20 минут","textChars":28,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/ixkjmdo7","slide":13,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/hcrid87m","slide":13,"text":"Команды проверяют 20 предложений:","textPreview":"Команды проверяют 20 предложений:","textChars":33,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/wbihk361","slide":13,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/va90bypg","slide":13,"text":"сколько ошибок найдено","textPreview":"сколько ошибок найдено","textChars":22,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/u90zitov","slide":13,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/1svipsnq","slide":13,"text":"сколько правильных слов ошибочно помечено","textPreview":"сколько правильных слов ошибочно помечено","textChars":41,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/g7m1wn65","slide":13,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/2tgjuh43","slide":13,"text":"какие правила опасны","textPreview":"какие правила опасны","textChars":20,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/3up03mlo","slide":13,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/4vy1wr29","slide":13,"text":"что нужно спросить у носителей","textPreview":"что нужно спросить у носителей","textChars":30,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/pw7i5w3e","slide":13,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/upwjqh4r","slide":13,"text":"Промпт для агента:","textPreview":"Промпт для агента:","textChars":18,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/vqp0zmlc","slide":13,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/gry1srmx","slide":13,"text":"На основе списка слов, частот и примеров ошибок предложи осторожную схему спелчекера.","textPreview":"На основе списка слов, частот и примеров ошибок предложи осторожную схему спелчекера.","textChars":85,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/hs7i1w3i","slide":13,"bbox":[80,534,12,12]}
+{"kind":"textbox","id":"sh/el0j21kb","slide":13,"text":"Отдельно выпиши правила, которые нельзя применять автоматически.","textPreview":"Отдельно выпиши правила, которые нельзя применять автоматически.","textChars":64,"textLines":1,"bbox":[110,526,1010,40]}
+{"kind":"shape","id":"sh/zm9kb6lw","slide":13,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/b61g3y18","slide":13,"text":"Занятие 7","textPreview":"Занятие 7","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/a5sfutkn","slide":13,"text":"13/13","textPreview":"13/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/y8pnhc","slide":13,"text":"[Sources]\n- Local markdown source: course_sessions/07_spellcheckery_normalizatsiya_i_lingvisticheskie_instrumenty.md"}

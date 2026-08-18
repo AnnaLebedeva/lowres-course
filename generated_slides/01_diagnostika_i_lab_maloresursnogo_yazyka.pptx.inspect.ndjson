@@ -1,0 +1,663 @@
+{"kind":"deck","id":"pr/99bsbq","name":"Deck"}
+{"kind":"layout","layoutId":"c35726b6-54da-44b1-a001-1b2938fa3b43","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"ce19d53f-e020-41a2-b47e-54e5caadef60","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/x7sl7q","slide":1,"title":"Курс по ML для малоресурсных языков","textShapes":6}
+{"kind":"shape","id":"sh/k36t0juh","slide":1,"bbox":[0,0,22,720]}
+{"kind":"textbox","id":"sh/j2xsredc","slide":1,"text":"Курс по ML для малоресурсных языков","textPreview":"Курс по ML для малоресурсных языков","textChars":35,"textLines":1,"bbox":[76,72,720,30]}
+{"kind":"textbox","id":"sh/i1oby9cr","slide":1,"text":"Занятие 1. От простого к сложному: как ML-лаборатория может помогать сохранять язык","textPreview":"Занятие 1. От простого к сложному: как ML-лаборатория может помогать сохранять язык","textChars":83,"textLines":1,"bbox":[76,170,990,170]}
+{"kind":"textbox","id":"sh/x0fap4v6","slide":1,"text":"Первое занятие запускает курс как совместную исследовательскую лабораторию. Студенты не получают готовый список \"правильных\" задач, а вместе с преподавателем строят карту: что значит сохранить язык, какие факторы на это влияют, к...","textPreview":"Первое занятие запускает курс как совместную исследовательскую лабораторию. Студенты не получают готовый список \"правильных\" задач, а вме...","textChars":232,"textLines":1,"bbox":[80,392,900,92]}
+{"kind":"textbox","id":"sh/wz69wzul","slide":1,"text":"Лекция, семинар, домашнее задание и заметки докладчика","textPreview":"Лекция, семинар, домашнее задание и заметки докладчика","textChars":54,"textLines":1,"bbox":[80,560,820,32]}
+{"kind":"textbox","id":"sh/vyxsnud0","slide":1,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/ax4ru9cf","slide":1,"text":"1/36","textPreview":"1/36","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/x7sl7q","slide":1,"text":"[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/jwvtxz","slide":2,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/3i94fap8","slide":2,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/ojilofqt","slide":2,"text":"Вопрос курса","textPreview":"Вопрос курса","textChars":12,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/pkrmhk7e","slide":2,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/edg3i58r","slide":2,"text":"Как машинное обучение может помогать сохранять малоресурсные языки?","textPreview":"Как машинное обучение может помогать сохранять малоресурсные языки?","textChars":67,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/fe9kbapc","slide":2,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/gfilkfqx","slide":2,"text":"Что можно сделать уже сейчас?","textPreview":"Что можно сделать уже сейчас?","textChars":29,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/1grmdk7i","slide":2,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/6pg3el8v","slide":2,"text":"Что требует данных, сообщества и полевой работы?","textPreview":"Что требует данных, сообщества и полевой работы?","textChars":48,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/rqpk7qpg","slide":2,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/rypcb2to","slide":2,"text":"Как не спутать полезный инструмент с красивым демо?","textPreview":"Как не спутать полезный инструмент с красивым демо?","textChars":51,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/qxgv2xs3","slide":2,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/d07udsbe","slide":2,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/szyd4na9","slide":2,"text":"2/36","textPreview":"2/36","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/jwvtxz","slide":2,"text":"Начать нужно не с моделей, а с задачи. \"Сохранить язык\" может означать разные вещи: сделать тексты доступными, помочь преподавателям, расшифровать архивные записи, создать клавиатуру, спелчекер, переводчик, корпус, учебные материалы или инструменты для исследователей. Важно сразу отделить технический интерес от реальной пользы.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/9qpp9g","slide":3,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/4bepwnih","slide":3,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/3q5o3i1w","slide":3,"text":"Как вы оказались на этом курсе?","textPreview":"Как вы оказались на этом курсе?","textChars":31,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/2pc7ux0b","slide":3,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/dgn69cjy","slide":3,"text":"Почему вы выбрали этот курс?","textPreview":"Почему вы выбрали этот курс?","textChars":28,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/cfep07it","slide":3,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/re5o7218","slide":3,"text":"В чем видите потенциальную пользу для себя?","textPreview":"В чем видите потенциальную пользу для себя?","textChars":43,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/qdw7yx0n","slide":3,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/1k76dcja","slide":3,"text":"В чем может быть ваш вклад?","textPreview":"В чем может быть ваш вклад?","textChars":27,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/0jyp47ip","slide":3,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/yt4ra9or","slide":3,"text":"Какие языки, регионы, данные, навыки или контакты вы приносите в группу?","textPreview":"Какие языки, регионы, данные, навыки или контакты вы приносите в группу?","textChars":72,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/juxsjepc","slide":3,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/kv69cj6x","slide":3,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/lwfalo7i","slide":3,"text":"3/36","textPreview":"3/36","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/9qpp9g","slide":3,"text":"Этот слайд нужен, чтобы сразу увидеть группу как набор компетенций, а не как \"студентов с разным уровнем Python\". У кого-то может быть языковая или региональная экспертиза, у кого-то - опыт работы с архивами, у кого-то - навыки перевода, преподавания, программирования, полевой работы, анализа данных или взаимодействия с сообществами. Это напрямую влияет на выбор проектных треков.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/q6t6o4","slide":4,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/k3yh8jat","slide":4,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/z2pgfe98","slide":4,"text":"Брейншторм: как можно сохранять язык?","textPreview":"Брейншторм: как можно сохранять язык?","textChars":37,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/y1gz6tsn","slide":4,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/9sryl8ra","slide":4,"text":"Что вообще помогает языку жить?","textPreview":"Что вообще помогает языку жить?","textChars":31,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/8rihc3ap","slide":4,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/769gjy9k","slide":4,"text":"Какие данные нужны?","textPreview":"Какие данные нужны?","textChars":19,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/m5gzatsz","slide":4,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/pwny94r6","slide":4,"text":"Какие инструменты нужны носителям, преподавателям, исследователям?","textPreview":"Какие инструменты нужны носителям, преподавателям, исследователям?","textChars":66,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/obex0zal","slide":4,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/yp4nqd0b","slide":4,"text":"Что можно сделать без ML?","textPreview":"Что можно сделать без ML?","textChars":25,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/zqdozihw","slide":4,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/0rm5s3ih","slide":4,"text":"Где ML действительно ускоряет работу?","textPreview":"Где ML действительно ускоряет работу?","textChars":37,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/lsv618z2","slide":4,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/mt4nud0n","slide":4,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/nudo3ih8","slide":4,"text":"4/36","textPreview":"4/36","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/q6t6o4","slide":4,"text":"На этом слайде не надо сразу подсказывать ответы. Дать студентам 7-10 минут на общий брейншторм. Писать ответы на доске или в общей таблице. Важно, чтобы прозвучали не только модели, но и люди, образование, доступность письменности, архивы, права, мотивация сообщества, материалы для детей, словари, медиа.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/bdjeda","slide":5,"title":"ЛЕКЦИЯ","textShapes":10}
+{"kind":"textbox","id":"sh/6903exsf","slide":5,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/twb29cr6","slide":5,"text":"Возможные ответы: что влияет на сохранение языка","textPreview":"Возможные ответы: что влияет на сохранение языка","textChars":48,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/8b2lg7al","slide":5,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/j69k3it4","slide":5,"text":"Передача между поколениями","textPreview":"Передача между поколениями","textChars":26,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/y503adsj","slide":5,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/l8r25sbu","slide":5,"text":"Престиж и видимость языка","textPreview":"Престиж и видимость языка","textChars":25,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/k7ilcna9","slide":5,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/32d4fm98","slide":5,"text":"Образование и учебные материалы","textPreview":"Образование и учебные материалы","textChars":31,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/2143mhsn","slide":5,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/0japwbe9","slide":5,"text":"Доступные тексты, аудио, словари, архивы","textPreview":"Доступные тексты, аудио, словари, архивы","textChars":40,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/lkjq5gfu","slide":5,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/yhs7ulw3","slide":5,"text":"Цифровая инфраструктура: клавиатуры, поиск, OCR, ASR, перевод, спелчекер","textPreview":"Цифровая инфраструктура: клавиатуры, поиск, OCR, ASR, перевод, спелчекер","textChars":72,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/zi1836xo","slide":5,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/cvapsbed","slide":5,"text":"Сообщество, согласие, права на данные","textPreview":"Сообщество, согласие, права на данные","textChars":37,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/dgjq1gfi","slide":5,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/qt87q1w7","slide":5,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/bu18z6xs","slide":5,"text":"5/36","textPreview":"5/36","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/bdjeda","slide":5,"text":"Здесь нужно собрать ответы студентов в более системную карту. ML - только один слой. Он полезен, когда помогает производить, искать, расшифровывать, переводить, проверять или структурировать языковые материалы. Но без сообщества и данных модель сама по себе язык не сохраняет.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/7exym2","slide":6,"title":"ЛЕКЦИЯ","textShapes":10}
+{"kind":"textbox","id":"sh/uhwbepgb","slide":6,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/hknapkf2","slide":6,"text":"Что дают разные ML-инструменты","textPreview":"Что дают разные ML-инструменты","textChars":30,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/gjetgfyh","slide":6,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/36psruxs","slide":6,"text":"OCR: оцифровать книги, газеты, учебники, архивные PDF","textPreview":"OCR: оцифровать книги, газеты, учебники, архивные PDF","textChars":53,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/25gbipgn","slide":6,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/p87at4fy","slide":6,"text":"ASR: получить тексты из записей речи","textPreview":"ASR: получить тексты из записей речи","textChars":36,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/47ytkzyd","slide":6,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/jalsfqho","slide":6,"text":"MT: строить перевод и параллельные корпуса","textPreview":"MT: строить перевод и параллельные корпуса","textChars":42,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/y9cr65g3","slide":6,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/8n6h4nup","slide":6,"text":"Alignment: находить пары переводов в текстах","textPreview":"Alignment: находить пары переводов в текстах","textChars":44,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/9ofyxsva","slide":6,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/mloz2dcj","slide":6,"text":"Спелчекер: поддержать письмо и очистку данных","textPreview":"Спелчекер: поддержать письмо и очистку данных","textChars":45,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/nmxgvid4","slide":6,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/wrqh8nul","slide":6,"text":"LLM: анализ, генерация черновиков, ассистивная разметка, локальные помощники","textPreview":"LLM: анализ, генерация черновиков, ассистивная разметка, локальные помощники","textChars":76,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/xszy1sv6","slide":6,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/apoz6dcf","slide":6,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/vqxgzid0","slide":6,"text":"6/36","textPreview":"6/36","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/7exym2","slide":6,"text":"Нужно явно проговорить цепочки. OCR позволяет получить текст из изображений, а потом использовать его для корпуса, перевода, спелчекера или локальной LLM. ASR позволяет получить текст \"из просто записи голоса\": интервью, сказки, разговоры, учебные фразы. Alignment помогает связать тексты на двух языках. Спелчекер помогает не только пользователям, но и OCR/ASR-постобработке.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/u9edjx","slide":7,"title":"ЛЕКЦИЯ","textShapes":10}
+{"kind":"textbox","id":"sh/x83ypwzu","slide":7,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/a5sfuh0j","slide":7,"text":"От простого к сложному","textPreview":"От простого к сложному","textChars":22,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/v61gnmho","slide":7,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/8jaxs7id","slide":7,"text":"Найти готовые датасеты","textPreview":"Найти готовые датасеты","textChars":22,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/94jylczy","slide":7,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/mhsfqh07","slide":7,"text":"Найти готовые модели","textPreview":"Найти готовые модели","textChars":20,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/ni1gjmhs","slide":7,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/szeh4bih","slide":7,"text":"Проверить baseline на своих примерах","textPreview":"Проверить baseline на своих примерах","textChars":36,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/t0nyxgz2","slide":7,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/1wbex0zm","slide":7,"text":"Если есть данные - дообучить или адаптировать модель","textPreview":"Если есть данные - дообучить или адаптировать модель","textChars":52,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/0v2d4vyh","slide":7,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/futwvahw","slide":7,"text":"Если данных нет - собрать минимальный датасет","textPreview":"Если данных нет - собрать минимальный датасет","textChars":45,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/etkv25gb","slide":7,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/dsbet0zq","slide":7,"text":"Если задача чувствительная - сначала согласие, протокол и хранение","textPreview":"Если задача чувствительная - сначала согласие, протокол и хранение","textChars":66,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/s72d0vy5","slide":7,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/r6twrqhk","slide":7,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/65kvylgz","slide":7,"text":"7/36","textPreview":"7/36","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/u9edjx","slide":7,"text":"Это ключевая логика курса. Не надо начинать с обучения модели, если уже есть готовый корпус или baseline. Сначала нужно узнать, что существует: Hugging Face, GitHub, ELAR, Zenodo, CLARIN, OPUS, Common Voice, архивы, локальные проекты. Если готовые ресурсы есть, проверяем их качество. Если нет, планируем сбор.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/044vxi","slide":8,"title":"ЛЕКЦИЯ","textShapes":11}
+{"kind":"textbox","id":"sh/1w3y50z6","slide":8,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/etszal0f","slide":8,"text":"Что считается первым полезным результатом","textPreview":"Что считается первым полезным результатом","textChars":41,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/fulg3qh0","slide":8,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/ozuhgfih","slide":8,"text":"Таблица найденных ресурсов","textPreview":"Таблица найденных ресурсов","textChars":26,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/p03i90z2","slide":8,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/2xcze50r","slide":8,"text":"20 проверенных текстов","textPreview":"20 проверенных текстов","textChars":22,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/nylg7ahc","slide":8,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/c3ehkfyt","slide":8,"text":"30 строк OCR ground truth","textPreview":"30 строк OCR ground truth","textChars":25,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/xonidkze","slide":8,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/143e9ona","slide":8,"text":"1 минута расшифрованного аудио","textPreview":"1 минута расшифрованного аудио","textChars":30,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/03uxgj6p","slide":8,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/z2lw7e54","slide":8,"text":"50 пар параллельных сегментов","textPreview":"50 пар параллельных сегментов","textChars":29,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/e1sfe9oj","slide":8,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/9s3ydon6","slide":8,"text":"Частотный словарь и список спорных форм","textPreview":"Частотный словарь и список спорных форм","textChars":39,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/oruxkj6l","slide":8,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/nqlgbe50","slide":8,"text":"Мини-демо или воспроизводимый notebook","textPreview":"Мини-демо или воспроизводимый notebook","textChars":38,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/m5cfi9ov","slide":8,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/pwje14n2","slide":8,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/4vax8z6h","slide":8,"text":"8/36","textPreview":"8/36","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/044vxi","slide":8,"text":"Нужно снизить порог входа. Для студентов, которые начали Python только в прошлом году, результатом не обязана быть большая модель. Маленький, проверенный, документированный артефакт лучше, чем нестабильное \"мы обучили нейросеть\" без данных и оценки.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/j0aaxz","slide":9,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/47m1sbmp","slide":9,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/36dkj654","slide":9,"text":"Командный выбор: язык и подход","textPreview":"Командный выбор: язык и подход","textChars":30,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/2l4jql4j","slide":9,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/dcf2p0n6","slide":9,"text":"Какой язык или языковая ситуация?","textPreview":"Какой язык или языковая ситуация?","textChars":33,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/cb61wvml","slide":9,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/radknq50","slide":9,"text":"Кто пользователи результата?","textPreview":"Кто пользователи результата?","textChars":28,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/q94jul4f","slide":9,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/tgbidwn2","slide":9,"text":"Что уже есть: данные, модели, словари, контакты?","textPreview":"Что уже есть: данные, модели, словари, контакты?","textChars":48,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/sf21krmh","slide":9,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/ilszqlwb","slide":9,"text":"Что реалистично за курс?","textPreview":"Что реалистично за курс?","textChars":24,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/jm10zqxw","slide":9,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/knahsveh","slide":9,"text":"Что может стать заделом для летней школы?","textPreview":"Что может стать заделом для летней школы?","textChars":41,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/583i10fm","slide":9,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/69czu5w7","slide":9,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/7al03axs","slide":9,"text":"9/36","textPreview":"9/36","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/j0aaxz","slide":9,"text":"Каждая команда должна выбрать не только язык, но и подход. Например: \"делаем OCR для учебника\", \"проверяем ASR на архивных записях\", \"собираем веб-корпус\", \"ищем параллельные тексты\", \"делаем спелчекер\". Выбор должен быть связан с доступностью данных и компетенциями команды.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/0ju18z","slide":10,"title":"ЛЕКЦИЯ","textShapes":10}
+{"kind":"textbox","id":"sh/8nyp83qp","slide":10,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/nmpofy9k","slide":10,"text":"Опросник как способ использовать экспертизу группы","textPreview":"Опросник как способ использовать экспертизу группы","textChars":50,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/mlw76tsz","slide":10,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/xs7ql8rm","slide":10,"text":"Python, Git, таблицы, командная строка","textPreview":"Python, Git, таблицы, командная строка","textChars":38,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/wrypc3q1","slide":10,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/vqp8jy9g","slide":10,"text":"Знание языков и регионов","textPreview":"Знание языков и регионов","textChars":24,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/apg7ad8v","slide":10,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/5grqpsri","slide":10,"text":"Лингвистика, перевод, архивы, полевая работа","textPreview":"Лингвистика, перевод, архивы, полевая работа","textChars":44,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/kfipgnqx","slide":10,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/ulwj6t4b","slide":10,"text":"Доступ к данным или контактам","textPreview":"Доступ к данным или контактам","textChars":29,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/vmp0fy5g","slide":10,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/gny183m1","slide":10,"text":"Интересы: OCR, ASR, перевод, корпус, спелчекер, LLM","textPreview":"Интересы: OCR, ASR, перевод, корпус, спелчекер, LLM","textChars":51,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/ho72h8nm","slide":10,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/ipgjad47","slide":10,"text":"Ограничения: время, права, чувствительные данные","textPreview":"Ограничения: время, права, чувствительные данные","textChars":48,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/3qpkji5s","slide":10,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/4ry1c3md","slide":10,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/5s72l8ny","slide":10,"text":"10/36","textPreview":"10/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/0ju18z","slide":10,"text":"Опросник нужен не для оценки студентов, а для проектирования команд. Если кто-то знает язык или регион, это критическая экспертиза. Если кто-то умеет структурировать данные или работать с LLM, это тоже роль. Команды должны собираться не только по дружбе, но и по ресурсам.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/ryibnc","slide":11,"title":"ЛЕКЦИЯ","textShapes":10}
+{"kind":"textbox","id":"sh/1szylojy","slide":11,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/ep8fa9k7","slide":11,"text":"VibeCoding: базовый принцип","textPreview":"VibeCoding: базовый принцип","textChars":27,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/zqhgje1s","slide":11,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/ovqxgj29","slide":11,"text":"Не \"напиши мне все\"","textPreview":"Не \"напиши мне все\"","textChars":19,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/9wjypoju","slide":11,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/mt8fetkj","slide":11,"text":"А \"помоги разложить задачу\"","textPreview":"А \"помоги разложить задачу\"","textChars":27,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/nuhgny14","slide":11,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/wzaxk32l","slide":11,"text":"Сначала цель и ограничения","textPreview":"Сначала цель и ограничения","textChars":26,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/x0jyt8j6","slide":11,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/t0765gjq","slide":11,"text":"Потом план","textPreview":"Потом план","textChars":10,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/8zypwb25","slide":11,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/7e5o361k","slide":11,"text":"Потом маленький проверяемый шаг","textPreview":"Потом маленький проверяемый шаг","textChars":31,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/6dwnu1kz","slide":11,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/h47690jm","slide":11,"text":"Потом критика результата","textPreview":"Потом критика результата","textChars":24,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/g3yp0vi1","slide":11,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/v2po7q1g","slide":11,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/u1g7yl0b","slide":11,"text":"11/36","textPreview":"11/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/ryibnc","slide":11,"text":"VibeCoding в этом курсе - не магическое программирование без понимания. Это режим, где студент формулирует задачу, просит LLM предложить план, генерирует небольшой кусок кода или таблицу, запускает, проверяет, показывает ошибку модели и улучшает. Главный навык - задавать проверяемые задачи и не принимать ответ на веру.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/6l8fdk","slide":12,"title":"ЛЕКЦИЯ","textShapes":11}
+{"kind":"textbox","id":"sh/xsvqd87u","slide":12,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/ap472toj","slide":12,"text":"Как брейнштормить проект с LLM","textPreview":"Как брейнштормить проект с LLM","textChars":30,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/bqdobyp4","slide":12,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/kv6p8n6l","slide":12,"text":"Хороший промпт содержит:","textPreview":"Хороший промпт содержит:","textChars":24,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/lwfqhs76","slide":12,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/yt476dof","slide":12,"text":"язык и регион;","textPreview":"язык и регион;","textChars":14,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/jud8fip0","slide":12,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/8z6pcn6h","slide":12,"text":"типы доступных данных;","textPreview":"типы доступных данных;","textChars":22,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/t0fqls72","slide":12,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/lor2tsz6","slide":12,"text":"желаемый артефакт;","textPreview":"желаемый артефакт;","textChars":18,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/03i10ny1","slide":12,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/z29krihg","slide":12,"text":"уровень команды;","textPreview":"уровень команды;","textChars":16,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/y10jydgv","slide":12,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/9sb2xszi","slide":12,"text":"ограничения по правам и времени;","textPreview":"ограничения по правам и времени;","textChars":32,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/8ri147yx","slide":12,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/nq9kv2hc","slide":12,"text":"просьбу не выдумывать источники.","textPreview":"просьбу не выдумывать источники.","textChars":32,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/mp0j2xgr","slide":12,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/pw72l8zy","slide":12,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/ovy1s3it","slide":12,"text":"12/36","textPreview":"12/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/6l8fdk","slide":12,"text":"Показать студентам пример прямо на занятии. Важно добавить запрет на выдуманные ссылки и требование помечать неопределенность. LLM должна помогать думать, но не заменять проверку источников.\n\nПример промпта:\n``\nМы команда на курсе по ML для малоресурсных языков.\nХотим выбрать проект для языка X. У нас базовый Python, 8 недель,\nвозможны тексты из открытого веба и 1-2 носителя для консультаций.\nПредложи 5 проектных гипотез от простой к сложной: датасет, OCR, ASR,\nперевод, спелчекер или локальный LLM-ассистент.\nДля каждой гипотезы укажи: нужные данные, минимальный первый шаг,\nриски, метрику успеха и что проверить вручную.\nНе выдумывай конкретные датасеты или ссылки.\n``\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/xhi292","slide":13,"title":"ЛЕКЦИЯ","textShapes":10}
+{"kind":"textbox","id":"sh/q587mxkv","slide":13,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/d8j6xcjm","slide":13,"text":"Бесплатные и доступные LLM для старта","textPreview":"Бесплатные и доступные LLM для старта","textChars":37,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/c7apo721","slide":13,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/32hori14","slide":13,"text":"ChatGPT Free: общий брейншторм, тексты, таблицы, базовый код","textPreview":"ChatGPT Free: общий брейншторм, тексты, таблицы, базовый код","textChars":60,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/i18nidkz","slide":13,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/p4z6tsja","slide":13,"text":"Google Gemini: мультимодальные задачи, работа с документами и общая аналитика","textPreview":"Google Gemini: мультимодальные задачи, работа с документами и общая аналитика","textChars":77,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/43qpkn2p","slide":13,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/vexoni18","slide":13,"text":"Claude Free: длинные тексты, редактирование, структурирование, документы","textPreview":"Claude Free: длинные тексты, редактирование, структурирование, документы","textChars":72,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/udonedkn","slide":13,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/sru1of61","slide":13,"text":"Microsoft Copilot: быстрый помощник в браузере и офисных сценариях","textPreview":"Microsoft Copilot: быстрый помощник в браузере и офисных сценариях","textChars":66,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/ts3ixknm","slide":13,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/6psjm5ov","slide":13,"text":"Perplexity: поиск с источниками и первичная разведка","textPreview":"Perplexity: поиск с источниками и первичная разведка","textChars":52,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/rq10va5g","slide":13,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/43a1kf65","slide":13,"text":"Локальные модели: Ollama / LM Studio, если важна приватность","textPreview":"Локальные модели: Ollama / LM Studio, если важна приватность","textChars":60,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/54jit07a","slide":13,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/i1szi5oz","slide":13,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/j210rapk","slide":13,"text":"13/36","textPreview":"13/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/xhi292","slide":13,"text":"Список меняется, поэтому студентам нужно проверять актуальные лимиты. Бесплатные версии подходят для брейншторма, конспектов, таблиц, простого кода и анализа ошибок. Для чувствительных данных лучше использовать локальные модели или предварительно обезличивать материалы.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/cu6w58","slide":14,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/cnq9kbm9","slide":14,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/bmh8r65o","slide":14,"text":"Топовые альтернативы и когда они нужны","textPreview":"Топовые альтернативы и когда они нужны","textChars":38,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/al8ri143","slide":14,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/lcjqxg3q","slide":14,"text":"ChatGPT Plus/Pro/Team/Edu: сильные модели, файлы, мультимодальность, проекты","textPreview":"ChatGPT Plus/Pro/Team/Edu: сильные модели, файлы, мультимодальность, проекты","textChars":76,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/kba9obm5","slide":14,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/zq18v6l0","slide":14,"text":"Claude Pro/Team: длинный контекст, редактура, анализ документов","textPreview":"Claude Pro/Team: длинный контекст, редактура, анализ документов","textChars":63,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/ypsrm14f","slide":14,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/9g3q1g32","slide":14,"text":"Gemini Advanced / Google AI Pro: интеграция с Google-экосистемой","textPreview":"Gemini Advanced / Google AI Pro: интеграция с Google-экосистемой","textChars":64,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/8fa9svmh","slide":14,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/i1g76h4b","slide":14,"text":"Perplexity Pro: исследовательский поиск и источники","textPreview":"Perplexity Pro: исследовательский поиск и источники","textChars":51,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/j2pozmlw","slide":14,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/43yp8rmh","slide":14,"text":"Codex: агентная работа с файлами, кодом, пайплайнами, тестами и документацией","textPreview":"Codex: агентная работа с файлами, кодом, пайплайнами, тестами и документацией","textChars":77,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/54r61w3m","slide":14,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/6507a147","slide":14,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/r69836ls","slide":14,"text":"14/36","textPreview":"14/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/cu6w58","slide":14,"text":"Платные инструменты не обязательны для всех. Они полезны, когда команда ведет проект с файлами, кодом, отчетами и проверками. Codex особенно удобен, когда работа уже стала проектом: есть папка, данные, скрипты, README, отчеты, и нужно поручать агенту конкретные изменения.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/5978ut","slide":15,"title":"ЛЕКЦИЯ","textShapes":10}
+{"kind":"textbox","id":"sh/m90765sn","slide":15,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/9cbq10be","slide":15,"text":"Как использовать Codex в этом курсе","textPreview":"Как использовать Codex в этом курсе","textChars":35,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/8b2p8fat","slide":15,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/z698vqtc","slide":15,"text":"Дать агенту папку проекта","textPreview":"Дать агенту папку проекта","textChars":25,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/y5072lsr","slide":15,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/l8rqx0b2","slide":15,"text":"Попросить найти данные и структуру файлов","textPreview":"Попросить найти данные и структуру файлов","textChars":41,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/k7ip4vax","slide":15,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/bip8rqt0","slide":15,"text":"Попросить создать скрипт очистки или отчет","textPreview":"Попросить создать скрипт очистки или отчет","textChars":42,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/ahg7ylsf","slide":15,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/g7upojy1","slide":15,"text":"Попросить проверить README, data card, model card","textPreview":"Попросить проверить README, data card, model card","textChars":49,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/h83qhozm","slide":15,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/u5s7m9gb","slide":15,"text":"Запускать несколько агентов на независимые задачи","textPreview":"Запускать несколько агентов на независимые задачи","textChars":49,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/v6l8fehg","slide":15,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/83apkzy5","slide":15,"text":"Использовать Skills для повторяемых рабочих процессов","textPreview":"Использовать Skills для повторяемых рабочих процессов","textChars":53,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/t4jqd4zq","slide":15,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/61s7ipgz","slide":15,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/7218buhk","slide":15,"text":"15/36","textPreview":"15/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/5978ut","slide":15,"text":"Codex - это не чат \"ответь словами\", а рабочая среда для агентной разработки. Ему удобно поручать задачи вида: \"создай 8 файлов программы курса\", \"проверь корпус на дубли\", \"собери data card\", \"напиши notebook для CER\", \"проверь, что инструкции запускаются\". Важно давать агенту ограниченную, проверяемую задачу и смотреть diff или результат.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/i18f7c","slide":16,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/sjihonup","slide":16,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/ri9gfid4","slide":16,"text":"Чем помогают агенты и Skills","textPreview":"Чем помогают агенты и Skills","textChars":28,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/6h0zmdcj","slide":16,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/18bylcv6","slide":16,"text":"Агент-исследователь: найти варианты источников и риски","textPreview":"Агент-исследователь: найти варианты источников и риски","textChars":54,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/07ihs7u1","slide":16,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/f69gj2dg","slide":16,"text":"Агент-инженер: собрать скрипт или notebook","textPreview":"Агент-инженер: собрать скрипт или notebook","textChars":42,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/el0zqxcv","slide":16,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/hc7y98v2","slide":16,"text":"Агент-ревьюер: найти ошибки в данных и документации","textPreview":"Агент-ревьюер: найти ошибки в данных и документации","textChars":51,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/wbyxg3uh","slide":16,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/ytwje98b","slide":16,"text":"Skill: повторяемая инструкция для OCR, таблиц, документов, презентаций","textPreview":"Skill: повторяемая инструкция для OCR, таблиц, документов, презентаций","textChars":70,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/zu507epw","slide":16,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/kve1gjqh","slide":16,"text":"Автоматизации: периодически проверять источники или задачи проекта","textPreview":"Автоматизации: периодически проверять источники или задачи проекта","textChars":66,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/lwn29o72","slide":16,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/6xwjit8n","slide":16,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/7y5kbep8","slide":16,"text":"16/36","textPreview":"16/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/i18f7c","slide":16,"text":"Объяснить разницу между LLM как собеседником и агентом как исполнителем в рабочей папке. Skills полезны, когда есть повторяемый формат: например, каждый раз создавать data card по одному шаблону или проверять OCR-отчет по чек-листу.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/ov78h0","slide":17,"title":"ЛЕКЦИЯ","textShapes":7}
+{"kind":"textbox","id":"sh/kf6xwr65","slide":17,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/jexwnm5k","slide":17,"text":"Что такое агент","textPreview":"Что такое агент","textChars":15,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/id4fuhof","slide":17,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/t4fytgn2","slide":17,"text":"Агент: система, способная совершать автономные действия во внешней среде для достижения поставленных целей","textPreview":"Агент: система, способная совершать автономные действия во внешней среде для достижения поставленных целей","textChars":106,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/s36x0b6h","slide":17,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/72xgr65w","slide":17,"text":"Интеллектуальный агент: планирует действия, реагирует на изменения, взаимодействует с человеком и другими аге...","textPreview":"Интеллектуальный агент: планирует действия, реагирует на изменения, взаимодействует с человеком и другими аге...","textChars":112,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/61ofy1ob","slide":17,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/h8zyxgny","slide":17,"text":"AI-агент: система на базе генеративного ИИ, которая планирует, действует, реагирует и взаимодействует","textPreview":"AI-агент: система на базе генеративного ИИ, которая планирует, действует, реагирует и взаимодействует","textChars":101,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/g7qx4b6d","slide":17,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/y5o3apcn","slide":17,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/j6xkjud8","slide":17,"text":"17/36","textPreview":"17/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/ov78h0","slide":17,"text":"Здесь важно дать не маркетинговое, а рабочее определение. Обычный чат отвечает текстом. Агент получает цель и может действовать во внешней среде: читать файлы, вызывать API, запускать скрипты, искать источники, обновлять таблицы, создавать отчеты. Интеллектуальный агент не просто выполняет одну команду: он может спланировать последовательность шагов, увидеть, что результат изменился или оказался плохим, перестроить план и при необходимости обратиться к человеку или другому агенту.\n\nAI-агент в этом курсе стоит понимать как агентную систему на базе генеративного искусственного интеллекта. Такая система использует LLM не только для генерации текста, но и для выбора следующего действия: какой файл открыть, какой инструмент вызвать, какой результат проверить, когда остановиться и когда запросить подтверждение.\n\nКомментарий к структуре блока: про AI-агентов, возможно, не нужно подробно давать виды архитектур как отдельную классификацию. Достаточно объяснить, что такое агенты и общий принцип их работы. Конкретную архитектуру для языковой лаборатории можно придумать по ходу дела: она, скорее всего, будет напоминать один из известных видов, но важнее идти от задачи, данных, ограничений и ролей команды.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/ycris0","slide":18,"title":"ЛЕКЦИЯ","textShapes":10}
+{"kind":"textbox","id":"sh/gby50je5","slide":18,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/vap4rexk","slide":18,"text":"Типичные архитектуры AI-агентов","textPreview":"Типичные архитектуры AI-агентов","textChars":31,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/u9gny9wz","slide":18,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/50r6xovm","slide":18,"text":"ChatBot: простая диалоговая архитектура","textPreview":"ChatBot: простая диалоговая архитектура","textChars":39,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/4zi54je1","slide":18,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/3y9ovexg","slide":18,"text":"RAGBot: чат с поиском по загруженным документам","textPreview":"RAGBot: чат с поиском по загруженным документам","textChars":47,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/idgn29wv","slide":18,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/l4nml4fi","slide":18,"text":"Copilot: ассистент внутри рабочей среды","textPreview":"Copilot: ассистент внутри рабочей среды","textChars":39,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/k3e5szex","slide":18,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/yh4na1kf","slide":18,"text":"Code Copilot: проект как база знаний","textPreview":"Code Copilot: проект как база знаний","textChars":36,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/jid43610","slide":18,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/kjm5cr2l","slide":18,"text":"ReAct: цикл \"LLM принимает решение -> действие -> наблюдение -> новое решение\"","textPreview":"ReAct: цикл \"LLM принимает решение -> действие -> наблюдение -> новое решение\"","textChars":78,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/lkvm5wj6","slide":18,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/6l4ne10r","slide":18,"text":"MultiAgent: несколько агентов с разными ролями и зонами ответственности","textPreview":"MultiAgent: несколько агентов с разными ролями и зонами ответственности","textChars":71,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/7md4761c","slide":18,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/8nm5gbih","slide":18,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/tofm9gj2","slide":18,"text":"18/36","textPreview":"18/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/ycris0","slide":18,"text":"Эти архитектуры различаются не только степенью автономности, но и тем, откуда агент берет контекст. ChatBot в основном опирается на системный промпт и историю диалога. RAGBot ищет ответ в загруженных документах. Copilot встроен в рабочую среду и помогает человеку выполнять действия. Code Copilot воспринимает весь проект как базу знаний: файлы, структуру папок, README, код, тесты, историю изменений. ReAct-агент сам выбирает инструменты и повторяет цикл действия. MultiAgent-система распределяет работу между несколькими ролями.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/3cumej","slide":19,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/z2903q18","slide":19,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/032hwv2t","slide":19,"text":"ChatBot","textPreview":"ChatBot","textChars":7,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/14bi50jy","slide":19,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/qx0zqlkb","slide":19,"text":"Самая простая архитектура","textPreview":"Самая простая архитектура","textChars":25,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/ry9gzq1w","slide":19,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/czihsv2h","slide":19,"text":"Работает на основе системных промптов и истории диалога","textPreview":"Работает на основе системных промптов и истории диалога","textChars":55,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/d0ri10j2","slide":19,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/29gzm1kf","slide":19,"text":"Обычно не имеет доступа к внешним данным","textPreview":"Обычно не имеет доступа к внешним данным","textChars":40,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/3apgv610","slide":19,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/bedszu90","slide":19,"text":"Хорошо подходит для персонажей, учебных ассистентов и диалоговых ботов","textPreview":"Хорошо подходит для персонажей, учебных ассистентов и диалоговых ботов","textChars":70,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/qd4rqpsf","slide":19,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/d0va1kr6","slide":19,"text":"Риск: уверенные ответы без проверки источников","textPreview":"Риск: уверенные ответы без проверки источников","textChars":46,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/cfm9szal","slide":19,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/z2xs3u9c","slide":19,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/y14rupsr","slide":19,"text":"19/36","textPreview":"19/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/3cumej","slide":19,"text":"ChatBot - это базовая схема: есть модель, системный промпт, пользовательские сообщения и ответ. Такой бот может быть очень полезен для объяснений, тренировки вопросов, создания персонажа, учебного консультанта или помощника с определенной манерой общения. Но если ему не дать инструменты, документы или поиск, он не знает, что происходит во внешнем мире, не проверяет источники и не видит файлы проекта.\n\nДля задач сохранения языков ChatBot подходит как помощник для брейншторма, обучения, составления вопросов для интервью, генерации черновиков карточек словаря или объяснения кода. Но ему нельзя поручать финальную проверку фактов, лицензий, языковой нормы или качества корпуса.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/zr7mv5","slide":20,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/x4zq5s3y","slide":20,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/a18rud47","slide":20,"text":"RAGBot и Copilot","textPreview":"RAGBot и Copilot","textChars":16,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/b2h83ils","slide":20,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/oz69snmh","slide":20,"text":"RAGBot специализируется на работе с загруженными документами","textPreview":"RAGBot специализируется на работе с загруженными документами","textChars":60,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/p0fq1s32","slide":20,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/2xo7qd4b","slide":20,"text":"Всегда выполняет поиск по документам","textPreview":"Всегда выполняет поиск по документам","textChars":36,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/nyx8zilw","slide":20,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/8va9472l","slide":20,"text":"Часто делает поиск только один раз перед ответом","textPreview":"Часто делает поиск только один раз перед ответом","textChars":48,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/9wjqdc36","slide":20,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/xgvyh03q","slide":20,"text":"Архитектура более структурированная, но менее гибкая","textPreview":"Архитектура более структурированная, но менее гибкая","textChars":52,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/wv2hofml","slide":20,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/butgfal0","slide":20,"text":"Copilot помогает внутри рабочей среды, где работает человек","textPreview":"Copilot помогает внутри рабочей среды, где работает человек","textChars":59,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/atkfm54f","slide":20,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/psbyd03u","slide":20,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/or2xkvm9","slide":20,"text":"20/36","textPreview":"20/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/zr7mv5","slide":20,"text":"RAGBot - это бот с retrieval-augmented generation: перед ответом он ищет релевантные фрагменты в загруженных документах и строит ответ на их основе. Например, мы загрузили методичку, словарь, архивное описание, data card или набор PDF, и бот отвечает, опираясь на найденные фрагменты. Это делает систему более структурированной и проверяемой, чем обычный ChatBot, но часто менее мощной и менее гибкой: она выполняет поиск один раз, получает набор фрагментов и дальше отвечает в рамках найденного контекста.\n\nВажно объяснить ограничение: если нужный фрагмент не найден на первом поиске, RAGBot может не догадаться переформулировать запрос, открыть другой файл или построить многошаговый план. Он хорош для вопросов по документам, но хуже для сложных workflows, где нужно читать файлы, запускать код, проверять результат и менять стратегию.\n\nCopilot - более широкая идея: ассистент встроен в среду, где человек уже работает. Это может быть браузер, офисный документ, таблица, редактор кода или IDE. Человек остается главным оператором, а ассистент предлагает, дописывает, объясняет, ищет по доступному контексту и помогает быстрее двигаться.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/u5c9rn","slide":21,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/gze5wz6x","slide":21,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/fy5o3u5c","slide":21,"text":"Code Copilot","textPreview":"Code Copilot","textChars":12,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/uxwnupo7","slide":21,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/twnm1knm","slide":21,"text":"Воспринимает весь проект как базу знаний","textPreview":"Воспринимает весь проект как базу знаний","textChars":40,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/sve5sf61","slide":21,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/7a54za5g","slide":21,"text":"Читает структуру папок, код, README, данные и тесты","textPreview":"Читает структуру папок, код, README, данные и тесты","textChars":51,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/69cnq5ov","slide":21,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/ds76d4nq","slide":21,"text":"Помогает писать, объяснять, править и проверять код","textPreview":"Помогает писать, объяснять, править и проверять код","textChars":51,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/cry54j65","slide":21,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/udo3udov","slide":21,"text":"Может находить связи между файлами","textPreview":"Может находить связи между файлами","textChars":34,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/vexk3i5g","slide":21,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/gfqlwn6l","slide":21,"text":"Силен там, где проект уже оформлен как папка или репозиторий","textPreview":"Силен там, где проект уже оформлен как папка или репозиторий","textChars":60,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/h0z25sn6","slide":21,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/69ojqtoj","slide":21,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/7axkzy54","slide":21,"text":"21/36","textPreview":"21/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/u5c9rn","slide":21,"text":"Code Copilot - это не просто автодополнение строки кода. В хорошем сценарии он видит проект как живую базу знаний: какие файлы есть, где лежат данные, как запускаются скрипты, какие тесты проверяют результат, что написано в README. Поэтому он может ответить не только \"как написать функцию\", но и \"где в этом проекте считается CER\", \"почему этот notebook не запускается\", \"какой файл отвечает за очистку корпуса\", \"что нужно добавить в data card\".\n\nДля курса это ключевая идея. Если команда ведет проект как папку с понятной структурой, README, источниками, notes, скриптами и результатами, агенту можно давать конкретные задачи: проверить корпус на дубли, собрать отчет, написать маленький pipeline, найти пропущенные поля в таблице источников. Чем аккуратнее проект оформлен, тем лучше работает code copilot.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/4pyuba","slide":22,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/f21c7ah0","slide":22,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/g3ut0fyl","slide":22,"text":"MultiAgent архитектура","textPreview":"MultiAgent архитектура","textChars":22,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/h43u90f6","slide":22,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/25cb25gr","slide":22,"text":"Несколько агентов общаются и координируют работу","textPreview":"Несколько агентов общаются и координируют работу","textChars":48,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/36lcbaxc","slide":22,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/47ud4fyh","slide":22,"text":"У каждого агента есть роль и специализация","textPreview":"У каждого агента есть роль и специализация","textChars":42,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/p83udkf2","slide":22,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/i98bqlg7","slide":22,"text":"Примеры ролей: исследователь, критик, координатор, исполнитель","textPreview":"Примеры ролей: исследователь, критик, координатор, исполнитель","textChars":62,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/jahczqhs","slide":22,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/7q903qps","slide":22,"text":"Нужно определить протокол коммуникации","textPreview":"Нужно определить протокол коммуникации","textChars":38,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/mpgjalon","slide":22,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/9sri507y","slide":22,"text":"Нужны стратегия распределения задач и механизм принятия решений","textPreview":"Нужны стратегия распределения задач и механизм принятия решений","textChars":63,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/8ri1cv6d","slide":22,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/zmp0zqpw","slide":22,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/ylgj6lob","slide":22,"text":"22/36","textPreview":"22/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/4pyuba","slide":22,"text":"В MultiAgent-системе мы не просим одну модель сделать все. Мы проектируем несколько ролей: агент-исследователь ищет источники, агент-критик проверяет риски и слабые места, агент-координатор следит за планом, агент-исполнитель пишет код или готовит отчет. Между ними должны быть правила: кто ставит задачу, кто принимает результат, как фиксируются аргументы, кто имеет право менять файлы, когда нужно спрашивать человека.\n\nТакая архитектура полезна, когда задача действительно сложная и состоит из разных типов работы. Но она не всегда нужна. Иногда один хороший code copilot с четким заданием надежнее, чем четыре агента, которые производят много текста и не сходятся в решении.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/bymadq","slide":23,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/ql0ry90n","slide":23,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/dorqt4je","slide":23,"text":"Вопрос к аудитории","textPreview":"Вопрос к аудитории","textChars":18,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/cni90zit","slide":23,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/3ip8nu1c","slide":23,"text":"Какие архитектуры подойдут для задач сохранения языков?","textPreview":"Какие архитектуры подойдут для задач сохранения языков?","textChars":55,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/2hgrupkr","slide":23,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/pk7qp4ji","slide":23,"text":"Где достаточно ChatBot?","textPreview":"Где достаточно ChatBot?","textChars":23,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/4jy9wzix","slide":23,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/vup8ju10","slide":23,"text":"Где нужен RAGBot по документам?","textPreview":"Где нужен RAGBot по документам?","textChars":31,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/utg7qpkf","slide":23,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/8jytcved","slide":23,"text":"Где лучше Code Copilot?","textPreview":"Где лучше Code Copilot?","textChars":23,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/9k7al0vy","slide":23,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/mhgbalwn","slide":23,"text":"Когда оправдана MultiAgent-схема?","textPreview":"Когда оправдана MultiAgent-схема?","textChars":33,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/7ipsjqd8","slide":23,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/kfet8beh","slide":23,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/lg7ahgv2","slide":23,"text":"23/36","textPreview":"23/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/bymadq","slide":23,"text":"Это вопрос докладчика к группе. Важно не искать один \"правильный\" ответ, а связать архитектуру с задачей.\n\nВозможные направления ответа:\n- ChatBot: учебный ассистент, тренажер диалога, объяснение терминов, черновики вопросов для интервью.\n- RAGBot: вопросы по архивным документам, методичкам, словарям, data card, юридическим условиям доступа, корпусной документации.\n- Code Copilot: очистка корпуса, OCR/ASR-pipeline, проверка таблиц, скрипты метрик, README, data card, воспроизводимость проекта.\n- MultiAgent: проектная лаборатория, где нужно разделить поиск источников, проверку лицензий, техническую обработку, ревью качества и документацию.\n\nОтдельно подчеркнуть: для языковых данных всегда нужен человек с языковой, региональной или этической экспертизой. Агент может ускорить работу, но не должен единолично решать, что является правильной формой языка, что можно публиковать и как представлять сообщество.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/3fk5lh","slide":24,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/lcfa9svi","slide":24,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/y9oryxw7","slide":24,"text":"Агентская память","textPreview":"Агентская память","textChars":16,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/jaxs7ids","slide":24,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/w7m9wne1","slide":24,"text":"Short-term memory: контекст текущей задачи или диалога","textPreview":"Short-term memory: контекст текущей задачи или диалога","textChars":54,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/x8vq5svm","slide":24,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/al4rudwv","slide":24,"text":"Long-term memory: сохраненные знания между сессиями","textPreview":"Long-term memory: сохраненные знания между сессиями","textChars":51,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/b6d83idg","slide":24,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/g3q987e5","slide":24,"text":"Память помогает агенту не начинать с нуля","textPreview":"Память помогает агенту не начинать с нуля","textChars":41,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/h4zahcvq","slide":24,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/5oni5oz2","slide":24,"text":"Риск: устаревшие, ошибочные или приватные сведения","textPreview":"Риск: устаревшие, ошибочные или приватные сведения","textChars":50,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/4nehwjyh","slide":24,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/jm503ehw","slide":24,"text":"Память должна быть проверяемой и редактируемой","textPreview":"Память должна быть проверяемой и редактируемой","textChars":46,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/ilwzu9gb","slide":24,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/hkny14z6","slide":24,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/wjehszil","slide":24,"text":"24/36","textPreview":"24/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/3fk5lh","slide":24,"text":"Short-term memory - это краткосрочная память агента: то, что находится в текущем контексте задачи. Например, последние сообщения, открытые фрагменты файлов, промежуточный план, результаты только что запущенной команды. Она помогает агенту связно вести работу внутри одной сессии, но обычно исчезает или сильно сокращается после завершения задачи.\n\nLong-term memory - это долговременная память: сведения, которые сохраняются между сессиями и могут быть использованы позже. Например, описание проекта, предпочтения команды, структура корпуса, принятые правила именования файлов, список источников, типичные ошибки OCR, решения по лицензиям. Для языковой лаборатории это полезно, потому что проекты длятся неделями, а не один чат.\n\nНо память опасна, если ее не контролировать. Агент может сохранить неточную гипотезу как факт, использовать устаревшее решение или запомнить приватную информацию. Поэтому хорошая агентская память должна быть прозрачной: видно, что сохранено, откуда это взялось, когда обновлялось и кто может это исправить или удалить.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/jpahtj","slide":25,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/pk7qhkrq","slide":25,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/2hw7mpsf","slide":25,"text":"Состояние агента","textPreview":"Состояние агента","textChars":16,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/3i58fu90","slide":25,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/cnypszah","slide":25,"text":"State: явная модель текущего контекста агента","textPreview":"State: явная модель текущего контекста агента","textChars":45,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/do7ql4r2","slide":25,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/qlg7qpsb","slide":25,"text":"Включает цели, план, память, наблюдения и результаты инструментов","textPreview":"Включает цели, план, память, наблюдения и результаты инструментов","textChars":65,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/rmp8ju9w","slide":25,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/srupgvad","slide":25,"text":"Должен быть сериализуемым: его можно сохранить, передать, восстановить","textPreview":"Должен быть сериализуемым: его можно сохранить, передать, восстановить","textChars":70,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/tsnq90ri","slide":25,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/54nm1gre","slide":25,"text":"Помогает понять, почему агент выбрал следующий шаг","textPreview":"Помогает понять, почему агент выбрал следующий шаг","textChars":50,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/k3e5svq9","slide":25,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/j254zq9o","slide":25,"text":"Чем яснее state, тем проще отлаживать агента","textPreview":"Чем яснее state, тем проще отлаживать агента","textChars":44,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/i1cnql83","slide":25,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/tsnm507q","slide":25,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/sre5wvq5","slide":25,"text":"25/36","textPreview":"25/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/jpahtj","slide":25,"text":"State - это явная, сериализуемая модель текущего контекста агента: цели, план, краткая и длинная память, результаты вызовов инструментов, наблюдения, управляющие метаданные. На основании них выбирается следующий шаг выполнения задачи.\n\nСлово \"сериализуемая\" здесь важно: состояние можно записать в структурированном виде, например как JSON, таблицу, лог или набор полей в базе данных. Это не просто \"что-то у модели в голове\", а проверяемая структура: какая цель сейчас активна, какой шаг плана выполняется, какие инструменты уже вызывались, что они вернули, какие ограничения действуют, кто должен подтвердить опасное действие.\n\nДля языковой лаборатории state помогает не терять ход работы. Например: агент знает, что команда собирает корпус для языка X, что текущая цель - проверить 20 источников, что уже найдено 8 URL, что два источника имеют неясную лицензию, что OCR для трех страниц дал высокий процент ошибок, а следующий безопасный шаг - попросить человека проверить лицензию или добавить метаданные.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/tr0j0y","slide":26,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/byx0z6p4","slide":26,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/cz618bqp","slide":26,"text":"ReAct как гибкая агентная архитектура","textPreview":"ReAct как гибкая агентная архитектура","textChars":37,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/d0fi1g7a","slide":26,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/yloja18v","slide":26,"text":"ReAct: LLM принимает решение -> выполняет действие -> получает наблюдение -> повторяет цикл","textPreview":"ReAct: LLM принимает решение -> выполняет действие -> получает наблюдение -> повторяет цикл","textChars":91,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/zmx036pg","slide":26,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/0n61cbql","slide":26,"text":"Может использовать произвольное количество инструментов","textPreview":"Может использовать произвольное количество инструментов","textChars":55,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/lozi5g76","slide":26,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/mp8jelor","slide":26,"text":"Подходит для сложных workflows: поиск, очистка, запуск скриптов, отчеты","textPreview":"Подходит для сложных workflows: поиск, очистка, запуск скриптов, отчеты","textChars":71,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/nqh07qpc","slide":26,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/nqlgfuxw","slide":26,"text":"Требует продвинутых моделей и строгого контроля","textPreview":"Требует продвинутых моделей и строгого контроля","textChars":47,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/mpcf6pwb","slide":26,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/9c3yh4fm","slide":26,"text":"Менее надежен, чем RAGBot или ChatBot, из-за вызова инструментов","textPreview":"Менее надежен, чем RAGBot или ChatBot, из-за вызова инструментов","textChars":64,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/obux8ze1","slide":26,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/zmlwbaxk","slide":26,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/elsfi5gz","slide":26,"text":"26/36","textPreview":"26/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/tr0j0y","slide":26,"text":"ReAct обычно наиболее гибкая и функциональная архитектура, потому что агент не ограничен одним ответом и одним заранее заданным действием. Он может решить: сначала прочитать README, затем посмотреть CSV, затем запустить проверку дублей, затем исправить скрипт, затем написать отчет. В языковой лаборатории это удобно для повторяемых пайплайнов: разведка источников, OCR/ASR-обработка, очистка корпуса, подготовка data card, проверка артефактов перед сдачей.\n\nНо гибкость дает риск. Инструмент может быть вызван не к месту, внешний API может вернуть шум, сгенерированный код может изменить не тот файл, а модель может уверенно продолжать работу после неверного наблюдения. Поэтому ReAct-агентам нужны ограничения прав, логи действий, маленькие задачи, проверяемые промежуточные результаты и человеческое подтверждение для опасных операций. Поддерживают такую архитектуру только достаточно продвинутые модели: слабая модель хуже планирует, хуже выбирает инструменты и чаще теряет цель.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/m5ubaf","slide":27,"title":"ЛЕКЦИЯ","textShapes":10}
+{"kind":"textbox","id":"sh/gvudc7yl","slide":27,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/falc3mxg","slide":27,"text":"Инструменты в агентских системах","textPreview":"Инструменты в агентских системах","textChars":32,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/u9svahgv","slide":27,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/t8ju1cfa","slide":27,"text":"Инструменты: функции или API, которые модель выбирает и вызывает через формальный контракт","textPreview":"Инструменты: функции или API, которые модель выбирает и вызывает через формальный контракт","textChars":90,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/s7at87yp","slide":27,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/761cz2x4","slide":27,"text":"Тулза: функция с именем, описанием и JSON-схемой аргументов","textPreview":"Тулза: функция с именем, описанием и JSON-схемой аргументов","textChars":59,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/65sb6xgj","slide":27,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/54juxsfy","slide":27,"text":"Позволяют агенту действовать во внешнем мире","textPreview":"Позволяют агенту действовать во внешнем мире","textChars":44,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/k3at4nyt","slide":27,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/qlkje94j","slide":27,"text":"Бывают внутренними и внешними","textPreview":"Бывают внутренними и внешними","textChars":29,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/rmtkne54","slide":27,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/snmlgjmp","slide":27,"text":"Расширяют возможности агента: файлы, браузер, OCR, ASR, таблицы, базы данных, Git","textPreview":"Расширяют возможности агента: файлы, браузер, OCR, ASR, таблицы, базы данных, Git","textChars":81,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/dov2ponu","slide":27,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/ixkja947","slide":27,"text":"Могут кэшировать информацию для оптимизации","textPreview":"Могут кэшировать информацию для оптимизации","textChars":43,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/3ytkje5s","slide":27,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/4j21cjmd","slide":27,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/5kb2lony","slide":27,"text":"27/36","textPreview":"27/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/m5ubaf","slide":27,"text":"Инструмент - это не \"любая возможность модели\", а описанный интерфейс: что можно вызвать, какие аргументы передать, какой результат получить и какие ограничения соблюдать. Например, агент может вызвать OCR для страницы, ASR для аудиофайла, поиск по корпусу, скрипт дедупликации, API таблицы или команду проверки README. Формальный контракт важен: без него агент не действует надежно, а просто генерирует текст о том, что \"можно было бы сделать\".\n\nВ практическом смысле тулза - это функция с именем, описанием и JSON-схемой аргументов, доступная модели для выбора и вызова в ходе решения задачи. Модель не просто \"знает\", что можно искать или запускать код, а видит список доступных функций и должна сгенерировать корректные параметры. В экосистемах агентных фреймворков инструмент оборачивает произвольный код с явной схемой ввода-вывода, чтобы модель могла корректно сгенерировать параметры и получить машинно-обрабатываемый результат. Поэтому хорошая тулза - это не только код, но и понятное имя, точное описание, строгая схема аргументов, предсказуемый формат ответа и ограничения на побочные эффекты.\n\nИнструменты могут быть внутренними, например чтение файлов проекта, запуск тестов или поиск по локальной папке, и внешними, например браузер, облачное хранилище, API архива, переводческий сервис или база данных. Кэширование помогает не пересчитывать дорогие операции: embeddings для уже обработанных текстов, результаты OCR для страниц, которые не менялись, или промежуточные отчеты по качеству корпуса. Для малоресурсных языков это особенно важно, потому что данные часто собираются малыми порциями, а проверка должна быть воспроизводимой.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/b31n5q","slide":28,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/o7ap47qd","slide":28,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/361ob2ps","slide":28,"text":"Как агенты помогают сохранять малоресурсные языки","textPreview":"Как агенты помогают сохранять малоресурсные языки","textChars":49,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/25s72x87","slide":28,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/dc36hc7u","slide":28,"text":"Мониторят новые источники текстов и аудио","textPreview":"Мониторят новые источники текстов и аудио","textChars":41,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/cbup87q9","slide":28,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/ba1of2po","slide":28,"text":"Запускают повторяемые пайплайны OCR, ASR, очистки и фильтрации","textPreview":"Запускают повторяемые пайплайны OCR, ASR, очистки и фильтрации","textChars":62,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/q9s76h8j","slide":28,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/l036lw76","slide":28,"text":"Проверяют метаданные, лицензии и data cards","textPreview":"Проверяют метаданные, лицензии и data cards","textChars":43,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/0zupcrql","slide":28,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/q1o36hcr","slide":28,"text":"Собирают отчеты о качестве корпуса","textPreview":"Собирают отчеты о качестве корпуса","textChars":34,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/r2x4fmtc","slide":28,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/c36l8ruh","slide":28,"text":"Помогают командам не терять контекст проекта","textPreview":"Помогают командам не терять контекст проекта","textChars":44,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/dozmhwb2","slide":28,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/ep83ahcn","slide":28,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/zqh4jmt8","slide":28,"text":"28/36","textPreview":"28/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/b31n5q","slide":28,"text":"Агентная система полезна там, где есть повторяемый workflow. Для языковой лаборатории это может быть не один большой \"умный агент\", а набор ограниченных ролей: агент-исследователь источников, агент-инженер пайплайна, агент-ревьюер данных, агент-документатор. Важно, чтобы агент не принимал финальные решения о языке, норме, правах и публикации данных без человека.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/jmff6f","slide":29,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/h036dkri","slide":29,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/uxsnips7","slide":29,"text":"Self-hosted агентная лаборатория","textPreview":"Self-hosted агентная лаборатория","textChars":32,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/vy14bu9s","slide":29,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/8ba5gfa1","slide":29,"text":"OpenClaw / аналоги: LLM + память + инструменты + skills + каналы связи","textPreview":"OpenClaw / аналоги: LLM + память + инструменты + skills + каналы связи","textChars":70,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/9cjm9krm","slide":29,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/m9sne5sv","slide":29,"text":"Задача не \"поговорить\", а выполнять повторяемые workflows","textPreview":"Задача не \"поговорить\", а выполнять повторяемые workflows","textChars":57,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/na147a9g","slide":29,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/s7e5szq5","slide":29,"text":"Примеры: мониторинг источников, очистка корпуса, OCR/ASR-отчеты, проверка data card","textPreview":"Примеры: мониторинг источников, очистка корпуса, OCR/ASR-отчеты, проверка data card","textChars":83,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/t8n6l4rq","slide":29,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/xcbalsfq","slide":29,"text":"Для курса: проектируем агента сначала на бумаге, внедряем только если окупается","textPreview":"Для курса: проектируем агента сначала на бумаге, внедряем только если окупается","textChars":79,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/wb29sne5","slide":29,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/vatsjix0","slide":29,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/a9krqdwf","slide":29,"text":"29/36","textPreview":"29/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/jmff6f","slide":29,"text":"OpenClaw и похожие агентные фреймворки стоит обсуждать как класс инструментов: self-hosted агент, который может иметь доступ к файлам, браузеру, расписанию, внешним каналам и набору навыков. Для сохранения языков это полезно не как \"модная штука\", а как инфраструктура языковой лаборатории: регулярно искать новые материалы, проверять лицензии, запускать очистку, считать метрики, собирать отчеты команд. Но ставить такой стек в первый день не обязательно. Сначала нужно спроектировать, какой повторяемый процесс он автоматизирует и какие права доступа ему безопасно давать.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/modavs","slide":30,"title":"ЛЕКЦИЯ","textShapes":11}
+{"kind":"textbox","id":"sh/at4vulwv","slide":30,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/xwfe5gvm","slide":30,"text":"Риски LLM и агентного подхода","textPreview":"Риски LLM и агентного подхода","textChars":29,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/wv6dwbe1","slide":30,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/jyxw7qds","slide":30,"text":"Выдуманные источники","textPreview":"Выдуманные источники","textChars":20,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/ixovylc7","slide":30,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/50fet0vi","slide":30,"text":"Неверное определение языка","textPreview":"Неверное определение языка","textChars":26,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/kz6d0vux","slide":30,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/72hwvqdo","slide":30,"text":"Стирание диалектных и редких форм","textPreview":"Стирание диалектных и редких форм","textChars":33,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/618v25c3","slide":30,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/03ehwr2h","slide":30,"text":"Нарушение приватности","textPreview":"Нарушение приватности","textChars":21,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/14ni5wj2","slide":30,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/e1wzuhkb","slide":30,"text":"Синтетические данные без маркировки","textPreview":"Синтетические данные без маркировки","textChars":35,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/z2503m1w","slide":30,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/o7eh0b2d","slide":30,"text":"Код, который работает \"на примере\", но ломается на корпусе","textPreview":"Код, который работает \"на примере\", но ломается на корпусе","textChars":58,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/987i9gjy","slide":30,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/m5wzy1k7","slide":30,"text":"Избыточная инфраструктура вместо простой таблицы и понятного процесса","textPreview":"Избыточная инфраструктура вместо простой таблицы и понятного процесса","textChars":69,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/n650761s","slide":30,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/wvyh4b2p","slide":30,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/xw7idgju","slide":30,"text":"30/36","textPreview":"30/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/modavs","slide":30,"text":"Этот слайд обязателен. Чем доступнее VibeCoding, тем важнее контроль качества. Студенты должны привыкнуть задавать вопросы: откуда данные, можно ли их использовать, что именно исправила модель, где лог, как воспроизвести результат, кто проверил языковой материал.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/efsl38","slide":31,"title":"ЛЕКЦИЯ","textShapes":12}
+{"kind":"textbox","id":"sh/7ito7294","slide":31,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/sj2p07qp","slide":31,"text":"Домашнее задание 1","textPreview":"Домашнее задание 1","textChars":18,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/tkb69cra","slide":31,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/e5k72h8v","slide":31,"text":"Заполнить индивидуальную анкету","textPreview":"Заполнить индивидуальную анкету","textChars":31,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/f6dobm9g","slide":31,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/g7mp4rq1","slide":31,"text":"Проверить доступ к Codex, Claude Code или другому агентному инструменту","textPreview":"Проверить доступ к Codex, Claude Code или другому агентному инструменту","textChars":71,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/18v6dcrm","slide":31,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/a90nqdsr","slide":31,"text":"Если используется Codex, подключить GitHub или учебный репозиторий","textPreview":"Если используется Codex, подключить GitHub или учебный репозиторий","textChars":66,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/va9ozi9c","slide":31,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/nq54bepo","slide":31,"text":"Создать папку или репозиторий проекта для курса","textPreview":"Создать папку или репозиторий проекта для курса","textChars":47,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/2pcn2983","slide":31,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/psnmdo7e","slide":31,"text":"Описать навыки, интересы и опыт с LLM/агентами","textPreview":"Описать навыки, интересы и опыт с LLM/агентами","textChars":46,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/ore54jqt","slide":31,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/fml47epc","slide":31,"text":"Указать языковую экспертизу и уровень программирования","textPreview":"Указать языковую экспертизу и уровень программирования","textChars":54,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/elcny98r","slide":31,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/1o3m9o7i","slide":31,"text":"Описать самый большой реализованный проект","textPreview":"Описать самый большой реализованный проект","textChars":42,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/0nu50jqx","slide":31,"bbox":[80,534,12,12]}
+{"kind":"textbox","id":"sh/ry143u9g","slide":31,"text":"Отметить желаемые артефакты лаборатории","textPreview":"Отметить желаемые артефакты лаборатории","textChars":39,"textLines":1,"bbox":[110,526,1010,40]}
+{"kind":"shape","id":"sh/6xs3up8v","slide":31,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/utsnmpsn","slide":31,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/vu1ofut8","slide":31,"text":"31/36","textPreview":"31/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/efsl38","slide":31,"text":"Первое домашнее задание нужно не для оценки, а для сборки лаборатории. По анкетам преподаватель поймет, кто уже использует Codex или Claude Code, кто может быстро поднять проектную папку с GitHub, кто знает малоресурсный язык или является носителем, у кого сильнее программирование, кто хочет работать с данными, моделями, метриками, интерфейсами или документацией. На основе этих ответов удобнее собирать команды так, чтобы в каждой команде был хотя бы один человек с рабочим агентным инструментом, а лучше - с Codex или Claude Code, подключенным к учебному проекту.\n\n[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/xnbndu","slide":32,"title":"СЕМИНАР","textShapes":12}
+{"kind":"textbox","id":"sh/lgfmp8be","slide":32,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/yd43utc3","slide":32,"text":"Практика 1. Брейншторм \"что значит сохранить язык?\", 20 минут","textPreview":"Практика 1. Брейншторм \"что значит сохранить язык?\", 20 минут","textChars":61,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/zex4nyto","slide":32,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/8j6lk3a5","slide":32,"text":"5 минут индивидуально: каждый пишет 5 идей.","textPreview":"5 минут индивидуально: каждый пишет 5 идей.","textChars":43,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/tkfmt8bq","slide":32,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/mho3idsz","slide":32,"text":"10 минут в группах: объединить идеи.","textPreview":"10 минут в группах: объединить идеи.","textChars":36,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/7ix4rytk","slide":32,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/onmloju1","slide":32,"text":"5 минут общая доска: собрать карту факторов.","textPreview":"5 минут общая доска: собрать карту факторов.","textChars":44,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/pov2hobm","slide":32,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/lkbeh8bu","slide":32,"text":"Ожидаемые категории:","textPreview":"Ожидаемые категории:","textChars":20,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/0j2x83u9","slide":32,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/zitwfyto","slide":32,"text":"образование;","textPreview":"образование;","textChars":12,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/yhkf6tc3","slide":32,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/9ovyl8bq","slide":32,"text":"архивы и документация;","textPreview":"архивы и документация;","textChars":22,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/8nmxcnu5","slide":32,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/nmdwjitk","slide":32,"text":"речь и аудио;","textPreview":"речь и аудио;","textChars":13,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/ml4fadcz","slide":32,"bbox":[80,534,12,12]}
+{"kind":"textbox","id":"sh/xcfypsb2","slide":32,"text":"письменность и орфография;","textPreview":"письменность и орфография;","textChars":26,"textLines":1,"bbox":[110,526,1010,40]}
+{"kind":"shape","id":"sh/wbmxgnuh","slide":32,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/gvuhcr2d","slide":32,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/hwnilwjy","slide":32,"text":"32/36","textPreview":"32/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/xnbndu","slide":32,"text":"[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/q0wl78","slide":33,"title":"СЕМИНАР","textShapes":12}
+{"kind":"textbox","id":"sh/hwvixcjy","slide":33,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/u94z2x0n","slide":33,"text":"Практика 2. Карта \"инструмент -> данные -> артефакт\", 20 минут","textPreview":"Практика 2. Карта \"инструмент -> данные -> артефакт\", 20 минут","textChars":62,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/vud0v218","slide":33,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/4z6h87ip","slide":33,"text":"Группы заполняют таблицу:","textPreview":"Группы заполняют таблицу:","textChars":25,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/50fi1cja","slide":33,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/ixoz6h0j","slide":33,"text":"Инструмент / Какие данные нужны / Что получаем / Самый простой первый шаг","textPreview":"Инструмент / Какие данные нужны / Что получаем / Самый простой первый шаг","textChars":73,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/3yx0zm14","slide":33,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/k32hwnil","slide":33,"text":"--- / --- / --- / ---","textPreview":"--- / --- / --- / ---","textChars":21,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/l4bypsjq","slide":33,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/dcvmlsre","slide":33,"text":"OCR / изображения, PDF, ground truth / текстовый корпус / проверить 3 страницы","textPreview":"OCR / изображения, PDF, ground truth / текстовый корпус / проверить 3 страницы","textChars":78,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/srmlcnqt","slide":33,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/rqd4ji9o","slide":33,"text":"ASR / аудио, транскрипты / текст из речи / расшифровать 1 минуту","textPreview":"ASR / аудио, транскрипты / текст из речи / расшифровать 1 минуту","textChars":64,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/qp43ad83","slide":33,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/1gfmpcrq","slide":33,"text":"MT / параллельные пары / переводчик или baseline / найти 30 пар","textPreview":"MT / параллельные пары / переводчик или baseline / найти 30 пар","textChars":63,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/0f65g7q5","slide":33,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/fex4n29k","slide":33,"text":"Alignment / два набора текстов / параллельный корпус / проверить top-20 кандидатов","textPreview":"Alignment / два набора текстов / параллельный корпус / проверить top-20 кандидатов","textChars":82,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/edo3ex8z","slide":33,"bbox":[80,534,12,12]}
+{"kind":"textbox","id":"sh/pkzmtcrm","slide":33,"text":"Спелчекер / словарь, корпус, ошибки / проверка письма / частотный список","textPreview":"Спелчекер / словарь, корпус, ошибки / проверка письма / частотный список","textChars":72,"textLines":1,"bbox":[110,526,1010,40]}
+{"kind":"shape","id":"sh/oj65k7q1","slide":33,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/8nepwvyd","slide":33,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/9o76pgfy","slide":33,"text":"33/36","textPreview":"33/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/q0wl78","slide":33,"text":"[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/utwev0","slide":34,"title":"СЕМИНАР","textShapes":12}
+{"kind":"textbox","id":"sh/3qlw7q14","slide":34,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/4bud0vip","slide":34,"text":"Практика 3. LLM-брейншторм проекта, 25 минут","textPreview":"Практика 3. LLM-брейншторм проекта, 25 минут","textChars":44,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/pc3e90ja","slide":34,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/ulsvul0n","slide":34,"text":"Каждая группа берет один язык-кандидат и запускает промпт из лекции в доступной LLM.","textPreview":"Каждая группа берет один язык-кандидат и запускает промпт из лекции в доступной LLM.","textChars":84,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/fm1c361s","slide":34,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/gnadwbid","slide":34,"text":"получить 5 гипотез от простой к сложной;","textPreview":"получить 5 гипотез от простой к сложной;","textChars":40,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/ho3e5gjy","slide":34,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/6hsvq10b","slide":34,"text":"удалить нереалистичные;","textPreview":"удалить нереалистичные;","textChars":23,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/7i1cz61w","slide":34,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/7apczats","slide":34,"text":"отметить, где LLM могла выдумать;","textPreview":"отметить, где LLM могла выдумать;","textChars":33,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/69gb65c7","slide":34,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/tcru1kbi","slide":34,"text":"выбрать 2 гипотезы для проверки.","textPreview":"выбрать 2 гипотезы для проверки.","textChars":32,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/8byt8fux","slide":34,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/ve9c3uto","slide":34,"text":"Есть ли данные?","textPreview":"Есть ли данные?","textChars":15,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/ud0bapc3","slide":34,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/hgru5kbu","slide":34,"text":"Можно ли их использовать?","textPreview":"Можно ли их использовать?","textChars":25,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/gfitcfu9","slide":34,"bbox":[80,534,12,12]}
+{"kind":"textbox","id":"sh/bi5srqtk","slide":34,"text":"Кто проверит язык?","textPreview":"Кто проверит язык?","textChars":18,"textLines":1,"bbox":[110,526,1010,40]}
+{"kind":"shape","id":"sh/ahwbylcz","slide":34,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/ex4f6twn","slide":34,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/fydwzyds","slide":34,"text":"34/36","textPreview":"34/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/utwev0","slide":34,"text":"[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/7omr93","slide":35,"title":"СЕМИНАР","textShapes":12}
+{"kind":"textbox","id":"sh/x4bmh43a","slide":35,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/a1k3mp4j","slide":35,"text":"Практика 4. Мини-разбор Codex/агентов, 15 минут","textPreview":"Практика 4. Мини-разбор Codex/агентов, 15 минут","textChars":47,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/b2tkful4","slide":35,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/oz2lkfmt","slide":35,"text":"Преподаватель показывает или описывает типовой сценарий:","textPreview":"Преподаватель показывает или описывает типовой сценарий:","textChars":56,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/p0b2dk3e","slide":35,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/2xk3ip4n","slide":35,"text":"Создать папку проекта.","textPreview":"Создать папку проекта.","textChars":22,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/nytkbul8","slide":35,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/0vilgfmh","slide":35,"text":"Положить туда sources.csv, README.md, 2-3 примера данных.","textPreview":"Положить туда sources.csv, README.md, 2-3 примера данных.","textChars":57,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/1wr29k32","slide":35,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/lkva50z6","slide":35,"text":"Попросить Codex: \"проанализируй структуру и предложи первый воспроизводимый pipeline\".","textPreview":"Попросить Codex: \"проанализируй структуру и предложи первый воспроизводимый pipeline\".","textChars":86,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/kjm9wvyl","slide":35,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/zids3ah0","slide":35,"text":"Попросить агента-ревьюера проверить риски.","textPreview":"Попросить агента-ревьюера проверить риски.","textChars":42,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/yh4ru5gf","slide":35,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/xwvq10zu","slide":35,"text":"Сравнить результат с человеческими ожиданиями.","textPreview":"Сравнить результат с человеческими ожиданиями.","textChars":46,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/cvm9svyp","slide":35,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/bud8zqh4","slide":35,"text":"Пример задачи для Codex:","textPreview":"Пример задачи для Codex:","textChars":24,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/at4rqlgj","slide":35,"bbox":[80,534,12,12]}
+{"kind":"textbox","id":"sh/psbqxgzy","slide":35,"text":"В этой папке проект по малоресурсному языку.","textPreview":"В этой папке проект по малоресурсному языку.","textChars":44,"textLines":1,"bbox":[110,526,1010,40]}
+{"kind":"shape","id":"sh/or29obyd","slide":35,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/0nq10fal","slide":35,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/18zitkb6","slide":35,"text":"35/36","textPreview":"35/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/7omr93","slide":35,"text":"[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}
+{"kind":"slide","id":"sl/no7rwt","slide":36,"title":"СЕМИНАР","textShapes":12}
+{"kind":"textbox","id":"sh/98jmxwbe","slide":36,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/m5832hs3","slide":36,"text":"Практика 5. Черновик командного решения, 10 минут","textPreview":"Практика 5. Черновик командного решения, 10 минут","textChars":49,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/n614vmto","slide":36,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/wbal8ra5","slide":36,"text":"Каждая команда фиксирует:","textPreview":"Каждая команда фиксирует:","textChars":25,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/xcjm1wbq","slide":36,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/a9s361sz","slide":36,"text":"язык;","textPreview":"язык;","textChars":5,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/ba14zmtk","slide":36,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/kzu5cba1","slide":36,"text":"2-3 подхода;","textPreview":"2-3 подхода;","textChars":12,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/l03m5gbm","slide":36,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/d4na1g7m","slide":36,"text":"самый простой первый шаг;","textPreview":"самый простой первый шаг;","textChars":25,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/c3et8b61","slide":36,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/b2lsz6pg","slide":36,"text":"самый сложный желаемый результат;","textPreview":"самый сложный желаемый результат;","textChars":33,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/q1cb61ob","slide":36,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/lsna5g7y","slide":36,"text":"какие данные нужно найти до следующего занятия.","textPreview":"какие данные нужно найти до следующего занятия.","textChars":47,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/0retwb6d","slide":36,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/z65s3qps","slide":36,"text":"## Домашнее задание 1","textPreview":"## Домашнее задание 1","textChars":21,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/y5wbalo7","slide":36,"bbox":[80,534,12,12]}
+{"kind":"textbox","id":"sh/1w3atw7e","slide":36,"text":"Каждый студент индивидуально выполняет техническую подготовку и заполняет анкету: homeworks/01_anketa.md.","textPreview":"Каждый студент индивидуально выполняет техническую подготовку и заполняет анкету: homeworks/01_anketa.md.","textChars":105,"textLines":1,"bbox":[110,526,1010,40]}
+{"kind":"shape","id":"sh/gvu90rqt","slide":36,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/sry1wv21","slide":36,"text":"Занятие 1","textPreview":"Занятие 1","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/ts7250jm","slide":36,"text":"36/36","textPreview":"36/36","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/no7rwt","slide":36,"text":"[Sources]\n- Local markdown source: course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md"}

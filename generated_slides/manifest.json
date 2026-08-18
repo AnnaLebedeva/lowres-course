@@ -1,0 +1,58 @@
+[
+  {
+    "title": "Занятие 1. От простого к сложному: как ML-лаборатория может помогать сохранять язык",
+    "file": "course_sessions/01_diagnostika_i_lab_maloresursnogo_yazyka.md",
+    "pptxPath": "/Users/ann.lebedeva/Documents/lowres/generated_slides/01_diagnostika_i_lab_maloresursnogo_yazyka.pptx",
+    "slideCount": 36,
+    "montage": "/private/tmp/lowres-slides-build/renders/01_diagnostika_i_lab_maloresursnogo_yazyka/montage.webp"
+  },
+  {
+    "title": "Занятие 2. Веб-скрейпинг, сбор данных и правовая рамка",
+    "file": "course_sessions/02_veb_skreyping_sbor_i_prava_na_dannye.md",
+    "pptxPath": "/Users/ann.lebedeva/Documents/lowres/generated_slides/02_veb_skreyping_sbor_i_prava_na_dannye.pptx",
+    "slideCount": 13,
+    "montage": "/private/tmp/lowres-slides-build/renders/02_veb_skreyping_sbor_i_prava_na_dannye/montage.webp"
+  },
+  {
+    "title": "Занятие 3. OCR для архивов, учебников и печатных материалов",
+    "file": "course_sessions/03_ocr_dlya_arhivov_i_pechatnyh_materialov.md",
+    "pptxPath": "/Users/ann.lebedeva/Documents/lowres/generated_slides/03_ocr_dlya_arhivov_i_pechatnyh_materialov.pptx",
+    "slideCount": 13,
+    "montage": "/private/tmp/lowres-slides-build/renders/03_ocr_dlya_arhivov_i_pechatnyh_materialov/montage.webp"
+  },
+  {
+    "title": "Занятие 4. ASR, речь и полевые аудиоданные",
+    "file": "course_sessions/04_asr_rech_i_polevye_audio_dannye.md",
+    "pptxPath": "/Users/ann.lebedeva/Documents/lowres/generated_slides/04_asr_rech_i_polevye_audio_dannye.pptx",
+    "slideCount": 13,
+    "montage": "/private/tmp/lowres-slides-build/renders/04_asr_rech_i_polevye_audio_dannye/montage.webp"
+  },
+  {
+    "title": "Занятие 5. Очистка, фильтрация и документация корпусов",
+    "file": "course_sessions/05_ochistka_filtratsiya_i_dokumentatsiya_korpusov.md",
+    "pptxPath": "/Users/ann.lebedeva/Documents/lowres/generated_slides/05_ochistka_filtratsiya_i_dokumentatsiya_korpusov.pptx",
+    "slideCount": 13,
+    "montage": "/private/tmp/lowres-slides-build/renders/05_ochistka_filtratsiya_i_dokumentatsiya_korpusov/montage.webp"
+  },
+  {
+    "title": "Занятие 6. Параллельные тексты, LBCM-alignment и машинный перевод",
+    "file": "course_sessions/06_parallel_texts_lbcm_alignment_i_perevod.md",
+    "pptxPath": "/Users/ann.lebedeva/Documents/lowres/generated_slides/06_parallel_texts_lbcm_alignment_i_perevod.pptx",
+    "slideCount": 13,
+    "montage": "/private/tmp/lowres-slides-build/renders/06_parallel_texts_lbcm_alignment_i_perevod/montage.webp"
+  },
+  {
+    "title": "Занятие 7. Спелчекеры, нормализация и лингвистические инструменты",
+    "file": "course_sessions/07_spellcheckery_normalizatsiya_i_lingvisticheskie_instrumenty.md",
+    "pptxPath": "/Users/ann.lebedeva/Documents/lowres/generated_slides/07_spellcheckery_normalizatsiya_i_lingvisticheskie_instrumenty.pptx",
+    "slideCount": 13,
+    "montage": "/private/tmp/lowres-slides-build/renders/07_spellcheckery_normalizatsiya_i_lingvisticheskie_instrumenty/montage.webp"
+  },
+  {
+    "title": "Занятие 8. Финальная интеграция, артефакты и план летней школы",
+    "file": "course_sessions/08_finalnaya_integratsiya_artifakty_i_plan_letney_shkoly.md",
+    "pptxPath": "/Users/ann.lebedeva/Documents/lowres/generated_slides/08_finalnaya_integratsiya_artifakty_i_plan_letney_shkoly.pptx",
+    "slideCount": 13,
+    "montage": "/private/tmp/lowres-slides-build/renders/08_finalnaya_integratsiya_artifakty_i_plan_letney_shkoly/montage.webp"
+  }
+]

@@ -1,0 +1,214 @@
+{"kind":"deck","id":"pr/a8akkp","name":"Deck"}
+{"kind":"layout","layoutId":"b65a198f-0254-4a4b-ada2-6baeaefd924a","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"a9e285f5-6960-4f49-a0db-43b935104c3a","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/x70b7i","slide":1,"title":"Курс по ML для малоресурсных языков","textShapes":6}
+{"kind":"shape","id":"sh/jed0j21o","slide":1,"bbox":[0,0,22,720]}
+{"kind":"textbox","id":"sh/kzmhc7i9","slide":1,"text":"Курс по ML для малоресурсных языков","textPreview":"Курс по ML для малоресурсных языков","textChars":35,"textLines":1,"bbox":[76,72,720,30]}
+{"kind":"textbox","id":"sh/l0vilcju","slide":1,"text":"Занятие 3. OCR для архивов, учебников и печатных материалов","textPreview":"Занятие 3. OCR для архивов, учебников и печатных материалов","textChars":59,"textLines":1,"bbox":[76,170,990,170]}
+{"kind":"textbox","id":"sh/a9kz6x07","slide":1,"text":"Занятие показывает, как извлекать текст из изображений и PDF: от сканов и фотографий до первичного OCR-датасета. Итог - воспроизводимый OCR-пайплайн и набор размеченных страниц или строк.","textPreview":"Занятие показывает, как извлекать текст из изображений и PDF: от сканов и фотографий до первичного OCR-датасета. Итог - воспроизводимый O...","textChars":187,"textLines":1,"bbox":[80,392,900,92]}
+{"kind":"textbox","id":"sh/batgf21s","slide":1,"text":"Лекция, семинар, домашнее задание и заметки докладчика","textPreview":"Лекция, семинар, домашнее задание и заметки докладчика","textChars":54,"textLines":1,"bbox":[80,560,820,32]}
+{"kind":"textbox","id":"sh/wb2h87ix","slide":1,"text":"Занятие 3","textPreview":"Занятие 3","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/xcbyhcji","slide":1,"text":"1/13","textPreview":"1/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/x70b7i","slide":1,"text":"[Sources]\n- Local markdown source: course_sessions/03_ocr_dlya_arhivov_i_pechatnyh_materialov.md"}
+{"kind":"slide","id":"sl/279l4k","slide":2,"title":"ЛЕКЦИЯ","textShapes":7}
+{"kind":"textbox","id":"sh/re94nmh8","slide":2,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/szi5gryt","slide":2,"text":"Почему OCR критичен для малоресурсных языков","textPreview":"Почему OCR критичен для малоресурсных языков","textChars":44,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/d0rmpwze","slide":2,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/e1kni1gz","slide":2,"text":"Много данных существует только в книгах, газетах, учебниках и архивах","textPreview":"Много данных существует только в книгах, газетах, учебниках и архивах","textChars":69,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/f2t4rmhk","slide":2,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/0325kry5","slide":2,"text":"OCR превращает изображения в корпус","textPreview":"OCR превращает изображения в корпус","textChars":35,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/14bmtwzq","slide":2,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/25knm1gv","slide":2,"text":"Ошибки OCR напрямую влияют на перевод, поиск, спелчекер и языковые модели","textPreview":"Ошибки OCR напрямую влияют на перевод, поиск, спелчекер и языковые модели","textChars":73,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/n6t4v6hg","slide":2,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/zexsreds","slide":2,"text":"Занятие 3","textPreview":"Занятие 3","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/ydobi9c7","slide":2,"text":"2/13","textPreview":"2/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/279l4k","slide":2,"text":"Для некоторых языков основной цифровой ресурс - это отсканированные книги или PDF. OCR может открыть корпус, которого иначе как будто не существует.\n\n[Sources]\n- Local markdown source: course_sessions/03_ocr_dlya_arhivov_i_pechatnyh_materialov.md"}
+{"kind":"slide","id":"sl/t8x2ii","slide":3,"title":"ЛЕКЦИЯ","textShapes":10}
+{"kind":"textbox","id":"sh/ah0fudk3","slide":3,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/x4ry5s3e","slide":3,"text":"Типы OCR-задач","textPreview":"Типы OCR-задач","textChars":14,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/wjihwn2t","slide":3,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/j69g7ilk","slide":3,"text":"Печатный текст","textPreview":"Печатный текст","textChars":14,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/i50zydkz","slide":3,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/58by9s3q","slide":3,"text":"Старые шрифты","textPreview":"Старые шрифты","textChars":13,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/k7ih0n25","slide":3,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/7atgb2lg","slide":3,"text":"Рукописи","textPreview":"Рукописи","textChars":8,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/69kz2xkb","slide":3,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/wvi5wb21","slide":3,"text":"Многоязычные страницы","textPreview":"Многоязычные страницы","textChars":21,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/hwbm5gjm","slide":3,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/ut0nu1kb","slide":3,"text":"Таблицы, словари, параллельные колонки","textPreview":"Таблицы, словари, параллельные колонки","textChars":38,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/vu94361w","slide":3,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/4z250v2d","slide":3,"text":"Нестандартная письменность","textPreview":"Нестандартная письменность","textChars":26,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/50bm90jy","slide":3,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/ixknylk7","slide":3,"text":"Занятие 3","textPreview":"Занятие 3","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/jyt47q1s","slide":3,"text":"3/13","textPreview":"3/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/t8x2ii","slide":3,"text":"Не все OCR-задачи одинаковы. Печатный современный текст может быть относительно простым. Рукописи и историческая орфография - отдельная исследовательская задача.\n\n[Sources]\n- Local markdown source: course_sessions/03_ocr_dlya_arhivov_i_pechatnyh_materialov.md"}
+{"kind":"slide","id":"sl/s8m0kc","slide":4,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/il0zeho7","slide":4,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/58by9cny","slide":4,"text":"Инструменты OCR","textPreview":"Инструменты OCR","textChars":15,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/47ihg76d","slide":4,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/vi9gj25g","slide":4,"text":"Tesseract: классический baseline и обучение новых языков","textPreview":"Tesseract: классический baseline и обучение новых языков","textChars":56,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/uh0zaxob","slide":4,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/hkrylcnm","slide":4,"text":"EasyOCR, PaddleOCR, docTR: современные нейросетевые варианты","textPreview":"EasyOCR, PaddleOCR, docTR: современные нейросетевые варианты","textChars":60,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/gjihc761","slide":4,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/7epgf2pk","slide":4,"text":"LayoutParser и аналоги: анализ структуры страницы","textPreview":"LayoutParser и аналоги: анализ структуры страницы","textChars":49,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/6dgz6xoz","slide":4,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/ofm18f2p","slide":4,"text":"LLM/VLM-подходы: помощь в распознавании и проверке","textPreview":"LLM/VLM-подходы: помощь в распознавании и проверке","textChars":50,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/9gv21kja","slide":4,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/md4j65kz","slide":4,"text":"Занятие 3","textPreview":"Занятие 3","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/nedkzalk","slide":4,"text":"4/13","textPreview":"4/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/s8m0kc","slide":4,"text":"Выбор инструмента зависит от письменности, качества сканов и объема разметки. Для курса полезно сравнить минимум два подхода: готовый OCR и небольшой адаптируемый пайплайн.\n\n[Sources]\n- Local markdown source: course_sessions/03_ocr_dlya_arhivov_i_pechatnyh_materialov.md"}
+{"kind":"slide","id":"sl/fggo96","slide":5,"title":"ЛЕКЦИЯ","textShapes":11}
+{"kind":"textbox","id":"sh/wz65gr2d","slide":5,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/vyxonml8","slide":5,"text":"OCR-пайплайн","textPreview":"OCR-пайплайн","textChars":12,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/axonehkn","slide":5,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/5oz6tw3a","slide":5,"text":"Скан или фото","textPreview":"Скан или фото","textChars":13,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/knq5kr2p","slide":5,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/jmhorml4","slide":5,"text":"Улучшение изображения","textPreview":"Улучшение изображения","textChars":21,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/i18nihkj","slide":5,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/tsz6xwj6","slide":5,"text":"Сегментация страницы","textPreview":"Сегментация страницы","textChars":20,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/srqpob2l","slide":5,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/uxsj2d4z","slide":5,"text":"Распознавание текста","textPreview":"Распознавание текста","textChars":20,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/vy10bilk","slide":5,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/wza14nm5","slide":5,"text":"Постобработка","textPreview":"Постобработка","textChars":13,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/h03ids3q","slide":5,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/i1cj6x4b","slide":5,"text":"Ручная проверка","textPreview":"Ручная проверка","textChars":15,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/j2l0f2lw","slide":5,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/43u187m1","slide":5,"text":"Оценка CER/WER","textPreview":"Оценка CER/WER","textChars":14,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/543ihc3m","slide":5,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/y58zut4r","slide":5,"text":"Занятие 3","textPreview":"Занятие 3","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/z6h03ylc","slide":5,"text":"5/13","textPreview":"5/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/fggo96","slide":5,"text":"На практике ошибки часто возникают до модели: плохой наклон, тени, размытость, неправильная сегментация колонок. Нужно проверять весь пайплайн.\n\n[Sources]\n- Local markdown source: course_sessions/03_ocr_dlya_arhivov_i_pechatnyh_materialov.md"}
+{"kind":"slide","id":"sl/fxe0yu","slide":6,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/xcjepkbi","slide":6,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/a9svu5cr","slide":6,"text":"Разметка для OCR","textPreview":"Разметка для OCR","textChars":16,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/va1wnatc","slide":6,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/8nadsful","slide":6,"text":"Уровень страницы","textPreview":"Уровень страницы","textChars":16,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/9ojelkb6","slide":6,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/ml8vq5cf","slide":6,"text":"Уровень строки","textPreview":"Уровень строки","textChars":14,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/nm1wjat0","slide":6,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/0jqdovup","slide":6,"text":"Уровень слова","textPreview":"Уровень слова","textChars":13,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/1kzuh0ba","slide":6,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/hcn6xcz2","slide":6,"text":"Ground truth: изображение + точная транскрипция","textPreview":"Ground truth: изображение + точная транскрипция","textChars":47,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/gbepo7ih","slide":6,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/fa5ov2hw","slide":6,"text":"Разметка должна сохранять оригинальную орфографию","textPreview":"Разметка должна сохранять оригинальную орфографию","textChars":49,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/upw7mh0b","slide":6,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/to36tcz6","slide":6,"text":"Занятие 3","textPreview":"Занятие 3","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/snu5k7il","slide":6,"text":"6/13","textPreview":"6/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/fxe0yu","slide":6,"text":"Для малоресурсного языка даже 50-100 качественно размеченных строк могут быть полезны для оценки или донастройки. Не надо начинать с огромного датасета.\n\n[Sources]\n- Local markdown source: course_sessions/03_ocr_dlya_arhivov_i_pechatnyh_materialov.md"}
+{"kind":"slide","id":"sl/cdpd0a","slide":7,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/exsru50v","slide":7,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/1k3apkzm","slide":7,"text":"Метрики OCR","textPreview":"Метрики OCR","textChars":11,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/0zu9wfi1","slide":7,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/nmlsrahs","slide":7,"text":"CER: character error rate","textPreview":"CER: character error rate","textChars":25,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/mlcry507","slide":7,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/9o3atkzi","slide":7,"text":"WER: word error rate","textPreview":"WER: word error rate","textChars":20,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/onu90fid","slide":7,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/vq5svuho","slide":7,"text":"Ошибки диакритики считать отдельно","textPreview":"Ошибки диакритики считать отдельно","textChars":34,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/apcr2p03","slide":7,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/43y58zq5","slide":7,"text":"Важна раздельная оценка по источникам","textPreview":"Важна раздельная оценка по источникам","textChars":37,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/p47m14ra","slide":7,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/21gn698z","slide":7,"text":"Занятие 3","textPreview":"Занятие 3","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/32p4zu9k","slide":7,"text":"7/13","textPreview":"7/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/cdpd0a","slide":7,"text":"CER полезен для языков с малым объемом данных и для письменностей, где словораздел может быть нестабилен. Для орфографически важных символов стоит делать отдельный анализ.\n\n[Sources]\n- Local markdown source: course_sessions/03_ocr_dlya_arhivov_i_pechatnyh_materialov.md"}
+{"kind":"slide","id":"sl/blt4o9","slide":8,"title":"ЛЕКЦИЯ","textShapes":8}
+{"kind":"textbox","id":"sh/wzm10z61","slide":8,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/vydkrupg","slide":8,"text":"Постобработка OCR","textPreview":"Постобработка OCR","textChars":17,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/axkjypov","slide":8,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/54v2x47i","slide":8,"text":"Словарь и спелчекер","textPreview":"Словарь и спелчекер","textChars":19,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/k3ml4z6x","slide":8,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/j2dkvupc","slide":8,"text":"Языковая модель","textPreview":"Языковая модель","textChars":15,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/i14j2po7","slide":8,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/tsf21o7u","slide":8,"text":"Правила для частых замен","textPreview":"Правила для частых замен","textChars":24,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/sr6l8j69","slide":8,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/ap4v2h8b","slide":8,"text":"Человек в цикле","textPreview":"Человек в цикле","textChars":15,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/vqdwvm9w","slide":8,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/wrmd4rqh","slide":8,"text":"Занятие 3","textPreview":"Занятие 3","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/xsvexcr2","slide":8,"text":"8/13","textPreview":"8/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/blt4o9","slide":8,"text":"Постобработка может сильно улучшить видимый результат, но может также стереть редкие формы. Для исследовательского корпуса нужно хранить и raw OCR, и исправленную версию.\n\n[Sources]\n- Local markdown source: course_sessions/03_ocr_dlya_arhivov_i_pechatnyh_materialov.md"}
+{"kind":"slide","id":"sl/2ziqc7","slide":9,"title":"ЛЕКЦИЯ","textShapes":9}
+{"kind":"textbox","id":"sh/6l0f6l8j","slide":9,"text":"ЛЕКЦИЯ","textPreview":"ЛЕКЦИЯ","textChars":6,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/toreh0ra","slide":9,"text":"Артефакт OCR","textPreview":"Артефакт OCR","textChars":12,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/snix8vqp","slide":9,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/ji9wbq98","slide":9,"text":"images/","textPreview":"images/","textChars":7,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/ihgv2l8n","slide":9,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/5kredgry","slide":9,"text":"ocr_raw.jsonl","textPreview":"ocr_raw.jsonl","textChars":13,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/4jix4vqd","slide":9,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/3etwnapc","slide":9,"text":"ocr_corrected.jsonl","textPreview":"ocr_corrected.jsonl","textChars":19,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/2dkfe58r","slide":9,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/cz2h8vid","slide":9,"text":"ocr_ground_truth.tsv","textPreview":"ocr_ground_truth.tsv","textChars":20,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/x0bih0zy","slide":9,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/axkz6l07","slide":9,"text":"ocr_report.md","textPreview":"ocr_report.md","textChars":13,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/byt0fqhs","slide":9,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/ov2h4bi1","slide":9,"text":"Занятие 3","textPreview":"Занятие 3","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/pwbidgzm","slide":9,"text":"9/13","textPreview":"9/13","textChars":4,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/2ziqc7","slide":9,"text":"Курс не обязан завершиться большим OCR-движком. Реалистичный артефакт - небольшой проверенный OCR-набор и честный отчет, какие документы распознаются, а какие нет.\n\n[Sources]\n- Local markdown source: course_sessions/03_ocr_dlya_arhivov_i_pechatnyh_materialov.md"}
+{"kind":"slide","id":"sl/axvq8m","slide":10,"title":"СЕМИНАР","textShapes":10}
+{"kind":"textbox","id":"sh/j65gb2lg","slide":10,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/47exk721","slide":10,"text":"Практика 1. Выбор документа, 15 минут","textPreview":"Практика 1. Выбор документа, 15 минут","textChars":37,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/58nydc3m","slide":10,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/uhcfexkz","slide":10,"text":"Команды выбирают 3-5 страниц:","textPreview":"Команды выбирают 3-5 страниц:","textChars":29,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/vilg7ilk","slide":10,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/w3exgn25","slide":10,"text":"учебник","textPreview":"учебник","textChars":7,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/h4ny9s3a","slide":10,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/mdcfadkn","slide":10,"text":"газета","textPreview":"газета","textChars":6,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/7elg3il8","slide":10,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/b2dkrixs","slide":10,"text":"словарь","textPreview":"словарь","textChars":7,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/a143ydw7","slide":10,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/xov2t8fy","slide":10,"text":"архивный PDF","textPreview":"архивный PDF","textChars":12,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/w3ml0ned","slide":10,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/jqx4vixo","slide":10,"text":"фото страницы","textPreview":"фото страницы","textChars":13,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/ypo32dw3","slide":10,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/lsfmxsfu","slide":10,"text":"Занятие 3","textPreview":"Занятие 3","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/kr6l4ne9","slide":10,"text":"10/13","textPreview":"10/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/axvq8m","slide":10,"text":"[Sources]\n- Local markdown source: course_sessions/03_ocr_dlya_arhivov_i_pechatnyh_materialov.md"}
+{"kind":"slide","id":"sl/o3xzzh","slide":11,"title":"СЕМИНАР","textShapes":5}
+{"kind":"textbox","id":"sh/sfehwrax","slide":11,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/re5g3mtc","slide":11,"text":"Практика 2. Первый OCR, 25 минут","textPreview":"Практика 2. Первый OCR, 25 минут","textChars":32,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/6dwzuhs7","slide":11,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/147y9wbu","slide":11,"text":"Команды запускают один готовый OCR-инструмент или используют агентно сгенерированный скрипт. Результат сохран...","textPreview":"Команды запускают один готовый OCR-инструмент или используют агентно сгенерированный скрипт. Результат сохран...","textChars":112,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/g3yh0ra9","slide":11,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/fipg7mto","slide":11,"text":"Занятие 3","textPreview":"Занятие 3","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/ehwzyhs3","slide":11,"text":"11/13","textPreview":"11/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/o3xzzh","slide":11,"text":"[Sources]\n- Local markdown source: course_sessions/03_ocr_dlya_arhivov_i_pechatnyh_materialov.md"}
+{"kind":"slide","id":"sl/execjj","slide":12,"title":"СЕМИНАР","textShapes":10}
+{"kind":"textbox","id":"sh/dofq9gre","slide":12,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/q1orylsn","slide":12,"text":"Практика 3. Ручная разметка и оценка, 25 минут","textPreview":"Практика 3. Ручная разметка и оценка, 25 минут","textChars":46,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/b2x87698","slide":12,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/oz69wbah","slide":12,"text":"Команды выбирают 10 строк и создают ocr_ground_truth.tsv:","textPreview":"Команды выбирают 10 строк и создают ocr_ground_truth.tsv:","textChars":57,"textLines":1,"bbox":[110,190,1010,50]}
+{"kind":"shape","id":"sh/p0fq5gr2","slide":12,"bbox":[80,256,12,12]}
+{"kind":"textbox","id":"sh/2xoru1sr","slide":12,"text":"image_id","textPreview":"image_id","textChars":8,"textLines":1,"bbox":[110,248,1010,50]}
+{"kind":"shape","id":"sh/3yx8369c","slide":12,"bbox":[80,314,12,12]}
+{"kind":"textbox","id":"sh/gvmpsral","slide":12,"text":"line_id","textPreview":"line_id","textChars":7,"textLines":1,"bbox":[110,306,1010,50]}
+{"kind":"shape","id":"sh/1wvq1wr6","slide":12,"bbox":[80,372,12,12]}
+{"kind":"textbox","id":"sh/14nydcn6","slide":12,"text":"recognized_text","textPreview":"recognized_text","textChars":15,"textLines":1,"bbox":[110,364,1010,50]}
+{"kind":"shape","id":"sh/g3exk7ml","slide":12,"bbox":[80,430,12,12]}
+{"kind":"textbox","id":"sh/f25gb250","slide":12,"text":"correct_text","textPreview":"correct_text","textChars":12,"textLines":1,"bbox":[110,422,1010,50]}
+{"kind":"shape","id":"sh/e1wfih4f","slide":12,"bbox":[80,488,12,12]}
+{"kind":"textbox","id":"sh/t0ny9cnu","slide":12,"text":"error_type","textPreview":"error_type","textChars":10,"textLines":1,"bbox":[110,480,1010,50]}
+{"kind":"shape","id":"sh/szuxg7m9","slide":12,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/rylg725o","slide":12,"text":"Занятие 3","textPreview":"Занятие 3","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/6xcfex4j","slide":12,"text":"12/13","textPreview":"12/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/execjj","slide":12,"text":"[Sources]\n- Local markdown source: course_sessions/03_ocr_dlya_arhivov_i_pechatnyh_materialov.md"}
+{"kind":"slide","id":"sl/rsvchz","slide":13,"title":"СЕМИНАР","textShapes":12}
+{"kind":"textbox","id":"sh/07a5436x","slide":13,"text":"СЕМИНАР","textPreview":"СЕМИНАР","textChars":7,"textLines":1,"bbox":[76,38,360,26]}
+{"kind":"textbox","id":"sh/z61ovy5c","slide":13,"text":"Практика 4. Постобработка, 25 минут","textPreview":"Практика 4. Постобработка, 25 минут","textChars":35,"textLines":1,"bbox":[76,78,1060,84]}
+{"kind":"shape","id":"sh/e5sn2tor","slide":13,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/9c3618ne","slide":13,"text":"Команды формулируют 5 правил исправления или используют словарь:","textPreview":"Команды формулируют 5 правил исправления или используют словарь:","textChars":64,"textLines":1,"bbox":[110,190,1010,40]}
+{"kind":"shape","id":"sh/obup8n6t","slide":13,"bbox":[80,246,12,12]}
+{"kind":"textbox","id":"sh/nalozi58","slide":13,"text":"частые ошибки символов","textPreview":"частые ошибки символов","textChars":22,"textLines":1,"bbox":[110,238,1010,40]}
+{"kind":"shape","id":"sh/m9c76don","slide":13,"bbox":[80,294,12,12]}
+{"kind":"textbox","id":"sh/pgz6pona","slide":13,"text":"проблемы диакритики","textPreview":"проблемы диакритики","textChars":19,"textLines":1,"bbox":[110,286,1010,40]}
+{"kind":"shape","id":"sh/4fq5wj6p","slide":13,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/ed8valsv","slide":13,"text":"разрывы слов","textPreview":"разрывы слов","textChars":12,"textLines":1,"bbox":[110,334,1010,40]}
+{"kind":"shape","id":"sh/fehw3q9g","slide":13,"bbox":[80,390,12,12]}
+{"kind":"textbox","id":"sh/gfqdcva1","slide":13,"text":"неверные переносы","textPreview":"неверные переносы","textChars":17,"textLines":1,"bbox":[110,382,1010,40]}
+{"kind":"shape","id":"sh/1gze50rm","slide":13,"bbox":[80,438,12,12]}
+{"kind":"textbox","id":"sh/2h8ve5sr","slide":13,"text":"смешение письменностей","textPreview":"смешение письменностей","textChars":22,"textLines":1,"bbox":[110,430,1010,40]}
+{"kind":"shape","id":"sh/3i1w7a9c","slide":13,"bbox":[80,486,12,12]}
+{"kind":"textbox","id":"sh/ojadgvqx","slide":13,"text":"Промпт для агента:","textPreview":"Промпт для агента:","textChars":18,"textLines":1,"bbox":[110,478,1010,40]}
+{"kind":"shape","id":"sh/pkje90ri","slide":13,"bbox":[80,534,12,12]}
+{"kind":"textbox","id":"sh/qlsvi583","slide":13,"text":"Проанализируй пары OCR-результат / правильный текст.","textPreview":"Проанализируй пары OCR-результат / правильный текст.","textChars":52,"textLines":1,"bbox":[110,526,1010,40]}
+{"kind":"shape","id":"sh/bm1wba9o","slide":13,"bbox":[76,632,200,3]}
+{"kind":"textbox","id":"sh/nalczapw","slide":13,"text":"Занятие 3","textPreview":"Занятие 3","textChars":9,"textLines":1,"bbox":[76,664,240,24]}
+{"kind":"textbox","id":"sh/m9cvq5ob","slide":13,"text":"13/13","textPreview":"13/13","textChars":5,"textLines":1,"bbox":[1120,664,84,24]}
+{"kind":"notes","id":"nt/rsvchz","slide":13,"text":"[Sources]\n- Local markdown source: course_sessions/03_ocr_dlya_arhivov_i_pechatnyh_materialov.md"}
