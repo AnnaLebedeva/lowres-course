@@ -802,13 +802,108 @@ https://docs.google.com/spreadsheets/d/1XIW9BCxs4ENsQUhiK1HYGzpA1aLiYcwOOOfnmZNt
 В Colab эта тетрадка сохраняет CSV в `/content/lowres_lab/lesson01_language_dataset_inventory.csv`. Его можно загрузить в Google Sheets или использовать как основу для обновления общей таблицы.
 """),
         md("""
+## 6. Как автоматизировать обновление
+
+Разовый агент полезен для старта, но карта датасетов быстро устаревает: в OPUS появляются новые релизы, в Hugging Face загружают корпуса, национальные проекты открывают новые таблицы, а часть ссылок ломается.
+
+Для этого нужен фоновый агент-монитор:
+
+1. **Scheduler** запускает пайплайн по расписанию: например, раз в неделю или раз в месяц.
+2. **Collector** заново обходит источники: OPUS, Wikipedia, Hugging Face, GitHub, национальные корпуса, сайты СМИ и архивов.
+3. **State store** хранит предыдущий снимок таблицы: CSV в GitHub, Google Sheet, SQLite или маленький JSON.
+4. **Diff checker** сравнивает старую и новую версии: новые языки, новые корпуса, рост/падение counts, ошибки API.
+5. **Updater** обновляет Google Sheet только для безопасных полей: counts, даты проверки, ссылки на источники.
+6. **Human review** получает спорные изменения: новый источник без понятной лицензии, резкое падение counts, объединение языков/вариантов, изменение классификации.
+
+Самый простой стек для курса:
+
+- `scripts/build_language_dataset_inventory.py` лежит в GitHub;
+- GitHub Actions запускает его по cron;
+- скрипт сохраняет новый CSV;
+- отдельный шаг через Google Sheets API обновляет таблицу;
+- если diff большой или появились ошибки, агент создает issue/комментарий для ручной проверки.
+
+Colab для такого расписания не подходит: он хорош для занятия и ручного запуска, но не для надежного фонового мониторинга.
+"""),
+        code("""
+def compare_inventory_snapshots(old_df, new_df):
+    key = 'iso639_3'
+    old = old_df.set_index(key)
+    new = new_df.set_index(key)
+    rows = []
+
+    for code in sorted(set(old.index) | set(new.index)):
+        if code not in old.index:
+            rows.append({'iso639_3': code, 'change_type': 'new_language', 'needs_human_review': True})
+            continue
+        if code not in new.index:
+            rows.append({'iso639_3': code, 'change_type': 'missing_language', 'needs_human_review': True})
+            continue
+
+        old_pairs = int(old.loc[code, 'opus_ru_parallel_pairs'])
+        new_pairs = int(new.loc[code, 'opus_ru_parallel_pairs'])
+        delta = new_pairs - old_pairs
+        if delta != 0:
+            rows.append({
+                'iso639_3': code,
+                'language_ru': new.loc[code, 'language_ru'],
+                'change_type': 'parallel_count_changed',
+                'old_pairs': old_pairs,
+                'new_pairs': new_pairs,
+                'delta': delta,
+                'needs_human_review': abs(delta) > max(1000, old_pairs * 0.5),
+            })
+
+    return pd.DataFrame(rows)
+
+# Мини-демо: имитируем, что через месяц OPUS нашел больше параллельных предложений для удмуртского.
+old_snapshot = inventory.copy()
+new_snapshot = inventory.copy()
+new_snapshot.loc[new_snapshot['iso639_3'] == 'udm', 'opus_ru_parallel_pairs'] += 250
+
+diff = compare_inventory_snapshots(old_snapshot, new_snapshot)
+display(diff)
+save_artifact('lesson01_inventory_diff_demo.csv', diff)
+"""),
+        md("""
+### Пример GitHub Actions расписания
+
+```yaml
+name: update-language-dataset-inventory
+
+on:
+  schedule:
+    - cron: "0 6 1 * *"  # 1 числа каждого месяца
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pandas openpyxl requests
+      - run: python scripts/build_language_dataset_inventory.py
+      - name: Update Google Sheet
+        run: python scripts/update_google_sheet.py
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          SPREADSHEET_ID: "1XIW9BCxs4ENsQUhiK1HYGzpA1aLiYcwOOOfnmZNtcB8"
+```
+
+В реальном проекте секреты Google API нельзя хранить в notebook. Их кладут в GitHub Secrets, Google Cloud Secret Manager или другой защищенный secret store.
+"""),
+        md("""
 ## Вопросы для отчета
 
 1. Какие языковые семьи в таблице оказываются лучше всего покрыты параллельными данными с русским?
 2. Где есть Википедия, но почти нет параллельных данных?
 3. Где OPUS показывает нули: это значит “данных нет” или “мы не нашли правильный код/источник”?
 4. Какие источники надо добавить следующими: национальные корпуса, сайты СМИ, библиотеки, архивы, Hugging Face, GitHub?
-5. Какие решения агента требуют человеческой проверки: список языков, объединение вариантов, лицензии, качество данных?
+5. Какие поля можно обновлять автоматически, а какие требуют human review?
+6. Как часто стоит запускать фонового агента для такой таблицы и почему?
 """),
     ]
 
