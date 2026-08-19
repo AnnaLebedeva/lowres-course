@@ -1,4 +1,5 @@
 import json
+import re
 import time
 import urllib.parse
 import urllib.request
@@ -13,6 +14,7 @@ OUT = ROOT / "generated_datasets"
 OUT.mkdir(exist_ok=True)
 
 OPUS_API = "https://opus.nlpl.eu/opusapi"
+HF_DATASETS_API = "https://huggingface.co/api/datasets"
 
 
 LANGUAGES = [
@@ -66,14 +68,15 @@ LANGUAGES = [
 ]
 
 
-def api_json(url, params, attempts=3):
+def api_json(url, params, attempts=3, timeout=30):
+    """Fetch JSON from a public API with a small retry loop."""
     query = urllib.parse.urlencode(params)
     full_url = f"{url}?{query}"
     last_error = None
     for attempt in range(attempts):
         req = urllib.request.Request(full_url, headers={"User-Agent": "lowres-course-dataset-scout/1.0"})
         try:
-            with urllib.request.urlopen(req, timeout=30) as response:
+            with urllib.request.urlopen(req, timeout=timeout) as response:
                 return json.loads(response.read().decode("utf-8"))
         except Exception as exc:
             last_error = exc
@@ -82,23 +85,27 @@ def api_json(url, params, attempts=3):
 
 
 def opus_summary(opus_code):
+    """Summarize OPUS monolingual and Russian-parallel resources for one language code."""
+    empty = {
+        "opus_ru_parallel_pairs": 0,
+        "opus_ru_parallel_documents": 0,
+        "opus_ru_parallel_corpora": "",
+        "opus_mono_pairs_or_segments": 0,
+        "opus_mono_documents": 0,
+        "opus_mono_corpora": "",
+    }
     if not opus_code:
-        return {
-            "opus_checked": False,
-            "opus_ru_parallel_pairs": 0,
-            "opus_ru_parallel_documents": 0,
-            "opus_ru_parallel_corpora": "",
-            "opus_mono_pairs_or_segments": 0,
-            "opus_mono_documents": 0,
-            "opus_mono_corpora": "",
-        }
+        return {"opus_checked": False, **empty}
 
-    data = api_json(OPUS_API, {
-        "source": "ru",
-        "target": opus_code,
-        "preprocessing": "xml",
-        "version": "latest",
-    })
+    try:
+        data = api_json(OPUS_API, {
+            "source": "ru",
+            "target": opus_code,
+            "preprocessing": "xml",
+            "version": "latest",
+        }, attempts=1, timeout=8)
+    except Exception as exc:
+        return {"opus_checked": False, "opus_error": str(exc), **empty}
     corpora = data.get("corpora", [])
     parallel = [
         c for c in corpora
@@ -110,6 +117,7 @@ def opus_summary(opus_code):
     ]
 
     def as_int(value):
+        """Convert OPUS numeric fields to int while treating blanks as zero."""
         if value in ("", None):
             return 0
         return int(value)
@@ -130,6 +138,7 @@ def opus_summary(opus_code):
 
 
 def wiki_summary(wiki_code):
+    """Read Wikipedia site statistics for a language edition when it exists."""
     if not wiki_code:
         return {"wiki_checked": False, "wiki_articles": "", "wiki_pages": "", "wiki_source_url": ""}
     try:
@@ -156,22 +165,173 @@ def wiki_summary(wiki_code):
         }
 
 
+def hf_dataset_summary(item):
+    """Search Hugging Face datasets and summarize likely language resources.
+
+    Hugging Face search does not provide a reliable document/sentence count for every dataset.
+    We therefore store discovery metadata: number of candidate datasets, likely Russian-parallel
+    candidates, top dataset IDs, downloads, and size categories from dataset tags.
+    """
+    language_tags = {
+        f"language:{item.get('opus_code')}" if item.get("opus_code") else "",
+        f"language:{item.get('iso639_3')}" if item.get("iso639_3") else "",
+    }
+    language_tags.discard("")
+    search_terms = [item.get("language_en"), item.get("language_ru")]
+    seen = {}
+    attempted = 0
+    successful = 0
+    for tag in language_tags:
+        attempted += 1
+        try:
+            results = api_json(HF_DATASETS_API, {"filter": tag, "limit": 10}, attempts=2, timeout=20)
+        except Exception:
+            continue
+        if not isinstance(results, list):
+            continue
+        successful += 1
+        for dataset in results:
+            dataset_id = dataset.get("id")
+            if dataset_id:
+                seen[dataset_id] = dataset
+
+    for term in [x for x in search_terms if x]:
+        attempted += 1
+        try:
+            results = api_json(HF_DATASETS_API, {"search": term, "limit": 10}, attempts=2, timeout=20)
+        except Exception:
+            continue
+        if not isinstance(results, list):
+            continue
+        successful += 1
+        for dataset in results:
+            dataset_id = dataset.get("id")
+            if dataset_id:
+                seen[dataset_id] = dataset
+
+    lang_texts = [
+        str(item.get("language_en", "")).lower(),
+        str(item.get("language_ru", "")).lower(),
+    ]
+
+    def mentions_language_name(text, names):
+        """Return True when a full language name appears as a word-like phrase."""
+        for name in names:
+            if not name:
+                continue
+            for part in re.split(r"\s*/\s*|\s+-\s+", name):
+                part = part.strip()
+                if len(part) >= 4 and re.search(rf"(?<![\w-]){re.escape(part)}(?![\w-])", text):
+                    return True
+        return False
+
+    datasets = []
+    for dataset in seen.values():
+        tags = set(dataset.get("tags") or [])
+        haystack = " ".join([
+            dataset.get("id", ""),
+            dataset.get("description", "") or "",
+            " ".join(tags),
+        ]).lower()
+        tagged = bool(tags & language_tags)
+        mentioned = mentions_language_name(haystack, lang_texts)
+        if tagged or mentioned:
+            datasets.append(dataset)
+
+    def is_ru_parallel(dataset):
+        """Heuristically mark a Hugging Face dataset as Russian-parallel."""
+        tags = set(dataset.get("tags") or [])
+        text = " ".join([
+            dataset.get("id", ""),
+            dataset.get("description", "") or "",
+            " ".join(tags),
+        ]).lower()
+        return (
+            "language:ru" in tags
+            or "russian" in text
+            or "рус" in text
+            or "-rus-" in text
+            or "rus-" in text
+        )
+
+    def specificity_score(dataset):
+        """Rank language-specific datasets above broad multilingual collections."""
+        tags = set(dataset.get("tags") or [])
+        text = " ".join([
+            dataset.get("id", ""),
+            dataset.get("description", "") or "",
+        ]).lower()
+        language_tag_count = sum(1 for tag in tags if tag.startswith("language:"))
+        if mentions_language_name(text, lang_texts):
+            return 2
+        if language_tag_count <= 5:
+            return 1
+        return 0
+
+    top = sorted(
+        datasets,
+        key=lambda d: (specificity_score(d), d.get("downloads") or 0),
+        reverse=True,
+    )[:5]
+    size_categories = sorted({
+        tag.replace("size_categories:", "")
+        for dataset in datasets
+        for tag in (dataset.get("tags") or [])
+        if tag.startswith("size_categories:")
+    })
+    return {
+        "hf_checked": successful > 0,
+        "hf_query_attempts": attempted,
+        "hf_query_successes": successful,
+        "hf_dataset_count": len(datasets),
+        "hf_ru_parallel_candidates": sum(1 for dataset in datasets if is_ru_parallel(dataset)),
+        "hf_top_datasets": "; ".join(dataset.get("id", "") for dataset in top),
+        "hf_downloads_sum": sum(int(dataset.get("downloads") or 0) for dataset in datasets),
+        "hf_size_categories": "; ".join(size_categories),
+        "hf_source_url": "https://huggingface.co/datasets",
+    }
+
+
 def build_inventory():
+    """Build the full dataset inventory table for the configured language list."""
     rows = []
     checked_at = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    previous_rows = {}
+    previous_csv = OUT / "russia_languages_dataset_inventory.csv"
+    if previous_csv.exists():
+        previous = pd.read_csv(previous_csv).fillna("")
+        previous_rows = {row["iso639_3"]: row for _, row in previous.iterrows()}
+
     for item in LANGUAGES:
-        print("checking", item["language_ru"])
+        print("checking", item["language_ru"], flush=True)
         row = dict(item)
-        row.update(opus_summary(item.get("opus_code")))
+        opus = opus_summary(item.get("opus_code"))
+        if opus.get("opus_error") and item["iso639_3"] in previous_rows:
+            previous = previous_rows[item["iso639_3"]]
+            for column in [
+                "opus_ru_parallel_pairs",
+                "opus_ru_parallel_documents",
+                "opus_ru_parallel_corpora",
+                "opus_mono_pairs_or_segments",
+                "opus_mono_documents",
+                "opus_mono_corpora",
+            ]:
+                opus[column] = previous.get(column, opus[column])
+            opus["opus_cached_from_previous_run"] = True
+        else:
+            opus["opus_cached_from_previous_run"] = False
+        row.update(opus)
         row.update(wiki_summary(item.get("wiki_code")))
+        row.update(hf_dataset_summary(item))
         row["parallel_with_russian_source"] = "https://opus.nlpl.eu/opusapi"
-        row["monolingual_source"] = "OPUS monolingual rows; Wikipedia statistics where available"
+        row["monolingual_source"] = "OPUS monolingual rows; Wikipedia statistics; Hugging Face dataset search"
         row["checked_at_utc"] = checked_at
         rows.append(row)
     return pd.DataFrame(rows)
 
 
 def main():
+    """Write the inventory as CSV and XLSX artifacts."""
     df = build_inventory()
     df = df.sort_values(["family", "branch", "language_ru"]).reset_index(drop=True)
     csv_path = OUT / "russia_languages_dataset_inventory.csv"
@@ -181,7 +341,7 @@ def main():
         df.to_excel(writer, sheet_name="inventory", index=False)
         meta = pd.DataFrame([
             {"field": "scope", "value": "Initial course inventory: major living languages of peoples of Russia, no dialect-level coverage."},
-            {"field": "sources", "value": "OPUS API; Wikipedia siteinfo statistics."},
+            {"field": "sources", "value": "OPUS API; Wikipedia siteinfo statistics; Hugging Face dataset API."},
             {"field": "checked_at_utc", "value": df["checked_at_utc"].iloc[0] if len(df) else ""},
             {"field": "caveat", "value": "Counts are API snapshots and need linguistic/community review before publication."},
         ])

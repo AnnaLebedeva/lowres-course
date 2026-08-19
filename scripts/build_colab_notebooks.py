@@ -585,10 +585,11 @@ def lesson01_dataset_scout_cells():
 1. берет редактируемый seed list основных живых языков народов России без диалектального уровня;
 2. проверяет OPUS API на параллельные данные с русским;
 3. проверяет OPUS на моноязычные строки/сегменты;
-4. проверяет наличие языковой Википедии и ее размер;
-5. собирает таблицу, которую можно открыть в Google Sheets и дальше править руками.
+4. проверяет Hugging Face Datasets как каталог опубликованных корпусов;
+5. проверяет наличие языковой Википедии и ее размер;
+6. собирает таблицу, которую можно открыть в Google Sheets и дальше править руками.
 
-Готовый снапшот этой таблицы уже создан в Google Sheets: https://docs.google.com/spreadsheets/d/1XIW9BCxs4ENsQUhiK1HYGzpA1aLiYcwOOOfnmZNtcB8
+Готовый снапшот этой таблицы уже создан в Google Sheets: https://docs.google.com/spreadsheets/d/1s3aSJEs8oYnnTomZil70iK_fzeQi3Ujs4W0Z9KsTSKs
 """),
         code("""
 !pip -q install langgraph pandas requests openpyxl
@@ -596,6 +597,7 @@ def lesson01_dataset_scout_cells():
         code(COMMON_SETUP + """
 from typing import Any, Dict, List, TypedDict
 from datetime import datetime, timezone
+import re
 from langgraph.graph import StateGraph, END
 """),
         md("""
@@ -610,15 +612,21 @@ seed_df = pd.DataFrame(LANGUAGES)
 display(seed_df.groupby(['family', 'branch']).size().reset_index(name='languages'))
 display(seed_df.head(12))
 """),
-        md("## 2. Инструменты агента: OPUS API и Wikipedia API"),
+        md("""
+## 2. Инструменты агента: OPUS API, Hugging Face и Wikipedia API
+
+Здесь агент работает со структурированными источниками. Это важное ограничение: API дают воспроизводимые поля и ссылки, а веб-поиск дает только кандидатов, которые потом нужно проверять человеком.
+"""),
         code("""
 OPUS_API = 'https://opus.nlpl.eu/opusapi'
+HF_DATASETS_API = 'https://huggingface.co/api/datasets'
 
-def api_get(url, params, attempts=3):
+def api_get(url, params, attempts=3, timeout=30):
+    \"\"\"Fetch JSON from a public API with a small retry loop and rate-limit backoff.\"\"\"
     last_error = None
     for attempt in range(attempts):
         try:
-            r = requests.get(url, params=params, timeout=30, headers={'User-Agent': 'lowres-course-dataset-scout/1.0'})
+            r = requests.get(url, params=params, timeout=timeout, headers={'User-Agent': 'lowres-course-dataset-scout/1.0'})
             if r.status_code == 429 and attempt < attempts - 1:
                 wait = int(r.headers.get('Retry-After', 2 + attempt * 2))
                 print('rate limit, wait', wait, 'sec')
@@ -633,27 +641,32 @@ def api_get(url, params, attempts=3):
     raise last_error
 
 def as_int(value):
+    \"\"\"Convert OPUS numeric fields to int while treating blanks as zero.\"\"\"
     if value in ('', None):
         return 0
     return int(value)
 
 def query_opus_for_language(opus_code):
+    \"\"\"Summarize OPUS monolingual and Russian-parallel resources for one language code.\"\"\"
+    empty = {
+        'opus_ru_parallel_pairs': 0,
+        'opus_ru_parallel_documents': 0,
+        'opus_ru_parallel_corpora': '',
+        'opus_mono_pairs_or_segments': 0,
+        'opus_mono_documents': 0,
+        'opus_mono_corpora': '',
+    }
     if not opus_code:
-        return {
-            'opus_checked': False,
-            'opus_ru_parallel_pairs': 0,
-            'opus_ru_parallel_documents': 0,
-            'opus_ru_parallel_corpora': '',
-            'opus_mono_pairs_or_segments': 0,
-            'opus_mono_documents': 0,
-            'opus_mono_corpora': '',
-        }
-    data = api_get(OPUS_API, {
-        'source': 'ru',
-        'target': opus_code,
-        'preprocessing': 'xml',
-        'version': 'latest',
-    })
+        return {'opus_checked': False, **empty}
+    try:
+        data = api_get(OPUS_API, {
+            'source': 'ru',
+            'target': opus_code,
+            'preprocessing': 'xml',
+            'version': 'latest',
+        }, attempts=1, timeout=8)
+    except Exception as exc:
+        return {'opus_checked': False, 'opus_error': str(exc), **empty}
     corpora = data.get('corpora', [])
     parallel = [c for c in corpora if {c.get('source'), c.get('target')} == {'ru', opus_code}]
     mono = [c for c in corpora if c.get('source') == opus_code and not c.get('target')]
@@ -668,6 +681,7 @@ def query_opus_for_language(opus_code):
     }
 
 def query_wikipedia_for_language(wiki_code):
+    \"\"\"Read Wikipedia site statistics for a language edition when it exists.\"\"\"
     if not wiki_code:
         return {'wiki_checked': False, 'wiki_articles': '', 'wiki_pages': '', 'wiki_source_url': ''}
     try:
@@ -692,22 +706,151 @@ def query_wikipedia_for_language(wiki_code):
             'wiki_source_url': f'https://{wiki_code}.wikipedia.org/',
             'wiki_error': str(exc),
         }
+
+def query_huggingface_for_language(row):
+    \"\"\"Search Hugging Face datasets and summarize likely resources for one language.
+
+    HF search usually does not expose exact document or sentence counts. We store discovery
+    metadata instead: number of candidate datasets, likely Russian-parallel candidates,
+    top dataset IDs, downloads, and size categories from tags.
+    \"\"\"
+    language_tags = {
+        f"language:{row.get('opus_code')}" if row.get('opus_code') else '',
+        f"language:{row.get('iso639_3')}" if row.get('iso639_3') else '',
+    }
+    language_tags.discard('')
+    search_terms = [row.get('language_en'), row.get('language_ru')]
+    seen = {}
+    attempted = 0
+    successful = 0
+    for tag in language_tags:
+        attempted += 1
+        try:
+            results = api_get(HF_DATASETS_API, {'filter': tag, 'limit': 10}, attempts=2, timeout=20)
+        except Exception:
+            continue
+        if not isinstance(results, list):
+            continue
+        successful += 1
+        for dataset in results:
+            dataset_id = dataset.get('id')
+            if dataset_id:
+                seen[dataset_id] = dataset
+
+    for term in [x for x in search_terms if x]:
+        attempted += 1
+        try:
+            results = api_get(HF_DATASETS_API, {'search': term, 'limit': 10}, attempts=2, timeout=20)
+        except Exception:
+            continue
+        if not isinstance(results, list):
+            continue
+        successful += 1
+        for dataset in results:
+            dataset_id = dataset.get('id')
+            if dataset_id:
+                seen[dataset_id] = dataset
+
+    lang_texts = [
+        str(row.get('language_en', '')).lower(),
+        str(row.get('language_ru', '')).lower(),
+    ]
+
+    def mentions_language_name(text, names):
+        \"\"\"Return True when a full language name appears as a word-like phrase.\"\"\"
+        for name in names:
+            if not name:
+                continue
+            for part in re.split(r'\\s*/\\s*|\\s+-\\s+', name):
+                part = part.strip()
+                if len(part) >= 4 and re.search(rf'(?<![\\w-]){re.escape(part)}(?![\\w-])', text):
+                    return True
+        return False
+
+    datasets = []
+    for dataset in seen.values():
+        tags = set(dataset.get('tags') or [])
+        haystack = ' '.join([
+            dataset.get('id', ''),
+            dataset.get('description', '') or '',
+            ' '.join(tags),
+        ]).lower()
+        tagged = bool(tags & language_tags)
+        mentioned = mentions_language_name(haystack, lang_texts)
+        if tagged or mentioned:
+            datasets.append(dataset)
+
+    def is_ru_parallel(dataset):
+        \"\"\"Heuristically mark a Hugging Face dataset as Russian-parallel.\"\"\"
+        tags = set(dataset.get('tags') or [])
+        text = ' '.join([
+            dataset.get('id', ''),
+            dataset.get('description', '') or '',
+            ' '.join(tags),
+        ]).lower()
+        return (
+            'language:ru' in tags
+            or 'russian' in text
+            or 'рус' in text
+            or '-rus-' in text
+            or 'rus-' in text
+        )
+
+    def specificity_score(dataset):
+        \"\"\"Rank language-specific datasets above broad multilingual collections.\"\"\"
+        tags = set(dataset.get('tags') or [])
+        text = ' '.join([
+            dataset.get('id', ''),
+            dataset.get('description', '') or '',
+        ]).lower()
+        language_tag_count = sum(1 for tag in tags if tag.startswith('language:'))
+        if mentions_language_name(text, lang_texts):
+            return 2
+        if language_tag_count <= 5:
+            return 1
+        return 0
+
+    top = sorted(
+        datasets,
+        key=lambda d: (specificity_score(d), d.get('downloads') or 0),
+        reverse=True,
+    )[:5]
+    size_categories = sorted({
+        tag.replace('size_categories:', '')
+        for dataset in datasets
+        for tag in (dataset.get('tags') or [])
+        if tag.startswith('size_categories:')
+    })
+    return {
+        'hf_checked': successful > 0,
+        'hf_query_attempts': attempted,
+        'hf_query_successes': successful,
+        'hf_dataset_count': len(datasets),
+        'hf_ru_parallel_candidates': sum(1 for dataset in datasets if is_ru_parallel(dataset)),
+        'hf_top_datasets': '; '.join(dataset.get('id', '') for dataset in top),
+        'hf_downloads_sum': sum(int(dataset.get('downloads') or 0) for dataset in datasets),
+        'hf_size_categories': '; '.join(size_categories),
+        'hf_source_url': 'https://huggingface.co/datasets',
+    }
 """),
         md("## 3. Plain Python агент: state, tools, observations, report"),
         code("""
 def scout_language(row):
+    \"\"\"Collect all observations for one language into one serializable row.\"\"\"
     observation = dict(row)
     observation.update(query_opus_for_language(row.get('opus_code')))
     observation.update(query_wikipedia_for_language(row.get('wiki_code')))
+    observation.update(query_huggingface_for_language(row))
     observation['parallel_with_russian_source'] = 'https://opus.nlpl.eu/opusapi'
-    observation['monolingual_source'] = 'OPUS monolingual rows; Wikipedia statistics where available'
+    observation['monolingual_source'] = 'OPUS monolingual rows; Wikipedia statistics; Hugging Face dataset search'
     observation['checked_at_utc'] = datetime.now(timezone.utc).strftime('%Y-%m-%d')
     return observation
 
 def run_dataset_scout(languages):
+    \"\"\"Run the plain Python version of the dataset-scouting agent.\"\"\"
     state = {
         'goal': 'собрать первичную карту языков и открытых датасетов',
-        'sources': ['OPUS API', 'Wikipedia siteinfo API'],
+        'sources': ['OPUS API', 'Hugging Face dataset API', 'Wikipedia siteinfo API'],
         'languages_total': len(languages),
         'observations': [],
         'errors': [],
@@ -751,9 +894,11 @@ class DatasetScoutState(TypedDict, total=False):
     summary: Dict[str, Any]
 
 def init_state_node(state: DatasetScoutState):
+    \"\"\"Prepare empty graph fields before collection starts.\"\"\"
     return {'observations': [], 'errors': []}
 
 def collect_node(state: DatasetScoutState):
+    \"\"\"Run the source-checking tools for every language in the graph state.\"\"\"
     observations = []
     errors = []
     for lang in state['languages']:
@@ -764,10 +909,12 @@ def collect_node(state: DatasetScoutState):
     return {'observations': observations, 'errors': errors}
 
 def table_node(state: DatasetScoutState):
+    \"\"\"Convert collected observations into a sorted pandas table.\"\"\"
     inventory = pd.DataFrame(state['observations']).sort_values(['family', 'branch', 'language_ru']).reset_index(drop=True)
     return {'inventory': inventory}
 
 def summary_node(state: DatasetScoutState):
+    \"\"\"Compute compact metrics that help the presenter inspect the run.\"\"\"
     inventory = state['inventory']
     return {'summary': {
         'languages_total': len(state['languages']),
@@ -797,7 +944,7 @@ graph_state['summary']
 
 На занятии можно открыть готовый Google Sheet и править его как общий рабочий артефакт:
 
-https://docs.google.com/spreadsheets/d/1XIW9BCxs4ENsQUhiK1HYGzpA1aLiYcwOOOfnmZNtcB8
+https://docs.google.com/spreadsheets/d/1s3aSJEs8oYnnTomZil70iK_fzeQi3Ujs4W0Z9KsTSKs
 
 В Colab эта тетрадка сохраняет CSV в `/content/lowres_lab/lesson01_language_dataset_inventory.csv`. Его можно загрузить в Google Sheets или использовать как основу для обновления общей таблицы.
 """),
@@ -815,6 +962,8 @@ https://docs.google.com/spreadsheets/d/1XIW9BCxs4ENsQUhiK1HYGzpA1aLiYcwOOOfnmZNt
 5. **Updater** обновляет Google Sheet только для безопасных полей: counts, даты проверки, ссылки на источники.
 6. **Human review** получает спорные изменения: новый источник без понятной лицензии, резкое падение counts, объединение языков/вариантов, изменение классификации.
 
+Где здесь веб-поиск? Его можно добавить отдельным агентом `WebDiscoveryAgent`: он ищет новые кандидаты по запросам вроде `"удмуртский корпус скачать"`, `"Udmurt dataset"`, `"site:github.com udmurt corpus"`, `"site:huggingface.co/datasets udmurt"`. Но веб-поиск лучше использовать как слой обнаружения, а не как источник финальных чисел. Найденные ссылки должны попадать в лист `candidates_for_review`, пока человек не подтвердит язык, лицензию, формат, объем и надежность источника.
+
 Самый простой стек для курса:
 
 - `scripts/build_language_dataset_inventory.py` лежит в GitHub;
@@ -827,6 +976,7 @@ Colab для такого расписания не подходит: он хо�
 """),
         code("""
 def compare_inventory_snapshots(old_df, new_df):
+    \"\"\"Return row-level changes between two inventory snapshots.\"\"\"
     key = 'iso639_3'
     old = old_df.set_index(key)
     new = new_df.set_index(key)
@@ -890,7 +1040,7 @@ jobs:
         run: python scripts/update_google_sheet.py
         env:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
-          SPREADSHEET_ID: "1XIW9BCxs4ENsQUhiK1HYGzpA1aLiYcwOOOfnmZNtcB8"
+          SPREADSHEET_ID: "1s3aSJEs8oYnnTomZil70iK_fzeQi3Ujs4W0Z9KsTSKs"
 ```
 
 В реальном проекте секреты Google API нельзя хранить в notebook. Их кладут в GitHub Secrets, Google Cloud Secret Manager или другой защищенный secret store.
@@ -902,8 +1052,10 @@ jobs:
 2. Где есть Википедия, но почти нет параллельных данных?
 3. Где OPUS показывает нули: это значит “данных нет” или “мы не нашли правильный код/источник”?
 4. Какие источники надо добавить следующими: национальные корпуса, сайты СМИ, библиотеки, архивы, Hugging Face, GitHub?
-5. Какие поля можно обновлять автоматически, а какие требуют human review?
-6. Как часто стоит запускать фонового агента для такой таблицы и почему?
+5. Какие результаты HF-поиска выглядят полезными, но требуют ручной проверки?
+6. Какие веб-поисковые запросы вы бы добавили для своего языка?
+7. Какие поля можно обновлять автоматически, а какие требуют human review?
+8. Как часто стоит запускать фонового агента для такой таблицы и почему?
 """),
     ]
 
