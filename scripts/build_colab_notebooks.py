@@ -622,7 +622,7 @@ OPUS_API = 'https://opus.nlpl.eu/opusapi'
 HF_DATASETS_API = 'https://huggingface.co/api/datasets'
 
 def api_get(url, params, attempts=3, timeout=30):
-    \"\"\"Fetch JSON from a public API with a small retry loop and rate-limit backoff.\"\"\"
+    \"\"\"Загружает JSON из публичного API с повторами и паузами при rate limit.\"\"\"
     last_error = None
     for attempt in range(attempts):
         try:
@@ -641,13 +641,13 @@ def api_get(url, params, attempts=3, timeout=30):
     raise last_error
 
 def as_int(value):
-    \"\"\"Convert OPUS numeric fields to int while treating blanks as zero.\"\"\"
+    \"\"\"Преобразует числовые поля OPUS в int, считая пустые значения нулем.\"\"\"
     if value in ('', None):
         return 0
     return int(value)
 
 def query_opus_for_language(opus_code):
-    \"\"\"Summarize OPUS monolingual and Russian-parallel resources for one language code.\"\"\"
+    \"\"\"Собирает сводку OPUS по моноязычным и русско-параллельным данным языка.\"\"\"
     empty = {
         'opus_ru_parallel_pairs': 0,
         'opus_ru_parallel_documents': 0,
@@ -681,7 +681,7 @@ def query_opus_for_language(opus_code):
     }
 
 def query_wikipedia_for_language(wiki_code):
-    \"\"\"Read Wikipedia site statistics for a language edition when it exists.\"\"\"
+    \"\"\"Читает статистику языкового раздела Википедии, если такой раздел существует.\"\"\"
     if not wiki_code:
         return {'wiki_checked': False, 'wiki_articles': '', 'wiki_pages': '', 'wiki_source_url': ''}
     try:
@@ -708,11 +708,11 @@ def query_wikipedia_for_language(wiki_code):
         }
 
 def query_huggingface_for_language(row):
-    \"\"\"Search Hugging Face datasets and summarize likely resources for one language.
+    \"\"\"Ищет датасеты на Hugging Face и собирает сводку вероятных ресурсов языка.
 
-    HF search usually does not expose exact document or sentence counts. We store discovery
-    metadata instead: number of candidate datasets, likely Russian-parallel candidates,
-    top dataset IDs, downloads, and size categories from tags.
+    HF-поиск обычно не дает точного количества документов или предложений.
+    Поэтому сохраняем разведочные метаданные: число кандидатов, вероятные русско-
+    параллельные датасеты, топ id датасетов, скачивания и категории размера из тегов.
     \"\"\"
     language_tags = {
         f"language:{row.get('opus_code')}" if row.get('opus_code') else '',
@@ -757,7 +757,7 @@ def query_huggingface_for_language(row):
     ]
 
     def mentions_language_name(text, names):
-        \"\"\"Return True when a full language name appears as a word-like phrase.\"\"\"
+        \"\"\"Проверяет, встречается ли полное название языка как отдельная фраза.\"\"\"
         for name in names:
             if not name:
                 continue
@@ -781,7 +781,7 @@ def query_huggingface_for_language(row):
             datasets.append(dataset)
 
     def is_ru_parallel(dataset):
-        \"\"\"Heuristically mark a Hugging Face dataset as Russian-parallel.\"\"\"
+        \"\"\"Эвристически определяет, похож ли HF-датасет на русско-параллельный.\"\"\"
         tags = set(dataset.get('tags') or [])
         text = ' '.join([
             dataset.get('id', ''),
@@ -797,7 +797,7 @@ def query_huggingface_for_language(row):
         )
 
     def specificity_score(dataset):
-        \"\"\"Rank language-specific datasets above broad multilingual collections.\"\"\"
+        \"\"\"Ставит языково-специфичные датасеты выше широких многоязычных коллекций.\"\"\"
         tags = set(dataset.get('tags') or [])
         text = ' '.join([
             dataset.get('id', ''),
@@ -836,7 +836,7 @@ def query_huggingface_for_language(row):
         md("## 3. Plain Python агент: state, tools, observations, report"),
         code("""
 def scout_language(row):
-    \"\"\"Collect all observations for one language into one serializable row.\"\"\"
+    \"\"\"Собирает все наблюдения по одному языку в одну сериализуемую строку.\"\"\"
     observation = dict(row)
     observation.update(query_opus_for_language(row.get('opus_code')))
     observation.update(query_wikipedia_for_language(row.get('wiki_code')))
@@ -847,7 +847,7 @@ def scout_language(row):
     return observation
 
 def run_dataset_scout(languages):
-    \"\"\"Run the plain Python version of the dataset-scouting agent.\"\"\"
+    \"\"\"Запускает plain Python-версию агента разведки датасетов.\"\"\"
     state = {
         'goal': 'собрать первичную карту языков и открытых датасетов',
         'sources': ['OPUS API', 'Hugging Face dataset API', 'Wikipedia siteinfo API'],
@@ -894,11 +894,11 @@ class DatasetScoutState(TypedDict, total=False):
     summary: Dict[str, Any]
 
 def init_state_node(state: DatasetScoutState):
-    \"\"\"Prepare empty graph fields before collection starts.\"\"\"
+    \"\"\"Готовит пустые поля графа перед началом сбора данных.\"\"\"
     return {'observations': [], 'errors': []}
 
 def collect_node(state: DatasetScoutState):
-    \"\"\"Run the source-checking tools for every language in the graph state.\"\"\"
+    \"\"\"Запускает инструменты проверки источников для каждого языка в state графа.\"\"\"
     observations = []
     errors = []
     for lang in state['languages']:
@@ -909,12 +909,12 @@ def collect_node(state: DatasetScoutState):
     return {'observations': observations, 'errors': errors}
 
 def table_node(state: DatasetScoutState):
-    \"\"\"Convert collected observations into a sorted pandas table.\"\"\"
+    \"\"\"Преобразует собранные наблюдения в отсортированную pandas-таблицу.\"\"\"
     inventory = pd.DataFrame(state['observations']).sort_values(['family', 'branch', 'language_ru']).reset_index(drop=True)
     return {'inventory': inventory}
 
 def summary_node(state: DatasetScoutState):
-    \"\"\"Compute compact metrics that help the presenter inspect the run.\"\"\"
+    \"\"\"Считает компактные метрики, по которым удобно проверять результат прогона.\"\"\"
     inventory = state['inventory']
     return {'summary': {
         'languages_total': len(state['languages']),
@@ -976,7 +976,7 @@ Colab для такого расписания не подходит: он хо�
 """),
         code("""
 def compare_inventory_snapshots(old_df, new_df):
-    \"\"\"Return row-level changes between two inventory snapshots.\"\"\"
+    \"\"\"Возвращает изменения по строкам между двумя снимками инвентаризации.\"\"\"
     key = 'iso639_3'
     old = old_df.set_index(key)
     new = new_df.set_index(key)

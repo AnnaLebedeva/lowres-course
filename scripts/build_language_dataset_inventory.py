@@ -69,7 +69,7 @@ LANGUAGES = [
 
 
 def api_json(url, params, attempts=3, timeout=30):
-    """Fetch JSON from a public API with a small retry loop."""
+    """Загружает JSON из публичного API с короткими повторами при сбоях."""
     query = urllib.parse.urlencode(params)
     full_url = f"{url}?{query}"
     last_error = None
@@ -85,7 +85,7 @@ def api_json(url, params, attempts=3, timeout=30):
 
 
 def opus_summary(opus_code):
-    """Summarize OPUS monolingual and Russian-parallel resources for one language code."""
+    """Собирает сводку OPUS по моноязычным и русско-параллельным данным языка."""
     empty = {
         "opus_ru_parallel_pairs": 0,
         "opus_ru_parallel_documents": 0,
@@ -117,7 +117,7 @@ def opus_summary(opus_code):
     ]
 
     def as_int(value):
-        """Convert OPUS numeric fields to int while treating blanks as zero."""
+        """Преобразует числовые поля OPUS в int, считая пустые значения нулем."""
         if value in ("", None):
             return 0
         return int(value)
@@ -138,7 +138,7 @@ def opus_summary(opus_code):
 
 
 def wiki_summary(wiki_code):
-    """Read Wikipedia site statistics for a language edition when it exists."""
+    """Читает статистику языкового раздела Википедии, если такой раздел существует."""
     if not wiki_code:
         return {"wiki_checked": False, "wiki_articles": "", "wiki_pages": "", "wiki_source_url": ""}
     try:
@@ -166,11 +166,11 @@ def wiki_summary(wiki_code):
 
 
 def hf_dataset_summary(item):
-    """Search Hugging Face datasets and summarize likely language resources.
+    """Ищет датасеты на Hugging Face и собирает сводку вероятных языковых ресурсов.
 
-    Hugging Face search does not provide a reliable document/sentence count for every dataset.
-    We therefore store discovery metadata: number of candidate datasets, likely Russian-parallel
-    candidates, top dataset IDs, downloads, and size categories from dataset tags.
+    Поиск Hugging Face не всегда дает надежное количество документов или предложений.
+    Поэтому сохраняем разведочные метаданные: число кандидатов, вероятные русско-
+    параллельные датасеты, топ id датасетов, скачивания и категории размера из тегов.
     """
     language_tags = {
         f"language:{item.get('opus_code')}" if item.get("opus_code") else "",
@@ -215,7 +215,7 @@ def hf_dataset_summary(item):
     ]
 
     def mentions_language_name(text, names):
-        """Return True when a full language name appears as a word-like phrase."""
+        """Проверяет, встречается ли полное название языка как отдельная фраза."""
         for name in names:
             if not name:
                 continue
@@ -239,7 +239,7 @@ def hf_dataset_summary(item):
             datasets.append(dataset)
 
     def is_ru_parallel(dataset):
-        """Heuristically mark a Hugging Face dataset as Russian-parallel."""
+        """Эвристически определяет, похож ли HF-датасет на русско-параллельный."""
         tags = set(dataset.get("tags") or [])
         text = " ".join([
             dataset.get("id", ""),
@@ -255,7 +255,7 @@ def hf_dataset_summary(item):
         )
 
     def specificity_score(dataset):
-        """Rank language-specific datasets above broad multilingual collections."""
+        """Ставит языково-специфичные датасеты выше широких многоязычных коллекций."""
         tags = set(dataset.get("tags") or [])
         text = " ".join([
             dataset.get("id", ""),
@@ -293,7 +293,7 @@ def hf_dataset_summary(item):
 
 
 def build_inventory():
-    """Build the full dataset inventory table for the configured language list."""
+    """Собирает полную таблицу инвентаризации для заданного списка языков."""
     rows = []
     checked_at = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     previous_rows = {}
@@ -331,7 +331,7 @@ def build_inventory():
 
 
 def main():
-    """Write the inventory as CSV and XLSX artifacts."""
+    """Записывает инвентаризацию в CSV и XLSX-артефакты."""
     df = build_inventory()
     df = df.sort_values(["family", "branch", "language_ru"]).reset_index(drop=True)
     csv_path = OUT / "russia_languages_dataset_inventory.csv"
