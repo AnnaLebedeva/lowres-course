@@ -592,11 +592,15 @@ def lesson01_dataset_scout_cells():
 Готовый снапшот этой таблицы уже создан в Google Sheets: https://docs.google.com/spreadsheets/d/1Qfr6JCB5CF-NLwQBODStqfhesrYw9tIVh2s_A6cg0d8
 """),
         code("""
-!pip -q install pandas requests openpyxl
+!pip -q install pandas requests openpyxl beautifulsoup4 langgraph
 """),
         code(COMMON_SETUP + """
 from datetime import datetime, timezone
 import re
+from typing import Any, Dict, List, TypedDict
+from urllib.parse import parse_qs, quote_plus, unquote, urljoin, urlparse
+from bs4 import BeautifulSoup
+from langgraph.graph import StateGraph, END
 """),
         md("""
 ## 1. Seed list языков
@@ -786,13 +790,13 @@ hf_fields_we_extract = {
 display(pd.DataFrame([hf_fields_we_extract]).T.rename(columns={0: 'value'}))
 """),
         md("""
-## 5. Почему здесь не нужны агенты
+## 5. Где заканчивается пайплайн и начинается агент
 
-Эту задачу лучше решать обычным алгоритмом. У нас есть фиксированный список языков, заранее известные API, понятные поля ответа и воспроизводимые шаги обработки. Если нужно проверить конкретную языковую пару или скачать конкретный датасет, это тоже проще, надежнее и дешевле сделать обычным кодом или руками.
+Первую часть задачи лучше решать обычным алгоритмом. У нас есть фиксированный список языков, заранее известные API, понятные поля ответа и воспроизводимые шаги обработки. Если нужно проверить конкретную языковую пару в OPUS/HF или скачать конкретный датасет, это проще, надежнее и дешевле сделать обычным кодом или руками.
 
-Агенты становятся уместны в другой ситуации: когда вход неформализован, источники заранее неизвестны, а набор решений нельзя полностью подготовить до запуска. Например: “найди все пригодные материалы для коми-пермяцкого, не перепутай его с коми-зырянским, отдели готовые датасеты от просто текстовых источников, оцени лицензионные риски и предложи, что проверить человеку”. Это уже не чистая табличная инвентаризация, а исследовательская разведка с неоднозначными решениями.
+Агенты становятся уместны сразу после этого: когда вход неформализован, источники заранее неизвестны, а набор решений нельзя полностью подготовить до запуска. Например: “найди все пригодные материалы для коми-пермяцкого, не перепутай его с коми-зырянским, отдели готовые датасеты от просто текстовых источников, оцени лицензионные риски и предложи, что проверить человеку”.
 
-В этой тетрадке мы сознательно оставляем только пайплайн сбора датасетов. Это хороший пример того, где агент не нужен.
+Такой поиск датасетов — недетерминированная исследовательская разведка: надо пройтись по выдаче, открыть страницы, понять, есть ли там датасет, найти ссылку на скачивание, проверить формат и решить, что отправить человеку на review. Ниже мы сначала соберем алгоритмическую таблицу по всем языкам, а потом для одного языка добавим аккуратного агента веб-разведки.
 """),
         md("## 6. Функции свертки источников в наблюдения"),
         code("""
@@ -1112,6 +1116,563 @@ jobs:
 В реальном проекте секреты Google API нельзя хранить в notebook. Их кладут в GitHub Secrets, Google Cloud Secret Manager или другой защищенный secret store.
 """),
         md("""
+## 10. Агент веб-разведки для одного языка
+
+Теперь берем место, где агенты действительно в тему. OPUS/HF-пайплайн выше работает по известным API. Но реальная разведка датасетов часто начинается с неформализованного запроса:
+
+> Найди открытые датасеты для удмуртского языка. Не считай Wikipedia готовым датасетом. Отделяй готовые датасеты от просто источников текстов. Если видишь GitHub, архив, корпус или страницу проекта, попробуй понять, можно ли скачать данные и что должен проверить человек.
+
+Это уже не таблица по заранее известной схеме. Здесь агенту нужны:
+
+- **state**: цель, язык, поисковые запросы, найденные страницы, кандидаты, ошибки;
+- **tools**: web search, открытие страницы, извлечение ссылок, probe скачивания;
+- **policy**: когда страницу считать кандидатом в датасет, когда отправлять на human review;
+- **LLM-слой**: опционально, для планирования запросов и классификации неоднозначных страниц.
+
+Ниже все ограничено специально для занятия: один язык, несколько запросов, несколько результатов, маленькие скачивания/probe, без автономного бесконечного браузинга.
+"""),
+        code("""
+DISCOVERY_LANGUAGE = {
+    'language_ru': 'удмуртский',
+    'language_en': 'Udmurt',
+    'iso639_3': 'udm',
+    'opus_code': 'udm',
+}
+
+DISCOVERY_GOAL = '''
+Найти дополнительные открытые датасеты или корпуса для удмуртского языка.
+Не считать Wikipedia готовым датасетом. Отделять готовые датасеты от просто
+источников текстов. Для каждого кандидата записать evidence, возможную лицензию,
+тип данных и что должен проверить человек.
+'''
+
+MAX_QUERIES = 4
+MAX_RESULTS_PER_QUERY = 4
+MAX_PAGES_TO_OPEN = 10
+MAX_DOWNLOAD_BYTES = 200_000
+
+CLASSROOM_FALLBACK_RESULTS = [
+    {
+        'title': 'udmurtNLP/flores-250-rus-udm',
+        'url': 'https://huggingface.co/datasets/udmurtNLP/flores-250-rus-udm',
+        'snippet': 'Hugging Face dataset card for a Russian-Udmurt parallel dataset.',
+    },
+    {
+        'title': 'udmurtNLP/udmurt-russian-english-labse',
+        'url': 'https://huggingface.co/datasets/udmurtNLP/udmurt-russian-english-labse',
+        'snippet': 'Hugging Face dataset card related to Udmurt, Russian and English data.',
+    },
+    {
+        'title': 'udmurtNLP/soviet-geography-book-rus-udm-parallel-corpora',
+        'url': 'https://huggingface.co/datasets/udmurtNLP/soviet-geography-book-rus-udm-parallel-corpora',
+        'snippet': 'Hugging Face dataset card for a Russian-Udmurt parallel corpus.',
+    },
+    {
+        'title': 'GitHub search: Udmurt corpus',
+        'url': 'https://github.com/search?q=Udmurt+corpus&type=repositories',
+        'snippet': 'GitHub repository search page for Udmurt corpus candidates.',
+    },
+]
+"""),
+        md("### 10.1. Tools: поиск, чтение страниц, проверка ссылок"),
+        code("""
+def normalize_ddg_url(href):
+    \"\"\"Достает настоящий URL из redirect-ссылки DuckDuckGo, если он там спрятан.\"\"\"
+    if not href:
+        return ''
+    parsed = urlparse(href)
+    if 'duckduckgo.com' in parsed.netloc and parsed.path.startswith('/l/'):
+        target = parse_qs(parsed.query).get('uddg', [''])[0]
+        return unquote(target)
+    return href
+
+def classroom_fallback_search(query, max_results=5):
+    \"\"\"Возвращает реальные seed-ссылки, если бесплатный web search заблокирован.\"\"\"
+    return [
+        {**item, 'query': query, 'search_mode': 'classroom_fallback'}
+        for item in CLASSROOM_FALLBACK_RESULTS[:max_results]
+    ]
+
+def web_search(query, max_results=5):
+    \"\"\"Ищет страницы через DuckDuckGo HTML и возвращает короткий список результатов.
+
+    Это не официальный Google Search API, а учебный бесплатный инструмент.
+    В production лучше использовать SerpAPI, Google Custom Search API, Brave Search API
+    или другой легальный поисковый API с понятными лимитами.
+    \"\"\"
+    url = 'https://duckduckgo.com/html/'
+    try:
+        r = requests.get(
+            url,
+            params={'q': query},
+            headers={'User-Agent': 'Mozilla/5.0 lowres-course-dataset-discovery/1.0'},
+            timeout=20,
+        )
+        r.raise_for_status()
+    except Exception as exc:
+        return [{'query': query, 'error': str(exc)}]
+
+    if 'Unfortunately, bots use DuckDuckGo too' in r.text or 'anomaly-modal' in r.text:
+        print('DuckDuckGo показал challenge; используем учебный fallback со стабильными реальными ссылками.')
+        return classroom_fallback_search(query, max_results=max_results)
+
+    soup = BeautifulSoup(r.text, 'html.parser')
+    results = []
+    for node in soup.select('a.result__a')[:max_results]:
+        href = normalize_ddg_url(node.get('href'))
+        title = ' '.join(node.get_text(' ', strip=True).split())
+        snippet_node = node.find_parent('div', class_='result')
+        snippet = ''
+        if snippet_node:
+            snippet = ' '.join(snippet_node.get_text(' ', strip=True).split())
+        if href:
+            results.append({
+                'query': query,
+                'title': title,
+                'url': href,
+                'snippet': snippet[:500],
+                'search_mode': 'duckduckgo_html',
+            })
+    if not results:
+        print('DuckDuckGo не вернул результатов; используем учебный fallback со стабильными реальными ссылками.')
+        return classroom_fallback_search(query, max_results=max_results)
+    return results
+
+def fetch_page(url, max_chars=8000):
+    \"\"\"Открывает HTML-страницу и возвращает текст, ссылки и технические метаданные.\"\"\"
+    try:
+        r = requests.get(
+            url,
+            headers={'User-Agent': 'Mozilla/5.0 lowres-course-dataset-discovery/1.0'},
+            timeout=20,
+        )
+        content_type = r.headers.get('Content-Type', '')
+        status = r.status_code
+        r.raise_for_status()
+    except Exception as exc:
+        return {
+            'url': url,
+            'status': 'error',
+            'error': str(exc),
+            'text': '',
+            'links': [],
+        }
+
+    soup = BeautifulSoup(r.text, 'html.parser')
+    for tag in soup(['script', 'style', 'noscript']):
+        tag.decompose()
+    text = ' '.join(soup.get_text(' ', strip=True).split())[:max_chars]
+    links = []
+    for a in soup.find_all('a', href=True):
+        link_url = urljoin(url, a['href'])
+        label = ' '.join(a.get_text(' ', strip=True).split())
+        links.append({'url': link_url, 'label': label[:160]})
+
+    return {
+        'url': url,
+        'status': status,
+        'content_type': content_type,
+        'text': text,
+        'links': links[:80],
+    }
+
+DOWNLOAD_HINTS = (
+    '.zip', '.tar.gz', '.tgz', '.csv', '.tsv', '.json', '.jsonl', '.txt',
+    '.xml', '.conllu', '.parquet', '.xlsx', '.wav', '.mp3'
+)
+
+def likely_download_link(link):
+    \"\"\"Проверяет по URL и подписи, похожа ли ссылка на скачивание данных.\"\"\"
+    url = link.get('url', '').lower()
+    label = link.get('label', '').lower()
+    joined = f'{url} {label}'
+    return (
+        any(hint in url for hint in DOWNLOAD_HINTS)
+        or 'download' in joined
+        or 'raw.githubusercontent.com' in url
+        or '/resolve/' in url
+        or 'releases/download' in url
+    )
+
+def probe_download(url, max_bytes=MAX_DOWNLOAD_BYTES):
+    \"\"\"Аккуратно проверяет, доступна ли ссылка на данные, не скачивая большие файлы.\"\"\"
+    result = {'download_url': url}
+    try:
+        head = requests.head(
+            url,
+            allow_redirects=True,
+            timeout=15,
+            headers={'User-Agent': 'Mozilla/5.0 lowres-course-dataset-discovery/1.0'},
+        )
+        result.update({
+            'head_status': head.status_code,
+            'content_type': head.headers.get('Content-Type', ''),
+            'content_length': head.headers.get('Content-Length', ''),
+        })
+        length = int(head.headers.get('Content-Length') or 0)
+        if length and length > max_bytes:
+            result['probe_status'] = 'too_large_for_class_demo'
+            return result
+    except Exception as exc:
+        result['head_error'] = str(exc)
+
+    try:
+        get = requests.get(
+            url,
+            stream=True,
+            timeout=20,
+            headers={'User-Agent': 'Mozilla/5.0 lowres-course-dataset-discovery/1.0'},
+        )
+        chunk = next(get.iter_content(chunk_size=min(max_bytes, 4096)), b'')
+        result.update({
+            'get_status': get.status_code,
+            'sample_bytes': len(chunk),
+            'sample_text': chunk[:500].decode('utf-8', errors='replace'),
+            'probe_status': 'sample_downloaded',
+        })
+    except Exception as exc:
+        result['get_error'] = str(exc)
+        result['probe_status'] = 'probe_failed'
+    return result
+"""),
+        md("### 10.2. Policy и опциональная LLM-классификация через OpenRouter"),
+        code("""
+DATASET_WORDS = [
+    'dataset', 'corpus', 'parallel corpus', 'monolingual corpus', 'treebank',
+    'download', 'github', 'huggingface', 'csv', 'jsonl', 'conllu', 'archive',
+    'датасет', 'корпус', 'параллельный корпус', 'скачать', 'данные',
+]
+
+SOURCE_ONLY_WORDS = [
+    'wikipedia', 'encyclopedia', 'news', 'article', 'blog', 'dictionary only',
+    'википедия', 'новость', 'статья',
+]
+
+def heuristic_classify_page(page, language):
+    \"\"\"Классифицирует страницу простыми правилами, если LLM-ключа нет.\"\"\"
+    text = page.get('text', '').lower()
+    url = page.get('url', '').lower()
+    lang_hits = sum(token in text or token in url for token in [
+        language['language_en'].lower(),
+        language['language_ru'].lower(),
+        language['iso639_3'].lower(),
+    ])
+    dataset_hits = sum(word in text or word in url for word in DATASET_WORDS)
+    source_only_hits = sum(word in text or word in url for word in SOURCE_ONLY_WORDS)
+    download_links = [link for link in page.get('links', []) if likely_download_link(link)]
+
+    if dataset_hits >= 2 and lang_hits:
+        label = 'dataset_candidate'
+    elif dataset_hits >= 1 and download_links:
+        label = 'possible_dataset_candidate'
+    elif source_only_hits:
+        label = 'source_or_reference_only'
+    else:
+        label = 'unclear'
+
+    review = []
+    if download_links:
+        review.append('проверить скачиваемые ссылки и формат')
+    if 'license' in text or 'лиценз' in text:
+        review.append('проверить лицензию')
+    else:
+        review.append('лицензия не найдена автоматически')
+    if source_only_hits:
+        review.append('не считать источником финальных чисел без ручной проверки')
+
+    return {
+        'label': label,
+        'confidence': 'medium' if label in {'dataset_candidate', 'source_or_reference_only'} else 'low',
+        'dataset_type': 'unknown',
+        'evidence': page.get('text', '')[:500],
+        'needs_human_review': True,
+        'human_review_note': '; '.join(review),
+        'mode': 'heuristic',
+    }
+
+def call_openrouter_json(prompt, model='openai/gpt-oss-20b:free'):
+    \"\"\"Вызывает OpenRouter и ожидает JSON-ответ, если доступен OPENROUTER_API_KEY.\"\"\"
+    try:
+        from google.colab import userdata
+        api_key = userdata.get('OPENROUTER_API_KEY')
+    except Exception:
+        api_key = os.environ.get('OPENROUTER_API_KEY')
+    if not api_key:
+        return None
+
+    response = requests.post(
+        'https://openrouter.ai/api/v1/chat/completions',
+        headers={
+            'Authorization': f'Bearer {api_key}',
+            'Content-Type': 'application/json',
+        },
+        json={
+            'model': model,
+            'messages': [
+                {'role': 'system', 'content': 'Ты аккуратно классифицируешь страницы про языковые датасеты. Отвечай только JSON.'},
+                {'role': 'user', 'content': prompt},
+            ],
+            'temperature': 0.1,
+        },
+        timeout=60,
+    )
+    response.raise_for_status()
+    raw = response.json()['choices'][0]['message']['content']
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        return {'label': 'llm_unparsed', 'raw_answer': raw, 'needs_human_review': True}
+
+def classify_page(page, language, goal):
+    \"\"\"Классифицирует страницу через LLM, а без ключа использует эвристики.\"\"\"
+    prompt = f\"\"\"Цель:
+{goal}
+
+Язык:
+{json.dumps(language, ensure_ascii=False)}
+
+Страница:
+URL: {page.get('url')}
+TEXT:
+{page.get('text', '')[:5000]}
+
+Верни JSON:
+{{
+  "label": "dataset_candidate | possible_dataset_candidate | source_or_reference_only | irrelevant | unclear",
+  "confidence": "high | medium | low",
+  "dataset_type": "parallel_text | monolingual_text | speech | dictionary | ocr | mixed | unknown",
+  "evidence": "короткая цитата/пересказ признаков",
+  "license_hint": "что видно про лицензию или пусто",
+  "needs_human_review": true,
+  "human_review_note": "что именно проверить человеку"
+}}
+\"\"\"
+    llm_answer = call_openrouter_json(prompt)
+    if llm_answer is not None:
+        llm_answer['mode'] = 'openrouter'
+        return llm_answer
+    return heuristic_classify_page(page, language)
+"""),
+        md("### 10.3. Агент руками: явный цикл state → tools → observations → decisions"),
+        code("""
+def plan_search_queries(language, goal):
+    \"\"\"Планирует несколько поисковых запросов для одного языка.\"\"\"
+    prompt = f\"\"\"Составь до 4 поисковых запросов для поиска датасетов языка.
+Язык: {json.dumps(language, ensure_ascii=False)}
+Цель: {goal}
+Верни JSON: {{"queries": ["..."]}}
+\"\"\"
+    llm_answer = call_openrouter_json(prompt)
+    if llm_answer and isinstance(llm_answer.get('queries'), list):
+        return llm_answer['queries'][:MAX_QUERIES]
+    return [
+        f"{language['language_en']} dataset corpus",
+        f"{language['language_en']} Russian parallel corpus",
+        f"{language['language_en']} language GitHub corpus",
+        f"{language['language_ru']} корпус скачать датасет",
+    ][:MAX_QUERIES]
+
+def run_manual_discovery_agent(language, goal):
+    \"\"\"Запускает маленького агента веб-разведки без фреймворка.\"\"\"
+    state = {
+        'goal': goal,
+        'language': language,
+        'queries': [],
+        'search_results': [],
+        'pages': [],
+        'candidates': [],
+        'download_probes': [],
+        'errors': [],
+    }
+    state['queries'] = plan_search_queries(language, goal)
+
+    seen_urls = set()
+    for query in state['queries']:
+        print('search:', query)
+        results = web_search(query, max_results=MAX_RESULTS_PER_QUERY)
+        state['search_results'].extend(results)
+        for item in results:
+            url = item.get('url')
+            if not url or url in seen_urls or item.get('error'):
+                continue
+            seen_urls.add(url)
+            if len(state['pages']) >= MAX_PAGES_TO_OPEN:
+                break
+            page = fetch_page(url)
+            state['pages'].append(page)
+            if page.get('status') == 'error':
+                state['errors'].append({'url': url, 'error': page.get('error')})
+                continue
+            classification = classify_page(page, language, goal)
+            candidate = {
+                'language_ru': language['language_ru'],
+                'language_en': language['language_en'],
+                'url': url,
+                'title': item.get('title', ''),
+                'query': query,
+                **classification,
+            }
+            candidate_links = [link for link in page.get('links', []) if likely_download_link(link)][:3]
+            candidate['download_link_count'] = len(candidate_links)
+            candidate['download_links'] = '; '.join(link['url'] for link in candidate_links)
+            state['candidates'].append(candidate)
+            for link in candidate_links[:1]:
+                state['download_probes'].append({
+                    'page_url': url,
+                    **probe_download(link['url']),
+                })
+    return state
+
+manual_agent_state = run_manual_discovery_agent(DISCOVERY_LANGUAGE, DISCOVERY_GOAL)
+print('pages opened:', len(manual_agent_state['pages']))
+print('candidates:', len(manual_agent_state['candidates']))
+print('download probes:', len(manual_agent_state['download_probes']))
+"""),
+        code("""
+manual_candidates = pd.DataFrame(manual_agent_state['candidates'])
+if len(manual_candidates):
+    display(manual_candidates[[
+        'language_ru', 'label', 'confidence', 'dataset_type',
+        'title', 'url', 'download_link_count', 'human_review_note', 'mode'
+    ]].head(20))
+    save_artifact('lesson01_manual_agent_candidates.csv', manual_candidates)
+
+manual_probes = pd.DataFrame(manual_agent_state['download_probes'])
+if len(manual_probes):
+    display(manual_probes.head(10))
+    save_artifact('lesson01_manual_agent_download_probes.csv', manual_probes)
+"""),
+        md("""
+Что здесь агентского:
+
+- вход свободный, а не набор параметров API;
+- агент сам превращает цель в поисковые запросы;
+- список страниц заранее неизвестен;
+- для каждой страницы надо принять неоднозначное решение: датасет, источник текстов, мусор или кандидат на review;
+- если на странице есть скачиваемые ссылки, агент сам выбирает, что аккуратно проверить;
+- результат не финальная истина, а очередь для human review.
+
+OpenRouter здесь отвечает только за LLM-решения. Он не гуглит и не скачивает сам. Поиск, чтение страниц и probe скачивания — это tools, которые мы написали отдельно.
+"""),
+        md("### 10.4. Та же разведка в LangGraph"),
+        code("""
+class DiscoveryState(TypedDict, total=False):
+    goal: str
+    language: Dict[str, Any]
+    queries: List[str]
+    search_results: List[Dict[str, Any]]
+    pages: List[Dict[str, Any]]
+    candidates: List[Dict[str, Any]]
+    download_probes: List[Dict[str, Any]]
+    errors: List[Dict[str, Any]]
+    report: Dict[str, Any]
+
+def plan_node(state: DiscoveryState):
+    \"\"\"Планирует поисковые запросы из свободной цели и языка.\"\"\"
+    return {'queries': plan_search_queries(state['language'], state['goal'])}
+
+def search_node(state: DiscoveryState):
+    \"\"\"Запускает web_search по всем запланированным запросам.\"\"\"
+    results = []
+    for query in state['queries'][:MAX_QUERIES]:
+        results.extend(web_search(query, max_results=MAX_RESULTS_PER_QUERY))
+    return {'search_results': results}
+
+def inspect_node(state: DiscoveryState):
+    \"\"\"Открывает найденные страницы, классифицирует их и проверяет ссылки на данные.\"\"\"
+    pages = []
+    candidates = []
+    probes = []
+    errors = []
+    seen = set()
+    for item in state['search_results']:
+        url = item.get('url')
+        if not url or url in seen or item.get('error'):
+            continue
+        seen.add(url)
+        if len(pages) >= MAX_PAGES_TO_OPEN:
+            break
+        page = fetch_page(url)
+        pages.append(page)
+        if page.get('status') == 'error':
+            errors.append({'url': url, 'error': page.get('error')})
+            continue
+        classification = classify_page(page, state['language'], state['goal'])
+        links = [link for link in page.get('links', []) if likely_download_link(link)][:3]
+        candidates.append({
+            'language_ru': state['language']['language_ru'],
+            'language_en': state['language']['language_en'],
+            'url': url,
+            'title': item.get('title', ''),
+            'query': item.get('query', ''),
+            **classification,
+            'download_link_count': len(links),
+            'download_links': '; '.join(link['url'] for link in links),
+        })
+        for link in links[:1]:
+            probes.append({'page_url': url, **probe_download(link['url'])})
+    return {'pages': pages, 'candidates': candidates, 'download_probes': probes, 'errors': errors}
+
+def report_node(state: DiscoveryState):
+    \"\"\"Собирает короткий отчет по результатам разведки.\"\"\"
+    candidates = state.get('candidates', [])
+    useful = [c for c in candidates if c.get('label') in {'dataset_candidate', 'possible_dataset_candidate'}]
+    return {'report': {
+        'language_ru': state['language']['language_ru'],
+        'queries': state.get('queries', []),
+        'search_results': len(state.get('search_results', [])),
+        'pages_opened': len(state.get('pages', [])),
+        'candidates_total': len(candidates),
+        'dataset_candidates': len(useful),
+        'download_probes': len(state.get('download_probes', [])),
+        'errors': len(state.get('errors', [])),
+    }}
+
+discovery_graph = StateGraph(DiscoveryState)
+discovery_graph.add_node('plan', plan_node)
+discovery_graph.add_node('search', search_node)
+discovery_graph.add_node('inspect', inspect_node)
+discovery_graph.add_node('report', report_node)
+discovery_graph.set_entry_point('plan')
+discovery_graph.add_edge('plan', 'search')
+discovery_graph.add_edge('search', 'inspect')
+discovery_graph.add_edge('inspect', 'report')
+discovery_graph.add_edge('report', END)
+
+dataset_discovery_agent = discovery_graph.compile()
+graph_agent_state = dataset_discovery_agent.invoke({
+    'language': DISCOVERY_LANGUAGE,
+    'goal': DISCOVERY_GOAL,
+})
+graph_agent_state['report']
+"""),
+        code("""
+graph_candidates = pd.DataFrame(graph_agent_state['candidates'])
+if len(graph_candidates):
+    display(graph_candidates[[
+        'language_ru', 'label', 'confidence', 'dataset_type',
+        'title', 'url', 'download_link_count', 'human_review_note', 'mode'
+    ]].head(20))
+    save_artifact('lesson01_langgraph_agent_candidates.csv', graph_candidates)
+
+graph_probes = pd.DataFrame(graph_agent_state['download_probes'])
+if len(graph_probes):
+    display(graph_probes.head(10))
+    save_artifact('lesson01_langgraph_agent_download_probes.csv', graph_probes)
+"""),
+        md("""
+LangGraph не делает агента умнее сам по себе. Его смысл здесь в другом: он явно фиксирует архитектуру и состояние.
+
+В plain Python версии мы сами держали порядок шагов в цикле. В LangGraph версии те же решения разложены по узлам:
+
+1. `plan`: превратить свободную цель в поисковые запросы;
+2. `search`: собрать выдачу;
+3. `inspect`: открыть страницы, классифицировать, проверить ссылки;
+4. `report`: собрать краткий отчет.
+
+Дальше этот граф можно расширять: добавить условный повтор поиска, отдельного license critic, human-in-the-loop узел, запись в Google Sheet, ограничение бюджета и сохранение state между запусками.
+"""),
+        md("""
 ## Вопросы для отчета
 
 1. Какие языковые семьи в таблице оказываются лучше всего покрыты параллельными данными с русским?
@@ -1122,6 +1683,8 @@ jobs:
 6. Какие веб-поисковые запросы вы бы добавили для своего языка?
 7. Какие поля можно обновлять автоматически, а какие требуют human review?
 8. Как часто стоит запускать фоновое обновление для такой таблицы и почему?
+9. Чем веб-разведка датасетов отличается от OPUS/HF-пайплайна?
+10. Какие решения агента в этом примере обязательно должен проверить человек?
 """),
     ]
 
