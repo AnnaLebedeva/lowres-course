@@ -531,48 +531,48 @@ display(pd.DataFrame([state['ocr_diagnostics'], state['wiki_stats']], index=['oc
 
 def lesson01_dataset_scout_cells():
     languages_code = repr([
-        {"language_ru": "татарский", "language_en": "Tatar", "family": "Тюркская", "branch": "кыпчакская", "iso639_3": "tat", "opus_code": "tt", "wiki_code": "tt"},
-        {"language_ru": "башкирский", "language_en": "Bashkir", "family": "Тюркская", "branch": "кыпчакская", "iso639_3": "bak", "opus_code": "ba", "wiki_code": "ba"},
-        {"language_ru": "чувашский", "language_en": "Chuvash", "family": "Тюркская", "branch": "огурская", "iso639_3": "chv", "opus_code": "chv", "wiki_code": "cv"},
-        {"language_ru": "якутский / саха", "language_en": "Sakha / Yakut", "family": "Тюркская", "branch": "сибирская", "iso639_3": "sah", "opus_code": "sah", "wiki_code": "sah"},
-        {"language_ru": "тувинский", "language_en": "Tuvan", "family": "Тюркская", "branch": "сибирская", "iso639_3": "tyv", "opus_code": "tyv", "wiki_code": "tyv"},
-        {"language_ru": "хакасский", "language_en": "Khakas", "family": "Тюркская", "branch": "сибирская", "iso639_3": "kjh", "opus_code": "kjh", "wiki_code": None},
-        {"language_ru": "алтайский", "language_en": "Altai", "family": "Тюркская", "branch": "сибирская", "iso639_3": "alt", "opus_code": "alt", "wiki_code": "alt"},
-        {"language_ru": "кумыкский", "language_en": "Kumyk", "family": "Тюркская", "branch": "кыпчакская", "iso639_3": "kum", "opus_code": "kum", "wiki_code": None},
-        {"language_ru": "карачаево-балкарский", "language_en": "Karachay-Balkar", "family": "Тюркская", "branch": "кыпчакская", "iso639_3": "krc", "opus_code": "krc", "wiki_code": "krc"},
-        {"language_ru": "ногайский", "language_en": "Nogai", "family": "Тюркская", "branch": "кыпчакская", "iso639_3": "nog", "opus_code": "nog", "wiki_code": None},
-        {"language_ru": "крымскотатарский", "language_en": "Crimean Tatar", "family": "Тюркская", "branch": "кыпчакско-огузская", "iso639_3": "crh", "opus_code": "crh", "wiki_code": "crh"},
-        {"language_ru": "удмуртский", "language_en": "Udmurt", "family": "Уральская", "branch": "пермская", "iso639_3": "udm", "opus_code": "udm", "wiki_code": "udm"},
-        {"language_ru": "коми-зырянский", "language_en": "Komi-Zyrian", "family": "Уральская", "branch": "пермская", "iso639_3": "kpv", "opus_code": "kpv", "wiki_code": "kv"},
-        {"language_ru": "коми-пермяцкий", "language_en": "Komi-Permyak", "family": "Уральская", "branch": "пермская", "iso639_3": "koi", "opus_code": "koi", "wiki_code": "koi"},
-        {"language_ru": "эрзянский", "language_en": "Erzya", "family": "Уральская", "branch": "мордовская", "iso639_3": "myv", "opus_code": "myv", "wiki_code": "myv"},
-        {"language_ru": "мокшанский", "language_en": "Moksha", "family": "Уральская", "branch": "мордовская", "iso639_3": "mdf", "opus_code": "mdf", "wiki_code": "mdf"},
-        {"language_ru": "марийский луговой", "language_en": "Meadow Mari", "family": "Уральская", "branch": "марийская", "iso639_3": "mhr", "opus_code": "mhr", "wiki_code": "mhr"},
-        {"language_ru": "марийский горный", "language_en": "Hill Mari", "family": "Уральская", "branch": "марийская", "iso639_3": "mrj", "opus_code": "mrj", "wiki_code": "mrj"},
-        {"language_ru": "карельский", "language_en": "Karelian", "family": "Уральская", "branch": "прибалтийско-финская", "iso639_3": "krl", "opus_code": "krl", "wiki_code": "krl"},
-        {"language_ru": "вепсский", "language_en": "Veps", "family": "Уральская", "branch": "прибалтийско-финская", "iso639_3": "vep", "opus_code": "vep", "wiki_code": "vep"},
-        {"language_ru": "хантыйский", "language_en": "Khanty", "family": "Уральская", "branch": "угорская", "iso639_3": "kca", "opus_code": None, "wiki_code": None},
-        {"language_ru": "мансийский", "language_en": "Mansi", "family": "Уральская", "branch": "угорская", "iso639_3": "mns", "opus_code": "mns", "wiki_code": None},
-        {"language_ru": "ненецкий", "language_en": "Nenets", "family": "Уральская", "branch": "самодийская", "iso639_3": "yrk", "opus_code": "yrk", "wiki_code": None},
-        {"language_ru": "чеченский", "language_en": "Chechen", "family": "Северокавказская", "branch": "нахская", "iso639_3": "che", "opus_code": "ce", "wiki_code": "ce"},
-        {"language_ru": "ингушский", "language_en": "Ingush", "family": "Северокавказская", "branch": "нахская", "iso639_3": "inh", "opus_code": "inh", "wiki_code": "inh"},
-        {"language_ru": "аварский", "language_en": "Avar", "family": "Северокавказская", "branch": "нахско-дагестанская", "iso639_3": "ava", "opus_code": "av", "wiki_code": "av"},
-        {"language_ru": "даргинский", "language_en": "Dargwa", "family": "Северокавказская", "branch": "нахско-дагестанская", "iso639_3": "dar", "opus_code": "dar", "wiki_code": None},
-        {"language_ru": "лезгинский", "language_en": "Lezgian", "family": "Северокавказская", "branch": "нахско-дагестанская", "iso639_3": "lez", "opus_code": "lez", "wiki_code": "lez"},
-        {"language_ru": "лакский", "language_en": "Lak", "family": "Северокавказская", "branch": "нахско-дагестанская", "iso639_3": "lbe", "opus_code": "lbe", "wiki_code": "lbe"},
-        {"language_ru": "рутульский", "language_en": "Rutul", "family": "Северокавказская", "branch": "нахско-дагестанская", "iso639_3": "rut", "opus_code": "rut", "wiki_code": None},
-        {"language_ru": "адыгейский", "language_en": "Adyghe", "family": "Северокавказская", "branch": "абхазо-адыгская", "iso639_3": "ady", "opus_code": "ady", "wiki_code": "ady"},
-        {"language_ru": "кабардино-черкесский", "language_en": "Kabardian", "family": "Северокавказская", "branch": "абхазо-адыгская", "iso639_3": "kbd", "opus_code": "kbd", "wiki_code": "kbd"},
-        {"language_ru": "абазинский", "language_en": "Abaza", "family": "Северокавказская", "branch": "абхазо-адыгская", "iso639_3": "abq", "opus_code": None, "wiki_code": None},
-        {"language_ru": "бурятский", "language_en": "Buryat", "family": "Монгольская", "branch": "монгольская", "iso639_3": "bxr", "opus_code": "bxr", "wiki_code": "bxr"},
-        {"language_ru": "калмыцкий", "language_en": "Kalmyk", "family": "Монгольская", "branch": "ойратская", "iso639_3": "xal", "opus_code": "xal", "wiki_code": "xal"},
-        {"language_ru": "эвенкийский", "language_en": "Evenki", "family": "Тунгусо-маньчжурская", "branch": "тунгусская", "iso639_3": "evn", "opus_code": "evn", "wiki_code": None},
-        {"language_ru": "нанайский", "language_en": "Nanai", "family": "Тунгусо-маньчжурская", "branch": "тунгусская", "iso639_3": "gld", "opus_code": "gld", "wiki_code": None},
-        {"language_ru": "нивхский", "language_en": "Nivkh", "family": "изолят / палеоазиатская группа", "branch": "нивхская", "iso639_3": "niv", "opus_code": None, "wiki_code": None},
-        {"language_ru": "чукотский", "language_en": "Chukchi", "family": "чукотско-камчатская", "branch": "чукотская", "iso639_3": "ckt", "opus_code": None, "wiki_code": None},
-        {"language_ru": "корякский", "language_en": "Koryak", "family": "чукотско-камчатская", "branch": "чукотская", "iso639_3": "kpy", "opus_code": None, "wiki_code": None},
-        {"language_ru": "алеутский", "language_en": "Aleut", "family": "эскимосско-алеутская", "branch": "алеутская", "iso639_3": "ale", "opus_code": "ale", "wiki_code": None},
-        {"language_ru": "эскимосский / юпик", "language_en": "Yupik", "family": "эскимосско-алеутская", "branch": "эскимосская", "iso639_3": "ess", "opus_code": None, "wiki_code": None},
+        {"language_ru": "татарский", "language_en": "Tatar", "family": "Тюркская", "branch": "кыпчакская", "iso639_3": "tat", "opus_code": "tt"},
+        {"language_ru": "башкирский", "language_en": "Bashkir", "family": "Тюркская", "branch": "кыпчакская", "iso639_3": "bak", "opus_code": "ba"},
+        {"language_ru": "чувашский", "language_en": "Chuvash", "family": "Тюркская", "branch": "огурская", "iso639_3": "chv", "opus_code": "chv"},
+        {"language_ru": "якутский / саха", "language_en": "Sakha / Yakut", "family": "Тюркская", "branch": "сибирская", "iso639_3": "sah", "opus_code": "sah"},
+        {"language_ru": "тувинский", "language_en": "Tuvan", "family": "Тюркская", "branch": "сибирская", "iso639_3": "tyv", "opus_code": "tyv"},
+        {"language_ru": "хакасский", "language_en": "Khakas", "family": "Тюркская", "branch": "сибирская", "iso639_3": "kjh", "opus_code": "kjh"},
+        {"language_ru": "алтайский", "language_en": "Altai", "family": "Тюркская", "branch": "сибирская", "iso639_3": "alt", "opus_code": "alt"},
+        {"language_ru": "кумыкский", "language_en": "Kumyk", "family": "Тюркская", "branch": "кыпчакская", "iso639_3": "kum", "opus_code": "kum"},
+        {"language_ru": "карачаево-балкарский", "language_en": "Karachay-Balkar", "family": "Тюркская", "branch": "кыпчакская", "iso639_3": "krc", "opus_code": "krc"},
+        {"language_ru": "ногайский", "language_en": "Nogai", "family": "Тюркская", "branch": "кыпчакская", "iso639_3": "nog", "opus_code": "nog"},
+        {"language_ru": "крымскотатарский", "language_en": "Crimean Tatar", "family": "Тюркская", "branch": "кыпчакско-огузская", "iso639_3": "crh", "opus_code": "crh"},
+        {"language_ru": "удмуртский", "language_en": "Udmurt", "family": "Уральская", "branch": "пермская", "iso639_3": "udm", "opus_code": "udm"},
+        {"language_ru": "коми-зырянский", "language_en": "Komi-Zyrian", "family": "Уральская", "branch": "пермская", "iso639_3": "kpv", "opus_code": "kpv"},
+        {"language_ru": "коми-пермяцкий", "language_en": "Komi-Permyak", "family": "Уральская", "branch": "пермская", "iso639_3": "koi", "opus_code": "koi"},
+        {"language_ru": "эрзянский", "language_en": "Erzya", "family": "Уральская", "branch": "мордовская", "iso639_3": "myv", "opus_code": "myv"},
+        {"language_ru": "мокшанский", "language_en": "Moksha", "family": "Уральская", "branch": "мордовская", "iso639_3": "mdf", "opus_code": "mdf"},
+        {"language_ru": "марийский луговой", "language_en": "Meadow Mari", "family": "Уральская", "branch": "марийская", "iso639_3": "mhr", "opus_code": "mhr"},
+        {"language_ru": "марийский горный", "language_en": "Hill Mari", "family": "Уральская", "branch": "марийская", "iso639_3": "mrj", "opus_code": "mrj"},
+        {"language_ru": "карельский", "language_en": "Karelian", "family": "Уральская", "branch": "прибалтийско-финская", "iso639_3": "krl", "opus_code": "krl"},
+        {"language_ru": "вепсский", "language_en": "Veps", "family": "Уральская", "branch": "прибалтийско-финская", "iso639_3": "vep", "opus_code": "vep"},
+        {"language_ru": "хантыйский", "language_en": "Khanty", "family": "Уральская", "branch": "угорская", "iso639_3": "kca", "opus_code": None},
+        {"language_ru": "мансийский", "language_en": "Mansi", "family": "Уральская", "branch": "угорская", "iso639_3": "mns", "opus_code": "mns"},
+        {"language_ru": "ненецкий", "language_en": "Nenets", "family": "Уральская", "branch": "самодийская", "iso639_3": "yrk", "opus_code": "yrk"},
+        {"language_ru": "чеченский", "language_en": "Chechen", "family": "Северокавказская", "branch": "нахская", "iso639_3": "che", "opus_code": "ce"},
+        {"language_ru": "ингушский", "language_en": "Ingush", "family": "Северокавказская", "branch": "нахская", "iso639_3": "inh", "opus_code": "inh"},
+        {"language_ru": "аварский", "language_en": "Avar", "family": "Северокавказская", "branch": "нахско-дагестанская", "iso639_3": "ava", "opus_code": "av"},
+        {"language_ru": "даргинский", "language_en": "Dargwa", "family": "Северокавказская", "branch": "нахско-дагестанская", "iso639_3": "dar", "opus_code": "dar"},
+        {"language_ru": "лезгинский", "language_en": "Lezgian", "family": "Северокавказская", "branch": "нахско-дагестанская", "iso639_3": "lez", "opus_code": "lez"},
+        {"language_ru": "лакский", "language_en": "Lak", "family": "Северокавказская", "branch": "нахско-дагестанская", "iso639_3": "lbe", "opus_code": "lbe"},
+        {"language_ru": "рутульский", "language_en": "Rutul", "family": "Северокавказская", "branch": "нахско-дагестанская", "iso639_3": "rut", "opus_code": "rut"},
+        {"language_ru": "адыгейский", "language_en": "Adyghe", "family": "Северокавказская", "branch": "абхазо-адыгская", "iso639_3": "ady", "opus_code": "ady"},
+        {"language_ru": "кабардино-черкесский", "language_en": "Kabardian", "family": "Северокавказская", "branch": "абхазо-адыгская", "iso639_3": "kbd", "opus_code": "kbd"},
+        {"language_ru": "абазинский", "language_en": "Abaza", "family": "Северокавказская", "branch": "абхазо-адыгская", "iso639_3": "abq", "opus_code": None},
+        {"language_ru": "бурятский", "language_en": "Buryat", "family": "Монгольская", "branch": "монгольская", "iso639_3": "bxr", "opus_code": "bxr"},
+        {"language_ru": "калмыцкий", "language_en": "Kalmyk", "family": "Монгольская", "branch": "ойратская", "iso639_3": "xal", "opus_code": "xal"},
+        {"language_ru": "эвенкийский", "language_en": "Evenki", "family": "Тунгусо-маньчжурская", "branch": "тунгусская", "iso639_3": "evn", "opus_code": "evn"},
+        {"language_ru": "нанайский", "language_en": "Nanai", "family": "Тунгусо-маньчжурская", "branch": "тунгусская", "iso639_3": "gld", "opus_code": "gld"},
+        {"language_ru": "нивхский", "language_en": "Nivkh", "family": "изолят / палеоазиатская группа", "branch": "нивхская", "iso639_3": "niv", "opus_code": None},
+        {"language_ru": "чукотский", "language_en": "Chukchi", "family": "чукотско-камчатская", "branch": "чукотская", "iso639_3": "ckt", "opus_code": None},
+        {"language_ru": "корякский", "language_en": "Koryak", "family": "чукотско-камчатская", "branch": "чукотская", "iso639_3": "kpy", "opus_code": None},
+        {"language_ru": "алеутский", "language_en": "Aleut", "family": "эскимосско-алеутская", "branch": "алеутская", "iso639_3": "ale", "opus_code": "ale"},
+        {"language_ru": "эскимосский / юпик", "language_en": "Yupik", "family": "эскимосско-алеутская", "branch": "эскимосская", "iso639_3": "ess", "opus_code": None},
     ])
     return [
         md("""
@@ -583,13 +583,13 @@ def lesson01_dataset_scout_cells():
 Агент в этой тетрадке собирает первоначальную информацию:
 
 1. берет редактируемый seed list основных живых языков народов России без диалектального уровня;
-2. проверяет OPUS API на параллельные данные с русским;
-3. проверяет OPUS на моноязычные строки/сегменты;
-4. проверяет Hugging Face Datasets как каталог опубликованных корпусов;
-5. проверяет наличие языковой Википедии и ее размер;
+2. показывает, как выглядит ответ OPUS и какие поля из него достает агент;
+3. показывает, как выглядит карточка/ответ Hugging Face Datasets и какие поля из него достает агент;
+4. проверяет OPUS API на параллельные данные с русским;
+5. проверяет Hugging Face Datasets как каталог опубликованных корпусов;
 6. собирает таблицу, которую можно открыть в Google Sheets и дальше править руками.
 
-Готовый снапшот этой таблицы уже создан в Google Sheets: https://docs.google.com/spreadsheets/d/1s3aSJEs8oYnnTomZil70iK_fzeQi3Ujs4W0Z9KsTSKs
+Готовый снапшот этой таблицы уже создан в Google Sheets: https://docs.google.com/spreadsheets/d/1cPapm3KaAqdoL07H3epM3LWwZuMrFYhGgTv6jAoR-qI
 """),
         code("""
 !pip -q install langgraph pandas requests openpyxl
@@ -613,9 +613,11 @@ display(seed_df.groupby(['family', 'branch']).size().reset_index(name='languages
 display(seed_df.head(12))
 """),
         md("""
-## 2. Инструменты агента: OPUS API, Hugging Face и Wikipedia API
+## 2. Инструменты агента: OPUS API и Hugging Face API
 
-Здесь агент работает со структурированными источниками. Это важное ограничение: API дают воспроизводимые поля и ссылки, а веб-поиск дает только кандидатов, которые потом нужно проверять человеком.
+Здесь агент работает со структурированными источниками готовых датасетов. Это важное ограничение: API дают воспроизводимые поля и ссылки, а веб-поиск дает только кандидатов, которые потом нужно проверять человеком.
+
+В этом занятии мы не используем Wikipedia: это хороший источник текстовых данных, но не каталог готовых датасетов. Сейчас нас интересует именно инвентаризация уже опубликованных датасетов и корпусов.
 """),
         code("""
 OPUS_API = 'https://opus.nlpl.eu/opusapi'
@@ -646,6 +648,146 @@ def as_int(value):
         return 0
     return int(value)
 
+def show_json_fragment(obj, keys=None, limit=1600):
+    \"\"\"Печатает небольшой фрагмент JSON, чтобы глазами увидеть форму ответа API.\"\"\"
+    if keys and isinstance(obj, dict):
+        obj = {key: obj.get(key) for key in keys}
+    text = json.dumps(obj, ensure_ascii=False, indent=2)
+    print(text[:limit] + ('\\n...' if len(text) > limit else ''))
+
+def opus_pair_page_url(source, target, corpus='Tatoeba'):
+    \"\"\"Собирает ссылку на человеческую страницу OPUS для корпуса и языковой пары.\"\"\"
+    return f'https://opus.nlpl.eu/datasets/{corpus}?hi={source}&pair={target}'
+
+def opus_pair_api_url(source, target):
+    \"\"\"Собирает ссылку на API-запрос OPUS для языковой пары.\"\"\"
+    return f'{OPUS_API}?source={source}&target={target}&preprocessing=xml&version=latest'
+
+def hf_dataset_page_url(dataset_id):
+    \"\"\"Собирает ссылку на карточку датасета на Hugging Face.\"\"\"
+    return f'https://huggingface.co/datasets/{dataset_id}'
+
+def hf_dataset_api_url(dataset_id):
+    \"\"\"Собирает ссылку на API-ответ Hugging Face по одному датасету.\"\"\"
+    return f'{HF_DATASETS_API}/{dataset_id}'
+
+"""),
+        md("""
+## 3. Пример OPUS: страница пары, API-ответ и извлекаемые поля
+
+Возьмем пару `ru-udm`: русский и удмуртский. У OPUS есть человеческие страницы корпусов и API. Для агента важнее API, но страница нужна, чтобы человек мог быстро открыть источник и проверить контекст: корпус, лицензию, форматы скачивания, предупреждения OPUS.
+"""),
+        code("""
+OPUS_EXAMPLE = {
+    'source': 'ru',
+    'target': 'udm',
+    'human_page': opus_pair_page_url('ru', 'udm', corpus='Tatoeba'),
+    'api_url': opus_pair_api_url('ru', 'udm'),
+}
+OPUS_EXAMPLE
+"""),
+        code("""
+# OPUS иногда отвечает медленно. Если API не ответил за короткое время,
+# используем сохраненный пример той же структуры, чтобы занятие не зависло.
+OPUS_FALLBACK = {
+    'corpora': [
+        {
+            'corpus': 'Tatoeba',
+            'source': 'ru',
+            'target': 'udm',
+            'alignment_pairs': '337',
+            'documents': '1',
+            'latest': 'True',
+            'preprocessing': 'xml',
+            'version': 'latest',
+            'url': 'https://opus.nlpl.eu/Tatoeba.php',
+        },
+    ]
+}
+
+try:
+    opus_raw = api_get(OPUS_API, {
+        'source': OPUS_EXAMPLE['source'],
+        'target': OPUS_EXAMPLE['target'],
+        'preprocessing': 'xml',
+        'version': 'latest',
+    }, attempts=1, timeout=8)
+    opus_raw_source = 'live OPUS API'
+except Exception as exc:
+    print('OPUS API сейчас не ответил быстро:', exc)
+    opus_raw = OPUS_FALLBACK
+    opus_raw_source = 'fallback example'
+
+print('Источник примера:', opus_raw_source)
+print('Страница пары/корпуса для человека:', OPUS_EXAMPLE['human_page'])
+print('API URL для агента:', OPUS_EXAMPLE['api_url'])
+show_json_fragment(opus_raw, keys=['corpora'], limit=2200)
+"""),
+        code("""
+opus_rows = pd.DataFrame(opus_raw.get('corpora', []))
+opus_fields_we_extract = opus_rows[[
+    'corpus',
+    'source',
+    'target',
+    'alignment_pairs',
+    'documents',
+    'preprocessing',
+    'version',
+]].copy()
+display(opus_fields_we_extract)
+
+print('Что агент кладет в итоговую таблицу:')
+display(pd.DataFrame([{
+    'opus_ru_parallel_pairs': opus_fields_we_extract['alignment_pairs'].map(as_int).sum(),
+    'opus_ru_parallel_documents': opus_fields_we_extract['documents'].map(as_int).sum(),
+    'opus_ru_parallel_corpora': '; '.join(
+        f"{row.corpus} ({row.alignment_pairs})"
+        for row in opus_fields_we_extract.itertuples()
+    ),
+    'parallel_with_russian_source': OPUS_EXAMPLE['api_url'],
+}]))
+"""),
+        md("""
+## 4. Пример Hugging Face: карточка датасета, API-ответ и извлекаемые поля
+
+На Hugging Face у каждого датасета есть страница-карточка и API-ответ. Страница нужна человеку: посмотреть README, лицензию, файлы, ограничения доступа. API нужен агенту: собрать id, теги языка, размер, число примеров, downloads и признаки параллельности.
+"""),
+        code("""
+HF_EXAMPLE_ID = 'udmurtNLP/flores-250-rus-udm'
+HF_EXAMPLE = {
+    'dataset_id': HF_EXAMPLE_ID,
+    'human_page': hf_dataset_page_url(HF_EXAMPLE_ID),
+    'api_url': hf_dataset_api_url(HF_EXAMPLE_ID),
+}
+HF_EXAMPLE
+"""),
+        code("""
+hf_raw = api_get(HF_DATASETS_API + '/' + HF_EXAMPLE_ID, {}, attempts=2, timeout=20)
+
+print('Страница датасета для человека:', HF_EXAMPLE['human_page'])
+print('API URL для агента:', HF_EXAMPLE['api_url'])
+show_json_fragment(hf_raw, keys=['id', 'tags', 'downloads', 'likes', 'cardData', 'siblings'], limit=2600)
+"""),
+        code("""
+card_data = hf_raw.get('cardData') or {}
+dataset_info = card_data.get('dataset_info') or {}
+splits = dataset_info.get('splits') or []
+features = dataset_info.get('features') or []
+
+hf_fields_we_extract = {
+    'hf_dataset_id': hf_raw.get('id'),
+    'hf_page': HF_EXAMPLE['human_page'],
+    'hf_downloads': hf_raw.get('downloads'),
+    'hf_likes': hf_raw.get('likes'),
+    'hf_language_tags': '; '.join(tag for tag in hf_raw.get('tags', []) if tag.startswith('language:')),
+    'hf_size_categories': '; '.join(tag.replace('size_categories:', '') for tag in hf_raw.get('tags', []) if tag.startswith('size_categories:')),
+    'hf_splits': '; '.join(f"{s.get('name')} ({s.get('num_examples')} examples)" for s in splits),
+    'hf_features': '; '.join(f"{f.get('name')}:{f.get('dtype')}" for f in features),
+    'hf_files': '; '.join(s.get('rfilename', '') for s in hf_raw.get('siblings', [])[:5]),
+}
+display(pd.DataFrame([hf_fields_we_extract]).T.rename(columns={0: 'value'}))
+"""),
+        code("""
 def query_opus_for_language(opus_code):
     \"\"\"Собирает сводку OPUS по моноязычным и русско-параллельным данным языка.\"\"\"
     empty = {
@@ -679,33 +821,6 @@ def query_opus_for_language(opus_code):
         'opus_mono_documents': sum(as_int(c.get('documents')) for c in mono),
         'opus_mono_corpora': '; '.join(f"{c.get('corpus')} ({c.get('alignment_pairs') or 0})" for c in mono),
     }
-
-def query_wikipedia_for_language(wiki_code):
-    \"\"\"Читает статистику языкового раздела Википедии, если такой раздел существует.\"\"\"
-    if not wiki_code:
-        return {'wiki_checked': False, 'wiki_articles': '', 'wiki_pages': '', 'wiki_source_url': ''}
-    try:
-        data = api_get(f'https://{wiki_code}.wikipedia.org/w/api.php', {
-            'action': 'query',
-            'meta': 'siteinfo',
-            'siprop': 'statistics',
-            'format': 'json',
-        })
-        stats = data.get('query', {}).get('statistics', {})
-        return {
-            'wiki_checked': True,
-            'wiki_articles': stats.get('articles', ''),
-            'wiki_pages': stats.get('pages', ''),
-            'wiki_source_url': f'https://{wiki_code}.wikipedia.org/',
-        }
-    except Exception as exc:
-        return {
-            'wiki_checked': False,
-            'wiki_articles': '',
-            'wiki_pages': '',
-            'wiki_source_url': f'https://{wiki_code}.wikipedia.org/',
-            'wiki_error': str(exc),
-        }
 
 def query_huggingface_for_language(row):
     \"\"\"Ищет датасеты на Hugging Face и собирает сводку вероятных ресурсов языка.
@@ -833,16 +948,15 @@ def query_huggingface_for_language(row):
         'hf_source_url': 'https://huggingface.co/datasets',
     }
 """),
-        md("## 3. Plain Python агент: state, tools, observations, report"),
+        md("## 5. Plain Python агент: state, tools, observations, report"),
         code("""
 def scout_language(row):
     \"\"\"Собирает все наблюдения по одному языку в одну сериализуемую строку.\"\"\"
     observation = dict(row)
     observation.update(query_opus_for_language(row.get('opus_code')))
-    observation.update(query_wikipedia_for_language(row.get('wiki_code')))
     observation.update(query_huggingface_for_language(row))
     observation['parallel_with_russian_source'] = 'https://opus.nlpl.eu/opusapi'
-    observation['monolingual_source'] = 'OPUS monolingual rows; Wikipedia statistics; Hugging Face dataset search'
+    observation['monolingual_source'] = 'OPUS monolingual rows; Hugging Face dataset search'
     observation['checked_at_utc'] = datetime.now(timezone.utc).strftime('%Y-%m-%d')
     return observation
 
@@ -850,7 +964,7 @@ def run_dataset_scout(languages):
     \"\"\"Запускает plain Python-версию агента разведки датасетов.\"\"\"
     state = {
         'goal': 'собрать первичную карту языков и открытых датасетов',
-        'sources': ['OPUS API', 'Hugging Face dataset API', 'Wikipedia siteinfo API'],
+        'sources': ['OPUS API', 'Hugging Face dataset API'],
         'languages_total': len(languages),
         'observations': [],
         'errors': [],
@@ -868,7 +982,7 @@ def run_dataset_scout(languages):
         'languages_total': len(languages),
         'languages_checked': len(inventory),
         'with_opus_ru_parallel': int((inventory['opus_ru_parallel_pairs'] > 0).sum()),
-        'with_wikipedia': int((inventory['wiki_checked'] == True).sum()),
+        'with_hf_candidates': int((inventory['hf_dataset_count'] > 0).sum()),
         'errors': len(state['errors']),
     }
     return state
@@ -884,7 +998,7 @@ display(inventory.groupby('family')[['opus_ru_parallel_pairs', 'opus_mono_pairs_
 save_artifact('lesson01_language_dataset_inventory.csv', inventory)
 save_artifact('lesson01_dataset_scout_summary.json', json.dumps(plain_state['summary'], ensure_ascii=False, indent=2))
 """),
-        md("## 4. Та же логика в LangGraph"),
+        md("## 6. Та же логика в LangGraph"),
         code("""
 class DatasetScoutState(TypedDict, total=False):
     languages: List[Dict[str, Any]]
@@ -920,7 +1034,7 @@ def summary_node(state: DatasetScoutState):
         'languages_total': len(state['languages']),
         'languages_checked': len(inventory),
         'with_opus_ru_parallel': int((inventory['opus_ru_parallel_pairs'] > 0).sum()),
-        'with_wikipedia': int((inventory['wiki_checked'] == True).sum()),
+        'with_hf_candidates': int((inventory['hf_dataset_count'] > 0).sum()),
         'errors': len(state.get('errors', [])),
     }}
 
@@ -940,23 +1054,23 @@ graph_state = agent.invoke({'languages': LANGUAGES})
 graph_state['summary']
 """),
         md("""
-## 5. Google Sheets
+## 7. Google Sheets
 
 На занятии можно открыть готовый Google Sheet и править его как общий рабочий артефакт:
 
-https://docs.google.com/spreadsheets/d/1s3aSJEs8oYnnTomZil70iK_fzeQi3Ujs4W0Z9KsTSKs
+https://docs.google.com/spreadsheets/d/1cPapm3KaAqdoL07H3epM3LWwZuMrFYhGgTv6jAoR-qI
 
 В Colab эта тетрадка сохраняет CSV в `/content/lowres_lab/lesson01_language_dataset_inventory.csv`. Его можно загрузить в Google Sheets или использовать как основу для обновления общей таблицы.
 """),
         md("""
-## 6. Как автоматизировать обновление
+## 8. Как автоматизировать обновление
 
 Разовый агент полезен для старта, но карта датасетов быстро устаревает: в OPUS появляются новые релизы, в Hugging Face загружают корпуса, национальные проекты открывают новые таблицы, а часть ссылок ломается.
 
 Для этого нужен фоновый агент-монитор:
 
 1. **Scheduler** запускает пайплайн по расписанию: например, раз в неделю или раз в месяц.
-2. **Collector** заново обходит источники: OPUS, Wikipedia, Hugging Face, GitHub, национальные корпуса, сайты СМИ и архивов.
+2. **Collector** заново обходит источники готовых датасетов: OPUS, Hugging Face, GitHub-релизы, национальные корпуса, каталоги открытых данных, архивы с опубликованными корпусами.
 3. **State store** хранит предыдущий снимок таблицы: CSV в GitHub, Google Sheet, SQLite или маленький JSON.
 4. **Diff checker** сравнивает старую и новую версии: новые языки, новые корпуса, рост/падение counts, ошибки API.
 5. **Updater** обновляет Google Sheet только для безопасных полей: counts, даты проверки, ссылки на источники.
@@ -1040,7 +1154,7 @@ jobs:
         run: python scripts/update_google_sheet.py
         env:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
-          SPREADSHEET_ID: "1s3aSJEs8oYnnTomZil70iK_fzeQi3Ujs4W0Z9KsTSKs"
+          SPREADSHEET_ID: "1cPapm3KaAqdoL07H3epM3LWwZuMrFYhGgTv6jAoR-qI"
 ```
 
 В реальном проекте секреты Google API нельзя хранить в notebook. Их кладут в GitHub Secrets, Google Cloud Secret Manager или другой защищенный secret store.
@@ -1817,7 +1931,7 @@ These notebooks are classroom practices for the course sessions. They are design
 
 | Notebook | Practice | Open in Colab |
 |---|---|---|
-| `01_agents_for_language_preservation.ipynb` | agentic dataset scouting for languages of Russia using OPUS and Wikipedia APIs | [Colab](https://colab.research.google.com/github/AnnaLebedeva/lowres-course/blob/main/colab_notebooks/01_agents_for_language_preservation.ipynb) |
+| `01_agents_for_language_preservation.ipynb` | agentic dataset scouting for languages of Russia using OPUS and Hugging Face dataset APIs | [Colab](https://colab.research.google.com/github/AnnaLebedeva/lowres-course/blob/main/colab_notebooks/01_agents_for_language_preservation.ipynb) |
 | `02_web_scraping_sources.ipynb` | source table, API collection, basic noise checks | [Colab](https://colab.research.google.com/github/AnnaLebedeva/lowres-course/blob/main/colab_notebooks/02_web_scraping_sources.ipynb) |
 | `03_ocr_udmurt_commons.ipynb` | OCR baseline on an Udmurt Wikimedia Commons scan | [Colab](https://colab.research.google.com/github/AnnaLebedeva/lowres-course/blob/main/colab_notebooks/03_ocr_udmurt_commons.ipynb) |
 | `04_asr_udmurt_whisper_tiny.ipynb` | ASR baseline on open Udmurt audio | [Colab](https://colab.research.google.com/github/AnnaLebedeva/lowres-course/blob/main/colab_notebooks/04_asr_udmurt_whisper_tiny.ipynb) |
