@@ -792,20 +792,30 @@ hf_fields_we_extract = {
 display(pd.DataFrame([hf_fields_we_extract]).T.rename(columns={0: 'value'}))
 """),
         md("""
-## 5. Что здесь должен решать агент
+## 5. Где здесь алгоритм, а где агент
 
-Если агент только собирает таблицу, он почти не отличается от обычного скрипта. В этой задаче агент нужен для другого: после наблюдений он должен принять решение, что делать дальше.
+Важная честная граница: все, что мы уже сделали выше, можно написать обычным алгоритмом. Список языков, запросы к OPUS, запросы к Hugging Face, сбор таблицы и даже простые `if/else`-решения — это детерминированный пайплайн. Он полезный, воспроизводимый и нужен как baseline, но сам по себе он еще не показывает агентность.
 
-Например:
+Агент появляется там, где LLM:
 
-- если OPUS дал много пар и HF тоже нашел русско-параллельные датасеты, можно принять строку с выборочной проверкой;
-- если OPUS упал по таймауту, надо запланировать повторный запрос, а не объявлять “данных нет”;
-- если HF нашел датасеты, но русская параллельность не очевидна, надо открыть карточки руками;
-- если OPUS и HF ничего не нашли, надо запускать web discovery: GitHub, сайты корпусов, национальные архивы, статьи с supplementary data.
+- принимает задачу в свободной форме, а не только параметры функции;
+- сама решает, какие источники и инструменты использовать;
+- меняет план после промежуточных наблюдений;
+- может написать или изменить код под новый источник;
+- формулирует, что именно должен проверить человек;
+- работает недетерминированно: два запуска могут дать разные стратегии, и это не баг, а свойство LLM-слоя.
+
+Поэтому ниже мы сначала оставляем правило-based baseline. Он показывает, какие решения можно автоматизировать без LLM. А потом добавляем LLM-планировщик: именно он превращает сбор статистики в агентную задачу.
 """),
+        md("### 5.1. Алгоритмический baseline: правила вместо агента"),
         code("""
-def decide_next_step(row):
-    \"\"\"Решает, что делать дальше с языком после наблюдений OPUS и HF.\"\"\"
+def rule_based_decide_next_step(row):
+    \"\"\"Правилами решает, что делать дальше с языком после наблюдений OPUS и HF.
+
+    Это полезный baseline, но не полноценный агент: все переходы заранее
+    записаны человеком в `if/else`, поэтому функция не понимает свободную
+    формулировку задачи и не может сама придумать новый способ проверки.
+    \"\"\"
     actions = []
     reasons = []
     opus_pairs = as_int(row.get('opus_ru_parallel_pairs'))
@@ -851,6 +861,15 @@ def decide_next_step(row):
         'agent_review_reason': unique_join(reasons),
     }
 
+def decide_next_step(row):
+    \"\"\"Возвращает решение для основного пайплайна занятия.
+
+    По умолчанию используем алгоритмический baseline, чтобы тетрадка
+    стабильно работала в бесплатном Colab без API-ключей. Ниже есть
+    LLM-версия планировщика, где начинается собственно агентность.
+    \"\"\"
+    return rule_based_decide_next_step(row)
+
 decision_examples = pd.DataFrame([
     {
         'case': 'есть OPUS и HF',
@@ -880,6 +899,139 @@ decision_demo = pd.concat([
     pd.DataFrame([decide_next_step(row) for row in decision_examples.to_dict('records')])
 ], axis=1)
 display(decision_demo)
+"""),
+        md("""
+### 5.2. Агентный слой: LLM-планировщик
+
+Теперь добавим то, чего нет у обычного алгоритма: свободную постановку задачи и решение “что делать дальше” через LLM. В реальном проекте такой узел можно подключить к OpenRouter, OpenAI API, локальной модели или другому LLM-провайдеру.
+
+Чтобы тетрадка запускалась у всех в бесплатном Colab, ячейка ниже работает в двух режимах:
+
+- если в Colab Secrets есть `OPENROUTER_API_KEY`, она делает настоящий LLM-вызов;
+- если ключа нет, она печатает промпт и показывает fallback-решение baseline, чтобы можно было разобрать архитектуру без платного/внешнего вызова.
+"""),
+        code("""
+def build_llm_planner_prompt(free_form_task, observation):
+    \"\"\"Собирает промпт для LLM-планировщика агентного следующего шага.\"\"\"
+    compact_observation = {
+        'language_ru': observation.get('language_ru'),
+        'language_en': observation.get('language_en'),
+        'family': observation.get('family'),
+        'iso639_3': observation.get('iso639_3'),
+        'opus_code': observation.get('opus_code'),
+        'opus_checked': observation.get('opus_checked'),
+        'opus_error': observation.get('opus_error'),
+        'opus_ru_parallel_pairs': observation.get('opus_ru_parallel_pairs'),
+        'opus_ru_parallel_corpora': observation.get('opus_ru_parallel_corpora'),
+        'hf_dataset_count': observation.get('hf_dataset_count'),
+        'hf_ru_parallel_candidates': observation.get('hf_ru_parallel_candidates'),
+        'hf_top_datasets': observation.get('hf_top_datasets'),
+    }
+    return f\"\"\"Ты агент-разведчик датасетов для проекта сохранения малоресурсных языков России.
+
+Задача пользователя в свободной форме:
+{free_form_task}
+
+Наблюдения инструментов в JSON:
+{json.dumps(compact_observation, ensure_ascii=False, indent=2)}
+
+Реши, что делать дальше. Верни только JSON с полями:
+- decision: accept_with_spot_check | needs_human_review | needs_discovery
+- confidence: high | medium | low
+- next_actions: список коротких действий
+- review_reason: короткое объяснение для человека
+- new_code_idea: если нужен новый источник, опиши какую функцию или запрос стоит написать
+\"\"\"
+
+def call_openrouter_llm(prompt, model='openai/gpt-oss-20b:free'):
+    \"\"\"Вызывает LLM через OpenRouter, если в Colab Secrets есть ключ.
+
+    Бесплатные модели и лимиты OpenRouter могут меняться, поэтому для
+    занятия эта функция опциональна. Если ключа нет, возвращается None.
+    \"\"\"
+    try:
+        from google.colab import userdata
+        api_key = userdata.get('OPENROUTER_API_KEY')
+    except Exception:
+        api_key = os.environ.get('OPENROUTER_API_KEY')
+
+    if not api_key:
+        return None
+
+    response = requests.post(
+        'https://openrouter.ai/api/v1/chat/completions',
+        headers={
+            'Authorization': f'Bearer {api_key}',
+            'Content-Type': 'application/json',
+        },
+        json={
+            'model': model,
+            'messages': [
+                {'role': 'system', 'content': 'Ты аккуратный исследователь языковых датасетов. Отвечай валидным JSON.'},
+                {'role': 'user', 'content': prompt},
+            ],
+            'temperature': 0.2,
+        },
+        timeout=60,
+    )
+    response.raise_for_status()
+    return response.json()['choices'][0]['message']['content']
+
+def llm_plan_next_step(free_form_task, observation):
+    \"\"\"Планирует следующий шаг через LLM или показывает fallback без ключа.\"\"\"
+    prompt = build_llm_planner_prompt(free_form_task, observation)
+    raw_answer = call_openrouter_llm(prompt)
+    if raw_answer is None:
+        print('LLM-ключ не найден. Ниже промпт, который агент отправил бы модели:')
+        print(prompt[:2200])
+        baseline = rule_based_decide_next_step(observation)
+        return {
+            'mode': 'fallback_without_llm',
+            **baseline,
+            'new_code_idea': 'LLM не вызывалась. В агентном режиме модель могла бы предложить новый web/API-поиск под эту ситуацию.',
+        }
+    try:
+        parsed = json.loads(raw_answer)
+        parsed['mode'] = 'llm'
+        return parsed
+    except json.JSONDecodeError:
+        return {
+            'mode': 'llm_unparsed',
+            'raw_answer': raw_answer,
+        }
+
+free_form_task = '''
+Собери первичную картину готовых датасетов для языка.
+Особенно интересуют параллельные данные с русским.
+Если готовых датасетов мало, предложи, где искать дальше, но не смешивай
+готовые датасеты с просто источниками текстов вроде Wikipedia.
+'''
+
+llm_demo_observation = {
+    'language_ru': 'удмуртский',
+    'language_en': 'Udmurt',
+    'family': 'Уральская',
+    'iso639_3': 'udm',
+    'opus_code': 'udm',
+    'opus_checked': True,
+    'opus_error': '',
+    'opus_ru_parallel_pairs': 526,
+    'opus_ru_parallel_corpora': 'Tatoeba (337); wikimedia (189)',
+    'hf_dataset_count': 19,
+    'hf_ru_parallel_candidates': 13,
+    'hf_top_datasets': 'udmurtNLP/flores-250-rus-udm; udmurtNLP/udmurt-russian',
+}
+
+llm_decision = llm_plan_next_step(free_form_task, llm_demo_observation)
+display(pd.DataFrame([llm_decision]).T.rename(columns={0: 'value'}))
+"""),
+        md("""
+Что важно заметить:
+
+- baseline-функция возвращает решение только потому, что мы заранее написали правила;
+- LLM-планировщик получает задачу словами и сам формирует стратегию следующего шага;
+- если появляется новый источник, например сайт национального корпуса или GitHub-репозиторий, LLM может предложить, какой парсер или API-запрос написать;
+- в production такой LLM-ответ нельзя слепо выполнять: его надо валидировать, логировать, ограничивать разрешенными инструментами и отправлять спорные случаи человеку.
 """),
         md("## 6. Функции свертки источников в наблюдения"),
         code("""
