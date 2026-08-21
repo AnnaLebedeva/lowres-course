@@ -589,7 +589,7 @@ def lesson01_dataset_scout_cells():
 5. проверяет Hugging Face Datasets как каталог опубликованных корпусов;
 6. собирает таблицу, которую можно открыть в Google Sheets и дальше править руками.
 
-Готовый снапшот этой таблицы уже создан в Google Sheets: https://docs.google.com/spreadsheets/d/1cPapm3KaAqdoL07H3epM3LWwZuMrFYhGgTv6jAoR-qI
+Готовый снапшот этой таблицы уже создан в Google Sheets: https://docs.google.com/spreadsheets/d/1uMvzNkzMRJDfCo3z6iQbID1OgIDVwzUOWtZw25RHweg
 """),
         code("""
 !pip -q install langgraph pandas requests openpyxl
@@ -670,6 +670,10 @@ def hf_dataset_page_url(dataset_id):
 def hf_dataset_api_url(dataset_id):
     \"\"\"Собирает ссылку на API-ответ Hugging Face по одному датасету.\"\"\"
     return f'{HF_DATASETS_API}/{dataset_id}'
+
+def unique_join(items):
+    \"\"\"Склеивает список решений без дублей, сохраняя порядок появления.\"\"\"
+    return '; '.join(dict.fromkeys([item for item in items if item]))
 
 """),
         md("""
@@ -787,6 +791,97 @@ hf_fields_we_extract = {
 }
 display(pd.DataFrame([hf_fields_we_extract]).T.rename(columns={0: 'value'}))
 """),
+        md("""
+## 5. Что здесь должен решать агент
+
+Если агент только собирает таблицу, он почти не отличается от обычного скрипта. В этой задаче агент нужен для другого: после наблюдений он должен принять решение, что делать дальше.
+
+Например:
+
+- если OPUS дал много пар и HF тоже нашел русско-параллельные датасеты, можно принять строку с выборочной проверкой;
+- если OPUS упал по таймауту, надо запланировать повторный запрос, а не объявлять “данных нет”;
+- если HF нашел датасеты, но русская параллельность не очевидна, надо открыть карточки руками;
+- если OPUS и HF ничего не нашли, надо запускать web discovery: GitHub, сайты корпусов, национальные архивы, статьи с supplementary data.
+"""),
+        code("""
+def decide_next_step(row):
+    \"\"\"Решает, что делать дальше с языком после наблюдений OPUS и HF.\"\"\"
+    actions = []
+    reasons = []
+    opus_pairs = as_int(row.get('opus_ru_parallel_pairs'))
+    hf_count = as_int(row.get('hf_dataset_count'))
+    hf_ru = as_int(row.get('hf_ru_parallel_candidates'))
+
+    if not row.get('opus_code'):
+        actions.append('review_language_code_mapping')
+        reasons.append('нет OPUS-кода: агент не может корректно проверить OPUS')
+    elif row.get('opus_error'):
+        actions.append('retry_opus_later')
+        reasons.append('OPUS не ответил: статистика могла быть взята из кеша или остаться нулевой')
+
+    if opus_pairs > 0:
+        actions.append('accept_opus_parallel_stats')
+    else:
+        actions.append('search_parallel_candidates')
+        reasons.append('OPUS не нашел русско-параллельные пары')
+
+    if hf_ru > 0:
+        actions.append('inspect_hf_parallel_cards')
+    elif hf_count > 0:
+        actions.append('inspect_hf_nonparallel_cards')
+        reasons.append('HF нашел датасеты, но русская параллельность не очевидна')
+    else:
+        actions.append('run_web_discovery')
+        reasons.append('HF не нашел кандидатов: стоит искать по вебу и GitHub')
+
+    if opus_pairs > 1000 and hf_ru > 0:
+        decision = 'accept_with_spot_check'
+        confidence = 'high'
+    elif opus_pairs > 0 or hf_ru > 0:
+        decision = 'needs_human_review'
+        confidence = 'medium'
+    else:
+        decision = 'needs_discovery'
+        confidence = 'low'
+
+    return {
+        'agent_decision': decision,
+        'agent_confidence': confidence,
+        'agent_next_actions': unique_join(actions),
+        'agent_review_reason': unique_join(reasons),
+    }
+
+decision_examples = pd.DataFrame([
+    {
+        'case': 'есть OPUS и HF',
+        'opus_code': 'udm',
+        'opus_ru_parallel_pairs': 526,
+        'hf_dataset_count': 19,
+        'hf_ru_parallel_candidates': 13,
+    },
+    {
+        'case': 'OPUS упал, HF что-то нашел',
+        'opus_code': 'mhr',
+        'opus_error': '<urlopen error timed out>',
+        'opus_ru_parallel_pairs': 0,
+        'hf_dataset_count': 11,
+        'hf_ru_parallel_candidates': 8,
+    },
+    {
+        'case': 'ничего не найдено',
+        'opus_code': None,
+        'opus_ru_parallel_pairs': 0,
+        'hf_dataset_count': 0,
+        'hf_ru_parallel_candidates': 0,
+    },
+])
+decision_demo = pd.concat([
+    decision_examples,
+    pd.DataFrame([decide_next_step(row) for row in decision_examples.to_dict('records')])
+], axis=1)
+display(decision_demo)
+"""),
+        md("## 6. Функции свертки источников в наблюдения"),
         code("""
 def query_opus_for_language(opus_code):
     \"\"\"Собирает сводку OPUS по моноязычным и русско-параллельным данным языка.\"\"\"
@@ -948,13 +1043,14 @@ def query_huggingface_for_language(row):
         'hf_source_url': 'https://huggingface.co/datasets',
     }
 """),
-        md("## 5. Plain Python агент: state, tools, observations, report"),
+        md("## 7. Plain Python агент: state, tools, observations, decisions, report"),
         code("""
 def scout_language(row):
     \"\"\"Собирает все наблюдения по одному языку в одну сериализуемую строку.\"\"\"
     observation = dict(row)
     observation.update(query_opus_for_language(row.get('opus_code')))
     observation.update(query_huggingface_for_language(row))
+    observation.update(decide_next_step(observation))
     observation['parallel_with_russian_source'] = 'https://opus.nlpl.eu/opusapi'
     observation['monolingual_source'] = 'OPUS monolingual rows; Hugging Face dataset search'
     observation['checked_at_utc'] = datetime.now(timezone.utc).strftime('%Y-%m-%d')
@@ -983,6 +1079,9 @@ def run_dataset_scout(languages):
         'languages_checked': len(inventory),
         'with_opus_ru_parallel': int((inventory['opus_ru_parallel_pairs'] > 0).sum()),
         'with_hf_candidates': int((inventory['hf_dataset_count'] > 0).sum()),
+        'accepted_with_spot_check': int((inventory['agent_decision'] == 'accept_with_spot_check').sum()),
+        'needs_human_review': int((inventory['agent_decision'] == 'needs_human_review').sum()),
+        'needs_discovery': int((inventory['agent_decision'] == 'needs_discovery').sum()),
         'errors': len(state['errors']),
     }
     return state
@@ -998,18 +1097,39 @@ display(inventory.groupby('family')[['opus_ru_parallel_pairs', 'opus_mono_pairs_
 save_artifact('lesson01_language_dataset_inventory.csv', inventory)
 save_artifact('lesson01_dataset_scout_summary.json', json.dumps(plain_state['summary'], ensure_ascii=False, indent=2))
 """),
-        md("## 6. Та же логика в LangGraph"),
+        code("""
+display(inventory[[
+    'language_ru',
+    'opus_ru_parallel_pairs',
+    'hf_ru_parallel_candidates',
+    'agent_decision',
+    'agent_confidence',
+    'agent_next_actions',
+    'agent_review_reason',
+]].head(20))
+
+save_artifact('lesson01_agent_decisions.csv', inventory[[
+    'language_ru',
+    'iso639_3',
+    'agent_decision',
+    'agent_confidence',
+    'agent_next_actions',
+    'agent_review_reason',
+]])
+"""),
+        md("## 8. Та же логика в LangGraph"),
         code("""
 class DatasetScoutState(TypedDict, total=False):
     languages: List[Dict[str, Any]]
     observations: List[Dict[str, Any]]
+    decisions: List[Dict[str, Any]]
     errors: List[Dict[str, Any]]
     inventory: Any
     summary: Dict[str, Any]
 
 def init_state_node(state: DatasetScoutState):
     \"\"\"Готовит пустые поля графа перед началом сбора данных.\"\"\"
-    return {'observations': [], 'errors': []}
+    return {'observations': [], 'decisions': [], 'errors': []}
 
 def collect_node(state: DatasetScoutState):
     \"\"\"Запускает инструменты проверки источников для каждого языка в state графа.\"\"\"
@@ -1017,10 +1137,26 @@ def collect_node(state: DatasetScoutState):
     errors = []
     for lang in state['languages']:
         try:
-            observations.append(scout_language(lang))
+            observation = dict(lang)
+            observation.update(query_opus_for_language(lang.get('opus_code')))
+            observation.update(query_huggingface_for_language(lang))
+            observation['parallel_with_russian_source'] = 'https://opus.nlpl.eu/opusapi'
+            observation['monolingual_source'] = 'OPUS monolingual rows; Hugging Face dataset search'
+            observation['checked_at_utc'] = datetime.now(timezone.utc).strftime('%Y-%m-%d')
+            observations.append(observation)
         except Exception as exc:
             errors.append({'language_ru': lang['language_ru'], 'error': str(exc)})
     return {'observations': observations, 'errors': errors}
+
+def decide_node(state: DatasetScoutState):
+    \"\"\"Принимает агентские решения по каждому наблюдению.\"\"\"
+    decided = []
+    decisions = []
+    for observation in state['observations']:
+        decision = decide_next_step(observation)
+        decisions.append({'language_ru': observation['language_ru'], **decision})
+        decided.append({**observation, **decision})
+    return {'observations': decided, 'decisions': decisions}
 
 def table_node(state: DatasetScoutState):
     \"\"\"Преобразует собранные наблюдения в отсортированную pandas-таблицу.\"\"\"
@@ -1035,17 +1171,22 @@ def summary_node(state: DatasetScoutState):
         'languages_checked': len(inventory),
         'with_opus_ru_parallel': int((inventory['opus_ru_parallel_pairs'] > 0).sum()),
         'with_hf_candidates': int((inventory['hf_dataset_count'] > 0).sum()),
+        'accepted_with_spot_check': int((inventory['agent_decision'] == 'accept_with_spot_check').sum()),
+        'needs_human_review': int((inventory['agent_decision'] == 'needs_human_review').sum()),
+        'needs_discovery': int((inventory['agent_decision'] == 'needs_discovery').sum()),
         'errors': len(state.get('errors', [])),
     }}
 
 workflow = StateGraph(DatasetScoutState)
 workflow.add_node('init', init_state_node)
 workflow.add_node('collect', collect_node)
+workflow.add_node('decide', decide_node)
 workflow.add_node('table', table_node)
 workflow.add_node('summary', summary_node)
 workflow.set_entry_point('init')
 workflow.add_edge('init', 'collect')
-workflow.add_edge('collect', 'table')
+workflow.add_edge('collect', 'decide')
+workflow.add_edge('decide', 'table')
 workflow.add_edge('table', 'summary')
 workflow.add_edge('summary', END)
 agent = workflow.compile()
@@ -1054,16 +1195,16 @@ graph_state = agent.invoke({'languages': LANGUAGES})
 graph_state['summary']
 """),
         md("""
-## 7. Google Sheets
+## 9. Google Sheets
 
 На занятии можно открыть готовый Google Sheet и править его как общий рабочий артефакт:
 
-https://docs.google.com/spreadsheets/d/1cPapm3KaAqdoL07H3epM3LWwZuMrFYhGgTv6jAoR-qI
+https://docs.google.com/spreadsheets/d/1uMvzNkzMRJDfCo3z6iQbID1OgIDVwzUOWtZw25RHweg
 
 В Colab эта тетрадка сохраняет CSV в `/content/lowres_lab/lesson01_language_dataset_inventory.csv`. Его можно загрузить в Google Sheets или использовать как основу для обновления общей таблицы.
 """),
         md("""
-## 8. Как автоматизировать обновление
+## 10. Как автоматизировать обновление
 
 Разовый агент полезен для старта, но карта датасетов быстро устаревает: в OPUS появляются новые релизы, в Hugging Face загружают корпуса, национальные проекты открывают новые таблицы, а часть ссылок ломается.
 
@@ -1154,7 +1295,7 @@ jobs:
         run: python scripts/update_google_sheet.py
         env:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
-          SPREADSHEET_ID: "1cPapm3KaAqdoL07H3epM3LWwZuMrFYhGgTv6jAoR-qI"
+          SPREADSHEET_ID: "1uMvzNkzMRJDfCo3z6iQbID1OgIDVwzUOWtZw25RHweg"
 ```
 
 В реальном проекте секреты Google API нельзя хранить в notebook. Их кладут в GitHub Secrets, Google Cloud Secret Manager или другой защищенный secret store.
