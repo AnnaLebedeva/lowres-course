@@ -952,6 +952,12 @@ save_artifact('lesson01_hf_ru_udm_pair_candidates.csv', hf_dataset_brief_table(h
 Агенты становятся уместны сразу после этого: когда вход неформализован, источники заранее неизвестны, а набор решений нельзя полностью подготовить до запуска. Например: “найди все пригодные материалы для коми-пермяцкого, не перепутай его с коми-зырянским, отдели готовые датасеты от просто текстовых источников, оцени лицензионные риски и предложи, что проверить человеку”.
 
 Такой поиск датасетов — недетерминированная исследовательская разведка: надо пройтись по выдаче, открыть страницы, понять, есть ли там датасет, найти ссылку на скачивание, проверить формат и решить, что отправить человеку на review. Ниже мы сначала соберем алгоритмическую таблицу по всем языкам, а потом для одного языка добавим аккуратного агента веб-разведки.
+
+После OPUS/HF-примеров появляются три реальные развилки:
+
+1. **Web discovery agent**: искать параллельные корпуса через поисковик, GitHub, страницы проектов и архивы; открывать страницы; искать скачиваемые ссылки; отправлять кандидатов на human review.
+2. **HF card review agent**: обкачать Hugging Face по тегам/поиску, получить много кандидатов вроде `fineweb`, `wikimedia/wikipedia` или широких multilingual-корпусов, а потом агентно оставить только настоящие параллельные корпуса для нужной пары.
+3. **Monolingual extraction pipeline**: если большой корпус вроде FineWeb реально содержит нужный язык, отдельно строить не агент, а воспроизводимый пайплайн фильтрации, language identification, дедупликации и datacard.
 """),
         md("## 6. Функции свертки источников в наблюдения"),
         code("""
@@ -1577,7 +1583,142 @@ TEXT:
         return llm_answer
     return heuristic_classify_page(page, language)
 """),
-        md("### 10.3. Агент руками: явный цикл state → tools → observations → decisions"),
+        md("### 10.3. Сценарий 2: агент-фильтр HF-карточек"),
+        md("""
+Перед веб-поиском можно сделать более контролируемую агентную задачу: взять кандидатов из HF API и отсеять широкие корпуса, которые только содержат языковой тег, но не являются параллельным корпусом для нужной пары.
+
+Например, `fineweb`, `wikimedia/wikipedia`, `GlotCC` или `DCAD` могут быть полезны для моноязычного сценария, но они не становятся русско-удмуртским параллельным корпусом только потому, что где-то содержат `language:udm` или слово `Udmurt`.
+"""),
+        code("""
+def heuristic_classify_hf_parallel_candidate(dataset, left_language, right_language):
+    \"\"\"Эвристически классифицирует HF-карточку для задачи поиска параллельного корпуса.\"\"\"
+    dataset_id = dataset.get('id', '')
+    tags = set(dataset.get('tags') or [])
+    text = dataset_search_text(dataset)
+    id_text = dataset_id.lower()
+
+    left_codes = {left_language.get('iso639_3'), left_language.get('opus_code')}
+    right_codes = {right_language.get('iso639_3'), right_language.get('opus_code')}
+    left_codes.discard(None)
+    right_codes.discard(None)
+    left_tags = {f'language:{code}' for code in left_codes}
+    right_tags = {f'language:{code}' for code in right_codes}
+
+    has_left = bool(tags & left_tags) or text_mentions_language(text, [left_language.get('language_en'), left_language.get('language_ru'), *left_codes])
+    has_right = bool(tags & right_tags) or text_mentions_language(text, [right_language.get('language_en'), right_language.get('language_ru'), *right_codes])
+    translation_hint = (
+        'task_categories:translation' in tags
+        or 'parallel' in text
+        or 'translation' in text
+        or 'перевод' in text
+        or 'параллель' in text
+    )
+    broad_corpus_hint = any(token in id_text for token in [
+        'fineweb', 'finepdf', 'wikipedia', 'wikimedia', 'glotcc', 'dcad', 'mmlu', 'common_voice'
+    ])
+
+    if has_left and has_right and translation_hint and not broad_corpus_hint:
+        label = 'parallel_corpus'
+        confidence = 'high'
+        reason = 'есть оба языка и признаки parallel/translation'
+    elif has_left and has_right and translation_hint:
+        label = 'parallel_candidate_needs_review'
+        confidence = 'medium'
+        reason = 'есть оба языка и признаки параллельности, но корпус выглядит широким/сомнительным'
+    elif broad_corpus_hint and (has_left or has_right):
+        label = 'not_parallel_broad_multilingual'
+        confidence = 'medium'
+        reason = 'похоже на широкий многоязычный/моноязычный корпус, не на пару'
+    elif has_left or has_right:
+        label = 'language_related_not_parallel'
+        confidence = 'low'
+        reason = 'связан с языком, но нет признаков параллельного корпуса'
+    else:
+        label = 'irrelevant_or_unclear'
+        confidence = 'low'
+        reason = 'не хватает признаков языка и пары'
+
+    return {
+        'dataset_id': dataset_id,
+        'label': label,
+        'confidence': confidence,
+        'reason': reason,
+        'downloads': dataset.get('downloads'),
+        'language_tags': '; '.join(tag for tag in tags if tag.startswith('language:')),
+        'task_tags': '; '.join(tag for tag in tags if tag.startswith('task_categories:')),
+        'url': hf_dataset_page_url(dataset_id),
+        'mode': 'heuristic',
+    }
+
+def classify_hf_parallel_candidate(dataset, left_language, right_language):
+    \"\"\"Классифицирует HF-карточку через LLM, а без ключа использует эвристику.\"\"\"
+    prompt = f\"\"\"Нужно понять, является ли Hugging Face dataset настоящим параллельным корпусом для языковой пары.
+
+Левый язык:
+{json.dumps(left_language, ensure_ascii=False)}
+
+Правый язык:
+{json.dumps(right_language, ensure_ascii=False)}
+
+Dataset object:
+{json.dumps({
+    'id': dataset.get('id'),
+    'description': dataset.get('description'),
+    'tags': dataset.get('tags'),
+    'downloads': dataset.get('downloads'),
+    'likes': dataset.get('likes'),
+}, ensure_ascii=False)[:5000]}
+
+Верни JSON:
+{{
+  "dataset_id": "...",
+  "label": "parallel_corpus | parallel_candidate_needs_review | not_parallel_broad_multilingual | language_related_not_parallel | irrelevant_or_unclear",
+  "confidence": "high | medium | low",
+  "reason": "почему",
+  "evidence": "короткие признаки из карточки",
+  "needs_human_review": true
+}}
+\"\"\"
+    llm_answer = call_openrouter_json(prompt)
+    if llm_answer is not None:
+        llm_answer['dataset_id'] = llm_answer.get('dataset_id') or dataset.get('id')
+        llm_answer['url'] = hf_dataset_page_url(dataset.get('id', ''))
+        llm_answer['mode'] = 'openrouter'
+        return llm_answer
+    return heuristic_classify_hf_parallel_candidate(dataset, left_language, right_language)
+
+def run_hf_card_review_agent(datasets, left_language, right_language, max_cards=30):
+    \"\"\"Проходит по HF-кандидатам и оставляет классификацию по параллельности.\"\"\"
+    state = {
+        'goal': 'отфильтровать HF-кандидаты до параллельных корпусов для языковой пары',
+        'left_language': left_language,
+        'right_language': right_language,
+        'cards_total': len(datasets),
+        'cards_reviewed': 0,
+        'decisions': [],
+    }
+    for dataset in datasets[:max_cards]:
+        decision = classify_hf_parallel_candidate(dataset, left_language, right_language)
+        state['decisions'].append(decision)
+        state['cards_reviewed'] += 1
+    return state
+
+hf_review_state = run_hf_card_review_agent(hf_ru_udm_candidates, RUSSIAN, UDMURT, max_cards=30)
+hf_review_df = pd.DataFrame(hf_review_state['decisions'])
+display(hf_review_df.sort_values(['label', 'confidence']).head(30))
+save_artifact('lesson01_hf_parallel_review_agent.csv', hf_review_df)
+"""),
+        code("""
+if len(hf_review_df):
+    display(hf_review_df['label'].value_counts().reset_index(name='count').rename(columns={'index': 'label'}))
+    display(hf_review_df[hf_review_df['label'].isin(['parallel_corpus', 'parallel_candidate_needs_review'])][[
+        'dataset_id', 'label', 'confidence', 'reason', 'url'
+    ]])
+"""),
+        md("""
+Это тоже агентная задача, хотя она не ходит в поисковик: вход уже собран алгоритмом, но классификация карточек неоднозначна. Здесь LLM полезна не для скачивания данных, а для чтения описаний, тегов и README-подобных текстов: отличить “параллельный корпус” от “широкий корпус, где этот язык где-то есть”.
+"""),
+        md("### 10.4. Сценарий 1: агент руками для web discovery"),
         code("""
 def plan_search_queries(language, goal):
     \"\"\"Планирует несколько поисковых запросов для одного языка.\"\"\"
@@ -1678,7 +1819,7 @@ if len(manual_probes):
 
 OpenRouter здесь отвечает только за LLM-решения. Он не гуглит и не скачивает сам. Поиск, чтение страниц и probe скачивания — это tools, которые мы написали отдельно.
 """),
-        md("### 10.4. Та же разведка в LangGraph"),
+        md("### 10.5. Та же web-разведка в LangGraph"),
         code("""
 class DiscoveryState(TypedDict, total=False):
     goal: str
@@ -1795,6 +1936,20 @@ LangGraph не делает агента умнее сам по себе. Его
 4. `report`: собрать краткий отчет.
 
 Дальше этот граф можно расширять: добавить условный повтор поиска, отдельного license critic, human-in-the-loop узел, запись в Google Sheet, ограничение бюджета и сохранение state между запусками.
+"""),
+        md("""
+### 10.6. Сценарий 3: моноязычные данные из больших корпусов
+
+Это уже скорее не агент, а отдельный воспроизводимый pipeline. Если HF-card review показывает, что `fineweb`, `GlotCC`, `DCAD` или другой большой корпус содержит нужный язык, дальше задача меняется:
+
+1. скачать или стримить только нужный shard/конфигурацию;
+2. прогнать language identification;
+3. отфильтровать строки нужного языка;
+4. убрать дубликаты, boilerplate и слишком короткие/битые тексты;
+5. посчитать объем, примеры, домены, риски;
+6. оформить datacard и список ограничений.
+
+Агент может помочь спроектировать такой pipeline для конкретного корпуса или проверить datacard, но сам extraction лучше делать обычным кодом: так результат воспроизводим и его можно перепроверить.
 """),
         md("""
 ## Вопросы для отчета
