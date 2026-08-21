@@ -673,6 +673,143 @@ def hf_dataset_api_url(dataset_id):
     \"\"\"Собирает ссылку на API-ответ Hugging Face по одному датасету.\"\"\"
     return f'{HF_DATASETS_API}/{dataset_id}'
 
+def text_mentions_language(text, names):
+    \"\"\"Проверяет, встречается ли название языка как отдельная фраза.\"\"\"
+    text = str(text or '').lower()
+    for name in names:
+        if not name:
+            continue
+        for part in re.split(r'\\s*/\\s*|\\s+-\\s+', str(name).lower()):
+            part = part.strip()
+            if len(part) >= 3 and re.search(rf'(?<![\\w-]){re.escape(part)}(?![\\w-])', text):
+                return True
+    return False
+
+def dataset_search_text(dataset):
+    \"\"\"Склеивает поля HF-датасета в текст для эвристической фильтрации.\"\"\"
+    tags = dataset.get('tags') or []
+    return ' '.join([
+        str(dataset.get('id', '')),
+        str(dataset.get('description', '') or ''),
+        ' '.join(tags),
+    ]).lower()
+
+def hf_search_datasets(params, limit=50):
+    \"\"\"Возвращает список датасетов Hugging Face по одному API-запросу.\"\"\"
+    query = dict(params)
+    query['limit'] = limit
+    data = api_get(HF_DATASETS_API, query, attempts=2, timeout=20)
+    return data if isinstance(data, list) else []
+
+def hf_datasets_for_language(language, limit_per_query=50):
+    \"\"\"Ищет все видимые через API HF-кандидаты для одного языка.
+
+    Это не скачивает сами датасеты, а собирает карточки/метаданные из каталога.
+    Используем теги `language:*` и текстовый поиск по английскому/русскому названию.
+    \"\"\"
+    tags = {
+        f"language:{language.get('opus_code')}" if language.get('opus_code') else '',
+        f"language:{language.get('iso639_3')}" if language.get('iso639_3') else '',
+    }
+    tags.discard('')
+    terms = [language.get('language_en'), language.get('language_ru'), language.get('iso639_3')]
+    seen = {}
+    errors = []
+
+    for tag in sorted(tags):
+        try:
+            for dataset in hf_search_datasets({'filter': tag}, limit=limit_per_query):
+                if dataset.get('id'):
+                    seen[dataset['id']] = dataset
+        except Exception as exc:
+            errors.append({'query_type': 'filter', 'query': tag, 'error': str(exc)})
+
+    for term in [term for term in terms if term]:
+        try:
+            for dataset in hf_search_datasets({'search': term}, limit=limit_per_query):
+                if dataset.get('id'):
+                    seen[dataset['id']] = dataset
+        except Exception as exc:
+            errors.append({'query_type': 'search', 'query': term, 'error': str(exc)})
+
+    names = [language.get('language_en'), language.get('language_ru'), language.get('iso639_3')]
+    filtered = []
+    for dataset in seen.values():
+        tags = set(dataset.get('tags') or [])
+        tagged = any(tag in tags for tag in [f"language:{language.get('opus_code')}", f"language:{language.get('iso639_3')}"])
+        mentioned = text_mentions_language(dataset_search_text(dataset), names)
+        if tagged or mentioned:
+            filtered.append(dataset)
+    return filtered, errors
+
+def hf_dataset_mentions_pair(dataset, left_language, right_language):
+    \"\"\"Эвристически проверяет, похож ли HF-датасет на пару языков.\"\"\"
+    tags = set(dataset.get('tags') or [])
+    text = dataset_search_text(dataset)
+
+    def mentions(lang):
+        possible_tags = {
+            f"language:{lang.get('opus_code')}" if lang.get('opus_code') else '',
+            f"language:{lang.get('iso639_3')}" if lang.get('iso639_3') else '',
+        }
+        possible_tags.discard('')
+        names = [lang.get('language_en'), lang.get('language_ru'), lang.get('iso639_3'), lang.get('opus_code')]
+        return bool(tags & possible_tags) or text_mentions_language(text, names)
+
+    return mentions(left_language) and mentions(right_language)
+
+def hf_datasets_for_pair(left_language, right_language, limit_per_query=50):
+    \"\"\"Ищет HF-кандидаты для языковой пары через API и постфильтрацию.
+
+    У Hugging Face нет универсального надежного фильтра “дай все датасеты ровно
+    для пары X-Y”, поэтому мы собираем кандидатов по каждому языку и поисковым
+    строкам пары, а затем фильтруем по тегам и тексту карточки.
+    \"\"\"
+    seen = {}
+    errors = []
+    for language in [left_language, right_language]:
+        datasets, language_errors = hf_datasets_for_language(language, limit_per_query=limit_per_query)
+        errors.extend(language_errors)
+        for dataset in datasets:
+            seen[dataset['id']] = dataset
+
+    pair_terms = [
+        f"{left_language.get('language_en')} {right_language.get('language_en')}",
+        f"{right_language.get('language_en')} {left_language.get('language_en')}",
+        f"{left_language.get('iso639_3')}-{right_language.get('iso639_3')}",
+        f"{right_language.get('iso639_3')}-{left_language.get('iso639_3')}",
+        f"{left_language.get('opus_code')}-{right_language.get('opus_code')}",
+        f"{right_language.get('opus_code')}-{left_language.get('opus_code')}",
+    ]
+    for term in [term for term in pair_terms if 'None' not in term]:
+        try:
+            for dataset in hf_search_datasets({'search': term}, limit=limit_per_query):
+                if dataset.get('id'):
+                    seen[dataset['id']] = dataset
+        except Exception as exc:
+            errors.append({'query_type': 'pair_search', 'query': term, 'error': str(exc)})
+
+    pair_candidates = [
+        dataset for dataset in seen.values()
+        if hf_dataset_mentions_pair(dataset, left_language, right_language)
+    ]
+    return pair_candidates, errors
+
+def hf_dataset_brief_table(datasets):
+    \"\"\"Делает компактную таблицу из списка HF dataset API objects.\"\"\"
+    rows = []
+    for dataset in datasets:
+        tags = dataset.get('tags') or []
+        rows.append({
+            'id': dataset.get('id'),
+            'downloads': dataset.get('downloads'),
+            'likes': dataset.get('likes'),
+            'language_tags': '; '.join(tag for tag in tags if tag.startswith('language:')),
+            'size_categories': '; '.join(tag.replace('size_categories:', '') for tag in tags if tag.startswith('size_categories:')),
+            'url': hf_dataset_page_url(dataset.get('id', '')),
+        })
+    return pd.DataFrame(rows)
+
 """),
         md("""
 ## 3. Пример OPUS: страница пары, API-ответ и извлекаемые поля
@@ -689,24 +826,6 @@ OPUS_EXAMPLE = {
 OPUS_EXAMPLE
 """),
         code("""
-# OPUS иногда отвечает медленно. Если API не ответил за короткое время,
-# используем сохраненный пример той же структуры, чтобы занятие не зависло.
-OPUS_FALLBACK = {
-    'corpora': [
-        {
-            'corpus': 'Tatoeba',
-            'source': 'ru',
-            'target': 'udm',
-            'alignment_pairs': '337',
-            'documents': '1',
-            'latest': 'True',
-            'preprocessing': 'xml',
-            'version': 'latest',
-            'url': 'https://opus.nlpl.eu/Tatoeba.php',
-        },
-    ]
-}
-
 try:
     opus_raw = api_get(OPUS_API, {
         'source': OPUS_EXAMPLE['source'],
@@ -716,9 +835,9 @@ try:
     }, attempts=1, timeout=8)
     opus_raw_source = 'live OPUS API'
 except Exception as exc:
-    print('OPUS API сейчас не ответил быстро:', exc)
-    opus_raw = OPUS_FALLBACK
-    opus_raw_source = 'fallback example'
+    print('OPUS API сейчас не ответил:', exc)
+    opus_raw = {'corpora': [], 'error': str(exc)}
+    opus_raw_source = 'OPUS error: empty result, continue'
 
 print('Источник примера:', opus_raw_source)
 print('Страница пары/корпуса для человека:', OPUS_EXAMPLE['human_page'])
@@ -727,7 +846,7 @@ show_json_fragment(opus_raw, keys=['corpora'], limit=2200)
 """),
         code("""
 opus_rows = pd.DataFrame(opus_raw.get('corpora', []))
-opus_fields_we_extract = opus_rows[[
+expected_opus_columns = [
     'corpus',
     'source',
     'target',
@@ -735,7 +854,11 @@ opus_fields_we_extract = opus_rows[[
     'documents',
     'preprocessing',
     'version',
-]].copy()
+]
+for column in expected_opus_columns:
+    if column not in opus_rows.columns:
+        opus_rows[column] = ''
+opus_fields_we_extract = opus_rows[expected_opus_columns].copy()
 display(opus_fields_we_extract)
 
 print('Что пайплайн кладет в итоговую таблицу:')
@@ -788,6 +911,38 @@ hf_fields_we_extract = {
     'hf_files': '; '.join(s.get('rfilename', '') for s in hf_raw.get('siblings', [])[:5]),
 }
 display(pd.DataFrame([hf_fields_we_extract]).T.rename(columns={0: 'value'}))
+"""),
+        md("""
+### 4.1. Hugging Face API: все кандидаты по языку и по языковой паре
+
+Да, через API можно собрать не только одну карточку, а список датасетов-кандидатов для конкретного языка. Для языковой пары сложнее: у HF нет одного надежного фильтра “ровно пара ru-udm”, поэтому мы комбинируем:
+
+- `filter=language:<code>` для каждого языка;
+- `search=<название языка>` и `search=<код-код>`;
+- постфильтрацию по тегам и тексту карточки.
+
+Это не скачивает все данные. Это собирает каталог кандидатов, которые потом можно открыть, скачать или отправить на human review.
+"""),
+        code("""
+UDMURT = {'language_ru': 'удмуртский', 'language_en': 'Udmurt', 'iso639_3': 'udm', 'opus_code': 'udm'}
+RUSSIAN = {'language_ru': 'русский', 'language_en': 'Russian', 'iso639_3': 'rus', 'opus_code': 'ru'}
+
+hf_udmurt_datasets, hf_udmurt_errors = hf_datasets_for_language(UDMURT, limit_per_query=50)
+print('HF candidates for Udmurt:', len(hf_udmurt_datasets))
+if hf_udmurt_errors:
+    print('HF language search errors:', hf_udmurt_errors[:3])
+display(hf_dataset_brief_table(hf_udmurt_datasets).head(25))
+
+save_artifact('lesson01_hf_udmurt_candidates.csv', hf_dataset_brief_table(hf_udmurt_datasets))
+"""),
+        code("""
+hf_ru_udm_candidates, hf_ru_udm_errors = hf_datasets_for_pair(RUSSIAN, UDMURT, limit_per_query=50)
+print('HF candidates for Russian-Udmurt pair:', len(hf_ru_udm_candidates))
+if hf_ru_udm_errors:
+    print('HF pair search errors:', hf_ru_udm_errors[:3])
+display(hf_dataset_brief_table(hf_ru_udm_candidates).head(25))
+
+save_artifact('lesson01_hf_ru_udm_pair_candidates.csv', hf_dataset_brief_table(hf_ru_udm_candidates))
 """),
         md("""
 ## 5. Где заканчивается пайплайн и начинается агент
@@ -1150,29 +1305,6 @@ MAX_QUERIES = 4
 MAX_RESULTS_PER_QUERY = 4
 MAX_PAGES_TO_OPEN = 10
 MAX_DOWNLOAD_BYTES = 200_000
-
-CLASSROOM_FALLBACK_RESULTS = [
-    {
-        'title': 'udmurtNLP/flores-250-rus-udm',
-        'url': 'https://huggingface.co/datasets/udmurtNLP/flores-250-rus-udm',
-        'snippet': 'Hugging Face dataset card for a Russian-Udmurt parallel dataset.',
-    },
-    {
-        'title': 'udmurtNLP/udmurt-russian-english-labse',
-        'url': 'https://huggingface.co/datasets/udmurtNLP/udmurt-russian-english-labse',
-        'snippet': 'Hugging Face dataset card related to Udmurt, Russian and English data.',
-    },
-    {
-        'title': 'udmurtNLP/soviet-geography-book-rus-udm-parallel-corpora',
-        'url': 'https://huggingface.co/datasets/udmurtNLP/soviet-geography-book-rus-udm-parallel-corpora',
-        'snippet': 'Hugging Face dataset card for a Russian-Udmurt parallel corpus.',
-    },
-    {
-        'title': 'GitHub search: Udmurt corpus',
-        'url': 'https://github.com/search?q=Udmurt+corpus&type=repositories',
-        'snippet': 'GitHub repository search page for Udmurt corpus candidates.',
-    },
-]
 """),
         md("### 10.1. Tools: поиск, чтение страниц, проверка ссылок"),
         code("""
@@ -1185,13 +1317,6 @@ def normalize_ddg_url(href):
         target = parse_qs(parsed.query).get('uddg', [''])[0]
         return unquote(target)
     return href
-
-def classroom_fallback_search(query, max_results=5):
-    \"\"\"Возвращает реальные seed-ссылки, если бесплатный web search заблокирован.\"\"\"
-    return [
-        {**item, 'query': query, 'search_mode': 'classroom_fallback'}
-        for item in CLASSROOM_FALLBACK_RESULTS[:max_results]
-    ]
 
 def web_search(query, max_results=5):
     \"\"\"Ищет страницы через DuckDuckGo HTML и возвращает короткий список результатов.
@@ -1213,8 +1338,10 @@ def web_search(query, max_results=5):
         return [{'query': query, 'error': str(exc)}]
 
     if 'Unfortunately, bots use DuckDuckGo too' in r.text or 'anomaly-modal' in r.text:
-        print('DuckDuckGo показал challenge; используем учебный fallback со стабильными реальными ссылками.')
-        return classroom_fallback_search(query, max_results=max_results)
+        return [{
+            'query': query,
+            'error': 'DuckDuckGo challenge; no fallback used. Try later or replace web_search with an official search API.',
+        }]
 
     soup = BeautifulSoup(r.text, 'html.parser')
     results = []
@@ -1233,9 +1360,6 @@ def web_search(query, max_results=5):
                 'snippet': snippet[:500],
                 'search_mode': 'duckduckgo_html',
             })
-    if not results:
-        print('DuckDuckGo не вернул результатов; используем учебный fallback со стабильными реальными ссылками.')
-        return classroom_fallback_search(query, max_results=max_results)
     return results
 
 def fetch_page(url, max_chars=8000):

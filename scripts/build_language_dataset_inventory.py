@@ -268,30 +268,11 @@ def build_inventory():
     """Собирает полную таблицу инвентаризации для заданного списка языков."""
     rows = []
     checked_at = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    previous_rows = {}
-    previous_csv = OUT / "russia_languages_dataset_inventory.csv"
-    if previous_csv.exists():
-        previous = pd.read_csv(previous_csv).fillna("")
-        previous_rows = {row["iso639_3"]: row for _, row in previous.iterrows()}
 
     for item in LANGUAGES:
         print("checking", item["language_ru"], flush=True)
         row = dict(item)
         opus = opus_summary(item.get("opus_code"))
-        if opus.get("opus_error") and item["iso639_3"] in previous_rows:
-            previous = previous_rows[item["iso639_3"]]
-            for column in [
-                "opus_ru_parallel_pairs",
-                "opus_ru_parallel_documents",
-                "opus_ru_parallel_corpora",
-                "opus_mono_pairs_or_segments",
-                "opus_mono_documents",
-                "opus_mono_corpora",
-            ]:
-                opus[column] = previous.get(column, opus[column])
-            opus["opus_cached_from_previous_run"] = True
-        else:
-            opus["opus_cached_from_previous_run"] = False
         row.update(opus)
         row.update(hf_dataset_summary(item))
         row["parallel_with_russian_source"] = "https://opus.nlpl.eu/opusapi"
