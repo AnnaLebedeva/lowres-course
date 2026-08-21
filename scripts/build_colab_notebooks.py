@@ -576,29 +576,27 @@ def lesson01_dataset_scout_cells():
     ])
     return [
         md("""
-# Занятие 1. Агент первичной разведки языковых данных
+# Занятие 1. Пайплайн инвентаризации языковых датасетов
 
 **Цель практики:** не OCR и не ASR, а стартовая карта проекта: какие языки берем в поле зрения и какие открытые данные уже можно найти.
 
-Агент в этой тетрадке собирает первоначальную информацию:
+В этой тетрадке мы собираем первоначальную информацию обычным воспроизводимым пайплайном:
 
 1. берет редактируемый seed list основных живых языков народов России без диалектального уровня;
-2. показывает, как выглядит ответ OPUS и какие поля из него достает агент;
-3. показывает, как выглядит карточка/ответ Hugging Face Datasets и какие поля из него достает агент;
+2. показывает, как выглядит ответ OPUS и какие поля из него достаем;
+3. показывает, как выглядит карточка/ответ Hugging Face Datasets и какие поля из него достаем;
 4. проверяет OPUS API на параллельные данные с русским;
 5. проверяет Hugging Face Datasets как каталог опубликованных корпусов;
 6. собирает таблицу, которую можно открыть в Google Sheets и дальше править руками.
 
-Готовый снапшот этой таблицы уже создан в Google Sheets: https://docs.google.com/spreadsheets/d/1uMvzNkzMRJDfCo3z6iQbID1OgIDVwzUOWtZw25RHweg
+Готовый снапшот этой таблицы уже создан в Google Sheets: https://docs.google.com/spreadsheets/d/1Qfr6JCB5CF-NLwQBODStqfhesrYw9tIVh2s_A6cg0d8
 """),
         code("""
-!pip -q install langgraph pandas requests openpyxl
+!pip -q install pandas requests openpyxl
 """),
         code(COMMON_SETUP + """
-from typing import Any, Dict, List, TypedDict
 from datetime import datetime, timezone
 import re
-from langgraph.graph import StateGraph, END
 """),
         md("""
 ## 1. Seed list языков
@@ -613,9 +611,9 @@ display(seed_df.groupby(['family', 'branch']).size().reset_index(name='languages
 display(seed_df.head(12))
 """),
         md("""
-## 2. Инструменты агента: OPUS API и Hugging Face API
+## 2. Источники пайплайна: OPUS API и Hugging Face API
 
-Здесь агент работает со структурированными источниками готовых датасетов. Это важное ограничение: API дают воспроизводимые поля и ссылки, а веб-поиск дает только кандидатов, которые потом нужно проверять человеком.
+Здесь мы работаем со структурированными источниками готовых датасетов. Это важное ограничение: API дают воспроизводимые поля и ссылки, а веб-поиск дает только кандидатов, которые потом нужно проверять человеком.
 
 В этом занятии мы не используем Wikipedia: это хороший источник текстовых данных, но не каталог готовых датасетов. Сейчас нас интересует именно инвентаризация уже опубликованных датасетов и корпусов.
 """),
@@ -671,15 +669,11 @@ def hf_dataset_api_url(dataset_id):
     \"\"\"Собирает ссылку на API-ответ Hugging Face по одному датасету.\"\"\"
     return f'{HF_DATASETS_API}/{dataset_id}'
 
-def unique_join(items):
-    \"\"\"Склеивает список решений без дублей, сохраняя порядок появления.\"\"\"
-    return '; '.join(dict.fromkeys([item for item in items if item]))
-
 """),
         md("""
 ## 3. Пример OPUS: страница пары, API-ответ и извлекаемые поля
 
-Возьмем пару `ru-udm`: русский и удмуртский. У OPUS есть человеческие страницы корпусов и API. Для агента важнее API, но страница нужна, чтобы человек мог быстро открыть источник и проверить контекст: корпус, лицензию, форматы скачивания, предупреждения OPUS.
+Возьмем пару `ru-udm`: русский и удмуртский. У OPUS есть человеческие страницы корпусов и API. Для пайплайна важнее API, но страница нужна, чтобы человек мог быстро открыть источник и проверить контекст: корпус, лицензию, форматы скачивания, предупреждения OPUS.
 """),
         code("""
 OPUS_EXAMPLE = {
@@ -724,7 +718,7 @@ except Exception as exc:
 
 print('Источник примера:', opus_raw_source)
 print('Страница пары/корпуса для человека:', OPUS_EXAMPLE['human_page'])
-print('API URL для агента:', OPUS_EXAMPLE['api_url'])
+print('API URL для пайплайна:', OPUS_EXAMPLE['api_url'])
 show_json_fragment(opus_raw, keys=['corpora'], limit=2200)
 """),
         code("""
@@ -740,7 +734,7 @@ opus_fields_we_extract = opus_rows[[
 ]].copy()
 display(opus_fields_we_extract)
 
-print('Что агент кладет в итоговую таблицу:')
+print('Что пайплайн кладет в итоговую таблицу:')
 display(pd.DataFrame([{
     'opus_ru_parallel_pairs': opus_fields_we_extract['alignment_pairs'].map(as_int).sum(),
     'opus_ru_parallel_documents': opus_fields_we_extract['documents'].map(as_int).sum(),
@@ -754,7 +748,7 @@ display(pd.DataFrame([{
         md("""
 ## 4. Пример Hugging Face: карточка датасета, API-ответ и извлекаемые поля
 
-На Hugging Face у каждого датасета есть страница-карточка и API-ответ. Страница нужна человеку: посмотреть README, лицензию, файлы, ограничения доступа. API нужен агенту: собрать id, теги языка, размер, число примеров, downloads и признаки параллельности.
+На Hugging Face у каждого датасета есть страница-карточка и API-ответ. Страница нужна человеку: посмотреть README, лицензию, файлы, ограничения доступа. API нужен пайплайну: собрать id, теги языка, размер, число примеров, downloads и признаки параллельности.
 """),
         code("""
 HF_EXAMPLE_ID = 'udmurtNLP/flores-250-rus-udm'
@@ -769,7 +763,7 @@ HF_EXAMPLE
 hf_raw = api_get(HF_DATASETS_API + '/' + HF_EXAMPLE_ID, {}, attempts=2, timeout=20)
 
 print('Страница датасета для человека:', HF_EXAMPLE['human_page'])
-print('API URL для агента:', HF_EXAMPLE['api_url'])
+print('API URL для пайплайна:', HF_EXAMPLE['api_url'])
 show_json_fragment(hf_raw, keys=['id', 'tags', 'downloads', 'likes', 'cardData', 'siblings'], limit=2600)
 """),
         code("""
@@ -792,246 +786,13 @@ hf_fields_we_extract = {
 display(pd.DataFrame([hf_fields_we_extract]).T.rename(columns={0: 'value'}))
 """),
         md("""
-## 5. Где здесь алгоритм, а где агент
+## 5. Почему здесь не нужны агенты
 
-Важная честная граница: все, что мы уже сделали выше, можно написать обычным алгоритмом. Список языков, запросы к OPUS, запросы к Hugging Face, сбор таблицы и даже простые `if/else`-решения — это детерминированный пайплайн. Он полезный, воспроизводимый и нужен как baseline, но сам по себе он еще не показывает агентность.
+Эту задачу лучше решать обычным алгоритмом. У нас есть фиксированный список языков, заранее известные API, понятные поля ответа и воспроизводимые шаги обработки. Если нужно проверить конкретную языковую пару или скачать конкретный датасет, это тоже проще, надежнее и дешевле сделать обычным кодом или руками.
 
-Агент появляется там, где LLM:
+Агенты становятся уместны в другой ситуации: когда вход неформализован, источники заранее неизвестны, а набор решений нельзя полностью подготовить до запуска. Например: “найди все пригодные материалы для коми-пермяцкого, не перепутай его с коми-зырянским, отдели готовые датасеты от просто текстовых источников, оцени лицензионные риски и предложи, что проверить человеку”. Это уже не чистая табличная инвентаризация, а исследовательская разведка с неоднозначными решениями.
 
-- принимает задачу в свободной форме, а не только параметры функции;
-- сама решает, какие источники и инструменты использовать;
-- меняет план после промежуточных наблюдений;
-- может написать или изменить код под новый источник;
-- формулирует, что именно должен проверить человек;
-- работает недетерминированно: два запуска могут дать разные стратегии, и это не баг, а свойство LLM-слоя.
-
-Поэтому ниже мы сначала оставляем правило-based baseline. Он показывает, какие решения можно автоматизировать без LLM. А потом добавляем LLM-планировщик: именно он превращает сбор статистики в агентную задачу.
-"""),
-        md("### 5.1. Алгоритмический baseline: правила вместо агента"),
-        code("""
-def rule_based_decide_next_step(row):
-    \"\"\"Правилами решает, что делать дальше с языком после наблюдений OPUS и HF.
-
-    Это полезный baseline, но не полноценный агент: все переходы заранее
-    записаны человеком в `if/else`, поэтому функция не понимает свободную
-    формулировку задачи и не может сама придумать новый способ проверки.
-    \"\"\"
-    actions = []
-    reasons = []
-    opus_pairs = as_int(row.get('opus_ru_parallel_pairs'))
-    hf_count = as_int(row.get('hf_dataset_count'))
-    hf_ru = as_int(row.get('hf_ru_parallel_candidates'))
-
-    if not row.get('opus_code'):
-        actions.append('review_language_code_mapping')
-        reasons.append('нет OPUS-кода: агент не может корректно проверить OPUS')
-    elif row.get('opus_error'):
-        actions.append('retry_opus_later')
-        reasons.append('OPUS не ответил: статистика могла быть взята из кеша или остаться нулевой')
-
-    if opus_pairs > 0:
-        actions.append('accept_opus_parallel_stats')
-    else:
-        actions.append('search_parallel_candidates')
-        reasons.append('OPUS не нашел русско-параллельные пары')
-
-    if hf_ru > 0:
-        actions.append('inspect_hf_parallel_cards')
-    elif hf_count > 0:
-        actions.append('inspect_hf_nonparallel_cards')
-        reasons.append('HF нашел датасеты, но русская параллельность не очевидна')
-    else:
-        actions.append('run_web_discovery')
-        reasons.append('HF не нашел кандидатов: стоит искать по вебу и GitHub')
-
-    if opus_pairs > 1000 and hf_ru > 0:
-        decision = 'accept_with_spot_check'
-        confidence = 'high'
-    elif opus_pairs > 0 or hf_ru > 0:
-        decision = 'needs_human_review'
-        confidence = 'medium'
-    else:
-        decision = 'needs_discovery'
-        confidence = 'low'
-
-    return {
-        'agent_decision': decision,
-        'agent_confidence': confidence,
-        'agent_next_actions': unique_join(actions),
-        'agent_review_reason': unique_join(reasons),
-    }
-
-def decide_next_step(row):
-    \"\"\"Возвращает решение для основного пайплайна занятия.
-
-    По умолчанию используем алгоритмический baseline, чтобы тетрадка
-    стабильно работала в бесплатном Colab без API-ключей. Ниже есть
-    LLM-версия планировщика, где начинается собственно агентность.
-    \"\"\"
-    return rule_based_decide_next_step(row)
-
-decision_examples = pd.DataFrame([
-    {
-        'case': 'есть OPUS и HF',
-        'opus_code': 'udm',
-        'opus_ru_parallel_pairs': 526,
-        'hf_dataset_count': 19,
-        'hf_ru_parallel_candidates': 13,
-    },
-    {
-        'case': 'OPUS упал, HF что-то нашел',
-        'opus_code': 'mhr',
-        'opus_error': '<urlopen error timed out>',
-        'opus_ru_parallel_pairs': 0,
-        'hf_dataset_count': 11,
-        'hf_ru_parallel_candidates': 8,
-    },
-    {
-        'case': 'ничего не найдено',
-        'opus_code': None,
-        'opus_ru_parallel_pairs': 0,
-        'hf_dataset_count': 0,
-        'hf_ru_parallel_candidates': 0,
-    },
-])
-decision_demo = pd.concat([
-    decision_examples,
-    pd.DataFrame([decide_next_step(row) for row in decision_examples.to_dict('records')])
-], axis=1)
-display(decision_demo)
-"""),
-        md("""
-### 5.2. Агентный слой: LLM-планировщик
-
-Теперь добавим то, чего нет у обычного алгоритма: свободную постановку задачи и решение “что делать дальше” через LLM. В реальном проекте такой узел можно подключить к OpenRouter, OpenAI API, локальной модели или другому LLM-провайдеру.
-
-Чтобы тетрадка запускалась у всех в бесплатном Colab, ячейка ниже работает в двух режимах:
-
-- если в Colab Secrets есть `OPENROUTER_API_KEY`, она делает настоящий LLM-вызов;
-- если ключа нет, она печатает промпт и показывает fallback-решение baseline, чтобы можно было разобрать архитектуру без платного/внешнего вызова.
-"""),
-        code("""
-def build_llm_planner_prompt(free_form_task, observation):
-    \"\"\"Собирает промпт для LLM-планировщика агентного следующего шага.\"\"\"
-    compact_observation = {
-        'language_ru': observation.get('language_ru'),
-        'language_en': observation.get('language_en'),
-        'family': observation.get('family'),
-        'iso639_3': observation.get('iso639_3'),
-        'opus_code': observation.get('opus_code'),
-        'opus_checked': observation.get('opus_checked'),
-        'opus_error': observation.get('opus_error'),
-        'opus_ru_parallel_pairs': observation.get('opus_ru_parallel_pairs'),
-        'opus_ru_parallel_corpora': observation.get('opus_ru_parallel_corpora'),
-        'hf_dataset_count': observation.get('hf_dataset_count'),
-        'hf_ru_parallel_candidates': observation.get('hf_ru_parallel_candidates'),
-        'hf_top_datasets': observation.get('hf_top_datasets'),
-    }
-    return f\"\"\"Ты агент-разведчик датасетов для проекта сохранения малоресурсных языков России.
-
-Задача пользователя в свободной форме:
-{free_form_task}
-
-Наблюдения инструментов в JSON:
-{json.dumps(compact_observation, ensure_ascii=False, indent=2)}
-
-Реши, что делать дальше. Верни только JSON с полями:
-- decision: accept_with_spot_check | needs_human_review | needs_discovery
-- confidence: high | medium | low
-- next_actions: список коротких действий
-- review_reason: короткое объяснение для человека
-- new_code_idea: если нужен новый источник, опиши какую функцию или запрос стоит написать
-\"\"\"
-
-def call_openrouter_llm(prompt, model='openai/gpt-oss-20b:free'):
-    \"\"\"Вызывает LLM через OpenRouter, если в Colab Secrets есть ключ.
-
-    Бесплатные модели и лимиты OpenRouter могут меняться, поэтому для
-    занятия эта функция опциональна. Если ключа нет, возвращается None.
-    \"\"\"
-    try:
-        from google.colab import userdata
-        api_key = userdata.get('OPENROUTER_API_KEY')
-    except Exception:
-        api_key = os.environ.get('OPENROUTER_API_KEY')
-
-    if not api_key:
-        return None
-
-    response = requests.post(
-        'https://openrouter.ai/api/v1/chat/completions',
-        headers={
-            'Authorization': f'Bearer {api_key}',
-            'Content-Type': 'application/json',
-        },
-        json={
-            'model': model,
-            'messages': [
-                {'role': 'system', 'content': 'Ты аккуратный исследователь языковых датасетов. Отвечай валидным JSON.'},
-                {'role': 'user', 'content': prompt},
-            ],
-            'temperature': 0.2,
-        },
-        timeout=60,
-    )
-    response.raise_for_status()
-    return response.json()['choices'][0]['message']['content']
-
-def llm_plan_next_step(free_form_task, observation):
-    \"\"\"Планирует следующий шаг через LLM или показывает fallback без ключа.\"\"\"
-    prompt = build_llm_planner_prompt(free_form_task, observation)
-    raw_answer = call_openrouter_llm(prompt)
-    if raw_answer is None:
-        print('LLM-ключ не найден. Ниже промпт, который агент отправил бы модели:')
-        print(prompt[:2200])
-        baseline = rule_based_decide_next_step(observation)
-        return {
-            'mode': 'fallback_without_llm',
-            **baseline,
-            'new_code_idea': 'LLM не вызывалась. В агентном режиме модель могла бы предложить новый web/API-поиск под эту ситуацию.',
-        }
-    try:
-        parsed = json.loads(raw_answer)
-        parsed['mode'] = 'llm'
-        return parsed
-    except json.JSONDecodeError:
-        return {
-            'mode': 'llm_unparsed',
-            'raw_answer': raw_answer,
-        }
-
-free_form_task = '''
-Собери первичную картину готовых датасетов для языка.
-Особенно интересуют параллельные данные с русским.
-Если готовых датасетов мало, предложи, где искать дальше, но не смешивай
-готовые датасеты с просто источниками текстов вроде Wikipedia.
-'''
-
-llm_demo_observation = {
-    'language_ru': 'удмуртский',
-    'language_en': 'Udmurt',
-    'family': 'Уральская',
-    'iso639_3': 'udm',
-    'opus_code': 'udm',
-    'opus_checked': True,
-    'opus_error': '',
-    'opus_ru_parallel_pairs': 526,
-    'opus_ru_parallel_corpora': 'Tatoeba (337); wikimedia (189)',
-    'hf_dataset_count': 19,
-    'hf_ru_parallel_candidates': 13,
-    'hf_top_datasets': 'udmurtNLP/flores-250-rus-udm; udmurtNLP/udmurt-russian',
-}
-
-llm_decision = llm_plan_next_step(free_form_task, llm_demo_observation)
-display(pd.DataFrame([llm_decision]).T.rename(columns={0: 'value'}))
-"""),
-        md("""
-Что важно заметить:
-
-- baseline-функция возвращает решение только потому, что мы заранее написали правила;
-- LLM-планировщик получает задачу словами и сам формирует стратегию следующего шага;
-- если появляется новый источник, например сайт национального корпуса или GitHub-репозиторий, LLM может предложить, какой парсер или API-запрос написать;
-- в production такой LLM-ответ нельзя слепо выполнять: его надо валидировать, логировать, ограничивать разрешенными инструментами и отправлять спорные случаи человеку.
+В этой тетрадке мы сознательно оставляем только пайплайн сбора датасетов. Это хороший пример того, где агент не нужен.
 """),
         md("## 6. Функции свертки источников в наблюдения"),
         code("""
@@ -1195,23 +956,21 @@ def query_huggingface_for_language(row):
         'hf_source_url': 'https://huggingface.co/datasets',
     }
 """),
-        md("## 7. Plain Python агент: state, tools, observations, decisions, report"),
+        md("## 7. Запуск пайплайна по всем языкам"),
         code("""
 def scout_language(row):
     \"\"\"Собирает все наблюдения по одному языку в одну сериализуемую строку.\"\"\"
     observation = dict(row)
     observation.update(query_opus_for_language(row.get('opus_code')))
     observation.update(query_huggingface_for_language(row))
-    observation.update(decide_next_step(observation))
     observation['parallel_with_russian_source'] = 'https://opus.nlpl.eu/opusapi'
     observation['monolingual_source'] = 'OPUS monolingual rows; Hugging Face dataset search'
     observation['checked_at_utc'] = datetime.now(timezone.utc).strftime('%Y-%m-%d')
     return observation
 
-def run_dataset_scout(languages):
-    \"\"\"Запускает plain Python-версию агента разведки датасетов.\"\"\"
-    state = {
-        'goal': 'собрать первичную карту языков и открытых датасетов',
+def run_dataset_inventory_pipeline(languages):
+    \"\"\"Запускает воспроизводимый пайплайн инвентаризации датасетов.\"\"\"
+    result = {
         'sources': ['OPUS API', 'Hugging Face dataset API'],
         'languages_total': len(languages),
         'observations': [],
@@ -1220,147 +979,47 @@ def run_dataset_scout(languages):
     for i, lang in enumerate(languages, 1):
         print(f"[{i}/{len(languages)}] {lang['language_ru']}")
         try:
-            state['observations'].append(scout_language(lang))
+            result['observations'].append(scout_language(lang))
         except Exception as exc:
-            state['errors'].append({'language_ru': lang['language_ru'], 'error': str(exc)})
-    inventory = pd.DataFrame(state['observations'])
+            result['errors'].append({'language_ru': lang['language_ru'], 'error': str(exc)})
+    inventory = pd.DataFrame(result['observations'])
     inventory = inventory.sort_values(['family', 'branch', 'language_ru']).reset_index(drop=True)
-    state['inventory'] = inventory
-    state['summary'] = {
+    result['inventory'] = inventory
+    result['summary'] = {
         'languages_total': len(languages),
         'languages_checked': len(inventory),
         'with_opus_ru_parallel': int((inventory['opus_ru_parallel_pairs'] > 0).sum()),
         'with_hf_candidates': int((inventory['hf_dataset_count'] > 0).sum()),
-        'accepted_with_spot_check': int((inventory['agent_decision'] == 'accept_with_spot_check').sum()),
-        'needs_human_review': int((inventory['agent_decision'] == 'needs_human_review').sum()),
-        'needs_discovery': int((inventory['agent_decision'] == 'needs_discovery').sum()),
-        'errors': len(state['errors']),
+        'errors': len(result['errors']),
     }
-    return state
+    return result
 
-plain_state = run_dataset_scout(LANGUAGES)
-plain_state['summary']
+pipeline_result = run_dataset_inventory_pipeline(LANGUAGES)
+pipeline_result['summary']
 """),
         code("""
-inventory = plain_state['inventory']
+inventory = pipeline_result['inventory']
 display(inventory.head(20))
 display(inventory.groupby('family')[['opus_ru_parallel_pairs', 'opus_mono_pairs_or_segments']].sum().sort_values('opus_ru_parallel_pairs', ascending=False))
 
 save_artifact('lesson01_language_dataset_inventory.csv', inventory)
-save_artifact('lesson01_dataset_scout_summary.json', json.dumps(plain_state['summary'], ensure_ascii=False, indent=2))
-"""),
-        code("""
-display(inventory[[
-    'language_ru',
-    'opus_ru_parallel_pairs',
-    'hf_ru_parallel_candidates',
-    'agent_decision',
-    'agent_confidence',
-    'agent_next_actions',
-    'agent_review_reason',
-]].head(20))
-
-save_artifact('lesson01_agent_decisions.csv', inventory[[
-    'language_ru',
-    'iso639_3',
-    'agent_decision',
-    'agent_confidence',
-    'agent_next_actions',
-    'agent_review_reason',
-]])
-"""),
-        md("## 8. Та же логика в LangGraph"),
-        code("""
-class DatasetScoutState(TypedDict, total=False):
-    languages: List[Dict[str, Any]]
-    observations: List[Dict[str, Any]]
-    decisions: List[Dict[str, Any]]
-    errors: List[Dict[str, Any]]
-    inventory: Any
-    summary: Dict[str, Any]
-
-def init_state_node(state: DatasetScoutState):
-    \"\"\"Готовит пустые поля графа перед началом сбора данных.\"\"\"
-    return {'observations': [], 'decisions': [], 'errors': []}
-
-def collect_node(state: DatasetScoutState):
-    \"\"\"Запускает инструменты проверки источников для каждого языка в state графа.\"\"\"
-    observations = []
-    errors = []
-    for lang in state['languages']:
-        try:
-            observation = dict(lang)
-            observation.update(query_opus_for_language(lang.get('opus_code')))
-            observation.update(query_huggingface_for_language(lang))
-            observation['parallel_with_russian_source'] = 'https://opus.nlpl.eu/opusapi'
-            observation['monolingual_source'] = 'OPUS monolingual rows; Hugging Face dataset search'
-            observation['checked_at_utc'] = datetime.now(timezone.utc).strftime('%Y-%m-%d')
-            observations.append(observation)
-        except Exception as exc:
-            errors.append({'language_ru': lang['language_ru'], 'error': str(exc)})
-    return {'observations': observations, 'errors': errors}
-
-def decide_node(state: DatasetScoutState):
-    \"\"\"Принимает агентские решения по каждому наблюдению.\"\"\"
-    decided = []
-    decisions = []
-    for observation in state['observations']:
-        decision = decide_next_step(observation)
-        decisions.append({'language_ru': observation['language_ru'], **decision})
-        decided.append({**observation, **decision})
-    return {'observations': decided, 'decisions': decisions}
-
-def table_node(state: DatasetScoutState):
-    \"\"\"Преобразует собранные наблюдения в отсортированную pandas-таблицу.\"\"\"
-    inventory = pd.DataFrame(state['observations']).sort_values(['family', 'branch', 'language_ru']).reset_index(drop=True)
-    return {'inventory': inventory}
-
-def summary_node(state: DatasetScoutState):
-    \"\"\"Считает компактные метрики, по которым удобно проверять результат прогона.\"\"\"
-    inventory = state['inventory']
-    return {'summary': {
-        'languages_total': len(state['languages']),
-        'languages_checked': len(inventory),
-        'with_opus_ru_parallel': int((inventory['opus_ru_parallel_pairs'] > 0).sum()),
-        'with_hf_candidates': int((inventory['hf_dataset_count'] > 0).sum()),
-        'accepted_with_spot_check': int((inventory['agent_decision'] == 'accept_with_spot_check').sum()),
-        'needs_human_review': int((inventory['agent_decision'] == 'needs_human_review').sum()),
-        'needs_discovery': int((inventory['agent_decision'] == 'needs_discovery').sum()),
-        'errors': len(state.get('errors', [])),
-    }}
-
-workflow = StateGraph(DatasetScoutState)
-workflow.add_node('init', init_state_node)
-workflow.add_node('collect', collect_node)
-workflow.add_node('decide', decide_node)
-workflow.add_node('table', table_node)
-workflow.add_node('summary', summary_node)
-workflow.set_entry_point('init')
-workflow.add_edge('init', 'collect')
-workflow.add_edge('collect', 'decide')
-workflow.add_edge('decide', 'table')
-workflow.add_edge('table', 'summary')
-workflow.add_edge('summary', END)
-agent = workflow.compile()
-
-graph_state = agent.invoke({'languages': LANGUAGES})
-graph_state['summary']
+save_artifact('lesson01_dataset_inventory_summary.json', json.dumps(pipeline_result['summary'], ensure_ascii=False, indent=2))
 """),
         md("""
-## 9. Google Sheets
+## 8. Google Sheets
 
 На занятии можно открыть готовый Google Sheet и править его как общий рабочий артефакт:
 
-https://docs.google.com/spreadsheets/d/1uMvzNkzMRJDfCo3z6iQbID1OgIDVwzUOWtZw25RHweg
+https://docs.google.com/spreadsheets/d/1Qfr6JCB5CF-NLwQBODStqfhesrYw9tIVh2s_A6cg0d8
 
 В Colab эта тетрадка сохраняет CSV в `/content/lowres_lab/lesson01_language_dataset_inventory.csv`. Его можно загрузить в Google Sheets или использовать как основу для обновления общей таблицы.
 """),
         md("""
-## 10. Как автоматизировать обновление
+## 9. Как автоматизировать обновление
 
-Разовый агент полезен для старта, но карта датасетов быстро устаревает: в OPUS появляются новые релизы, в Hugging Face загружают корпуса, национальные проекты открывают новые таблицы, а часть ссылок ломается.
+Разовый запуск полезен для старта, но карта датасетов быстро устаревает: в OPUS появляются новые релизы, в Hugging Face загружают корпуса, национальные проекты открывают новые таблицы, а часть ссылок ломается.
 
-Для этого нужен фоновый агент-монитор:
+Для этого нужен регулярный фоновый пайплайн:
 
 1. **Scheduler** запускает пайплайн по расписанию: например, раз в неделю или раз в месяц.
 2. **Collector** заново обходит источники готовых датасетов: OPUS, Hugging Face, GitHub-релизы, национальные корпуса, каталоги открытых данных, архивы с опубликованными корпусами.
@@ -1369,7 +1028,7 @@ https://docs.google.com/spreadsheets/d/1uMvzNkzMRJDfCo3z6iQbID1OgIDVwzUOWtZw25RH
 5. **Updater** обновляет Google Sheet только для безопасных полей: counts, даты проверки, ссылки на источники.
 6. **Human review** получает спорные изменения: новый источник без понятной лицензии, резкое падение counts, объединение языков/вариантов, изменение классификации.
 
-Где здесь веб-поиск? Его можно добавить отдельным агентом `WebDiscoveryAgent`: он ищет новые кандидаты по запросам вроде `"удмуртский корпус скачать"`, `"Udmurt dataset"`, `"site:github.com udmurt corpus"`, `"site:huggingface.co/datasets udmurt"`. Но веб-поиск лучше использовать как слой обнаружения, а не как источник финальных чисел. Найденные ссылки должны попадать в лист `candidates_for_review`, пока человек не подтвердит язык, лицензию, формат, объем и надежность источника.
+Где здесь веб-поиск? Его можно добавить отдельным ручным или полуавтоматическим слоем обнаружения: запросы вроде `"удмуртский корпус скачать"`, `"Udmurt dataset"`, `"site:github.com udmurt corpus"`, `"site:huggingface.co/datasets udmurt"`. Но веб-поиск лучше использовать как слой кандидатов, а не как источник финальных чисел. Найденные ссылки должны попадать в лист `candidates_for_review`, пока человек не подтвердит язык, лицензию, формат, объем и надежность источника.
 
 Самый простой стек для курса:
 
@@ -1377,7 +1036,7 @@ https://docs.google.com/spreadsheets/d/1uMvzNkzMRJDfCo3z6iQbID1OgIDVwzUOWtZw25RH
 - GitHub Actions запускает его по cron;
 - скрипт сохраняет новый CSV;
 - отдельный шаг через Google Sheets API обновляет таблицу;
-- если diff большой или появились ошибки, агент создает issue/комментарий для ручной проверки.
+- если diff большой или появились ошибки, workflow создает issue/комментарий для ручной проверки.
 
 Colab для такого расписания не подходит: он хорош для занятия и ручного запуска, но не для надежного фонового мониторинга.
 """),
@@ -1447,7 +1106,7 @@ jobs:
         run: python scripts/update_google_sheet.py
         env:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
-          SPREADSHEET_ID: "1uMvzNkzMRJDfCo3z6iQbID1OgIDVwzUOWtZw25RHweg"
+          SPREADSHEET_ID: "1Qfr6JCB5CF-NLwQBODStqfhesrYw9tIVh2s_A6cg0d8"
 ```
 
 В реальном проекте секреты Google API нельзя хранить в notebook. Их кладут в GitHub Secrets, Google Cloud Secret Manager или другой защищенный secret store.
@@ -1462,13 +1121,13 @@ jobs:
 5. Какие результаты HF-поиска выглядят полезными, но требуют ручной проверки?
 6. Какие веб-поисковые запросы вы бы добавили для своего языка?
 7. Какие поля можно обновлять автоматически, а какие требуют human review?
-8. Как часто стоит запускать фонового агента для такой таблицы и почему?
+8. Как часто стоит запускать фоновое обновление для такой таблицы и почему?
 """),
     ]
 
 
 NOTEBOOKS = {
-    "01_agents_for_language_preservation.ipynb": lesson01_dataset_scout_cells(),
+    "01_dataset_inventory_pipeline.ipynb": lesson01_dataset_scout_cells(),
     "02_web_scraping_sources.ipynb": [
         md("""
 # Занятие 2. Веб-сбор, источники и правовая рамка
@@ -2224,7 +1883,7 @@ These notebooks are classroom practices for the course sessions. They are design
 
 | Notebook | Practice | Open in Colab |
 |---|---|---|
-| `01_agents_for_language_preservation.ipynb` | agentic dataset scouting for languages of Russia using OPUS and Hugging Face dataset APIs | [Colab](https://colab.research.google.com/github/AnnaLebedeva/lowres-course/blob/main/colab_notebooks/01_agents_for_language_preservation.ipynb) |
+| `01_dataset_inventory_pipeline.ipynb` | dataset inventory pipeline for languages of Russia using OPUS and Hugging Face dataset APIs | [Colab](https://colab.research.google.com/github/AnnaLebedeva/lowres-course/blob/main/colab_notebooks/01_dataset_inventory_pipeline.ipynb) |
 | `02_web_scraping_sources.ipynb` | source table, API collection, basic noise checks | [Colab](https://colab.research.google.com/github/AnnaLebedeva/lowres-course/blob/main/colab_notebooks/02_web_scraping_sources.ipynb) |
 | `03_ocr_udmurt_commons.ipynb` | OCR baseline on an Udmurt Wikimedia Commons scan | [Colab](https://colab.research.google.com/github/AnnaLebedeva/lowres-course/blob/main/colab_notebooks/03_ocr_udmurt_commons.ipynb) |
 | `04_asr_udmurt_whisper_tiny.ipynb` | ASR baseline on open Udmurt audio | [Colab](https://colab.research.google.com/github/AnnaLebedeva/lowres-course/blob/main/colab_notebooks/04_asr_udmurt_whisper_tiny.ipynb) |

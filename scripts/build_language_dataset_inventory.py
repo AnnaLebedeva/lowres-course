@@ -264,54 +264,6 @@ def hf_dataset_summary(item):
     }
 
 
-def agent_decision(row):
-    """Принимает решение о следующем шаге на основе наблюдений OPUS и HF."""
-    actions = []
-    reasons = []
-    opus_pairs = as_int(row.get("opus_ru_parallel_pairs"))
-    hf_count = as_int(row.get("hf_dataset_count"))
-    hf_ru = as_int(row.get("hf_ru_parallel_candidates"))
-
-    if not row.get("opus_code"):
-        actions.append("review_language_code_mapping")
-        reasons.append("нет OPUS-кода: агент не может корректно проверить OPUS")
-    elif row.get("opus_error"):
-        actions.append("retry_opus_later")
-        reasons.append("OPUS не ответил: статистика могла быть взята из кеша или остаться нулевой")
-
-    if opus_pairs > 0:
-        actions.append("accept_opus_parallel_stats")
-    else:
-        actions.append("search_parallel_candidates")
-        reasons.append("OPUS не нашел русско-параллельные пары")
-
-    if hf_ru > 0:
-        actions.append("inspect_hf_parallel_cards")
-    elif hf_count > 0:
-        actions.append("inspect_hf_nonparallel_cards")
-        reasons.append("HF нашел датасеты, но русская параллельность не очевидна")
-    else:
-        actions.append("run_web_discovery")
-        reasons.append("HF не нашел кандидатов: стоит искать по вебу и GitHub")
-
-    if opus_pairs > 1000 and hf_ru > 0:
-        decision = "accept_with_spot_check"
-        confidence = "high"
-    elif opus_pairs > 0 or hf_ru > 0:
-        decision = "needs_human_review"
-        confidence = "medium"
-    else:
-        decision = "needs_discovery"
-        confidence = "low"
-
-    return {
-        "agent_decision": decision,
-        "agent_confidence": confidence,
-        "agent_next_actions": "; ".join(dict.fromkeys(actions)),
-        "agent_review_reason": "; ".join(dict.fromkeys(reasons)),
-    }
-
-
 def build_inventory():
     """Собирает полную таблицу инвентаризации для заданного списка языков."""
     rows = []
@@ -342,7 +294,6 @@ def build_inventory():
             opus["opus_cached_from_previous_run"] = False
         row.update(opus)
         row.update(hf_dataset_summary(item))
-        row.update(agent_decision(row))
         row["parallel_with_russian_source"] = "https://opus.nlpl.eu/opusapi"
         row["monolingual_source"] = "OPUS monolingual rows; Hugging Face dataset search"
         row["checked_at_utc"] = checked_at
