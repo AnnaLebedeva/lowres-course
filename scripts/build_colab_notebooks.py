@@ -673,20 +673,8 @@ def hf_dataset_api_url(dataset_id):
     \"\"\"Собирает ссылку на API-ответ Hugging Face по одному датасету.\"\"\"
     return f'{HF_DATASETS_API}/{dataset_id}'
 
-def text_mentions_language(text, names):
-    \"\"\"Проверяет, встречается ли название языка как отдельная фраза.\"\"\"
-    text = str(text or '').lower()
-    for name in names:
-        if not name:
-            continue
-        for part in re.split(r'\\s*/\\s*|\\s+-\\s+', str(name).lower()):
-            part = part.strip()
-            if len(part) >= 3 and re.search(rf'(?<![\\w-]){re.escape(part)}(?![\\w-])', text):
-                return True
-    return False
-
 def dataset_search_text(dataset):
-    \"\"\"Склеивает поля HF-датасета в текст для эвристической фильтрации.\"\"\"
+    \"\"\"Склеивает metadata HF-датасета в текст для LLM-классификации.\"\"\"
     tags = dataset.get('tags') or []
     return ' '.join([
         str(dataset.get('id', '')),
@@ -705,14 +693,14 @@ def hf_datasets_for_language(language, limit_per_query=50):
     \"\"\"Ищет все видимые через API HF-кандидаты для одного языка.
 
     Это не скачивает сами датасеты, а собирает карточки/метаданные из каталога.
-    Используем теги `language:*` и текстовый поиск по английскому/русскому названию.
+    Основной критерий здесь только HF-теги `language:*`; текст карточки не используем
+    как доказательство языка.
     \"\"\"
     tags = {
         f"language:{language.get('opus_code')}" if language.get('opus_code') else '',
         f"language:{language.get('iso639_3')}" if language.get('iso639_3') else '',
     }
     tags.discard('')
-    terms = [language.get('language_en'), language.get('language_ru'), language.get('iso639_3')]
     seen = {}
     errors = []
 
@@ -723,47 +711,14 @@ def hf_datasets_for_language(language, limit_per_query=50):
                     seen[dataset['id']] = dataset
         except Exception as exc:
             errors.append({'query_type': 'filter', 'query': tag, 'error': str(exc)})
-
-    for term in [term for term in terms if term]:
-        try:
-            for dataset in hf_search_datasets({'search': term}, limit=limit_per_query):
-                if dataset.get('id'):
-                    seen[dataset['id']] = dataset
-        except Exception as exc:
-            errors.append({'query_type': 'search', 'query': term, 'error': str(exc)})
-
-    names = [language.get('language_en'), language.get('language_ru'), language.get('iso639_3')]
-    filtered = []
-    for dataset in seen.values():
-        tags = set(dataset.get('tags') or [])
-        tagged = any(tag in tags for tag in [f"language:{language.get('opus_code')}", f"language:{language.get('iso639_3')}"])
-        mentioned = text_mentions_language(dataset_search_text(dataset), names)
-        if tagged or mentioned:
-            filtered.append(dataset)
-    return filtered, errors
-
-def hf_dataset_mentions_pair(dataset, left_language, right_language):
-    \"\"\"Эвристически проверяет, похож ли HF-датасет на пару языков.\"\"\"
-    tags = set(dataset.get('tags') or [])
-    text = dataset_search_text(dataset)
-
-    def mentions(lang):
-        possible_tags = {
-            f"language:{lang.get('opus_code')}" if lang.get('opus_code') else '',
-            f"language:{lang.get('iso639_3')}" if lang.get('iso639_3') else '',
-        }
-        possible_tags.discard('')
-        names = [lang.get('language_en'), lang.get('language_ru'), lang.get('iso639_3'), lang.get('opus_code')]
-        return bool(tags & possible_tags) or text_mentions_language(text, names)
-
-    return mentions(left_language) and mentions(right_language)
+    return list(seen.values()), errors
 
 def hf_datasets_for_pair(left_language, right_language, limit_per_query=50):
-    \"\"\"Ищет HF-кандидаты для языковой пары через API и постфильтрацию.
+    \"\"\"Собирает HF-кандидаты для языковой пары без текстовой псевдопроверки.
 
     У Hugging Face нет универсального надежного фильтра “дай все датасеты ровно
-    для пары X-Y”, поэтому мы собираем кандидатов по каждому языку и поисковым
-    строкам пары, а затем фильтруем по тегам и тексту карточки.
+    для пары X-Y”. Поэтому берем датасеты с тегами обоих языков и добавляем
+    результаты прямого pair-search. Дальше классификацию делает LLM.
     \"\"\"
     seen = {}
     errors = []
@@ -789,10 +744,24 @@ def hf_datasets_for_pair(left_language, right_language, limit_per_query=50):
         except Exception as exc:
             errors.append({'query_type': 'pair_search', 'query': term, 'error': str(exc)})
 
-    pair_candidates = [
-        dataset for dataset in seen.values()
-        if hf_dataset_mentions_pair(dataset, left_language, right_language)
-    ]
+    left_tags = {
+        f"language:{left_language.get('opus_code')}" if left_language.get('opus_code') else '',
+        f"language:{left_language.get('iso639_3')}" if left_language.get('iso639_3') else '',
+    }
+    right_tags = {
+        f"language:{right_language.get('opus_code')}" if right_language.get('opus_code') else '',
+        f"language:{right_language.get('iso639_3')}" if right_language.get('iso639_3') else '',
+    }
+    left_tags.discard('')
+    right_tags.discard('')
+
+    pair_candidates = []
+    for dataset in seen.values():
+        tags = set(dataset.get('tags') or [])
+        has_both_language_tags = bool(tags & left_tags) and bool(tags & right_tags)
+        came_from_pair_search = any(term.lower() in dataset_search_text(dataset) for term in pair_terms if 'None' not in term)
+        if has_both_language_tags or came_from_pair_search:
+            pair_candidates.append(dataset)
     return pair_candidates, errors
 
 def hf_dataset_brief_table(datasets):
@@ -956,7 +925,7 @@ save_artifact('lesson01_hf_ru_udm_pair_candidates.csv', hf_dataset_brief_table(h
 После OPUS/HF-примеров появляются три реальные развилки:
 
 1. **Web discovery agent**: искать параллельные корпуса через поисковик, GitHub, страницы проектов и архивы; открывать страницы; искать скачиваемые ссылки; отправлять кандидатов на human review.
-2. **HF card review agent**: обкачать Hugging Face по тегам/поиску, получить много кандидатов вроде `fineweb`, `wikimedia/wikipedia` или широких multilingual-корпусов, а потом агентно оставить только настоящие параллельные корпуса для нужной пары.
+2. **HF card LLM classifier**: обкачать Hugging Face по тегам/поиску, получить много кандидатов вроде `fineweb`, `wikimedia/wikipedia` или широких multilingual-корпусов, а потом через LLM-классификацию оставить только настоящие параллельные корпуса для нужной пары.
 3. **Monolingual extraction pipeline**: если большой корпус вроде FineWeb реально содержит нужный язык, отдельно строить не агент, а воспроизводимый пайплайн фильтрации, language identification, дедупликации и datacard.
 """),
         md("## 6. Функции свертки источников в наблюдения"),
@@ -1583,75 +1552,34 @@ TEXT:
         return llm_answer
     return heuristic_classify_page(page, language)
 """),
-        md("### 10.3. Сценарий 2: агент-фильтр HF-карточек"),
+        md("### 10.3. Сценарий 2: LLM-классификатор HF-карточек"),
         md("""
-Перед веб-поиском можно сделать более контролируемую агентную задачу: взять кандидатов из HF API и отсеять широкие корпуса, которые только содержат языковой тег, но не являются параллельным корпусом для нужной пары.
+Перед веб-поиском можно сделать более контролируемую LLM-задачу: взять кандидатов из HF API и отсеять широкие корпуса, которые только содержат языковой тег, но не являются параллельным корпусом для нужной пары.
 
 Например, `fineweb`, `wikimedia/wikipedia`, `GlotCC` или `DCAD` могут быть полезны для моноязычного сценария, но они не становятся русско-удмуртским параллельным корпусом только потому, что где-то содержат `language:udm` или слово `Udmurt`.
+Это не агент: здесь нет планирования, выбора tools и изменения стратегии. Это LLM-классификация заранее собранного списка.
 """),
         code("""
-def heuristic_classify_hf_parallel_candidate(dataset, left_language, right_language):
-    \"\"\"Эвристически классифицирует HF-карточку для задачи поиска параллельного корпуса.\"\"\"
-    dataset_id = dataset.get('id', '')
-    tags = set(dataset.get('tags') or [])
-    text = dataset_search_text(dataset)
-    id_text = dataset_id.lower()
-
-    left_codes = {left_language.get('iso639_3'), left_language.get('opus_code')}
-    right_codes = {right_language.get('iso639_3'), right_language.get('opus_code')}
-    left_codes.discard(None)
-    right_codes.discard(None)
-    left_tags = {f'language:{code}' for code in left_codes}
-    right_tags = {f'language:{code}' for code in right_codes}
-
-    has_left = bool(tags & left_tags) or text_mentions_language(text, [left_language.get('language_en'), left_language.get('language_ru'), *left_codes])
-    has_right = bool(tags & right_tags) or text_mentions_language(text, [right_language.get('language_en'), right_language.get('language_ru'), *right_codes])
-    translation_hint = (
-        'task_categories:translation' in tags
-        or 'parallel' in text
-        or 'translation' in text
-        or 'перевод' in text
-        or 'параллель' in text
-    )
-    broad_corpus_hint = any(token in id_text for token in [
-        'fineweb', 'finepdf', 'wikipedia', 'wikimedia', 'glotcc', 'dcad', 'mmlu', 'common_voice'
-    ])
-
-    if has_left and has_right and translation_hint and not broad_corpus_hint:
-        label = 'parallel_corpus'
-        confidence = 'high'
-        reason = 'есть оба языка и признаки parallel/translation'
-    elif has_left and has_right and translation_hint:
-        label = 'parallel_candidate_needs_review'
-        confidence = 'medium'
-        reason = 'есть оба языка и признаки параллельности, но корпус выглядит широким/сомнительным'
-    elif broad_corpus_hint and (has_left or has_right):
-        label = 'not_parallel_broad_multilingual'
-        confidence = 'medium'
-        reason = 'похоже на широкий многоязычный/моноязычный корпус, не на пару'
-    elif has_left or has_right:
-        label = 'language_related_not_parallel'
-        confidence = 'low'
-        reason = 'связан с языком, но нет признаков параллельного корпуса'
-    else:
-        label = 'irrelevant_or_unclear'
-        confidence = 'low'
-        reason = 'не хватает признаков языка и пары'
-
+def needs_openrouter_classification(dataset):
+    \"\"\"Возвращает честную заглушку, если OpenRouter-ключ не подключен.\"\"\"
+    tags = dataset.get('tags') or []
     return {
-        'dataset_id': dataset_id,
-        'label': label,
-        'confidence': confidence,
-        'reason': reason,
+        'dataset_id': dataset.get('id'),
+        'label': 'needs_openrouter_key',
+        'confidence': 'none',
+        'reason': 'классификация параллельности отключена: нет OPENROUTER_API_KEY',
+        'evidence': dataset_search_text(dataset)[:500],
+        'needs_human_review': True,
         'downloads': dataset.get('downloads'),
         'language_tags': '; '.join(tag for tag in tags if tag.startswith('language:')),
         'task_tags': '; '.join(tag for tag in tags if tag.startswith('task_categories:')),
-        'url': hf_dataset_page_url(dataset_id),
-        'mode': 'heuristic',
+        'url': hf_dataset_page_url(dataset.get('id', '')),
+        'mode': 'no_llm',
     }
 
 def classify_hf_parallel_candidate(dataset, left_language, right_language):
-    \"\"\"Классифицирует HF-карточку через LLM, а без ключа использует эвристику.\"\"\"
+    \"\"\"Классифицирует HF-карточку через OpenRouter и возвращает JSON-решение.\"\"\"
+    compact_text = dataset_search_text(dataset)
     prompt = f\"\"\"Нужно понять, является ли Hugging Face dataset настоящим параллельным корпусом для языковой пары.
 
 Левый язык:
@@ -1665,6 +1593,7 @@ Dataset object:
     'id': dataset.get('id'),
     'description': dataset.get('description'),
     'tags': dataset.get('tags'),
+    'metadata_text': compact_text[:3000],
     'downloads': dataset.get('downloads'),
     'likes': dataset.get('likes'),
 }, ensure_ascii=False)[:5000]}
@@ -1685,10 +1614,10 @@ Dataset object:
         llm_answer['url'] = hf_dataset_page_url(dataset.get('id', ''))
         llm_answer['mode'] = 'openrouter'
         return llm_answer
-    return heuristic_classify_hf_parallel_candidate(dataset, left_language, right_language)
+    return needs_openrouter_classification(dataset)
 
-def run_hf_card_review_agent(datasets, left_language, right_language, max_cards=30):
-    \"\"\"Проходит по HF-кандидатам и оставляет классификацию по параллельности.\"\"\"
+def run_hf_card_review_classifier(datasets, left_language, right_language, max_cards=30):
+    \"\"\"Проходит по HF-кандидатам и классифицирует параллельность через LLM.\"\"\"
     state = {
         'goal': 'отфильтровать HF-кандидаты до параллельных корпусов для языковой пары',
         'left_language': left_language,
@@ -1703,10 +1632,10 @@ def run_hf_card_review_agent(datasets, left_language, right_language, max_cards=
         state['cards_reviewed'] += 1
     return state
 
-hf_review_state = run_hf_card_review_agent(hf_ru_udm_candidates, RUSSIAN, UDMURT, max_cards=30)
+hf_review_state = run_hf_card_review_classifier(hf_ru_udm_candidates, RUSSIAN, UDMURT, max_cards=30)
 hf_review_df = pd.DataFrame(hf_review_state['decisions'])
 display(hf_review_df.sort_values(['label', 'confidence']).head(30))
-save_artifact('lesson01_hf_parallel_review_agent.csv', hf_review_df)
+save_artifact('lesson01_hf_parallel_review_classifier.csv', hf_review_df)
 """),
         code("""
 if len(hf_review_df):
@@ -1716,7 +1645,7 @@ if len(hf_review_df):
     ]])
 """),
         md("""
-Это тоже агентная задача, хотя она не ходит в поисковик: вход уже собран алгоритмом, но классификация карточек неоднозначна. Здесь LLM полезна не для скачивания данных, а для чтения описаний, тегов и README-подобных текстов: отличить “параллельный корпус” от “широкий корпус, где этот язык где-то есть”.
+Это не агентная задача: вход уже собран алгоритмом, tools не выбираются, стратегия не меняется. Но это хороший пример LLM-классификации: модель читает metadata карточек и возвращает JSON с решением, является ли карточка параллельным корпусом или широким многоязычным/моноязычным ресурсом.
 """),
         md("### 10.4. Сценарий 1: агент руками для web discovery"),
         code("""
