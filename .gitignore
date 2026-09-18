@@ -4,3 +4,6 @@
 .codex-tmp/
 __pycache__/
 *.pyc
+.inventory-state/
+.inventory-secrets/
+.venv/

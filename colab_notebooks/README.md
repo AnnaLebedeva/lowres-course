@@ -21,3 +21,8 @@ Main open sources used or referenced:
 - Hugging Face dataset `AigizK/tatar-russian-parallel-corpora`
 - Tatoeba downloads as an optional source for sentence pairs
 - Mozilla Common Voice as an optional source for ASR data when access/terms are suitable
+
+## Автоматическое обновление инвентаризации
+
+[Настройка GitHub Actions и Google Drive](../docs/dataset-inventory-actions.md):
+ежедневное продолжение очереди, еженедельное обновление каталогов, чекпоинты и диагностика.
