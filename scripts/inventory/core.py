@@ -290,12 +290,21 @@ human_check: одно короткое указание до 150 символо�
     if trace['finish_reason'] == 'length':
         trace['stage'] = 'response_length'
         raise ValueError('Ответ модели обрезан по лимиту токенов; полный ответ сохранён в trace.response_body')
+    trace['answer_source'] = 'content'
+    if raw is None or (isinstance(raw, str) and not raw.strip()):
+        raw = message.get('reasoning') if isinstance(message, dict) else None
+        trace['answer_source'] = 'reasoning'
+        trace['raw_answer'] = raw
     if not isinstance(raw, str) or not raw.strip():
-        raise ValueError('Модель вернула пустой или нетекстовый content')
+        raise ValueError('Модель не вернула текст решения в content или reasoning')
     raw = raw.strip()
     if raw.startswith('```'):
         raw = re.sub(r'^```(?:json)?\s*|\s*```$', '', raw)
     trace['stage'] = 'decision_json'
+    # Некоторые провайдеры возвращают экранированный JSON в reasoning.
+    # Разбираем весь ответ: не извлекаем фрагменты JSON из рассуждений.
+    if trace['answer_source'] == 'reasoning' and raw.startswith(r'{\"'):
+        raw = json.loads('"' + raw + '"')
     decision = json.loads(raw)
     trace['stage'] = 'decision_validation'
     if not isinstance(decision, dict):

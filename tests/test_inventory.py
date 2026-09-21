@@ -46,6 +46,47 @@ class InventoryTests(unittest.TestCase):
             response.raise_for_status.side_effect = core.requests.HTTPError('quota', response=response)
         return response
 
+    def test_reasoning_fallback_and_content_priority(self):
+        answer = json.dumps(self.decision, ensure_ascii=False)
+        cases = [
+            (None, answer, 'reasoning'),
+            ('  ', answer, 'reasoning'),
+            (None, json.dumps(answer, ensure_ascii=False)[1:-1], 'reasoning'),
+            (answer, 'not a decision', 'content'),
+        ]
+        for content, reasoning, source in cases:
+            with self.subTest(source=source, content=content):
+                response = self.response()
+                response.json.return_value['choices'][0]['message'] = {
+                    'content': content, 'reasoning': reasoning}
+                trace = {}
+                with patch.object(core.requests, 'post', return_value=response) as post:
+                    result = core.hf_llm_decision(self.packet, 'test-key', trace=trace)
+                self.assertEqual(result['verdict'], 'keep')
+                self.assertEqual(trace['answer_source'], source)
+                self.assertEqual(post.call_count, 1)
+
+    def test_reasoning_must_be_complete_valid_decision(self):
+        invalid = ['thinking ' + json.dumps(self.decision), '{}',
+                   json.dumps({**self.decision, 'suitable': False}),
+                   json.dumps({**self.decision, 'evidence': []})]
+        for reasoning in invalid:
+            with self.subTest(reasoning=reasoning):
+                response = self.response()
+                response.json.return_value['choices'][0]['message'] = {
+                    'content': None, 'reasoning': reasoning}
+                with patch.object(core.requests, 'post', return_value=response):
+                    with self.assertRaises(ValueError):
+                        core.hf_llm_decision(self.packet, 'test-key')
+
+    def test_length_is_not_rescued_by_reasoning(self):
+        response = self.response(finish='length')
+        response.json.return_value['choices'][0]['message'] = {
+            'content': None, 'reasoning': json.dumps(self.decision)}
+        with patch.object(core.requests, 'post', return_value=response):
+            with self.assertRaisesRegex(ValueError, 'обрезан'):
+                core.hf_llm_decision(self.packet, 'test-key')
+
     def test_completed_skipped_after_catalog_refresh_and_relocation(self):
         self.prepare()
         with patch.object(core, 'hf_collect_evidence', new=lambda dataset_id: self.packet), \
