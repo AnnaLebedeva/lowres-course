@@ -255,7 +255,7 @@ human_check: одно короткое указание до 150 символо�
  "reason": "кратко по-русски", "evidence": [{"source": "description|files|folders", "quote": "дословный фрагмент"}],
  "human_check": "что проверить человеку, если кандидат выбран"}'''
     payload = {'model': HF_REVIEW_MODEL, 'temperature': 0,
-               'max_tokens': 1800, 'response_format': {'type': 'json_object'},
+               'max_tokens': 8192, 'response_format': {'type': 'json_object'},
                'messages': [{'role': 'system', 'content': instructions},
                             {'role': 'user', 'content': json.dumps({'goal': goal, 'materials': packet}, ensure_ascii=False)}]}
     for attempt in range(3):
