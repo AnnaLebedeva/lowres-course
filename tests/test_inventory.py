@@ -3,12 +3,17 @@ import hashlib
 import io
 import json
 import os
+import ssl
 from pathlib import Path
 import sys
 import tempfile
 import unittest
 from contextlib import redirect_stdout, ExitStack
 from unittest.mock import Mock, patch
+
+import httplib2
+from google.auth.exceptions import RefreshError
+from googleapiclient.errors import HttpError
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 from inventory import core
@@ -172,7 +177,203 @@ class DriveStoreTests(unittest.TestCase):
                           Path('hf_checkpoints/run'): 'run', self.relative: 'record'}
         self.store.versions = {self.relative: 'old-time'}
         self.store.digests = {}
+        self.store.pending_creates = {}
+        self.store.pending_updates = {}
+        self.store.http = Mock()
         self.store.service = Mock()
+        sleep_patch = patch('inventory.drive_store.time.sleep')
+        self.sleep = sleep_patch.start()
+        self.addCleanup(sleep_patch.stop)
+        self.store.service.files().list().execute.return_value = {'files': []}
+
+    @staticmethod
+    def http_error(status, reason='backendError'):
+        return HttpError(httplib2.Response({'status': str(status)}),
+                         json.dumps({'error': {'errors': [{'reason': reason}]}}).encode())
+
+    def created_metadata(self, file_id='new-record'):
+        return {'id': file_id, 'name': 'record.json', 'mimeType': 'application/json',
+                'parents': ['run'], 'trashed': False, 'modifiedTime': 'new-time',
+                'md5Checksum': hashlib.md5(self.path.read_bytes()).hexdigest()}
+
+    def prepare_create(self):
+        self.store.versions.clear()
+        self.store.ids.pop(self.relative)
+        self.store.service.files().generateIds().execute.return_value = {'ids': ['new-record']}
+
+    def test_transient_errors_retry_with_bounded_backoff(self):
+        for error in (self.http_error(500), self.http_error(503), self.http_error(429),
+                      self.http_error(403, 'rateLimitExceeded'), ssl.SSLEOFError('EOF'),
+                      TimeoutError('timeout'), ConnectionResetError('reset')):
+            with self.subTest(error=type(error).__name__):
+                operation = Mock(side_effect=[error, 'ok'])
+                self.sleep.reset_mock()
+                self.assertEqual(self.store._retry(operation), 'ok')
+                self.assertEqual(operation.call_count, 2)
+                self.sleep.assert_called_once_with(2)
+        operation = Mock(side_effect=self.http_error(500))
+        self.sleep.reset_mock()
+        with self.assertRaises(HttpError):
+            self.store._retry(operation)
+        self.assertEqual(operation.call_count, 4)
+        self.assertEqual([call.args[0] for call in self.sleep.call_args_list], [2, 4, 8])
+
+    def test_auth_permission_and_conflict_errors_are_not_retried(self):
+        for error in (self.http_error(400), self.http_error(401),
+                      self.http_error(403, 'insufficientPermissions'), self.http_error(404),
+                      self.http_error(409), RefreshError('invalid_grant'),
+                      ssl.SSLCertVerificationError('certificate'), RuntimeError('conflict')):
+            with self.subTest(error=type(error).__name__):
+                operation = Mock(side_effect=error)
+                self.sleep.reset_mock()
+                with self.assertRaises(type(error)):
+                    self.store._retry(operation)
+                operation.assert_called_once()
+                self.sleep.assert_not_called()
+
+    def test_list_recovers_from_ssl_eof_and_discards_connection(self):
+        self.store.service.files().list().execute.side_effect = [ssl.SSLEOFError('EOF'), {'files': []}]
+        self.assertEqual(self.store.children('root'), {})
+        self.store.http.close.assert_called_once()
+
+    def test_update_retries_500_with_fresh_media(self):
+        files = self.store.service.files()
+        files.get().execute.return_value = {'id': 'record', 'modifiedTime': 'old-time'}
+        files.update().execute.side_effect = [self.http_error(500), {'id': 'record', 'modifiedTime': 'new-time'}]
+        files.update.reset_mock()
+        self.store.upload(self.path)
+        self.assertEqual(files.update.call_count, 2)
+        for call in files.update.call_args_list:
+            media = call.kwargs['media_body']
+            self.assertEqual(media.getbytes(0, media.size()), self.path.read_bytes())
+        self.assertEqual(self.store.versions[self.relative], 'new-time')
+
+    def test_lost_update_response_is_recognized_without_second_write(self):
+        files = self.store.service.files()
+        files.get().execute.side_effect = [
+            {'id': 'record', 'modifiedTime': 'old-time'}, self.created_metadata('record')]
+        files.update().execute.side_effect = ssl.SSLEOFError('response lost after commit')
+        files.update.reset_mock()
+        self.store.upload(self.path)
+        files.update.assert_called_once()
+        self.assertEqual(self.store.versions[self.relative], 'new-time')
+        self.assertEqual(self.store.pending_updates, {})
+
+    def test_concurrent_edit_between_update_attempts_is_not_overwritten(self):
+        files = self.store.service.files()
+        files.get().execute.side_effect = [
+            {'modifiedTime': 'old-time'}, {'modifiedTime': 'colab-time', 'md5Checksum': 'other'}]
+        files.update().execute.side_effect = ssl.SSLEOFError('EOF')
+        files.update.reset_mock()
+        with self.assertRaisesRegex(RuntimeError, 'Конфликт'):
+            self.store.upload(self.path)
+        files.update.assert_called_once()
+
+    def test_lost_create_response_does_not_duplicate_file(self):
+        self.prepare_create()
+        files = self.store.service.files()
+        files.get().execute.side_effect = [self.http_error(404), self.created_metadata()]
+        files.create().execute.side_effect = ssl.SSLEOFError('response lost after commit')
+        files.create.reset_mock()
+        self.store.upload(self.path)
+        files.create.assert_called_once()
+        self.assertEqual(files.create.call_args.kwargs['body']['id'], 'new-record')
+        self.assertEqual(self.store.ids[self.relative], 'new-record')
+
+    def test_create_reuses_id_when_first_request_did_not_commit(self):
+        self.prepare_create()
+        files = self.store.service.files()
+        files.get().execute.side_effect = self.http_error(404)
+        files.create().execute.side_effect = [self.http_error(503), self.created_metadata()]
+        files.create.reset_mock()
+        self.store.upload(self.path)
+        self.assertEqual([c.kwargs['body']['id'] for c in files.create.call_args_list],
+                         ['new-record', 'new-record'])
+
+    def test_create_409_reconciles_only_matching_content(self):
+        for checksum in (hashlib.md5(self.path.read_bytes()).hexdigest(), 'someone-elses-content'):
+            with self.subTest(checksum=checksum):
+                self.store.versions.clear()
+                self.store.digests.clear()
+                self.store.service.files().generateIds().execute.return_value = {'ids': ['new-record']}
+                files = self.store.service.files()
+                files.get().execute.side_effect = [self.http_error(404),
+                    {**self.created_metadata(), 'md5Checksum': checksum}]
+                files.create().execute.side_effect = self.http_error(409)
+                if checksum == 'someone-elses-content':
+                    with self.assertRaisesRegex(RuntimeError, 'Конфликт'):
+                        self.store.upload(self.path)
+                else:
+                    self.store.upload(self.path)
+
+    def test_flush_preserves_create_id_after_exhausted_retries(self):
+        self.prepare_create()
+        files = self.store.service.files()
+        files.get().execute.side_effect = self.http_error(404)
+        files.create().execute.side_effect = ssl.SSLEOFError('EOF')
+        files.create.reset_mock()
+        with self.assertRaises(ssl.SSLEOFError):
+            self.store.upload(self.path)
+        self.assertEqual(files.create.call_count, 4)
+        files.get().execute.side_effect = None
+        files.get().execute.return_value = self.created_metadata()
+        self.store.flush()
+        self.assertEqual(files.create.call_count, 4)
+        self.assertEqual(self.store.pending_creates, {})
+        self.assertEqual(self.store.ids[self.relative], 'new-record')
+
+    def test_folder_create_recovers_after_lost_response(self):
+        files = self.store.service.files()
+        files.generateIds().execute.return_value = {'ids': ['new-folder']}
+        files.get().execute.side_effect = [self.http_error(404),
+            {'id': 'new-folder', 'name': 'run', 'mimeType': 'application/vnd.google-apps.folder',
+             'parents': ['hf'], 'modifiedTime': 'new-time'}]
+        files.create().execute.side_effect = ssl.SSLEOFError('EOF')
+        files.create.reset_mock()
+        item = self.store._create(Path('hf_checkpoints/run'), 'hf', 'application/vnd.google-apps.folder')
+        self.assertEqual(item['id'], 'new-folder')
+        files.create.assert_called_once()
+
+    def test_other_file_with_same_name_is_not_adopted(self):
+        self.prepare_create()
+        files = self.store.service.files()
+        files.get().execute.side_effect = self.http_error(404)
+        files.list().execute.return_value = {'files': [{'id': 'colab-record', 'name': 'record.json'}]}
+        with self.assertRaisesRegex(RuntimeError, 'Другой запуск'):
+            self.store.upload(self.path)
+        files.create.assert_not_called()
+
+    def test_create_does_not_multiply_list_retries(self):
+        self.prepare_create()
+        files = self.store.service.files()
+        files.get().execute.side_effect = self.http_error(404)
+        files.list().execute.side_effect = self.http_error(500)
+        with self.assertRaises(HttpError):
+            self.store.upload(self.path)
+        self.assertEqual(files.list().execute.call_count, 4)
+        self.assertEqual(self.sleep.call_count, 3)
+        files.create.assert_not_called()
+
+    def test_pull_retries_download_without_replaying_model(self):
+        from inventory import drive_store
+        self.store.children = Mock(side_effect=[
+            {'hf_checkpoints': {'id': 'hf', 'mimeType': 'application/vnd.google-apps.folder'}},
+            {'record.json': {'id': 'record', 'mimeType': 'application/json',
+                             'modifiedTime': '2026-10-20T12:00:00Z'}}])
+        def downloader(buffer, request):
+            def download(**kwargs):
+                if not getattr(download, 'retried', False):
+                    download.retried = True
+                    raise ssl.SSLEOFError('EOF')
+                buffer.write(b'{}')
+                return None, True
+            return Mock(next_chunk=Mock(side_effect=download))
+        with patch.object(drive_store, 'MediaIoBaseDownload', side_effect=downloader), \
+             patch.object(core.requests, 'post') as model_request:
+            self.store.pull()
+            model_request.assert_not_called()
+        self.assertEqual((self.store.root / 'hf_checkpoints/record.json').read_bytes(), b'{}')
+        self.sleep.assert_called_once_with(2)
 
     def test_remote_conflict_never_overwritten(self):
         self.store.service.files().get().execute.return_value = {'modifiedTime': 'changed-by-colab'}
